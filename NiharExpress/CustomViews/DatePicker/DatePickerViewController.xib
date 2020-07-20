@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Bold.ttf">
+            <string>Roboto-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DatePickerViewController" customModule="NiharExpress" customModuleProvider="target">
+            <connections>
+                <outlet property="datePicker" destination="XBW-TX-ngF" id="cCx-ao-V7d"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXJ-UH-GVT">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <action selector="btnClose:" destination="-1" eventType="touchUpInside" id="6dS-CX-gKd"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mXL-mD-zpl" customClass="DesignableView" customModule="NiharExpress" customModuleProvider="target">
+                    <rect key="frame" x="20" y="320" width="374" height="256"/>
+                    <subviews>
+                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="XBW-TX-ngF">
+                            <rect key="frame" x="0.0" y="0.0" width="374" height="216"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="216" id="O9n-0x-NJh"/>
+                            </constraints>
+                            <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
+                                <!--1970-01-01 11:00:00 +0000-->
+                            </date>
+                        </datePicker>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BSN-6m-cla">
+                            <rect key="frame" x="294" y="216" width="70" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="70" id="T5L-ec-nOV"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="15"/>
+                            <state key="normal" title="Done">
+                                <color key="titleColor" red="0.50196078430000002" green="0.1176470588" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="btnDone:" destination="-1" eventType="touchUpInside" id="7RG-BJ-ZOb"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zxa-1C-WH8">
+                            <rect key="frame" x="10" y="216" width="70" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="70" id="c0h-2B-vgw"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="15"/>
+                            <state key="normal" title="Close">
+                                <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="btnClose:" destination="-1" eventType="touchUpInside" id="KXE-lr-izm"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="BSN-6m-cla" secondAttribute="trailing" constant="10" id="3dy-U3-XvB"/>
+                        <constraint firstAttribute="bottom" secondItem="zxa-1C-WH8" secondAttribute="bottom" id="68Q-jf-MyS"/>
+                        <constraint firstItem="XBW-TX-ngF" firstAttribute="leading" secondItem="mXL-mD-zpl" secondAttribute="leading" id="EtR-yJ-8Y5"/>
+                        <constraint firstItem="zxa-1C-WH8" firstAttribute="leading" secondItem="mXL-mD-zpl" secondAttribute="leading" constant="10" id="Q4d-so-lX2"/>
+                        <constraint firstAttribute="height" constant="256" id="Scm-T0-E7S"/>
+                        <constraint firstAttribute="bottom" secondItem="BSN-6m-cla" secondAttribute="bottom" id="dat-2p-nQC"/>
+                        <constraint firstItem="XBW-TX-ngF" firstAttribute="top" secondItem="mXL-mD-zpl" secondAttribute="top" id="i53-vn-HTK"/>
+                        <constraint firstItem="zxa-1C-WH8" firstAttribute="top" secondItem="XBW-TX-ngF" secondAttribute="bottom" id="jcP-o2-GtH"/>
+                        <constraint firstItem="BSN-6m-cla" firstAttribute="top" secondItem="XBW-TX-ngF" secondAttribute="bottom" id="kt5-v2-8VD"/>
+                        <constraint firstAttribute="trailing" secondItem="XBW-TX-ngF" secondAttribute="trailing" id="m2b-5U-bIv"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="6"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="maskToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="yXJ-UH-GVT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="07E-2o-3Ue"/>
+                <constraint firstAttribute="trailing" secondItem="yXJ-UH-GVT" secondAttribute="trailing" id="Jiu-eY-E20"/>
+                <constraint firstItem="mXL-mD-zpl" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="KP6-ml-kWB"/>
+                <constraint firstItem="mXL-mD-zpl" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="dje-N8-RB1"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="mXL-mD-zpl" secondAttribute="trailing" constant="20" id="gUu-Oa-3FY"/>
+                <constraint firstAttribute="bottom" secondItem="yXJ-UH-GVT" secondAttribute="bottom" id="vTh-mK-pIG"/>
+                <constraint firstItem="yXJ-UH-GVT" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="xfD-Cj-ZLw"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="131.8840579710145" y="153.34821428571428"/>
+        </view>
+    </objects>
+</document>

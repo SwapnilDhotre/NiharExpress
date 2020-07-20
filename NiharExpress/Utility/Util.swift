@@ -12,8 +12,7 @@ class Util {
     
     static func setIntialController(window: UIWindow) {
         
-        window.rootViewController = TabBarViewController()
-        
+        window.rootViewController = UINavigationController(rootViewController: SplashScreenViewController())
         window.makeKeyAndVisible()
     }
     

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Medium.ttf">
+            <string>Roboto-Medium</string>
+        </array>
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="183" id="KGk-i7-Jjw" customClass="PaymentViewTableViewCell" customModule="NiharExpress" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="183"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="183"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XIQ-Wd-iPY">
+                        <rect key="frame" x="0.0" y="171" width="320" height="12"/>
+                        <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="12" id="SQk-9D-gpb"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="₹" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="21w-Zi-PLK">
+                        <rect key="frame" x="16" y="12" width="16" height="35.5"/>
+                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="30"/>
+                        <color key="textColor" red="0.50196078430000002" green="0.1176470588" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kTa-Ry-n7E">
+                        <rect key="frame" x="16" y="55" width="288" height="96"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="96" id="9XQ-0c-P0c"/>
+                        </constraints>
+                    </tableView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NWv-vm-bVK">
+                        <rect key="frame" x="274" y="16" width="30" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="t1C-mL-hHp"/>
+                            <constraint firstAttribute="width" constant="30" id="tD8-sh-a4i"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cash" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="454-aS-xPe">
+                        <rect key="frame" x="42" y="17" width="45.5" height="23.5"/>
+                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="21w-Zi-PLK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="00C-JD-mdj"/>
+                    <constraint firstItem="XIQ-Wd-iPY" firstAttribute="top" secondItem="kTa-Ry-n7E" secondAttribute="bottom" constant="20" id="0I0-fM-AbU"/>
+                    <constraint firstAttribute="trailing" secondItem="XIQ-Wd-iPY" secondAttribute="trailing" id="1Pm-EF-b5c"/>
+                    <constraint firstAttribute="trailing" secondItem="NWv-vm-bVK" secondAttribute="trailing" constant="16" id="7wR-3r-lTG"/>
+                    <constraint firstItem="kTa-Ry-n7E" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="AK7-y9-B67"/>
+                    <constraint firstItem="kTa-Ry-n7E" firstAttribute="top" secondItem="454-aS-xPe" secondAttribute="bottom" constant="14.5" id="C5c-jr-168"/>
+                    <constraint firstItem="454-aS-xPe" firstAttribute="leading" secondItem="21w-Zi-PLK" secondAttribute="trailing" constant="10" id="K1w-cA-cPI"/>
+                    <constraint firstItem="XIQ-Wd-iPY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="VNf-rb-pJ2"/>
+                    <constraint firstAttribute="bottom" secondItem="XIQ-Wd-iPY" secondAttribute="bottom" id="XpG-48-Nvn"/>
+                    <constraint firstItem="454-aS-xPe" firstAttribute="centerY" secondItem="21w-Zi-PLK" secondAttribute="centerY" constant="-1" id="f3j-Hu-qVs"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="kTa-Ry-n7E" secondAttribute="trailing" id="lmd-NE-1sf"/>
+                    <constraint firstItem="21w-Zi-PLK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="xcQ-8J-oQH"/>
+                    <constraint firstItem="NWv-vm-bVK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="zta-yT-j6Y"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="lblCashAmount" destination="454-aS-xPe" id="sPq-wV-G3U"/>
+                <outlet property="lblRupeeAmount" destination="21w-Zi-PLK" id="Cgr-UI-a8c"/>
+                <outlet property="lblTickAmount" destination="NWv-vm-bVK" id="tkA-Du-LOl"/>
+                <outlet property="tableView" destination="kTa-Ry-n7E" id="FVp-cb-lVr"/>
+                <outlet property="tableViewHeightConstraint" destination="9XQ-0c-P0c" id="IgP-B4-eZj"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="187.16517857142856"/>
+        </tableViewCell>
+    </objects>
+</document>

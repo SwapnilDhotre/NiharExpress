@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Sets the translucent background color
         UINavigationBar.appearance().backgroundColor = .clear
         UINavigationBar.appearance().isTranslucent = true
+        
+        GMSServices.provideAPIKey("AIzaSyCaAqBQK94LMz7gPiEpdqIBAHDoQ0npm_k")//"AIzaSyD0LGElUr4KoKgSbhcxA2SCa2Q6_w-lpf4")
         
         return true
     }

@@ -21,8 +21,8 @@ class TabBarViewController: UITabBarController {
         self.delegate = self
         
         self.tabBar.tintColor = UIColor.white
-        self.tabBar.barTintColor = UIColor.purple
-        self.tabBar.unselectedItemTintColor = UIColor.lightGray
+        self.tabBar.barTintColor = ColorConstant.themePrimary.color
+        self.tabBar.unselectedItemTintColor = UIColor.white.withAlphaComponent(0.8)
     }
     
     func configureTabs() {
@@ -40,32 +40,32 @@ class TabBarViewController: UITabBarController {
         
         let item1 = UITabBarItem()
         item1.title = "Orders"
-        item1.image = UIImage(named: "home")
+        item1.image = FontUtility.appImageIcon(code: AppIcons.orders.rawValue, textColor: .white, size: CGSize(width: 24, height: 24))
         
         navigationOrders.tabBarItem = item1
         
         let item2 = UITabBarItem()
         item2.title = "Profile"
-        item2.image = UIImage(named: "home")
+        item2.image = FontUtility.appImageIcon(code: AppIcons.outlinePerson.rawValue, textColor: .white, size: CGSize(width: 24, height: 24))
         
         profileController.tabBarItem = item2
         
         let item3 = UITabBarItem()
         item3.title = "New Order"
         item3.tag = 102
-        item3.image = UIImage(named: "home")
+        item3.image = FontUtility.appImageIcon(code: AppIcons.outlineAddCircle.rawValue, textColor: .white, size: CGSize(width: 24, height: 24))
         
         controller.tabBarItem = item3
         
         let item4 = UITabBarItem()
         item4.title = "Help"
-        item4.image = UIImage(named: "home")
+        item4.image = FontUtility.appImageIcon(code: AppIcons.outlineHelp.rawValue, textColor: .white, size: CGSize(width: 24, height: 24))
         
         helpController.tabBarItem = item4
         
         let item5 = UITabBarItem()
         item5.title = "Info"
-        item5.image = UIImage(named: "home")
+        item5.image = FontUtility.appImageIcon(code: AppIcons.outlineInfo.rawValue, textColor: .white, size: CGSize(width: 24, height: 24))
         
         infoController.tabBarItem = item5
     }

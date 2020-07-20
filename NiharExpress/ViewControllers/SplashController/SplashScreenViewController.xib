@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SplashScreenViewController" customModule="NiharExpress" customModuleProvider="target">
+            <connections>
+                <outlet property="logoHeightConstraint" destination="Blc-cq-wFO" id="eTk-9N-u9u"/>
+                <outlet property="logoWidthConstraint" destination="Zh9-fU-2Xs" id="dzx-kl-5DQ"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_back_white" translatesAutoresizingMaskIntoConstraints="NO" id="RJr-I9-nn0">
+                    <rect key="frame" x="162" y="403" width="90" height="90"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="90" id="Blc-cq-wFO"/>
+                        <constraint firstAttribute="width" constant="90" id="Zh9-fU-2Xs"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="RJr-I9-nn0" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="FQS-Ry-HNe"/>
+                <constraint firstItem="RJr-I9-nn0" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ZBr-Tq-n30"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="131.8840579710145" y="143.97321428571428"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="logo_back_white" width="554" height="554"/>
+    </resources>
+</document>

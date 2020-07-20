@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Bold.ttf">
+            <string>Roboto-Bold</string>
+        </array>
+        <array key="Roboto-Medium.ttf">
+            <string>Roboto-Medium</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OrdersViewController" customModule="NiharExpress" customModuleProvider="target">
             <connections>
+                <outlet property="createOrderButton" destination="WBY-tO-7QE" id="5hb-Ry-HUF"/>
+                <outlet property="createOrderTopConstraint" destination="y34-qD-8HG" id="pLo-NG-mMK"/>
+                <outlet property="lblLoginButton" destination="dZJ-Vs-doT" id="4Ui-Qv-Ydw"/>
+                <outlet property="lblOrderWithNoOrganization" destination="BxZ-zF-oqi" id="xX2-B8-JZX"/>
+                <outlet property="logoHeightConstraint" destination="4Y2-L0-vx6" id="1iK-gd-2tJ"/>
+                <outlet property="logoWidthConstraint" destination="V4M-Fj-cr3" id="WCq-T8-W1H"/>
+                <outlet property="registerButton" destination="HXS-bh-VqP" id="vog-7Q-dUQ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -17,33 +33,104 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" spacing="106" translatesAutoresizingMaskIntoConstraints="NO" id="GcL-6b-eVw">
-                    <rect key="frame" x="106.5" y="433" width="201" height="30"/>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="GcL-6b-eVw">
+                    <rect key="frame" x="52" y="369" width="310" height="38"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZJ-Vs-doT">
-                            <rect key="frame" x="0.0" y="0.0" width="38" height="30"/>
-                            <state key="normal" title="Login"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZJ-Vs-doT" customClass="DesignableButton" customModule="NiharExpress" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="140" height="38"/>
+                            <color key="backgroundColor" red="0.50196078431372548" green="0.11764705882352941" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="140" id="48N-Dd-lZx"/>
+                                <constraint firstAttribute="height" constant="38" id="eR4-r0-NtZ"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="14"/>
+                            <state key="normal" title="Login">
+                                <color key="titleColor" red="0.95294117649999999" green="0.94509803920000002" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="6"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="maskToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="loginBtnAction:" destination="-1" eventType="touchUpInside" id="SjA-0k-RSc"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HXS-bh-VqP">
-                            <rect key="frame" x="144" y="0.0" width="57" height="30"/>
-                            <state key="normal" title="Register"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HXS-bh-VqP" customClass="DesignableButton" customModule="NiharExpress" customModuleProvider="target">
+                            <rect key="frame" x="170" y="0.0" width="140" height="38"/>
+                            <color key="backgroundColor" red="0.50196078431372548" green="0.11764705882352941" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="14"/>
+                            <state key="normal" title="Register">
+                                <color key="titleColor" red="0.95294117649999999" green="0.94509803920000002" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="6"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="maskToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="registerBtnAction:" destination="-1" eventType="touchUpInside" id="821-gf-Hru"/>
                             </connections>
                         </button>
                     </subviews>
+                    <constraints>
+                        <constraint firstItem="HXS-bh-VqP" firstAttribute="width" secondItem="dZJ-Vs-doT" secondAttribute="width" id="nJB-jg-SLb"/>
+                    </constraints>
                 </stackView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_mainpage" translatesAutoresizingMaskIntoConstraints="NO" id="CU7-8X-X7c">
+                    <rect key="frame" x="162" y="183" width="90" height="90"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="90" id="4Y2-L0-vx6"/>
+                        <constraint firstAttribute="width" constant="90" id="V4M-Fj-cr3"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WBY-tO-7QE" customClass="DesignableButton" customModule="NiharExpress" customModuleProvider="target">
+                    <rect key="frame" x="107" y="607" width="200" height="38"/>
+                    <color key="backgroundColor" red="0.50196078430000002" green="0.1176470588" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="lbu-iR-g2d"/>
+                        <constraint firstAttribute="height" constant="38" id="mE3-qb-fac"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="14"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
+                    <state key="normal" title="Create Order">
+                        <color key="titleColor" red="0.95294117649999999" green="0.94509803920000002" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="6"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="maskToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="loginBtnAction:" destination="-1" eventType="touchUpInside" id="Lam-gl-hrG"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order with no registration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BxZ-zF-oqi">
+                    <rect key="frame" x="127.5" y="653" width="159.5" height="16.5"/>
+                    <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="WBY-tO-7QE" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Fzw-bo-WBM"/>
                 <constraint firstItem="GcL-6b-eVw" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="MUL-CH-EsP"/>
-                <constraint firstItem="GcL-6b-eVw" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="WTj-LZ-JzZ"/>
+                <constraint firstItem="CU7-8X-X7c" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-220" id="TL9-yf-AgL"/>
+                <constraint firstItem="GcL-6b-eVw" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-60" id="WTj-LZ-JzZ"/>
+                <constraint firstItem="BxZ-zF-oqi" firstAttribute="centerX" secondItem="WBY-tO-7QE" secondAttribute="centerX" id="gSr-fZ-Rwz"/>
+                <constraint firstItem="BxZ-zF-oqi" firstAttribute="top" secondItem="WBY-tO-7QE" secondAttribute="bottom" constant="8" id="jbM-f0-T6L"/>
+                <constraint firstItem="CU7-8X-X7c" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="wZk-RK-oti"/>
+                <constraint firstItem="WBY-tO-7QE" firstAttribute="top" secondItem="GcL-6b-eVw" secondAttribute="bottom" constant="200" id="y34-qD-8HG"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="139" y="129"/>
+            <point key="canvasLocation" x="137.68115942028987" y="128.57142857142856"/>
         </view>
     </objects>
+    <resources>
+        <image name="logo_mainpage" width="554" height="445"/>
+    </resources>
 </document>
