@@ -29,6 +29,8 @@
 		0F7F1C6E24AE424E0011A754 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F1C6C24AE424E0011A754 /* ProfileViewController.swift */; };
 		0F7F1C6F24AE424E0011A754 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F7F1C6D24AE424E0011A754 /* ProfileViewController.xib */; };
 		C43D0B0E6A4EBCD9DA632D09 /* Pods_NiharExpress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACD65CF2FAE382A706B66B97 /* Pods_NiharExpress.framework */; };
+		E60336D424C6ADC200D263C9 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E60336D324C6ADC200D263C9 /* LoginView.xib */; };
+		E60336D624C6ADD100D263C9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60336D524C6ADD100D263C9 /* LoginView.swift */; };
 		E60F186C24BEEC2F00134353 /* OptimizeRouteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60F186A24BEEC2F00134353 /* OptimizeRouteTableViewCell.swift */; };
 		E60F186D24BEEC2F00134353 /* OptimizeRouteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E60F186B24BEEC2F00134353 /* OptimizeRouteTableViewCell.xib */; };
 		E60F187024BEF74100134353 /* AddDeliveryPointTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60F186E24BEF74100134353 /* AddDeliveryPointTableViewCell.swift */; };
@@ -81,6 +83,14 @@
 		E630D9B924BDC5D9006666A8 /* BottomCreateOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E630D9B824BDC5D9006666A8 /* BottomCreateOrderView.swift */; };
 		E630D9BC24BDDF32006666A8 /* WeightTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E630D9BA24BDDF32006666A8 /* WeightTableViewCell.swift */; };
 		E630D9BD24BDDF32006666A8 /* WeightTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E630D9BB24BDDF32006666A8 /* WeightTableViewCell.xib */; };
+		E65C384424C5FB94002DD732 /* TabbedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C384124C5FB94002DD732 /* TabbedView.swift */; };
+		E65C384524C5FB94002DD732 /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C384224C5FB94002DD732 /* TabModel.swift */; };
+		E65C384624C5FB94002DD732 /* TabbedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E65C384324C5FB94002DD732 /* TabbedView.xib */; };
+		E65C384A24C5FBE0002DD732 /* SingleLineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C384824C5FBE0002DD732 /* SingleLineCollectionViewCell.swift */; };
+		E65C384B24C5FBE0002DD732 /* SingleLineCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E65C384924C5FBE0002DD732 /* SingleLineCollectionViewCell.xib */; };
+		E65C384D24C5FD02002DD732 /* UIButton_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C384C24C5FD02002DD732 /* UIButton_Extension.swift */; };
+		E65C384F24C5FE8B002DD732 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C384E24C5FE8B002DD732 /* RegistrationView.swift */; };
+		E65C385124C5FE93002DD732 /* RegistrationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E65C385024C5FE93002DD732 /* RegistrationView.xib */; };
 		E6AA98E324BF32CC006577F6 /* PaymentViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AA98E124BF32CC006577F6 /* PaymentViewTableViewCell.swift */; };
 		E6AA98E424BF32CC006577F6 /* PaymentViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6AA98E224BF32CC006577F6 /* PaymentViewTableViewCell.xib */; };
 		E6AA98E624BF3875006577F6 /* nihar_font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E6AA98E524BF3874006577F6 /* nihar_font.ttf */; };
@@ -123,6 +133,8 @@
 		820DDFDA1D3278D30ADBC68A /* Pods-NiharExpress.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NiharExpress.release.xcconfig"; path = "Target Support Files/Pods-NiharExpress/Pods-NiharExpress.release.xcconfig"; sourceTree = "<group>"; };
 		ACD65CF2FAE382A706B66B97 /* Pods_NiharExpress.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NiharExpress.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAC0C6EAEB1AA2E7906AC099 /* Pods-NiharExpress.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NiharExpress.debug.xcconfig"; path = "Target Support Files/Pods-NiharExpress/Pods-NiharExpress.debug.xcconfig"; sourceTree = "<group>"; };
+		E60336D324C6ADC200D263C9 /* LoginView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
+		E60336D524C6ADD100D263C9 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		E60F186A24BEEC2F00134353 /* OptimizeRouteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptimizeRouteTableViewCell.swift; sourceTree = "<group>"; };
 		E60F186B24BEEC2F00134353 /* OptimizeRouteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptimizeRouteTableViewCell.xib; sourceTree = "<group>"; };
 		E60F186E24BEF74100134353 /* AddDeliveryPointTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDeliveryPointTableViewCell.swift; sourceTree = "<group>"; };
@@ -175,6 +187,14 @@
 		E630D9B824BDC5D9006666A8 /* BottomCreateOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCreateOrderView.swift; sourceTree = "<group>"; };
 		E630D9BA24BDDF32006666A8 /* WeightTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightTableViewCell.swift; sourceTree = "<group>"; };
 		E630D9BB24BDDF32006666A8 /* WeightTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeightTableViewCell.xib; sourceTree = "<group>"; };
+		E65C384124C5FB94002DD732 /* TabbedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbedView.swift; sourceTree = "<group>"; };
+		E65C384224C5FB94002DD732 /* TabModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
+		E65C384324C5FB94002DD732 /* TabbedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabbedView.xib; sourceTree = "<group>"; };
+		E65C384824C5FBE0002DD732 /* SingleLineCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleLineCollectionViewCell.swift; sourceTree = "<group>"; };
+		E65C384924C5FBE0002DD732 /* SingleLineCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleLineCollectionViewCell.xib; sourceTree = "<group>"; };
+		E65C384C24C5FD02002DD732 /* UIButton_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton_Extension.swift; sourceTree = "<group>"; };
+		E65C384E24C5FE8B002DD732 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		E65C385024C5FE93002DD732 /* RegistrationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegistrationView.xib; sourceTree = "<group>"; };
 		E6AA98E124BF32CC006577F6 /* PaymentViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewTableViewCell.swift; sourceTree = "<group>"; };
 		E6AA98E224BF32CC006577F6 /* PaymentViewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentViewTableViewCell.xib; sourceTree = "<group>"; };
 		E6AA98E524BF3874006577F6 /* nihar_font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = nihar_font.ttf; sourceTree = "<group>"; };
@@ -245,6 +265,8 @@
 			children = (
 				0F6C5B3124AE4AA300F15376 /* LoginViewController.swift */,
 				0F6C5B3224AE4AA300F15376 /* LoginViewController.xib */,
+				E60336D324C6ADC200D263C9 /* LoginView.xib */,
+				E60336D524C6ADD100D263C9 /* LoginView.swift */,
 			);
 			path = LoginController;
 			sourceTree = "<group>";
@@ -254,6 +276,8 @@
 			children = (
 				0F6C5B2D24AE4A9500F15376 /* RegistrationViewController.swift */,
 				0F6C5B2E24AE4A9500F15376 /* RegistrationViewController.xib */,
+				E65C384E24C5FE8B002DD732 /* RegistrationView.swift */,
+				E65C385024C5FE93002DD732 /* RegistrationView.xib */,
 			);
 			path = RegisterController;
 			sourceTree = "<group>";
@@ -407,6 +431,7 @@
 				E630D9A524BD9D43006666A8 /* UIColor_Extension.swift */,
 				E630D99B24BD9CB4006666A8 /* String_Extension.swift */,
 				E630D9AF24BDBAC1006666A8 /* UIDevice_Extension.swift */,
+				E65C384C24C5FD02002DD732 /* UIButton_Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -513,10 +538,31 @@
 		E630D9B124BDC15C006666A8 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				E65C384024C5FB94002DD732 /* TabbedView */,
 				E60F187724BF0CC800134353 /* DatePicker */,
 				E60F187624BF0CB600134353 /* CreateOrderTopBottom */,
 			);
 			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		E65C384024C5FB94002DD732 /* TabbedView */ = {
+			isa = PBXGroup;
+			children = (
+				E65C384724C5FBD3002DD732 /* Cells */,
+				E65C384124C5FB94002DD732 /* TabbedView.swift */,
+				E65C384224C5FB94002DD732 /* TabModel.swift */,
+				E65C384324C5FB94002DD732 /* TabbedView.xib */,
+			);
+			path = TabbedView;
+			sourceTree = "<group>";
+		};
+		E65C384724C5FBD3002DD732 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E65C384824C5FBE0002DD732 /* SingleLineCollectionViewCell.swift */,
+				E65C384924C5FBE0002DD732 /* SingleLineCollectionViewCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		E6AA98EB24BF4625006577F6 /* PickAddressForLocation */ = {
@@ -614,6 +660,7 @@
 				E6AA98EA24BF3914006577F6 /* RadioCellTableViewCell.xib in Resources */,
 				E630D96124BD9192006666A8 /* fa-brands-400.ttf in Resources */,
 				0F6C5B3024AE4A9500F15376 /* RegistrationViewController.xib in Resources */,
+				E60336D424C6ADC200D263C9 /* LoginView.xib in Resources */,
 				E60F187124BEF74100134353 /* AddDeliveryPointTableViewCell.xib in Resources */,
 				E630D98224BD9375006666A8 /* Roboto-Light.ttf in Resources */,
 				0F7F1C6424AE415F0011A754 /* TabBarViewController.xib in Resources */,
@@ -622,7 +669,9 @@
 				0F7F1C5424AE3E7F0011A754 /* Assets.xcassets in Resources */,
 				E630D93824BD8D08006666A8 /* SplashScreenViewController.xib in Resources */,
 				E6CF2D4E24BE0BD600158CE0 /* PickUpDeliveryPointTableViewCell.xib in Resources */,
+				E65C384624C5FB94002DD732 /* TabbedView.xib in Resources */,
 				0F7F1C6F24AE424E0011A754 /* ProfileViewController.xib in Resources */,
+				E65C385124C5FE93002DD732 /* RegistrationView.xib in Resources */,
 				E60F186D24BEEC2F00134353 /* OptimizeRouteTableViewCell.xib in Resources */,
 				E630D9BD24BDDF32006666A8 /* WeightTableViewCell.xib in Resources */,
 				E6AA98E624BF3875006577F6 /* nihar_font.ttf in Resources */,
@@ -639,6 +688,7 @@
 				0F6C5B2124AE428D00F15376 /* HelpViewController.xib in Resources */,
 				E630D98624BD9375006666A8 /* Roboto-MediumItalic.ttf in Resources */,
 				E630D98724BD9375006666A8 /* Roboto-ThinItalic.ttf in Resources */,
+				E65C384B24C5FBE0002DD732 /* SingleLineCollectionViewCell.xib in Resources */,
 				0F6C5B3424AE4AA300F15376 /* LoginViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -719,6 +769,7 @@
 				E630D9B024BDBAC1006666A8 /* UIDevice_Extension.swift in Sources */,
 				E630D9A924BD9D6F006666A8 /* APIManager.swift in Sources */,
 				E630D99324BD9813006666A8 /* FontAwesome.swift in Sources */,
+				E60336D624C6ADD100D263C9 /* LoginView.swift in Sources */,
 				E60F186C24BEEC2F00134353 /* OptimizeRouteTableViewCell.swift in Sources */,
 				E630D9AD24BD9DFC006666A8 /* Constants.swift in Sources */,
 				E630D99C24BD9CB4006666A8 /* String_Extension.swift in Sources */,
@@ -732,6 +783,7 @@
 				0F6C5B2F24AE4A9500F15376 /* RegistrationViewController.swift in Sources */,
 				0F6C5B3C24AE509F00F15376 /* NewOrderFormTableViewController.swift in Sources */,
 				E630D93324BD7489006666A8 /* UIViewController_Extension.swift in Sources */,
+				E65C384A24C5FBE0002DD732 /* SingleLineCollectionViewCell.swift in Sources */,
 				0F6C5B2A24AE48A600F15376 /* Util.swift in Sources */,
 				E6AA98EE24BF4651006577F6 /* PickAddressViewController.swift in Sources */,
 				E630D9A024BD9CD9006666A8 /* Date_Extension.swift in Sources */,
@@ -742,18 +794,22 @@
 				0F7F1C6E24AE424E0011A754 /* ProfileViewController.swift in Sources */,
 				E630D9AB24BD9DBB006666A8 /* UserConstant.swift in Sources */,
 				E630D9B924BDC5D9006666A8 /* BottomCreateOrderView.swift in Sources */,
+				E65C384524C5FB94002DD732 /* TabModel.swift in Sources */,
 				0F7F1C4D24AE3E7D0011A754 /* SceneDelegate.swift in Sources */,
 				E630D99A24BD9C99006666A8 /* UITableView_Extension.swift in Sources */,
 				E630D9A624BD9D43006666A8 /* UIColor_Extension.swift in Sources */,
 				E630D9A224BD9CFC006666A8 /* UserDefaultManager.swift in Sources */,
+				E65C384F24C5FE8B002DD732 /* RegistrationView.swift in Sources */,
 				0F6C5B3324AE4AA300F15376 /* LoginViewController.swift in Sources */,
 				E60F187424BF033200134353 /* NotifyBySMSTableViewCell.swift in Sources */,
 				E630D99224BD9813006666A8 /* FontAwesomeEnum.swift in Sources */,
 				E6CF2D4824BE044200158CE0 /* FormFieldModel.swift in Sources */,
+				E65C384D24C5FD02002DD732 /* UIButton_Extension.swift in Sources */,
 				0F7F1C6924AE42020011A754 /* OrdersViewController.swift in Sources */,
 				E60F187A24BF0CDC00134353 /* DatePickerViewController.swift in Sources */,
 				E6CF2D4A24BE053700158CE0 /* FormSubFieldModel.swift in Sources */,
 				E630D93124BD7157006666A8 /* UINavigationController_Extension.swift in Sources */,
+				E65C384424C5FB94002DD732 /* TabbedView.swift in Sources */,
 				E630D99E24BD9CCB006666A8 /* Dictionary_Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

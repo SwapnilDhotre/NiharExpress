@@ -381,6 +381,8 @@ extension NewOrderFormTableViewController: LocationCellProtocol {
 extension NewOrderFormTableViewController: ReloadCellProtocol {
     func reloadCell(for indexPath: IndexPath) {
         self.tableView.reloadRows(at: [indexPath], with: .automatic)
+        
+        self.tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
     }
 }
 

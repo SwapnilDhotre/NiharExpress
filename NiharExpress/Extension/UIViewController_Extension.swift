@@ -83,7 +83,7 @@ extension UIViewController {
     
     func getBackBarButton() -> UIButton {
         let iconButton = UIButton(frame:  CGRect(origin: CGPoint.zero, size: CGSize(width: 50, height: 40)))
-//        iconButton.setBackButton()
+        iconButton.setBackButton()
         return iconButton
     }
     

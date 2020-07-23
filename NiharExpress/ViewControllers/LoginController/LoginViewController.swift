@@ -9,15 +9,24 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-
+    
+    @IBOutlet weak var tabbedView: TabbedView!
+    
+    // MARK: - Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tabbedView.tabbedDatasource = self
+        self.tabbedView.reloadTabs()
+        
+        self.configureUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.tabBarController?.tabBar.isHidden = true
+        self.showAndUpdateNavigationBar(with: "Sign in", withShadow: false, isHavingBackButton: true, actionController: self, backAction: #selector(self.backBtnAction(_:)))
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -25,4 +34,28 @@ class LoginViewController: UIViewController {
         
         self.tabBarController?.tabBar.isHidden = false
     }
+    
+    // MARK: - Custom Methods
+    func configureUI() {
+        
+    }
+    
+    // MARK: - Action Methods
+    @objc func backBtnAction(_ sender: UIBarButtonItem) {
+        self.navigationController?.popViewController(animated: true)
+    }
 }
+
+extension LoginViewController: TabbedViewDataSource {
+    func tabTitles() -> [String] {
+        return [
+            "FOR INDVIDUALS",
+            "FOR BUSINESS"
+        ]
+    }
+    
+    func reloadContainer(for tab: TabModel, index: Int) -> UIView {
+        return LoginView()
+    }
+}
+

@@ -128,6 +128,24 @@ class PickUpDeliveryPointTableViewCell: UITableViewCell {
     func updateData(with model: FormFieldModel) {
         self.model = model
         
+        
+        if model.isSubFieldsVisible {
+            self.formBottomConstraint.priority = UILayoutPriority(rawValue: 920)
+        } else {
+            self.formBottomConstraint.priority = UILayoutPriority(rawValue: 940)
+        }
+        
+        if model.isNestedSubFieldVisible {
+            self.nestedFormBottomConstraint.constant = 230
+            self.nestedFormBottomConstraint.priority = UILayoutPriority(rawValue: 950)
+            
+        } else {
+            self.nestedFormBottomConstraint.priority = UILayoutPriority(rawValue: 900)
+            self.nestedFormBottomConstraint.constant = 0
+        }
+        
+        self.contentView.layoutIfNeeded()
+        
         self.lblFormFieldTitle.text = model.title
         
         self.lblFieldNo.text = "\(indexPath.row)"
@@ -168,22 +186,6 @@ class PickUpDeliveryPointTableViewCell: UITableViewCell {
             }
         }
         
-        if model.isSubFieldsVisible {
-            self.formBottomConstraint.priority = UILayoutPriority(rawValue: 920)
-        } else {
-            self.formBottomConstraint.priority = UILayoutPriority(rawValue: 940)
-        }
-        
-        if model.isNestedSubFieldVisible {
-            self.nestedFormBottomConstraint.constant = 230
-            self.nestedFormBottomConstraint.priority = UILayoutPriority(rawValue: 950)
-            
-        } else {
-            self.nestedFormBottomConstraint.priority = UILayoutPriority(rawValue: 900)
-            self.nestedFormBottomConstraint.constant = 0
-        }
-        self.contentView.layoutIfNeeded()
-        
         self.updateExpandCollapseBtn(sender: self.btnFormFieldCollapser, isCollapsed: !model.isSubFieldsVisible)
         self.updateExpandCollapseBtn(sender: self.btnFormNestedFieldCollapser, isCollapsed: !model.isNestedSubFieldVisible)
     }
@@ -214,5 +216,5 @@ class PickUpDeliveryPointTableViewCell: UITableViewCell {
 
 
 extension PickUpDeliveryPointTableViewCell: UITextFieldDelegate {
- 
+    
 }

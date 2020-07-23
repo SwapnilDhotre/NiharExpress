@@ -27,28 +27,27 @@ class TabBarViewController: UITabBarController {
     
     func configureTabs() {
         let controller = UIViewController()
-        let ordersController = OrdersViewController()
-        let navigationOrders = UINavigationController(rootViewController: ordersController)
-        let profileController = ProfileViewController()
+        let ordersNavigationController = UINavigationController(rootViewController: OrdersViewController())
+        let profileNavigationController = UINavigationController(rootViewController: OrdersViewController())//ProfileViewController())
         let helpController = HelpViewController()
         let infoController = InfoViewController()
         
         self.viewControllers =
-            [navigationOrders, profileController, controller, helpController, infoController]
+            [ordersNavigationController, profileNavigationController, controller, helpController, infoController]
         
-        self.selectedViewController = navigationOrders
+        self.selectedViewController = ordersNavigationController
         
         let item1 = UITabBarItem()
         item1.title = "Orders"
         item1.image = FontUtility.appImageIcon(code: AppIcons.orders.rawValue, textColor: .white, size: CGSize(width: 24, height: 24))
         
-        navigationOrders.tabBarItem = item1
+        ordersNavigationController.tabBarItem = item1
         
         let item2 = UITabBarItem()
         item2.title = "Profile"
         item2.image = FontUtility.appImageIcon(code: AppIcons.outlinePerson.rawValue, textColor: .white, size: CGSize(width: 24, height: 24))
         
-        profileController.tabBarItem = item2
+        profileNavigationController.tabBarItem = item2
         
         let item3 = UITabBarItem()
         item3.title = "New Order"

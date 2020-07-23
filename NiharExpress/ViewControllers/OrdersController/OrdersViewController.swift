@@ -32,7 +32,7 @@ class OrdersViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.resetAnimatedView()
-        self.showAndUpdateNavigationBar(with: "SAME DAY DELIVERY PARTNER", withShadow: true, isHavingBackButton: true, actionController: self, backAction: #selector(self.backBtnAction(_:)))
+        self.showAndUpdateNavigationBar(with: "SAME DAY DELIVERY PARTNER", withShadow: true, isHavingBackButton: false, actionController: self, backAction: #selector(self.backBtnAction(_:)))
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -72,9 +72,7 @@ class OrdersViewController: UIViewController {
     @objc func backBtnAction(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
-    
-
-    
+        
     // MARK: - Action Methods
     @IBAction func loginBtnAction(_ sender: UIButton) {
         self.navigationController?.pushViewController(LoginViewController(), animated: true)
