@@ -28,6 +28,7 @@
 		0F7F1C6A24AE42020011A754 /* OrdersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F7F1C6824AE42020011A754 /* OrdersViewController.xib */; };
 		0F7F1C6E24AE424E0011A754 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F1C6C24AE424E0011A754 /* ProfileViewController.swift */; };
 		0F7F1C6F24AE424E0011A754 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F7F1C6D24AE424E0011A754 /* ProfileViewController.xib */; };
+		0FEF269124CBFFE400D2CD69 /* URLConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEF269024CBFFE300D2CD69 /* URLConstant.swift */; };
 		C43D0B0E6A4EBCD9DA632D09 /* Pods_NiharExpress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACD65CF2FAE382A706B66B97 /* Pods_NiharExpress.framework */; };
 		E60336D424C6ADC200D263C9 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E60336D324C6ADC200D263C9 /* LoginView.xib */; };
 		E60336D624C6ADD100D263C9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60336D524C6ADD100D263C9 /* LoginView.swift */; };
@@ -130,6 +131,7 @@
 		0F7F1C6824AE42020011A754 /* OrdersViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrdersViewController.xib; sourceTree = "<group>"; };
 		0F7F1C6C24AE424E0011A754 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		0F7F1C6D24AE424E0011A754 /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
+		0FEF269024CBFFE300D2CD69 /* URLConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLConstant.swift; sourceTree = "<group>"; };
 		820DDFDA1D3278D30ADBC68A /* Pods-NiharExpress.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NiharExpress.release.xcconfig"; path = "Target Support Files/Pods-NiharExpress/Pods-NiharExpress.release.xcconfig"; sourceTree = "<group>"; };
 		ACD65CF2FAE382A706B66B97 /* Pods_NiharExpress.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NiharExpress.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAC0C6EAEB1AA2E7906AC099 /* Pods-NiharExpress.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NiharExpress.debug.xcconfig"; path = "Target Support Files/Pods-NiharExpress/Pods-NiharExpress.debug.xcconfig"; sourceTree = "<group>"; };
@@ -499,6 +501,7 @@
 			children = (
 				E630D9AC24BD9DFB006666A8 /* Constants.swift */,
 				E630D99524BD9BD1006666A8 /* ColorConstant.swift */,
+				0FEF269024CBFFE300D2CD69 /* URLConstant.swift */,
 				E630D9AA24BD9DBA006666A8 /* UserConstant.swift */,
 			);
 			path = Constants;
@@ -811,6 +814,7 @@
 				E630D93124BD7157006666A8 /* UINavigationController_Extension.swift in Sources */,
 				E65C384424C5FB94002DD732 /* TabbedView.swift in Sources */,
 				E630D99E24BD9CCB006666A8 /* Dictionary_Extension.swift in Sources */,
+				0FEF269124CBFFE400D2CD69 /* URLConstant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

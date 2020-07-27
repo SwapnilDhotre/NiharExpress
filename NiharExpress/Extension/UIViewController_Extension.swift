@@ -114,7 +114,7 @@ extension UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    func showAlert(withMsg msg: String, title: String? = nil, completion: ((UIAlertAction) -> Void)? = nil) {
+    func showAlert(withMsg msg: String, title: String? = "Nihar Express", completion: ((UIAlertAction) -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
@@ -134,5 +134,26 @@ extension UIViewController {
         
         self.present(alert, animated: true)
         return alert
+    }
+    
+    func showAlertLoader() -> UIAlertController {
+        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        loadingIndicator.startAnimating();
+
+        alert.view.addSubview(loadingIndicator)
+        self.present(alert, animated: false, completion: nil)
+        return alert
+    }
+    
+    func disableInteraction() {
+        self.view.isUserInteractionEnabled = false
+    }
+    
+    func enableInteraction() {
+        self.view.isUserInteractionEnabled = true
     }
 }

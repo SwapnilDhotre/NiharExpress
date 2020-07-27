@@ -15,7 +15,36 @@ enum HttpMethod: String {
     case delete = "DELETE"
 }
 
-typealias Parameters = [String: Any]
+enum APIStatus: String {
+    case success = "200"
+    case alreadyExist = "304"
+    case badRequest = "400"
+    case unauthorizedAccess = "401"
+    case notFound = "404"
+    case methodNotFound = "405"
+    case ambiguous = ""
+    
+    var message: String {
+        switch self {
+        case .success:
+            return "Api Success"
+        case .alreadyExist:
+            return "Data already exist"
+        case .badRequest:
+            return "Something went wrong"
+        case .unauthorizedAccess:
+            return "User login expired"
+        case .notFound:
+            return "Not found"
+        case .methodNotFound:
+            return "URL error"
+        case .ambiguous:
+            return "Something went wrong"
+        }
+    }
+}
+
+typealias Parameters = [String: String]
 typealias Headers = [String: String]
 typealias APICallCompletionHandler = (_ response: [String:Any]?, _ error: Error?) -> Void
 
@@ -54,10 +83,15 @@ class APIManager {
         
         switch method {
         case .get:
-            if let param = parameters{
-                let jsonString = self.createJsonString(parameter: param)
-                let url = urlString + "?data=" + jsonString
-                request.url = URL.init(string: url)
+            if let param = parameters {
+                var urlComponents = URLComponents(string: urlString)!
+                var urlItems: [URLQueryItem] = []
+                for (key, value) in param {
+                    urlItems.append(URLQueryItem(name: key, value: value))
+                }
+                urlComponents.queryItems = urlItems
+                
+                request.url = urlComponents.url
             }
             
             self.executeRequest(urlRequest: request, completionHandler: completionHandler)
@@ -127,5 +161,21 @@ class APIManager {
         body += "--\(boundary)--\(lineBreak)"
         
         return body.data(using: .utf8)!
+    }
+    
+    func parseResponse(responseData: [String: Any]?, completion: ([String: Any]?, APIStatus?) -> Void) {
+        if let data = responseData {
+            if let data = data[keyPath: "\(Constants.Response.response).\(Constants.Response.data)"] as? [String: Any] {
+                completion(data, nil)
+            } else if let value = data[keyPath: "\(Constants.Response.response).\(Constants.Response.data)"] as? String {
+                completion(["value": value], nil)
+            } else if let status = data[keyPath: "\(Constants.Response.response).\(Constants.Response.responseCode)"] as? String, let apiStatus = APIStatus(rawValue: status) {
+                completion(nil, apiStatus)
+            } else {
+                completion(nil, APIStatus.ambiguous)
+            }
+        } else {
+            completion(nil, nil)
+        }
     }
 }

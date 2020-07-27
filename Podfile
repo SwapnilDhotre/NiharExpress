@@ -8,6 +8,9 @@ target 'NiharExpress' do
   pod 'GoogleMaps'
   pod 'GooglePlaces'
   pod 'SwiftyJSON', '~> 4.0'
+  
+  pod 'CryptoSwift', '~> 1.0'
+  
   # Pods for NiharExpress
 
 end

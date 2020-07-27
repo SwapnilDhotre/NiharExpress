@@ -1,4 +1,5 @@
 PODS:
+  - CryptoSwift (1.3.1)
   - GoogleMaps (3.9.0):
     - GoogleMaps/Maps (= 3.9.0)
   - GoogleMaps/Base (3.9.0)
@@ -9,21 +10,24 @@ PODS:
   - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
+  - CryptoSwift (~> 1.0)
   - GoogleMaps
   - GooglePlaces
   - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
   trunk:
+    - CryptoSwift
     - GoogleMaps
     - GooglePlaces
     - SwiftyJSON
 
 SPEC CHECKSUMS:
+  CryptoSwift: f12f037f6d0fcd6d48c96db0071b653de64e6c4d
   GoogleMaps: 4b5346bddfe6911bb89155d43c903020170523ac
   GooglePlaces: 1634d019549b969d40fe0ccb0b9513055adebe01
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: d6fa19b00fda3897c4c25cebf843a0244ad6ee4d
+PODFILE CHECKSUM: 69710768a98b229f1656f7a6743c2ce5c7d2e30f
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.9.3
