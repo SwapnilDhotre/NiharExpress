@@ -18,7 +18,7 @@
                 <outlet property="addressLabel" destination="2G7-Tm-27E" id="Yea-s2-G2h"/>
                 <outlet property="imageViiew" destination="yeC-RW-8CS" id="nFo-1a-dHa"/>
                 <outlet property="mapView" destination="sxx-Y6-HiB" id="X7Z-CC-Chk"/>
-                <outlet property="pinImageVerticalConstraint" destination="bsZ-hb-TW4" id="91e-eC-1BC"/>
+                <outlet property="pinImageVerticalConstraint" destination="102-7i-X2G" id="8lM-du-vQS"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -28,11 +28,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sxx-Y6-HiB" customClass="GMSMapView">
-                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                 </view>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_address" translatesAutoresizingMaskIntoConstraints="NO" id="yeC-RW-8CS">
-                    <rect key="frame" x="192" y="433" width="30" height="30"/>
+                    <rect key="frame" x="192" y="418" width="30" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="45H-IJ-fgn"/>
                         <constraint firstAttribute="height" constant="30" id="gbl-wx-1w9"/>
@@ -48,15 +48,15 @@
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="sxx-Y6-HiB" secondAttribute="bottom" id="6QY-qD-XZB"/>
+                <constraint firstItem="yeC-RW-8CS" firstAttribute="bottom" secondItem="sxx-Y6-HiB" secondAttribute="centerY" id="102-7i-X2G"/>
+                <constraint firstItem="sxx-Y6-HiB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="AZH-0x-m6J"/>
                 <constraint firstAttribute="trailing" secondItem="2G7-Tm-27E" secondAttribute="trailing" id="G8Z-7H-mrU"/>
                 <constraint firstItem="2G7-Tm-27E" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="KXB-ii-tpd"/>
+                <constraint firstAttribute="bottom" secondItem="sxx-Y6-HiB" secondAttribute="bottom" id="KiY-kt-LCs"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sxx-Y6-HiB" secondAttribute="trailing" id="T9d-O7-x8f"/>
-                <constraint firstItem="sxx-Y6-HiB" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="bHu-Ww-Oa2"/>
-                <constraint firstItem="yeC-RW-8CS" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="bsZ-hb-TW4"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="2G7-Tm-27E" secondAttribute="bottom" id="buT-zh-XI6"/>
-                <constraint firstItem="yeC-RW-8CS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="dRN-wH-MRF"/>
                 <constraint firstItem="sxx-Y6-HiB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="fkS-I4-DbC"/>
+                <constraint firstItem="yeC-RW-8CS" firstAttribute="centerX" secondItem="sxx-Y6-HiB" secondAttribute="centerX" id="qo4-Yx-XuB"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="131.8840579710145" y="153.34821428571428"/>

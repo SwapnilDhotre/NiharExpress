@@ -54,6 +54,7 @@ class TabbedView: UIView {
     }
     
     func reloadTabs() {
+        self.tabsCollectionView.reloadData()
         if let dataSource = self.tabbedDatasource {
             self.tabs = dataSource.tabTitles().map({
                 TabModel(id: 123, title: $0, isSelected: false)

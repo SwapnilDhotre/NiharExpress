@@ -48,6 +48,12 @@ public enum AppIcons: String {
     
     case radioSelected = "\u{e90f}"
     case radioUnSelected = "\u{e911}"
+    
+    case questionMark = "\u{e912}"
+    
+    case paperPad = "\u{e913}"
+    case cards = "\u{e915}"
+    case businessBriefcase = "\u{e914}"
 }
 
 class FontUtility {

@@ -64,7 +64,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="21w-Zi-PLK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="00C-JD-mdj"/>
-                    <constraint firstItem="XIQ-Wd-iPY" firstAttribute="top" secondItem="kTa-Ry-n7E" secondAttribute="bottom" constant="20" id="0I0-fM-AbU"/>
+                    <constraint firstItem="XIQ-Wd-iPY" firstAttribute="top" relation="greaterThanOrEqual" secondItem="kTa-Ry-n7E" secondAttribute="bottom" constant="20" id="0I0-fM-AbU"/>
                     <constraint firstItem="kTa-Ry-n7E" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="55" id="0fp-i0-K7l"/>
                     <constraint firstAttribute="trailing" secondItem="XIQ-Wd-iPY" secondAttribute="trailing" id="1Pm-EF-b5c"/>
                     <constraint firstAttribute="trailing" secondItem="NWv-vm-bVK" secondAttribute="trailing" constant="16" id="7wR-3r-lTG"/>

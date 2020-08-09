@@ -9,22 +9,68 @@
 import UIKit
 
 class HelpViewController: UIViewController {
-
+    
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        self.configureUI()
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.showAndUpdateNavigationBar(with: "Help", withShadow: true, isHavingBackButton: false)
     }
-    */
+    
+    func configureUI() {
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        
+        self.tableView.tableFooterView = UIView()
+        
+        self.tableView.register(UINib(nibName: ProfileTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: ProfileTableViewCell.identifier)
+    }
+}
 
+extension HelpViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier) as? ProfileTableViewCell else {
+            assertionFailure("Couldn't dequeue:>> \(ProfileTableViewCell.identifier)")
+            return UITableViewCell()
+        }
+        
+        cell.selectionStyle = .none
+        if indexPath.row == 0 {
+            cell.updateData(with: AppIcons.questionMark.rawValue, title: "FAQ's", subTitle: "", trailing: "")
+        } else if indexPath.row == 1 {
+            cell.updateData(with: AppIcons.questionMark.rawValue, title: "Support", subTitle: "", trailing: "")
+        }
+        
+        cell.lblIcon.font = FontUtility.niharExpress(size: 18)
+        cell.lblTitle.textColor = UIColor.darkGray
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            self.loadWebPage(url: "", title: "FAQ's")
+        } else if indexPath.row == 1 {
+            self.loadWebPage(url: "", title: "Support")
+        }
+    }
+    
+    func loadWebPage(url: String, title: String) {
+        let webController = WebViewViewController()
+        webController.titleString = title
+        webController.urlString = url
+        
+        self.navigationController?.pushViewController(webController, animated: true)
+    }
 }

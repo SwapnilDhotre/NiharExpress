@@ -32,6 +32,11 @@
 		C43D0B0E6A4EBCD9DA632D09 /* Pods_NiharExpress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACD65CF2FAE382A706B66B97 /* Pods_NiharExpress.framework */; };
 		E60336D424C6ADC200D263C9 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E60336D324C6ADC200D263C9 /* LoginView.xib */; };
 		E60336D624C6ADD100D263C9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60336D524C6ADD100D263C9 /* LoginView.swift */; };
+		E609BD5124E011BF00B505EB /* EmptyFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E609BD4F24E011BF00B505EB /* EmptyFormViewController.swift */; };
+		E609BD5224E011BF00B505EB /* EmptyFormViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E609BD5024E011BF00B505EB /* EmptyFormViewController.xib */; };
+		E609BD5824E02ABA00B505EB /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E609BD5624E02ABA00B505EB /* WebViewViewController.swift */; };
+		E609BD5924E02ABA00B505EB /* WebViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E609BD5724E02ABA00B505EB /* WebViewViewController.xib */; };
+		E609BD5B24E0380200B505EB /* nihar_font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E609BD5A24E0380200B505EB /* nihar_font.ttf */; };
 		E60F186C24BEEC2F00134353 /* OptimizeRouteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60F186A24BEEC2F00134353 /* OptimizeRouteTableViewCell.swift */; };
 		E60F186D24BEEC2F00134353 /* OptimizeRouteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E60F186B24BEEC2F00134353 /* OptimizeRouteTableViewCell.xib */; };
 		E60F187024BEF74100134353 /* AddDeliveryPointTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60F186E24BEF74100134353 /* AddDeliveryPointTableViewCell.swift */; };
@@ -119,7 +124,6 @@
 		E672532724DE4DBA008837CB /* CancellationOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E672532524DE4DBA008837CB /* CancellationOrderViewController.xib */; };
 		E672532A24DE5026008837CB /* RadioTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E672532824DE5026008837CB /* RadioTableViewCell.swift */; };
 		E672532B24DE5026008837CB /* RadioTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E672532924DE5026008837CB /* RadioTableViewCell.xib */; };
-		E672532D24DE514B008837CB /* nihar_font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E672532C24DE514B008837CB /* nihar_font.ttf */; };
 		E684749424DEBFEB00BB339B /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E684749224DEBFEB00BB339B /* NotificationViewController.swift */; };
 		E684749524DEBFEB00BB339B /* NotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E684749324DEBFEB00BB339B /* NotificationViewController.xib */; };
 		E684749824DEC9A800BB339B /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E684749624DEC9A800BB339B /* NotificationTableViewCell.swift */; };
@@ -193,6 +197,11 @@
 		DAC0C6EAEB1AA2E7906AC099 /* Pods-NiharExpress.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NiharExpress.debug.xcconfig"; path = "Target Support Files/Pods-NiharExpress/Pods-NiharExpress.debug.xcconfig"; sourceTree = "<group>"; };
 		E60336D324C6ADC200D263C9 /* LoginView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
 		E60336D524C6ADD100D263C9 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		E609BD4F24E011BF00B505EB /* EmptyFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyFormViewController.swift; sourceTree = "<group>"; };
+		E609BD5024E011BF00B505EB /* EmptyFormViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyFormViewController.xib; sourceTree = "<group>"; };
+		E609BD5624E02ABA00B505EB /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
+		E609BD5724E02ABA00B505EB /* WebViewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewViewController.xib; sourceTree = "<group>"; };
+		E609BD5A24E0380200B505EB /* nihar_font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = nihar_font.ttf; sourceTree = "<group>"; };
 		E60F186A24BEEC2F00134353 /* OptimizeRouteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptimizeRouteTableViewCell.swift; sourceTree = "<group>"; };
 		E60F186B24BEEC2F00134353 /* OptimizeRouteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptimizeRouteTableViewCell.xib; sourceTree = "<group>"; };
 		E60F186E24BEF74100134353 /* AddDeliveryPointTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDeliveryPointTableViewCell.swift; sourceTree = "<group>"; };
@@ -280,7 +289,6 @@
 		E672532524DE4DBA008837CB /* CancellationOrderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CancellationOrderViewController.xib; sourceTree = "<group>"; };
 		E672532824DE5026008837CB /* RadioTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioTableViewCell.swift; sourceTree = "<group>"; };
 		E672532924DE5026008837CB /* RadioTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RadioTableViewCell.xib; sourceTree = "<group>"; };
-		E672532C24DE514B008837CB /* nihar_font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = nihar_font.ttf; sourceTree = "<group>"; };
 		E684749224DEBFEB00BB339B /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		E684749324DEBFEB00BB339B /* NotificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationViewController.xib; sourceTree = "<group>"; };
 		E684749624DEC9A800BB339B /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
@@ -402,6 +410,8 @@
 				E630D9AE24BDB3F5006666A8 /* Cells */,
 				0F6C5B3A24AE509F00F15376 /* NewOrderFormTableViewController.swift */,
 				0F6C5B3B24AE509F00F15376 /* NewOrderFormTableViewController.xib */,
+				E609BD4F24E011BF00B505EB /* EmptyFormViewController.swift */,
+				E609BD5024E011BF00B505EB /* EmptyFormViewController.xib */,
 			);
 			path = NewOrderForm;
 			sourceTree = "<group>";
@@ -463,6 +473,7 @@
 		0F7F1C6024AE3F080011A754 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				E609BD5524E02AA200B505EB /* WebView */,
 				E684749124DEBFDA00BB339B /* Notification */,
 				E6465EA724DBBAF700AF591D /* VerifyOTP */,
 				E6496AA224DB1CF200514AB9 /* OrderReviewController */,
@@ -525,6 +536,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		E609BD5524E02AA200B505EB /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				E609BD5624E02ABA00B505EB /* WebViewViewController.swift */,
+				E609BD5724E02ABA00B505EB /* WebViewViewController.xib */,
+			);
+			path = WebView;
+			sourceTree = "<group>";
+		};
 		E60F187624BF0CB600134353 /* CreateOrderTopBottom */ = {
 			isa = PBXGroup;
 			children = (
@@ -574,7 +594,7 @@
 		E630D93C24BD9192006666A8 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				E672532C24DE514B008837CB /* nihar_font.ttf */,
+				E609BD5A24E0380200B505EB /* nihar_font.ttf */,
 				E630D97424BD9368006666A8 /* Roboto */,
 				E630D94424BD9192006666A8 /* FontAwesome */,
 			);
@@ -882,6 +902,7 @@
 				E6F81A3924DDB33600E98351 /* OrderDetailsViewController.xib in Resources */,
 				E6994C8C24DEF71800B935C1 /* DateTimePickerTableViewCell.xib in Resources */,
 				E630D98124BD9375006666A8 /* Roboto-BlackItalic.ttf in Resources */,
+				E609BD5924E02ABA00B505EB /* WebViewViewController.xib in Resources */,
 				E630D9B324BDC172006666A8 /* NavigationView.xib in Resources */,
 				E654782224DD59C300A1F697 /* InProgressOrdersTableViewCell.xib in Resources */,
 				E6FBE9A424DE9F2100787B61 /* StarRatingViewController.xib in Resources */,
@@ -902,11 +923,11 @@
 				E6994C9824DF146800B935C1 /* RemoveAddressTableViewCell.xib in Resources */,
 				0F7F1C6424AE415F0011A754 /* TabBarViewController.xib in Resources */,
 				0F6C5B3D24AE509F00F15376 /* NewOrderFormTableViewController.xib in Resources */,
+				E609BD5B24E0380200B505EB /* nihar_font.ttf in Resources */,
 				E6994C9024DF0FB400B935C1 /* ForOnlineStoreHeaderTableViewCell.xib in Resources */,
 				E68474A324DEEDD900BB339B /* PickAddressFieldTableViewCell.xib in Resources */,
 				E684749924DEC9A800BB339B /* NotificationTableViewCell.xib in Resources */,
 				E6AA98E424BF32CC006577F6 /* PaymentViewTableViewCell.xib in Resources */,
-				E672532D24DE514B008837CB /* nihar_font.ttf in Resources */,
 				0F7F1C5424AE3E7F0011A754 /* Assets.xcassets in Resources */,
 				E630D93824BD8D08006666A8 /* SplashScreenViewController.xib in Resources */,
 				E65C384624C5FB94002DD732 /* TabbedView.xib in Resources */,
@@ -917,6 +938,7 @@
 				E6465EAB24DBBB1C00AF591D /* VerifyOtpViewController.xib in Resources */,
 				E60F186D24BEEC2F00134353 /* OptimizeRouteTableViewCell.xib in Resources */,
 				E6496A9F24DB123A00514AB9 /* EmptyOrderView.xib in Resources */,
+				E609BD5224E011BF00B505EB /* EmptyFormViewController.xib in Resources */,
 				E630D9BD24BDDF32006666A8 /* WeightTableViewCell.xib in Resources */,
 				E6AA98EF24BF4651006577F6 /* PickAddressViewController.xib in Resources */,
 				E68474A724DEEF8100BB339B /* AddressCommonTableViewCell.xib in Resources */,
@@ -1029,6 +1051,7 @@
 				E630D99824BD9C88006666A8 /* UIView_Extension.swift in Sources */,
 				0F7F1C6324AE415F0011A754 /* TabBarViewController.swift in Sources */,
 				E630D9A424BD9D0C006666A8 /* UIView_Utility.swift in Sources */,
+				E609BD5824E02ABA00B505EB /* WebViewViewController.swift in Sources */,
 				E68474A624DEEF8100BB339B /* AddressCommonTableViewCell.swift in Sources */,
 				E6AA98F124BF4BBE006577F6 /* PlaceMarker.swift in Sources */,
 				E630D9BC24BDDF32006666A8 /* WeightTableViewCell.swift in Sources */,
@@ -1075,6 +1098,7 @@
 				E630D9A224BD9CFC006666A8 /* UserDefaultManager.swift in Sources */,
 				E672532624DE4DBA008837CB /* CancellationOrderViewController.swift in Sources */,
 				E6F81A4924DDD46600E98351 /* InProgressTableViewCell.swift in Sources */,
+				E609BD5124E011BF00B505EB /* EmptyFormViewController.swift in Sources */,
 				E65C384F24C5FE8B002DD732 /* RegistrationView.swift in Sources */,
 				0F6C5B3324AE4AA300F15376 /* LoginViewController.swift in Sources */,
 				E6F81A3C24DDB7AE00E98351 /* OrderDetailsLocationTableViewCell.swift in Sources */,

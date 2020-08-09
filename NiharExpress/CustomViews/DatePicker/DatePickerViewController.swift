@@ -10,6 +10,7 @@ import UIKit
 
 class DatePickerViewController: UIViewController {
 
+    var previousPickedDate: Date?
     var pickedDate: Date?
     @IBOutlet weak var datePicker: UIDatePicker!
     
@@ -23,7 +24,12 @@ class DatePickerViewController: UIViewController {
     }
     
     func configureUI() {
-        self.datePicker.minimumDate = Date()
+        if let date = self.previousPickedDate {
+            self.datePicker.minimumDate = date
+            self.datePicker.datePickerMode = .time
+        } else {
+            self.datePicker.minimumDate = Date()
+        }
         self.datePicker.addTarget(self, action: #selector(self.datePicked(_:)), for: .valueChanged)
     }
 

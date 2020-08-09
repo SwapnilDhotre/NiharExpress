@@ -54,6 +54,7 @@ class OrderReviewViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var alertLoader: UIAlertController?
+    var formDelegate: FormDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,6 +102,7 @@ class OrderReviewViewController: UIViewController {
     
     // MARK: - Action Methods
     @IBAction func createOrderAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         if UserConstant.shared.userModel == nil {
             self.onFlyCreateOrder()
         } else {
@@ -108,6 +110,7 @@ class OrderReviewViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.alertLoader?.dismiss(animated: false, completion: nil)
                     if let _ = responseData {
+                        self.formDelegate?.formDismissal()
                         self.dismiss(animated: false, completion: nil)
                     } else {
                         self.showAlert(withMsg: apiStatus?.message ?? "Something went wrong.")
@@ -147,6 +150,7 @@ class OrderReviewViewController: UIViewController {
                             DispatchQueue.main.async {
                                 self.alertLoader?.dismiss(animated: false, completion: nil)
                                 if let _ = responseData {
+                                    self.formDelegate?.formDismissal()
                                     self.dismiss(animated: false, completion: nil)
                                 } else {
                                     self.showAlert(withMsg: apiStatus?.message ?? "Something went wrong.")
@@ -181,9 +185,10 @@ class OrderReviewViewController: UIViewController {
     }
     
     func createOrder(customerId: String? = nil, completion: @escaping ([String: Any]?, APIStatus?) -> Void) {
+        let paymentAtAddress = (self.locations.filter { $0.isDefaultPayment }).first
+        
         var array = self.locations
         let pickUpLocation = array.remove(at: 0)
-        let paymentAtAddress = (self.locations.filter { $0.isDefaultPayment }).first
         
         let params: Parameters = [
             Constants.API.method: Constants.MethodType.placeOrder.rawValue,

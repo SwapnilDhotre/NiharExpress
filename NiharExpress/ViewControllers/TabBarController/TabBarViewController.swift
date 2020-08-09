@@ -30,14 +30,14 @@ class TabBarViewController: UITabBarController {
     }
     
     func configureTabs() {
-        let controller = UIViewController()
+        let emptyController = UINavigationController(rootViewController: EmptyFormViewController())
         let ordersNavigationController = UINavigationController(rootViewController: OrdersViewController())
         let profileNavigationController = UINavigationController(rootViewController: ProfileViewController())
-        let helpController = HelpViewController()
-        let infoController = InfoViewController()
+        let helpNavigationController = UINavigationController(rootViewController: HelpViewController())
+        let infoNavigationController = UINavigationController(rootViewController: InfoViewController())
         
         self.viewControllers =
-            [ordersNavigationController, profileNavigationController, controller, helpController, infoController]
+            [ordersNavigationController, profileNavigationController, emptyController, helpNavigationController, infoNavigationController]
         
         self.selectedViewController = ordersNavigationController
         
@@ -60,39 +60,26 @@ class TabBarViewController: UITabBarController {
         item3.tag = 103
         item3.image = FontUtility.appImageIcon(code: AppIcons.outlineAddCircle.rawValue, textColor: .white, size: CGSize(width: 24, height: 24))
         
-        controller.tabBarItem = item3
+        emptyController.tabBarItem = item3
         
         let item4 = UITabBarItem()
         item4.title = "Help"
         item4.tag = 104
         item4.image = FontUtility.appImageIcon(code: AppIcons.outlineHelp.rawValue, textColor: .white, size: CGSize(width: 24, height: 24))
         
-        helpController.tabBarItem = item4
+        helpNavigationController.tabBarItem = item4
         
         let item5 = UITabBarItem()
         item5.title = "Info"
         item4.tag = 105
         item5.image = FontUtility.appImageIcon(code: AppIcons.outlineInfo.rawValue, textColor: .white, size: CGSize(width: 24, height: 24))
         
-        infoController.tabBarItem = item5
+        infoNavigationController.tabBarItem = item5
     }
 }
 
 extension TabBarViewController: UITabBarControllerDelegate {
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        if item.tag == 103 {
-            let controller = NewOrderFormTableViewController()
-            controller.delegate = self
-            let formController = UINavigationController(rootViewController: controller)
-            formController.modalPresentationStyle = .fullScreen
-            self.present(formController, animated: true, completion: nil)
-        }
-    }
-}
-
-extension TabBarViewController: FormDelegate {
-    func formDismissal() {
-        self.selectedIndex = 0
     }
 }

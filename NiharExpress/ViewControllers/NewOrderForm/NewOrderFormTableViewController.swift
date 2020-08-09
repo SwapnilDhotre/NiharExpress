@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import ContactsUI
 
 protocol FormDelegate {
     func formDismissal()
@@ -28,6 +29,8 @@ class NewOrderFormTableViewController: UITableViewController {
     var priceInfo: PriceInfo?
     
     var alertLoader: UIAlertController?
+    var phoneNumberField: FormSubFieldModel?
+    private let contactPicker = CNContactPickerViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -254,6 +257,7 @@ class NewOrderFormTableViewController: UITableViewController {
             self.showAlert(withMsg: "Price not calculated")
         }
         
+        reviewController.formDelegate = self.delegate
         reviewController.locations = locations
         reviewController.locations[paymentWillOccurAtIndex].isDefaultPayment = true
         reviewController.optimizeRoute = optimizeRoute
@@ -581,8 +585,10 @@ class NewOrderFormTableViewController: UITableViewController {
             switch formField.type {
             case .weight:
                 return 65
-            case .pickUpPoint, .deliveryPoint, .addDeliveryPoint, .optimizeRoute, .parcelInfo, .paymentInfo:
+            case .pickUpPoint, .deliveryPoint, .addDeliveryPoint, .optimizeRoute, .parcelInfo:
                 return UITableView.automaticDimension
+            case .paymentInfo:
+                return 200
             case .notifyInfo:
                 return 120
             }
@@ -616,8 +622,9 @@ extension NewOrderFormTableViewController: AddDeliveryProtocol {
 }
 
 extension NewOrderFormTableViewController {
-    func pickDate(completion: @escaping (Date?) -> Void) {
+    func pickDate(previousDate: Date? = nil, completion: @escaping (Date?) -> Void) {
         let picker = DatePickerViewController()
+        picker.previousPickedDate = previousDate
         picker.modalPresentationStyle = .overCurrentContext
         picker.datePicked = { (date) in
             completion(date)
@@ -637,7 +644,7 @@ extension NewOrderFormTableViewController {
     }
 }
 
-// MARK - AddressField Protocol
+// MARK: - AddressField Protocol
 extension NewOrderFormTableViewController: AddressHeaderProtocol {
     func arrowActionPerformed(model: FormSubFieldModel) {
         model.value = !(model.value as! Bool)
@@ -684,7 +691,7 @@ extension NewOrderFormTableViewController: DatePickerProtocol {
             fromDate = firstDate ?? Date()
             
             DispatchQueue.main.async {
-                self.pickDate { (secondDate) in
+                self.pickDate(previousDate: fromDate) { (secondDate) in
                     DispatchQueue.main.async {
                         toDate = secondDate ?? Date()
                         self.configureTopBottomUI()
@@ -701,7 +708,9 @@ extension NewOrderFormTableViewController: AddressCommonFieldProtocol {
     func tralingActionPerformed(for subFormFieldModel: FormSubFieldModel) {
         switch subFormFieldModel.type {
         case .phoneNo:
-            print("Pick contact")
+            self.contactPicker.delegate = self
+            self.phoneNumberField = subFormFieldModel
+            self.present(contactPicker, animated: true, completion: nil)
             break
         default:
             assertionFailure("Case not handle in FormSubFieldModel")
@@ -712,6 +721,65 @@ extension NewOrderFormTableViewController: AddressCommonFieldProtocol {
 extension NewOrderFormTableViewController: TransactionTypeDelegate {
     func transactionTypeAction(sender: UIButton, model: FormSubFieldModel) {
         // Perform transactions
+    }
+}
+
+// MARK: - Contact Picker
+extension NewOrderFormTableViewController: CNContactPickerDelegate {
+    
+    func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
+        let phoneNumberCount = contact.phoneNumbers.count
+        
+        guard phoneNumberCount > 0 else {
+            dismiss(animated: true)
+            //show pop up: "Selected contact does not have a number"
+            return
+        }
+        
+        if phoneNumberCount == 1 {
+            setNumberFromContact(contactNumber: contact.phoneNumbers[0].value.stringValue)
+            
+        } else {
+            let alertController = UIAlertController(title: "Select one of the numbers", message: nil, preferredStyle: .alert)
+            
+            for i in 0...phoneNumberCount-1 {
+                let phoneAction = UIAlertAction(title: contact.phoneNumbers[i].value.stringValue, style: .default, handler: {
+                    alert -> Void in
+                    self.setNumberFromContact(contactNumber: contact.phoneNumbers[i].value.stringValue)
+                })
+                alertController.addAction(phoneAction)
+            }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {
+                alert -> Void in
+                
+            })
+            alertController.addAction(cancelAction)
+            
+            dismiss(animated: true)
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    func setNumberFromContact(contactNumber: String) {
+        var contactNumber = contactNumber.replacingOccurrences(of: "-", with: "")
+        contactNumber = contactNumber.replacingOccurrences(of: "(", with: "")
+        contactNumber = contactNumber.replacingOccurrences(of: ")", with: "")
+        contactNumber = String(contactNumber.filter { !" \n\t\r".contains($0) })
+        guard contactNumber.count >= 10 else {
+            dismiss(animated: true) {
+                self.showAlert(withMsg: "Selected contact does not have a valid number")
+            }
+            return
+        }
+        
+        if let phoneNoField = self.phoneNumberField {
+            phoneNoField.value  = String(contactNumber.suffix(10))
+            self.tableView.reloadRows(at: [phoneNoField.indexPath], with: .automatic)
+        }
+    }
+    
+    func contactPickerDidCancel(_ picker: CNContactPickerViewController) {
+        
     }
 }
 
