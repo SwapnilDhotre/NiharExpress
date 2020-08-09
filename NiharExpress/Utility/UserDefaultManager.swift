@@ -21,6 +21,7 @@ enum UserDefaultKeys: String {
     case isLoggedIn
     case token
     case userModel
+    case city
     case appInfo
     
     case isProductDemoViewed
@@ -57,5 +58,11 @@ class UserDefaultManager {
             return defaults.string(forKey: key.rawValue)
             }
         }
+    }
+    
+    func clear() {
+        let domain = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: domain)
+        UserDefaults.standard.synchronize()
     }
 }

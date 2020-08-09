@@ -18,6 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let frame = UIScreen.main.bounds
         self.window = UIWindow(frame: frame)
+        
+        UserConstant.shared.fetchRequiredConstants()
+        
         Util.setIntialController(window: self.window!)
         
         // Sets the translucent background color
@@ -27,6 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey("AIzaSyCaAqBQK94LMz7gPiEpdqIBAHDoQ0npm_k")//"AIzaSyD0LGElUr4KoKgSbhcxA2SCa2Q6_w-lpf4")
         
         return true
+    }
+    
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        UserConstant.shared.fetchRequiredConstants()
     }
 }
 

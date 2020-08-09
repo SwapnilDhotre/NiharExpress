@@ -11,9 +11,14 @@ import UIKit
 class WeightTableViewCell: UITableViewCell {
     static var identifier = "WeightTableViewCell"
 
+    @IBOutlet weak var txtWeightField: UITextField!
+    
+    var formModel: FormFieldModel?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        self.txtWeightField.delegate = self
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -22,4 +27,20 @@ class WeightTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func updateData(with formField: FormFieldModel) {
+        self.formModel = formField
+        
+        self.txtWeightField.text = formField.value as? String
+    }
+}
+
+extension WeightTableViewCell: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.formModel?.value = textField.text!
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }

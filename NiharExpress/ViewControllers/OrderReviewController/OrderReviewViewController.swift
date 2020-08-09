@@ -1,0 +1,263 @@
+//
+//  OrderReviewViewController.swift
+//  NiharExpress
+//
+//  Created by Swapnil_Dhotre on 8/5/20.
+//  Copyright © 2020 Swapnil Dhotre. All rights reserved.
+//
+
+import UIKit
+
+class VisitLocation {
+    var userName: String
+    var address: AddressModel
+    var dateTime: Date
+    var mobileNo: String
+    var comment: String
+    var isDefaultPayment: Bool
+    var storeName: String?
+    var storeContactNo: String?
+    var orderType: String?
+    var transactionType: String?
+    var transactionAmount: String?
+    
+    init(userName: String, address: AddressModel, dateTime: Date, mobileNo: String, comment: String, isDefaultPayment: Bool) {
+        self.userName = userName
+        self.address = address
+        self.dateTime = dateTime
+        self.mobileNo = mobileNo
+        self.comment = comment
+        self.isDefaultPayment = isDefaultPayment
+    }
+}
+
+class OrderReviewViewController: UIViewController {
+    
+    private var isCashOnDelivery: Bool = true
+    
+    var weight: String!
+    var parcelPrice: String!
+    var optimizeRoute: Bool!
+    var category: Category!
+    var priceInfo: PriceInfo!
+    var locations: [VisitLocation] = []
+    
+    @IBOutlet weak var lblWhatItem: UILabel!
+    @IBOutlet weak var lblItemSize: UILabel!
+    @IBOutlet weak var lblItemValue: UILabel!
+    
+    @IBOutlet weak var lblTotalAmount: UILabel!
+    
+    @IBOutlet weak var cashOnDeliveryRadio: UILabel!
+    @IBOutlet weak var payOnlineRadio: UILabel!
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    var alertLoader: UIAlertController?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.configureUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.showAndUpdateNavigationBar(with: "Order Review", withShadow: true, isHavingBackButton: true, actionController: self, backAction: #selector(self.backBtnPressed(_:)))
+    }
+    
+    // MARK: - Custom Methods
+    func configureUI() {
+        self.lblWhatItem.text = "What's in it : \(category.title)"
+        self.lblItemSize.text = "Upto \(weight ?? "")kg, book a courier"
+        self.lblItemValue.text = "Stated Value: ₹\(self.priceInfo.totalCost)"
+        self.lblTotalAmount.text = "₹\(self.priceInfo.totalCost)"
+        
+        self.cashOnDeliveryRadio.font = UIFont.fontAwesome(ofSize: 18, style: .regular)
+        self.payOnlineRadio.font = UIFont.fontAwesome(ofSize: 18, style: .regular)
+        
+        self.cashOnDeliveryRadio.textColor = ColorConstant.themePrimary.color
+        self.payOnlineRadio.textColor = ColorConstant.themePrimary.color
+        
+        self.updateRadio()
+        
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        self.tableView.tableFooterView = UIView()
+        
+        self.tableView.register(UINib(nibName: ReviewTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: ReviewTableViewCell.identifier)
+    }
+    
+    func updateRadio() {
+        if self.isCashOnDelivery {
+            self.cashOnDeliveryRadio.text = FontAwesome.dotCircle.rawValue
+            self.payOnlineRadio.text = FontAwesome.circle.rawValue
+        } else {
+            self.cashOnDeliveryRadio.text = FontAwesome.circle.rawValue
+            self.payOnlineRadio.text = FontAwesome.dotCircle.rawValue
+        }
+    }
+    
+    // MARK: - Action Methods
+    @IBAction func createOrderAction(_ sender: UIButton) {
+        if UserConstant.shared.userModel == nil {
+            self.onFlyCreateOrder()
+        } else {
+            self.createOrder { (responseData, apiStatus) in
+                DispatchQueue.main.async {
+                    self.alertLoader?.dismiss(animated: false, completion: nil)
+                    if let _ = responseData {
+                        self.dismiss(animated: false, completion: nil)
+                    } else {
+                        self.showAlert(withMsg: apiStatus?.message ?? "Something went wrong.")
+                    }
+                }
+            }
+        }
+    }
+    
+    @IBAction func cashOnDeliveryAction(_ sender: UIButton) {
+        self.isCashOnDelivery = true
+        self.updateRadio()
+    }
+    
+    @IBAction func payOnlineAction(_ sender: UIButton) {
+        self.isCashOnDelivery = false
+        self.updateRadio()
+    }
+    
+    @objc func backBtnPressed(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    // MARK: - API Methods
+    func onFlyCreateOrder() {
+        if let location = self.locations.first {
+            
+            self.alertLoader = self.showAlertLoader()
+            self.hitGetOTP(with: location.mobileNo, completion: { (customerId, apiStatus) in
+                
+                DispatchQueue.main.async {
+                    self.alertLoader?.dismiss(animated: false, completion: nil)
+                    if let status = apiStatus {
+                        self.showAlert(withMsg: status.message)
+                    } else {
+                        self.createOrder(customerId: customerId) { (responseData, apiStatus) in
+                            DispatchQueue.main.async {
+                                self.alertLoader?.dismiss(animated: false, completion: nil)
+                                if let _ = responseData {
+                                    self.dismiss(animated: false, completion: nil)
+                                } else {
+                                    self.showAlert(withMsg: apiStatus?.message ?? "Something went wrong.")
+                                }
+                            }
+                        }
+                    }
+                }
+            })
+        }
+    }
+    
+    func hitGetOTP(with mobileNoEmail: String, completion: @escaping (String, APIStatus?) -> Void) {
+        let params: Parameters = [
+            Constants.API.method: Constants.MethodType.getOTP.rawValue,
+            Constants.API.key: "6997c339387ac79b5fec7676cd6170b0d8b1e79c",
+            Constants.API.mobileNo: mobileNoEmail,
+            Constants.API.mod: "W"
+        ]
+        
+        APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
+            
+            APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
+                
+                if let customerId = responseData?.first?[Constants.Response.customerId] as? String {
+                    completion("\(customerId)", apiStatus)
+                } else {
+                    completion("", apiStatus)
+                }
+            }
+        }
+    }
+    
+    func createOrder(customerId: String? = nil, completion: @escaping ([String: Any]?, APIStatus?) -> Void) {
+        var array = self.locations
+        let pickUpLocation = array.remove(at: 0)
+        let paymentAtAddress = (self.locations.filter { $0.isDefaultPayment }).first
+        
+        let params: Parameters = [
+            Constants.API.method: Constants.MethodType.placeOrder.rawValue,
+            Constants.API.key: "5b418e652da7ed82fe28897fa81bc0356c7d8f31",
+            Constants.API.categoryId: self.category.id,
+            Constants.API.weight: self.weight,
+            
+            Constants.API.pickUpAddress: pickUpLocation.address.address,
+            Constants.API.pickUpPoint: "\(pickUpLocation.address.coordinate.latitude),\(pickUpLocation.address.coordinate.longitude)",
+            Constants.API.pickUpName: pickUpLocation.userName,
+            Constants.API.pickUpMobile: pickUpLocation.mobileNo,
+            Constants.API.pickUpDate: pickUpLocation.dateTime.toString(withFormat: "dd.MM"),
+            Constants.API.pickUpTime: pickUpLocation.dateTime.toString(withFormat: "HH:mm"),
+            Constants.API.pickUpComment: pickUpLocation.comment,
+            Constants.API.pickUpStoreName: pickUpLocation.storeName,
+            Constants.API.pickUpStoreContactNo: pickUpLocation.storeContactNo,
+            Constants.API.pickUpOrderType: pickUpLocation.orderType,
+            Constants.API.pickUptransactionType: pickUpLocation.transactionType,
+            
+            Constants.API.deliveryAddress: "[\((array.map { $0.address.address }).joined(separator: ", "))]",
+            "\(Constants.API.deliveryPoint)[]": "[\((array.map { "\($0.address.coordinate.latitude),\($0.address.coordinate.longitude)" }).joined(separator: ", "))]",
+            Constants.API.deliveryMobile: "[\((array.map { $0.mobileNo }).joined(separator: ", "))]",
+            Constants.API.deliveryName: "[\((array.map { $0.userName }).joined(separator: ", "))]",
+            Constants.API.deliveryDate: "[\((array.map { $0.dateTime.toString(withFormat: "dd.MM") }).joined(separator: ", "))]",
+            Constants.API.deliveryTime: "[\((array.map { $0.dateTime.toString(withFormat: "HH:mm") }).joined(separator: ", "))]",
+            Constants.API.deliveryComment: "[\((array.map { $0.comment }).joined(separator: ", "))]",
+            Constants.API.deliveryStoreName: "[\((array.map { $0.storeName ?? "" }).joined(separator: ", "))]",
+            Constants.API.deliveryStoreContactNo: "[\((array.map { $0.storeContactNo ?? "" }).joined(separator: ", "))]",
+            Constants.API.deliveryOrderType: "[\((array.map { $0.orderType ?? "" }).joined(separator: ", "))]",
+            Constants.API.deliveryTransactionType: "[\((array.map { $0.transactionType ?? "" }).joined(separator: ", "))]",
+            
+            Constants.API.orderType: "N",
+            Constants.API.price: self.priceInfo.price,
+            Constants.API.customerId: customerId ?? UserConstant.shared.userModel.id,
+            Constants.API.cityId: UserConstant.shared.city?.id ?? "1",
+            Constants.API.paymentMethod: self.isCashOnDelivery ? "CA" : "CO",
+            Constants.API.paymentAddress: paymentAtAddress?.address.address ?? "",
+            Constants.API.insurancePrice: self.priceInfo.insuranceCost,
+            Constants.API.parcelPrice: self.parcelPrice,
+            Constants.API.orderId: nil,
+            Constants.API.couponId: nil,
+            Constants.API.discount: nil,
+            Constants.API.distance: "\(self.priceInfo.distance)"
+        ]
+        
+        params.printPrettyJSON()
+        
+        APIManager.shared.executeDataRequest(urlString: URLConstant.niharBaseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
+            APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
+                if let data = responseData?.first {
+                    completion(data, nil)
+                } else {
+                    completion(nil, apiStatus)
+                }
+            }
+        }
+    }
+}
+
+extension OrderReviewViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.locations.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ReviewTableViewCell.identifier) as? ReviewTableViewCell else {
+            assertionFailure("Couldn't dequeue:>> \(ReviewTableViewCell.identifier)")
+            return UITableViewCell()
+        }
+        
+        cell.selectionStyle = .none
+        let data = self.locations[indexPath.row]
+        cell.updateData(with: "\(indexPath.row + 1)", address: data.address.address, dateTime: data.dateTime.toString(withFormat: "dd.MM HH:mm"), mobileNo: data.mobileNo)
+        
+        return cell
+    }
+}

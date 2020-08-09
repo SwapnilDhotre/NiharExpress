@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Bold.ttf">
+            <string>Roboto-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CancellationOrderViewController" customModule="NiharExpress" customModuleProvider="target">
+            <connections>
+                <outlet property="btnCancelOrder" destination="fSu-il-4TI" id="fDn-Zu-z1L"/>
+                <outlet property="btnClose" destination="PBI-HY-fNa" id="uvX-Au-Nzl"/>
+                <outlet property="spinner" destination="0m3-uj-lbA" id="G2z-gn-jFb"/>
+                <outlet property="tableView" destination="wSh-JH-P9r" id="VSo-M9-Iwo"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iTV-dY-MpP">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HMe-TU-PM8" customClass="DesignableView" customModule="NiharExpress" customModuleProvider="target">
+                    <rect key="frame" x="40" y="214" width="334" height="448"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cancellation Reason" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8z6-xn-vsL">
+                            <rect key="frame" x="24" y="15" width="157" height="20"/>
+                            <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="17"/>
+                            <color key="textColor" red="0.50196078430000002" green="0.1176470588" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n6k-1k-g3P">
+                            <rect key="frame" x="0.0" y="47" width="334" height="1"/>
+                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="2VX-S0-OIM"/>
+                            </constraints>
+                        </view>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wSh-JH-P9r">
+                            <rect key="frame" x="0.0" y="48" width="334" height="350"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        </tableView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PBI-HY-fNa">
+                            <rect key="frame" x="278" y="6" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="40" id="KD4-as-U6T"/>
+                                <constraint firstAttribute="height" constant="40" id="bNN-dc-fhd"/>
+                            </constraints>
+                            <state key="normal" title="X"/>
+                            <connections>
+                                <action selector="closeBtnAction:" destination="-1" eventType="touchUpInside" id="9dq-CQ-Oba"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iex-pG-Hgj">
+                            <rect key="frame" x="0.0" y="398" width="334" height="1"/>
+                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="pjl-hG-DDk"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fSu-il-4TI">
+                            <rect key="frame" x="212" y="409" width="102" height="29"/>
+                            <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="14"/>
+                            <state key="normal" title="CANCEL ORDER">
+                                <color key="titleColor" red="0.50196078430000002" green="0.1176470588" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="cancelOrderBtnAction:" destination="-1" eventType="touchUpInside" id="5kZ-Ch-cW1"/>
+                            </connections>
+                        </button>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="0m3-uj-lbA">
+                            <rect key="frame" x="157" y="213" width="20" height="20"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="fSu-il-4TI" secondAttribute="trailing" constant="20" id="1X5-Pn-kN5"/>
+                        <constraint firstItem="n6k-1k-g3P" firstAttribute="top" secondItem="8z6-xn-vsL" secondAttribute="bottom" constant="12" id="60Y-vR-Mwy"/>
+                        <constraint firstItem="wSh-JH-P9r" firstAttribute="leading" secondItem="HMe-TU-PM8" secondAttribute="leading" id="65a-ZP-Wp4"/>
+                        <constraint firstItem="fSu-il-4TI" firstAttribute="top" secondItem="Iex-pG-Hgj" secondAttribute="bottom" constant="10" id="6oQ-wx-uzb"/>
+                        <constraint firstItem="wSh-JH-P9r" firstAttribute="top" secondItem="n6k-1k-g3P" secondAttribute="bottom" id="9oL-fa-a9m"/>
+                        <constraint firstItem="8z6-xn-vsL" firstAttribute="leading" secondItem="HMe-TU-PM8" secondAttribute="leading" constant="24" id="CPr-Ly-QrC"/>
+                        <constraint firstItem="8z6-xn-vsL" firstAttribute="top" secondItem="HMe-TU-PM8" secondAttribute="top" constant="15" id="O1e-OX-Qwz"/>
+                        <constraint firstItem="Iex-pG-Hgj" firstAttribute="leading" secondItem="HMe-TU-PM8" secondAttribute="leading" id="Vcg-UL-hIm"/>
+                        <constraint firstAttribute="trailing" secondItem="wSh-JH-P9r" secondAttribute="trailing" id="cQC-Sy-YvB"/>
+                        <constraint firstItem="0m3-uj-lbA" firstAttribute="centerY" secondItem="wSh-JH-P9r" secondAttribute="centerY" id="csn-tb-hp1"/>
+                        <constraint firstItem="0m3-uj-lbA" firstAttribute="centerX" secondItem="wSh-JH-P9r" secondAttribute="centerX" id="ijj-oN-LCH"/>
+                        <constraint firstItem="n6k-1k-g3P" firstAttribute="leading" secondItem="HMe-TU-PM8" secondAttribute="leading" id="jNg-iX-Kaf"/>
+                        <constraint firstAttribute="bottom" secondItem="fSu-il-4TI" secondAttribute="bottom" constant="10" id="kNT-he-N9c"/>
+                        <constraint firstAttribute="trailing" secondItem="Iex-pG-Hgj" secondAttribute="trailing" id="rAx-Gf-KzF"/>
+                        <constraint firstItem="Iex-pG-Hgj" firstAttribute="top" secondItem="wSh-JH-P9r" secondAttribute="bottom" id="u5v-Br-88y"/>
+                        <constraint firstAttribute="trailing" secondItem="PBI-HY-fNa" secondAttribute="trailing" constant="16" id="uJw-qK-LX8"/>
+                        <constraint firstItem="PBI-HY-fNa" firstAttribute="top" secondItem="HMe-TU-PM8" secondAttribute="top" constant="6" id="v39-LX-SJB"/>
+                        <constraint firstAttribute="trailing" secondItem="n6k-1k-g3P" secondAttribute="trailing" id="zom-db-MUI"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="maskToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="iTV-dY-MpP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="7kk-Tx-MXF"/>
+                <constraint firstItem="HMe-TU-PM8" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-10" id="8vR-CC-W1I"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="HMe-TU-PM8" secondAttribute="trailing" constant="40" id="FhI-fK-VBf"/>
+                <constraint firstItem="HMe-TU-PM8" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="JyO-1a-vic"/>
+                <constraint firstItem="HMe-TU-PM8" firstAttribute="height" secondItem="iTV-dY-MpP" secondAttribute="height" multiplier="0.5" id="NhL-2T-CzG"/>
+                <constraint firstAttribute="bottom" secondItem="iTV-dY-MpP" secondAttribute="bottom" id="SDG-LS-TJY"/>
+                <constraint firstItem="iTV-dY-MpP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="X8U-pd-Je8"/>
+                <constraint firstAttribute="trailing" secondItem="iTV-dY-MpP" secondAttribute="trailing" id="fpD-YC-0Gz"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="131.8840579710145" y="132.58928571428572"/>
+        </view>
+    </objects>
+</document>

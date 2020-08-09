@@ -14,7 +14,7 @@ class RegistrationViewController: UIViewController {
     
     var registrationView: RegistrationView?
     var alertLoader: UIAlertController?
-    
+        
     // MARK: - Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,35 +54,18 @@ class RegistrationViewController: UIViewController {
             Constants.API.method: Constants.MethodType.getOTP.rawValue,
             Constants.API.key: "6997c339387ac79b5fec7676cd6170b0d8b1e79c",
             Constants.API.mobileNo: phoneNumber,
-            Constants.API.mod: "L"
+//            Constants.API.mod: "L"
         ]
         
         APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
             
             APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
                 
-                if let otpText = responseData?[Constants.Response.otp] as? Int {
+                if let otpText = responseData?.first?[Constants.Response.otp] as? Int {
                     completion("\(otpText)", apiStatus)
                 } else {
                     completion("", apiStatus)
                 }
-            }
-        }
-    }
-    
-    func hitRegister(with fullName: String, phoneNumber: String, emailId: String, verifyOtp: String, completion: (Bool, String) -> Void) {
-     
-        let params: Parameters = [
-            Constants.API.method: Constants.MethodType.registration.rawValue,
-            Constants.API.key: "6997c339387ac79b5fec7676cd6170b0d8b1e79c",
-            Constants.API.name: fullName,
-            Constants.API.mobileNo: phoneNumber,
-            Constants.API.emaildId: emailId,
-            Constants.API.otp: verifyOtp
-        ]
-        APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
-            if let data = responseData {
-                print("")
             }
         }
     }
@@ -104,7 +87,7 @@ extension RegistrationViewController: TabbedViewDataSource {
 }
 
 extension RegistrationViewController: RegistrationViewProtocol {
-    func getOTP(with fullName: String, phoneNumber: String) {
+    func getOTP(with fullName: String, phoneNumber: String, emailId: String) {
         let isSuccess = self.verifyData(fullName: fullName, phoneNumber: phoneNumber)
         if isSuccess {
             self.alertLoader = self.showAlertLoader()
@@ -115,20 +98,30 @@ extension RegistrationViewController: RegistrationViewProtocol {
                     if let status = apiStatus {
                         self.showAlert(withMsg: status.message)
                     } else {
-                        self.registrationView?.txtFieldVerificationCode.text = otpValue
+                        
+                        let verifyOTPController = VerifyOtpViewController()
+                        verifyOTPController.fullName = fullName
+                        verifyOTPController.phoneNumber = phoneNumber
+                        verifyOTPController.emailId = emailId
+                        verifyOTPController.otp = otpValue
+                        
+                        verifyOTPController.isLoginAPI = false
+                        verifyOTPController.delegate = self
+                        
+                        verifyOTPController.modalPresentationStyle = .overCurrentContext
+                        
+                        self.present(verifyOTPController, animated: false, completion: nil)
                     }
                 }
             })
         }
     }
     
-    func registerData(with fullName: String, phoneNumber: String, emailId: String, verifyOtp: String) {
+    func registerData(with fullName: String, phoneNumber: String, emailId: String) {
         
         let isSuccess = self.verifyData(fullName: fullName, phoneNumber: phoneNumber)
         if isSuccess {
-            self.hitRegister(with: fullName, phoneNumber: phoneNumber, emailId: emailId, verifyOtp: verifyOtp) { (isSucceded, errorMsg) in
-                print("API Hit success")
-            }
+            self.getOTP(with: fullName, phoneNumber: phoneNumber, emailId: emailId)
         }
     }
     
@@ -153,5 +146,17 @@ extension RegistrationViewController: RegistrationViewProtocol {
         })
         
         alert = self.showAlertAndCustomAction(withMsg: msg, title: "Nihar Express", actions: [defaultAction])
+    }
+}
+
+extension RegistrationViewController: OTPVerifiedProtocol {
+    func loginSuccess() {}
+    
+    func registrationSuccess() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func resendOTP() {
+        self.registrationView?.btnRegister.sendActions(for: .touchUpInside)
     }
 }

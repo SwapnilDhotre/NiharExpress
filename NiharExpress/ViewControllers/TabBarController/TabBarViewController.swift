@@ -17,6 +17,10 @@ class TabBarViewController: UITabBarController {
         self.configureTabs()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     func configureUI() {
         self.delegate = self
         
@@ -28,7 +32,7 @@ class TabBarViewController: UITabBarController {
     func configureTabs() {
         let controller = UIViewController()
         let ordersNavigationController = UINavigationController(rootViewController: OrdersViewController())
-        let profileNavigationController = UINavigationController(rootViewController: OrdersViewController())//ProfileViewController())
+        let profileNavigationController = UINavigationController(rootViewController: ProfileViewController())
         let helpController = HelpViewController()
         let infoController = InfoViewController()
         
@@ -39,31 +43,35 @@ class TabBarViewController: UITabBarController {
         
         let item1 = UITabBarItem()
         item1.title = "Orders"
+        item1.tag = 101
         item1.image = FontUtility.appImageIcon(code: AppIcons.orders.rawValue, textColor: .white, size: CGSize(width: 24, height: 24))
         
         ordersNavigationController.tabBarItem = item1
         
         let item2 = UITabBarItem()
         item2.title = "Profile"
+        item2.tag = 102
         item2.image = FontUtility.appImageIcon(code: AppIcons.outlinePerson.rawValue, textColor: .white, size: CGSize(width: 24, height: 24))
         
         profileNavigationController.tabBarItem = item2
         
         let item3 = UITabBarItem()
         item3.title = "New Order"
-        item3.tag = 102
+        item3.tag = 103
         item3.image = FontUtility.appImageIcon(code: AppIcons.outlineAddCircle.rawValue, textColor: .white, size: CGSize(width: 24, height: 24))
         
         controller.tabBarItem = item3
         
         let item4 = UITabBarItem()
         item4.title = "Help"
+        item4.tag = 104
         item4.image = FontUtility.appImageIcon(code: AppIcons.outlineHelp.rawValue, textColor: .white, size: CGSize(width: 24, height: 24))
         
         helpController.tabBarItem = item4
         
         let item5 = UITabBarItem()
         item5.title = "Info"
+        item4.tag = 105
         item5.image = FontUtility.appImageIcon(code: AppIcons.outlineInfo.rawValue, textColor: .white, size: CGSize(width: 24, height: 24))
         
         infoController.tabBarItem = item5
@@ -73,7 +81,7 @@ class TabBarViewController: UITabBarController {
 extension TabBarViewController: UITabBarControllerDelegate {
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        if item.tag == 102 {
+        if item.tag == 103 {
             let controller = NewOrderFormTableViewController()
             controller.delegate = self
             let formController = UINavigationController(rootViewController: controller)

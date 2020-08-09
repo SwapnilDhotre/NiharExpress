@@ -25,6 +25,7 @@ class FormFieldModel {
     var type: FormFieldType
     var formSubFields: [FormSubFieldModel]
     var value: Any
+    var paymentLocation: [PaymentWillOccurAt] = []
     
     var isSubFieldsVisible = true
     var isNestedSubFieldVisible = false
@@ -51,31 +52,36 @@ class FormFieldModel {
     
     static func getPickupPointFields() -> [FormSubFieldModel] {
         return [
+            FormSubFieldModel(title: "Pickup Point", type: .header, value: true),
             FormSubFieldModel(title: "Address", type: .address, value: AddressModel(address: "", coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0))),
+            FormSubFieldModel(title: "Name", type: .name, value: ""),
             FormSubFieldModel(title: "PhoneNumber", type: .phoneNo, value: ""),
             FormSubFieldModel(title: "When to arrive at this address", type: .whenToPickup, value: (fromDate: Date(), toDate: Date())),
             FormSubFieldModel(title: "Comments", type: .comment, value: ""),
+            FormSubFieldModel(title: "For online store", type: .storeInfoHeader, value: false),
             FormSubFieldModel(title: "Contact Person", type: .contactPerson, value: ""),
             FormSubFieldModel(title: "Contact No", type: .contactNo, value: ""),
-            FormSubFieldModel(title: "Transaction", type: .transaction, value: "")
+            FormSubFieldModel(title: "Transaction Type", type: .transaction, value: (transactionType: "", transactionAmount: "")),
         ]
     }
     
     static func getDeliveryPointFields() -> [FormSubFieldModel] {
         return [
+            FormSubFieldModel(title: "Delivery Point", type: .header, value: true),
             FormSubFieldModel(title: "Address", type: .address, value: AddressModel(address: "", coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0))),
+            FormSubFieldModel(title: "Name", type: .name, value: ""),
             FormSubFieldModel(title: "PhoneNumber", type: .phoneNo, value: ""),
-            FormSubFieldModel(title: "When to deliver at this address", type: .whenToDelivery, value: (fromDate: Date(), toDate: Date())),
             FormSubFieldModel(title: "Comments", type: .comment, value: ""),
+            FormSubFieldModel(title: "For online store", type: .storeInfoHeader, value: false),
             FormSubFieldModel(title: "Contact Person", type: .contactPerson, value: ""),
             FormSubFieldModel(title: "Contact No", type: .contactNo, value: ""),
-            FormSubFieldModel(title: "Transaction", type: .transaction, value: "")
+            FormSubFieldModel(title: "Transaction Type", type: .transaction, value: (transactionType: "", transactionAmount: "")),
         ]
     }
     
     static func getParcelInfoFields() -> [FormSubFieldModel] {
         return [
-            FormSubFieldModel(title: "What are we sending?", type: .parcelType, value: ""),
+            FormSubFieldModel(title: "What are we sending?", type: .parcelType, value: Category(id: "", title: "", isSelected: false)),
             FormSubFieldModel(title: "Parcel Value", type: .parcelValue, value: ""),
             FormSubFieldModel(title: "Promocode", type: .promoCode, value: "")
         ]

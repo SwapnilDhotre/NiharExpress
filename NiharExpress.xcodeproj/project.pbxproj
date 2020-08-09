@@ -84,6 +84,29 @@
 		E630D9B924BDC5D9006666A8 /* BottomCreateOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E630D9B824BDC5D9006666A8 /* BottomCreateOrderView.swift */; };
 		E630D9BC24BDDF32006666A8 /* WeightTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E630D9BA24BDDF32006666A8 /* WeightTableViewCell.swift */; };
 		E630D9BD24BDDF32006666A8 /* WeightTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E630D9BB24BDDF32006666A8 /* WeightTableViewCell.xib */; };
+		E6465EAA24DBBB1C00AF591D /* VerifyOtpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6465EA824DBBB1C00AF591D /* VerifyOtpViewController.swift */; };
+		E6465EAB24DBBB1C00AF591D /* VerifyOtpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6465EA924DBBB1C00AF591D /* VerifyOtpViewController.xib */; };
+		E6496A9224DA6F6C00514AB9 /* ParcelTypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6496A9024DA6F6C00514AB9 /* ParcelTypeCollectionViewCell.swift */; };
+		E6496A9324DA6F6C00514AB9 /* ParcelTypeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6496A9124DA6F6C00514AB9 /* ParcelTypeCollectionViewCell.xib */; };
+		E6496A9524DA835100514AB9 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6496A9424DA835100514AB9 /* Category.swift */; };
+		E6496A9724DADFFA00514AB9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6496A9624DADFFA00514AB9 /* User.swift */; };
+		E6496A9A24DAF05E00514AB9 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6496A9824DAF05E00514AB9 /* ProfileTableViewCell.swift */; };
+		E6496A9B24DAF05E00514AB9 /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6496A9924DAF05E00514AB9 /* ProfileTableViewCell.xib */; };
+		E6496A9F24DB123A00514AB9 /* EmptyOrderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6496A9E24DB123A00514AB9 /* EmptyOrderView.xib */; };
+		E6496AA124DB125100514AB9 /* EmptyOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6496AA024DB125100514AB9 /* EmptyOrderView.swift */; };
+		E6496AA524DB1D6300514AB9 /* OrderReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6496AA324DB1D6300514AB9 /* OrderReviewViewController.swift */; };
+		E6496AA624DB1D6300514AB9 /* OrderReviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6496AA424DB1D6300514AB9 /* OrderReviewViewController.xib */; };
+		E6496AA924DB28FE00514AB9 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6496AA724DB28FE00514AB9 /* ReviewTableViewCell.swift */; };
+		E6496AAA24DB28FE00514AB9 /* ReviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6496AA824DB28FE00514AB9 /* ReviewTableViewCell.xib */; };
+		E6506C6624DC09BC0044368B /* PriceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6506C6524DC09BC0044368B /* PriceInfo.swift */; };
+		E654781C24DD2D6D00A1F697 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = E654781B24DD2D6D00A1F697 /* Order.swift */; };
+		E654781E24DD30DC00A1F697 /* OrderAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = E654781D24DD30DC00A1F697 /* OrderAddress.swift */; };
+		E654782124DD59C300A1F697 /* InProgressOrdersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E654781F24DD59C300A1F697 /* InProgressOrdersTableViewCell.swift */; };
+		E654782224DD59C300A1F697 /* InProgressOrdersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E654782024DD59C300A1F697 /* InProgressOrdersTableViewCell.xib */; };
+		E654782424DD5FCF00A1F697 /* OrderAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E654782324DD5FCF00A1F697 /* OrderAddressView.swift */; };
+		E654782624DD5FE500A1F697 /* OrderAddressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E654782524DD5FE500A1F697 /* OrderAddressView.xib */; };
+		E654782B24DD6F8800A1F697 /* CompletedOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E654782924DD6F8800A1F697 /* CompletedOrderTableViewCell.swift */; };
+		E654782C24DD6F8800A1F697 /* CompletedOrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E654782A24DD6F8800A1F697 /* CompletedOrderTableViewCell.xib */; };
 		E65C384424C5FB94002DD732 /* TabbedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C384124C5FB94002DD732 /* TabbedView.swift */; };
 		E65C384524C5FB94002DD732 /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C384224C5FB94002DD732 /* TabModel.swift */; };
 		E65C384624C5FB94002DD732 /* TabbedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E65C384324C5FB94002DD732 /* TabbedView.xib */; };
@@ -92,9 +115,32 @@
 		E65C384D24C5FD02002DD732 /* UIButton_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C384C24C5FD02002DD732 /* UIButton_Extension.swift */; };
 		E65C384F24C5FE8B002DD732 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C384E24C5FE8B002DD732 /* RegistrationView.swift */; };
 		E65C385124C5FE93002DD732 /* RegistrationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E65C385024C5FE93002DD732 /* RegistrationView.xib */; };
+		E672532624DE4DBA008837CB /* CancellationOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E672532424DE4DBA008837CB /* CancellationOrderViewController.swift */; };
+		E672532724DE4DBA008837CB /* CancellationOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E672532524DE4DBA008837CB /* CancellationOrderViewController.xib */; };
+		E672532A24DE5026008837CB /* RadioTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E672532824DE5026008837CB /* RadioTableViewCell.swift */; };
+		E672532B24DE5026008837CB /* RadioTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E672532924DE5026008837CB /* RadioTableViewCell.xib */; };
+		E672532D24DE514B008837CB /* nihar_font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E672532C24DE514B008837CB /* nihar_font.ttf */; };
+		E684749424DEBFEB00BB339B /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E684749224DEBFEB00BB339B /* NotificationViewController.swift */; };
+		E684749524DEBFEB00BB339B /* NotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E684749324DEBFEB00BB339B /* NotificationViewController.xib */; };
+		E684749824DEC9A800BB339B /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E684749624DEC9A800BB339B /* NotificationTableViewCell.swift */; };
+		E684749924DEC9A800BB339B /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E684749724DEC9A800BB339B /* NotificationTableViewCell.xib */; };
+		E684749C24DEEBFF00BB339B /* AddressHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E684749A24DEEBFF00BB339B /* AddressHeaderTableViewCell.swift */; };
+		E684749D24DEEBFF00BB339B /* AddressHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E684749B24DEEBFF00BB339B /* AddressHeaderTableViewCell.xib */; };
+		E68474A224DEEDD900BB339B /* PickAddressFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68474A024DEEDD900BB339B /* PickAddressFieldTableViewCell.swift */; };
+		E68474A324DEEDD900BB339B /* PickAddressFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E68474A124DEEDD900BB339B /* PickAddressFieldTableViewCell.xib */; };
+		E68474A624DEEF8100BB339B /* AddressCommonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68474A424DEEF8100BB339B /* AddressCommonTableViewCell.swift */; };
+		E68474A724DEEF8100BB339B /* AddressCommonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E68474A524DEEF8100BB339B /* AddressCommonTableViewCell.xib */; };
+		E6994C8B24DEF71800B935C1 /* DateTimePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6994C8924DEF71800B935C1 /* DateTimePickerTableViewCell.swift */; };
+		E6994C8C24DEF71800B935C1 /* DateTimePickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6994C8A24DEF71800B935C1 /* DateTimePickerTableViewCell.xib */; };
+		E6994C8F24DF0FB400B935C1 /* ForOnlineStoreHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6994C8D24DF0FB400B935C1 /* ForOnlineStoreHeaderTableViewCell.swift */; };
+		E6994C9024DF0FB400B935C1 /* ForOnlineStoreHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6994C8E24DF0FB400B935C1 /* ForOnlineStoreHeaderTableViewCell.xib */; };
+		E6994C9324DF124F00B935C1 /* TransactionTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6994C9124DF124F00B935C1 /* TransactionTypeTableViewCell.swift */; };
+		E6994C9424DF124F00B935C1 /* TransactionTypeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6994C9224DF124F00B935C1 /* TransactionTypeTableViewCell.xib */; };
+		E6994C9724DF146800B935C1 /* RemoveAddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6994C9524DF146800B935C1 /* RemoveAddressTableViewCell.swift */; };
+		E6994C9824DF146800B935C1 /* RemoveAddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6994C9624DF146800B935C1 /* RemoveAddressTableViewCell.xib */; };
+		E6A6286B24DC7CC60015CC4A /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A6286A24DC7CC60015CC4A /* City.swift */; };
 		E6AA98E324BF32CC006577F6 /* PaymentViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AA98E124BF32CC006577F6 /* PaymentViewTableViewCell.swift */; };
 		E6AA98E424BF32CC006577F6 /* PaymentViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6AA98E224BF32CC006577F6 /* PaymentViewTableViewCell.xib */; };
-		E6AA98E624BF3875006577F6 /* nihar_font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E6AA98E524BF3874006577F6 /* nihar_font.ttf */; };
 		E6AA98E924BF3914006577F6 /* RadioCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AA98E724BF3914006577F6 /* RadioCellTableViewCell.swift */; };
 		E6AA98EA24BF3914006577F6 /* RadioCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6AA98E824BF3914006577F6 /* RadioCellTableViewCell.xib */; };
 		E6AA98EE24BF4651006577F6 /* PickAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AA98EC24BF4651006577F6 /* PickAddressViewController.swift */; };
@@ -103,8 +149,18 @@
 		E6AA98F324BF4D2D006577F6 /* GooglePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AA98F224BF4D2D006577F6 /* GooglePlace.swift */; };
 		E6CF2D4824BE044200158CE0 /* FormFieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CF2D4724BE044200158CE0 /* FormFieldModel.swift */; };
 		E6CF2D4A24BE053700158CE0 /* FormSubFieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CF2D4924BE053700158CE0 /* FormSubFieldModel.swift */; };
-		E6CF2D4D24BE0BD600158CE0 /* PickUpDeliveryPointTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CF2D4B24BE0BD600158CE0 /* PickUpDeliveryPointTableViewCell.swift */; };
-		E6CF2D4E24BE0BD600158CE0 /* PickUpDeliveryPointTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6CF2D4C24BE0BD600158CE0 /* PickUpDeliveryPointTableViewCell.xib */; };
+		E6F81A3824DDB33600E98351 /* OrderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F81A3624DDB33600E98351 /* OrderDetailsViewController.swift */; };
+		E6F81A3924DDB33600E98351 /* OrderDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6F81A3724DDB33600E98351 /* OrderDetailsViewController.xib */; };
+		E6F81A3C24DDB7AE00E98351 /* OrderDetailsLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F81A3A24DDB7AE00E98351 /* OrderDetailsLocationTableViewCell.swift */; };
+		E6F81A3D24DDB7AE00E98351 /* OrderDetailsLocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6F81A3B24DDB7AE00E98351 /* OrderDetailsLocationTableViewCell.xib */; };
+		E6F81A4124DDC44F00E98351 /* InformationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F81A3F24DDC44F00E98351 /* InformationTableViewCell.swift */; };
+		E6F81A4224DDC44F00E98351 /* InformationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6F81A4024DDC44F00E98351 /* InformationTableViewCell.xib */; };
+		E6F81A4524DDCBFE00E98351 /* OrderDeliveredTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F81A4324DDCBFE00E98351 /* OrderDeliveredTableViewCell.swift */; };
+		E6F81A4624DDCBFE00E98351 /* OrderDeliveredTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6F81A4424DDCBFE00E98351 /* OrderDeliveredTableViewCell.xib */; };
+		E6F81A4924DDD46600E98351 /* InProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F81A4724DDD46600E98351 /* InProgressTableViewCell.swift */; };
+		E6F81A4A24DDD46600E98351 /* InProgressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6F81A4824DDD46600E98351 /* InProgressTableViewCell.xib */; };
+		E6FBE9A324DE9F2100787B61 /* StarRatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FBE9A124DE9F2100787B61 /* StarRatingViewController.swift */; };
+		E6FBE9A424DE9F2100787B61 /* StarRatingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6FBE9A224DE9F2100787B61 /* StarRatingViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -189,6 +245,29 @@
 		E630D9B824BDC5D9006666A8 /* BottomCreateOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCreateOrderView.swift; sourceTree = "<group>"; };
 		E630D9BA24BDDF32006666A8 /* WeightTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightTableViewCell.swift; sourceTree = "<group>"; };
 		E630D9BB24BDDF32006666A8 /* WeightTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeightTableViewCell.xib; sourceTree = "<group>"; };
+		E6465EA824DBBB1C00AF591D /* VerifyOtpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyOtpViewController.swift; sourceTree = "<group>"; };
+		E6465EA924DBBB1C00AF591D /* VerifyOtpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VerifyOtpViewController.xib; sourceTree = "<group>"; };
+		E6496A9024DA6F6C00514AB9 /* ParcelTypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelTypeCollectionViewCell.swift; sourceTree = "<group>"; };
+		E6496A9124DA6F6C00514AB9 /* ParcelTypeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParcelTypeCollectionViewCell.xib; sourceTree = "<group>"; };
+		E6496A9424DA835100514AB9 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		E6496A9624DADFFA00514AB9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E6496A9824DAF05E00514AB9 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		E6496A9924DAF05E00514AB9 /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
+		E6496A9E24DB123A00514AB9 /* EmptyOrderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyOrderView.xib; sourceTree = "<group>"; };
+		E6496AA024DB125100514AB9 /* EmptyOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyOrderView.swift; sourceTree = "<group>"; };
+		E6496AA324DB1D6300514AB9 /* OrderReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderReviewViewController.swift; sourceTree = "<group>"; };
+		E6496AA424DB1D6300514AB9 /* OrderReviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderReviewViewController.xib; sourceTree = "<group>"; };
+		E6496AA724DB28FE00514AB9 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
+		E6496AA824DB28FE00514AB9 /* ReviewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewTableViewCell.xib; sourceTree = "<group>"; };
+		E6506C6524DC09BC0044368B /* PriceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceInfo.swift; sourceTree = "<group>"; };
+		E654781B24DD2D6D00A1F697 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		E654781D24DD30DC00A1F697 /* OrderAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderAddress.swift; sourceTree = "<group>"; };
+		E654781F24DD59C300A1F697 /* InProgressOrdersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressOrdersTableViewCell.swift; sourceTree = "<group>"; };
+		E654782024DD59C300A1F697 /* InProgressOrdersTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InProgressOrdersTableViewCell.xib; sourceTree = "<group>"; };
+		E654782324DD5FCF00A1F697 /* OrderAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderAddressView.swift; sourceTree = "<group>"; };
+		E654782524DD5FE500A1F697 /* OrderAddressView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderAddressView.xib; sourceTree = "<group>"; };
+		E654782924DD6F8800A1F697 /* CompletedOrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedOrderTableViewCell.swift; sourceTree = "<group>"; };
+		E654782A24DD6F8800A1F697 /* CompletedOrderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompletedOrderTableViewCell.xib; sourceTree = "<group>"; };
 		E65C384124C5FB94002DD732 /* TabbedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbedView.swift; sourceTree = "<group>"; };
 		E65C384224C5FB94002DD732 /* TabModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
 		E65C384324C5FB94002DD732 /* TabbedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabbedView.xib; sourceTree = "<group>"; };
@@ -197,9 +276,32 @@
 		E65C384C24C5FD02002DD732 /* UIButton_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton_Extension.swift; sourceTree = "<group>"; };
 		E65C384E24C5FE8B002DD732 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		E65C385024C5FE93002DD732 /* RegistrationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegistrationView.xib; sourceTree = "<group>"; };
+		E672532424DE4DBA008837CB /* CancellationOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancellationOrderViewController.swift; sourceTree = "<group>"; };
+		E672532524DE4DBA008837CB /* CancellationOrderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CancellationOrderViewController.xib; sourceTree = "<group>"; };
+		E672532824DE5026008837CB /* RadioTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioTableViewCell.swift; sourceTree = "<group>"; };
+		E672532924DE5026008837CB /* RadioTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RadioTableViewCell.xib; sourceTree = "<group>"; };
+		E672532C24DE514B008837CB /* nihar_font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = nihar_font.ttf; sourceTree = "<group>"; };
+		E684749224DEBFEB00BB339B /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		E684749324DEBFEB00BB339B /* NotificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationViewController.xib; sourceTree = "<group>"; };
+		E684749624DEC9A800BB339B /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		E684749724DEC9A800BB339B /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
+		E684749A24DEEBFF00BB339B /* AddressHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		E684749B24DEEBFF00BB339B /* AddressHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		E68474A024DEEDD900BB339B /* PickAddressFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickAddressFieldTableViewCell.swift; sourceTree = "<group>"; };
+		E68474A124DEEDD900BB339B /* PickAddressFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickAddressFieldTableViewCell.xib; sourceTree = "<group>"; };
+		E68474A424DEEF8100BB339B /* AddressCommonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCommonTableViewCell.swift; sourceTree = "<group>"; };
+		E68474A524DEEF8100BB339B /* AddressCommonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressCommonTableViewCell.xib; sourceTree = "<group>"; };
+		E6994C8924DEF71800B935C1 /* DateTimePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimePickerTableViewCell.swift; sourceTree = "<group>"; };
+		E6994C8A24DEF71800B935C1 /* DateTimePickerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateTimePickerTableViewCell.xib; sourceTree = "<group>"; };
+		E6994C8D24DF0FB400B935C1 /* ForOnlineStoreHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForOnlineStoreHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		E6994C8E24DF0FB400B935C1 /* ForOnlineStoreHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForOnlineStoreHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		E6994C9124DF124F00B935C1 /* TransactionTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTypeTableViewCell.swift; sourceTree = "<group>"; };
+		E6994C9224DF124F00B935C1 /* TransactionTypeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionTypeTableViewCell.xib; sourceTree = "<group>"; };
+		E6994C9524DF146800B935C1 /* RemoveAddressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveAddressTableViewCell.swift; sourceTree = "<group>"; };
+		E6994C9624DF146800B935C1 /* RemoveAddressTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RemoveAddressTableViewCell.xib; sourceTree = "<group>"; };
+		E6A6286A24DC7CC60015CC4A /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		E6AA98E124BF32CC006577F6 /* PaymentViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewTableViewCell.swift; sourceTree = "<group>"; };
 		E6AA98E224BF32CC006577F6 /* PaymentViewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentViewTableViewCell.xib; sourceTree = "<group>"; };
-		E6AA98E524BF3874006577F6 /* nihar_font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = nihar_font.ttf; sourceTree = "<group>"; };
 		E6AA98E724BF3914006577F6 /* RadioCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioCellTableViewCell.swift; sourceTree = "<group>"; };
 		E6AA98E824BF3914006577F6 /* RadioCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RadioCellTableViewCell.xib; sourceTree = "<group>"; };
 		E6AA98EC24BF4651006577F6 /* PickAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickAddressViewController.swift; sourceTree = "<group>"; };
@@ -208,8 +310,18 @@
 		E6AA98F224BF4D2D006577F6 /* GooglePlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlace.swift; sourceTree = "<group>"; };
 		E6CF2D4724BE044200158CE0 /* FormFieldModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldModel.swift; sourceTree = "<group>"; };
 		E6CF2D4924BE053700158CE0 /* FormSubFieldModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSubFieldModel.swift; sourceTree = "<group>"; };
-		E6CF2D4B24BE0BD600158CE0 /* PickUpDeliveryPointTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpDeliveryPointTableViewCell.swift; sourceTree = "<group>"; };
-		E6CF2D4C24BE0BD600158CE0 /* PickUpDeliveryPointTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickUpDeliveryPointTableViewCell.xib; sourceTree = "<group>"; };
+		E6F81A3624DDB33600E98351 /* OrderDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsViewController.swift; sourceTree = "<group>"; };
+		E6F81A3724DDB33600E98351 /* OrderDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderDetailsViewController.xib; sourceTree = "<group>"; };
+		E6F81A3A24DDB7AE00E98351 /* OrderDetailsLocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsLocationTableViewCell.swift; sourceTree = "<group>"; };
+		E6F81A3B24DDB7AE00E98351 /* OrderDetailsLocationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderDetailsLocationTableViewCell.xib; sourceTree = "<group>"; };
+		E6F81A3F24DDC44F00E98351 /* InformationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationTableViewCell.swift; sourceTree = "<group>"; };
+		E6F81A4024DDC44F00E98351 /* InformationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InformationTableViewCell.xib; sourceTree = "<group>"; };
+		E6F81A4324DDCBFE00E98351 /* OrderDeliveredTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDeliveredTableViewCell.swift; sourceTree = "<group>"; };
+		E6F81A4424DDCBFE00E98351 /* OrderDeliveredTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderDeliveredTableViewCell.xib; sourceTree = "<group>"; };
+		E6F81A4724DDD46600E98351 /* InProgressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressTableViewCell.swift; sourceTree = "<group>"; };
+		E6F81A4824DDD46600E98351 /* InProgressTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InProgressTableViewCell.xib; sourceTree = "<group>"; };
+		E6FBE9A124DE9F2100787B61 /* StarRatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingViewController.swift; sourceTree = "<group>"; };
+		E6FBE9A224DE9F2100787B61 /* StarRatingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StarRatingViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -351,12 +463,16 @@
 		0F7F1C6024AE3F080011A754 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				E684749124DEBFDA00BB339B /* Notification */,
+				E6465EA724DBBAF700AF591D /* VerifyOTP */,
+				E6496AA224DB1CF200514AB9 /* OrderReviewController */,
 				E6AA98EB24BF4625006577F6 /* PickAddressForLocation */,
 				E630D93524BD8CE9006666A8 /* SplashController */,
 				0F6C5B3524AE503D00F15376 /* NewOrderForm */,
 				0F6C5B2C24AE4A7E00F15376 /* RegisterController */,
 				0F6C5B2B24AE4A6F00F15376 /* LoginController */,
 				0F7F1C6624AE41CE0011A754 /* OrdersController */,
+				E6F81A3524DDB31100E98351 /* OrderDetails */,
 				0F7F1C6B24AE422C0011A754 /* ProfileController */,
 				0F6C5B2224AE429500F15376 /* HelpController */,
 				0F6C5B2724AE42C400F15376 /* InfoController */,
@@ -379,6 +495,12 @@
 			children = (
 				0F7F1C6724AE42020011A754 /* OrdersViewController.swift */,
 				0F7F1C6824AE42020011A754 /* OrdersViewController.xib */,
+				E6496A9E24DB123A00514AB9 /* EmptyOrderView.xib */,
+				E6496AA024DB125100514AB9 /* EmptyOrderView.swift */,
+				E654781F24DD59C300A1F697 /* InProgressOrdersTableViewCell.swift */,
+				E654782024DD59C300A1F697 /* InProgressOrdersTableViewCell.xib */,
+				E654782924DD6F8800A1F697 /* CompletedOrderTableViewCell.swift */,
+				E654782A24DD6F8800A1F697 /* CompletedOrderTableViewCell.xib */,
 			);
 			path = OrdersController;
 			sourceTree = "<group>";
@@ -388,6 +510,8 @@
 			children = (
 				0F7F1C6C24AE424E0011A754 /* ProfileViewController.swift */,
 				0F7F1C6D24AE424E0011A754 /* ProfileViewController.xib */,
+				E6496A9824DAF05E00514AB9 /* ProfileTableViewCell.swift */,
+				E6496A9924DAF05E00514AB9 /* ProfileTableViewCell.xib */,
 			);
 			path = ProfileController;
 			sourceTree = "<group>";
@@ -450,7 +574,7 @@
 		E630D93C24BD9192006666A8 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				E6AA98E524BF3874006577F6 /* nihar_font.ttf */,
+				E672532C24DE514B008837CB /* nihar_font.ttf */,
 				E630D97424BD9368006666A8 /* Roboto */,
 				E630D94424BD9192006666A8 /* FontAwesome */,
 			);
@@ -520,8 +644,6 @@
 			children = (
 				E630D9BA24BDDF32006666A8 /* WeightTableViewCell.swift */,
 				E630D9BB24BDDF32006666A8 /* WeightTableViewCell.xib */,
-				E6CF2D4B24BE0BD600158CE0 /* PickUpDeliveryPointTableViewCell.swift */,
-				E6CF2D4C24BE0BD600158CE0 /* PickUpDeliveryPointTableViewCell.xib */,
 				E60F186A24BEEC2F00134353 /* OptimizeRouteTableViewCell.swift */,
 				E60F186B24BEEC2F00134353 /* OptimizeRouteTableViewCell.xib */,
 				E60F186E24BEF74100134353 /* AddDeliveryPointTableViewCell.swift */,
@@ -534,6 +656,9 @@
 				E6AA98E224BF32CC006577F6 /* PaymentViewTableViewCell.xib */,
 				E6AA98E724BF3914006577F6 /* RadioCellTableViewCell.swift */,
 				E6AA98E824BF3914006577F6 /* RadioCellTableViewCell.xib */,
+				E6496A9024DA6F6C00514AB9 /* ParcelTypeCollectionViewCell.swift */,
+				E6496A9124DA6F6C00514AB9 /* ParcelTypeCollectionViewCell.xib */,
+				E684749F24DEEC0E00BB339B /* AddressCells */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -544,8 +669,30 @@
 				E65C384024C5FB94002DD732 /* TabbedView */,
 				E60F187724BF0CC800134353 /* DatePicker */,
 				E60F187624BF0CB600134353 /* CreateOrderTopBottom */,
+				E654782324DD5FCF00A1F697 /* OrderAddressView.swift */,
+				E654782524DD5FE500A1F697 /* OrderAddressView.xib */,
 			);
 			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		E6465EA724DBBAF700AF591D /* VerifyOTP */ = {
+			isa = PBXGroup;
+			children = (
+				E6465EA824DBBB1C00AF591D /* VerifyOtpViewController.swift */,
+				E6465EA924DBBB1C00AF591D /* VerifyOtpViewController.xib */,
+			);
+			path = VerifyOTP;
+			sourceTree = "<group>";
+		};
+		E6496AA224DB1CF200514AB9 /* OrderReviewController */ = {
+			isa = PBXGroup;
+			children = (
+				E6496AA324DB1D6300514AB9 /* OrderReviewViewController.swift */,
+				E6496AA424DB1D6300514AB9 /* OrderReviewViewController.xib */,
+				E6496AA724DB28FE00514AB9 /* ReviewTableViewCell.swift */,
+				E6496AA824DB28FE00514AB9 /* ReviewTableViewCell.xib */,
+			);
+			path = OrderReviewController;
 			sourceTree = "<group>";
 		};
 		E65C384024C5FB94002DD732 /* TabbedView */ = {
@@ -568,6 +715,51 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		E672532324DE4D97008837CB /* OperationalController */ = {
+			isa = PBXGroup;
+			children = (
+				E672532424DE4DBA008837CB /* CancellationOrderViewController.swift */,
+				E672532524DE4DBA008837CB /* CancellationOrderViewController.xib */,
+				E672532824DE5026008837CB /* RadioTableViewCell.swift */,
+				E672532924DE5026008837CB /* RadioTableViewCell.xib */,
+				E6FBE9A124DE9F2100787B61 /* StarRatingViewController.swift */,
+				E6FBE9A224DE9F2100787B61 /* StarRatingViewController.xib */,
+			);
+			path = OperationalController;
+			sourceTree = "<group>";
+		};
+		E684749124DEBFDA00BB339B /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				E684749224DEBFEB00BB339B /* NotificationViewController.swift */,
+				E684749324DEBFEB00BB339B /* NotificationViewController.xib */,
+				E684749624DEC9A800BB339B /* NotificationTableViewCell.swift */,
+				E684749724DEC9A800BB339B /* NotificationTableViewCell.xib */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		E684749F24DEEC0E00BB339B /* AddressCells */ = {
+			isa = PBXGroup;
+			children = (
+				E684749A24DEEBFF00BB339B /* AddressHeaderTableViewCell.swift */,
+				E684749B24DEEBFF00BB339B /* AddressHeaderTableViewCell.xib */,
+				E68474A024DEEDD900BB339B /* PickAddressFieldTableViewCell.swift */,
+				E68474A124DEEDD900BB339B /* PickAddressFieldTableViewCell.xib */,
+				E68474A424DEEF8100BB339B /* AddressCommonTableViewCell.swift */,
+				E68474A524DEEF8100BB339B /* AddressCommonTableViewCell.xib */,
+				E6994C8924DEF71800B935C1 /* DateTimePickerTableViewCell.swift */,
+				E6994C8A24DEF71800B935C1 /* DateTimePickerTableViewCell.xib */,
+				E6994C8D24DF0FB400B935C1 /* ForOnlineStoreHeaderTableViewCell.swift */,
+				E6994C8E24DF0FB400B935C1 /* ForOnlineStoreHeaderTableViewCell.xib */,
+				E6994C9124DF124F00B935C1 /* TransactionTypeTableViewCell.swift */,
+				E6994C9224DF124F00B935C1 /* TransactionTypeTableViewCell.xib */,
+				E6994C9524DF146800B935C1 /* RemoveAddressTableViewCell.swift */,
+				E6994C9624DF146800B935C1 /* RemoveAddressTableViewCell.xib */,
+			);
+			path = AddressCells;
+			sourceTree = "<group>";
+		};
 		E6AA98EB24BF4625006577F6 /* PickAddressForLocation */ = {
 			isa = PBXGroup;
 			children = (
@@ -584,8 +776,40 @@
 				E6CF2D4724BE044200158CE0 /* FormFieldModel.swift */,
 				E6CF2D4924BE053700158CE0 /* FormSubFieldModel.swift */,
 				E6AA98F224BF4D2D006577F6 /* GooglePlace.swift */,
+				E6496A9424DA835100514AB9 /* Category.swift */,
+				E6496A9624DADFFA00514AB9 /* User.swift */,
+				E6506C6524DC09BC0044368B /* PriceInfo.swift */,
+				E6A6286A24DC7CC60015CC4A /* City.swift */,
+				E654781B24DD2D6D00A1F697 /* Order.swift */,
+				E654781D24DD30DC00A1F697 /* OrderAddress.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		E6F81A3524DDB31100E98351 /* OrderDetails */ = {
+			isa = PBXGroup;
+			children = (
+				E672532324DE4D97008837CB /* OperationalController */,
+				E6F81A3624DDB33600E98351 /* OrderDetailsViewController.swift */,
+				E6F81A3724DDB33600E98351 /* OrderDetailsViewController.xib */,
+				E6F81A3E24DDB7B700E98351 /* Cells */,
+			);
+			path = OrderDetails;
+			sourceTree = "<group>";
+		};
+		E6F81A3E24DDB7B700E98351 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E6F81A3A24DDB7AE00E98351 /* OrderDetailsLocationTableViewCell.swift */,
+				E6F81A3B24DDB7AE00E98351 /* OrderDetailsLocationTableViewCell.xib */,
+				E6F81A3F24DDC44F00E98351 /* InformationTableViewCell.swift */,
+				E6F81A4024DDC44F00E98351 /* InformationTableViewCell.xib */,
+				E6F81A4324DDCBFE00E98351 /* OrderDeliveredTableViewCell.swift */,
+				E6F81A4424DDCBFE00E98351 /* OrderDeliveredTableViewCell.xib */,
+				E6F81A4724DDD46600E98351 /* InProgressTableViewCell.swift */,
+				E6F81A4824DDD46600E98351 /* InProgressTableViewCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -650,49 +874,74 @@
 			buildActionMask = 2147483647;
 			files = (
 				E630D98C24BD9375006666A8 /* Roboto-Thin.ttf in Resources */,
+				E6496A9B24DAF05E00514AB9 /* ProfileTableViewCell.xib in Resources */,
 				0F7F1C5724AE3E7F0011A754 /* LaunchScreen.storyboard in Resources */,
 				E630D96024BD9192006666A8 /* fa-light-300.ttf in Resources */,
 				E630D98424BD9375006666A8 /* Roboto-Bold.ttf in Resources */,
 				E60F187F24BF176B00134353 /* ParcelInfoTableViewCell.xib in Resources */,
+				E6F81A3924DDB33600E98351 /* OrderDetailsViewController.xib in Resources */,
+				E6994C8C24DEF71800B935C1 /* DateTimePickerTableViewCell.xib in Resources */,
 				E630D98124BD9375006666A8 /* Roboto-BlackItalic.ttf in Resources */,
 				E630D9B324BDC172006666A8 /* NavigationView.xib in Resources */,
+				E654782224DD59C300A1F697 /* InProgressOrdersTableViewCell.xib in Resources */,
+				E6FBE9A424DE9F2100787B61 /* StarRatingViewController.xib in Resources */,
 				E630D98A24BD9375006666A8 /* Roboto-Italic.ttf in Resources */,
+				E6496AAA24DB28FE00514AB9 /* ReviewTableViewCell.xib in Resources */,
 				E630D98B24BD9375006666A8 /* Roboto-Regular.ttf in Resources */,
+				E6994C9424DF124F00B935C1 /* TransactionTypeTableViewCell.xib in Resources */,
+				E6F81A4224DDC44F00E98351 /* InformationTableViewCell.xib in Resources */,
 				E630D95F24BD9192006666A8 /* fa-regular-400.ttf in Resources */,
 				E630D95E24BD9192006666A8 /* fa-solid-900.ttf in Resources */,
 				E6AA98EA24BF3914006577F6 /* RadioCellTableViewCell.xib in Resources */,
 				E630D96124BD9192006666A8 /* fa-brands-400.ttf in Resources */,
 				0F6C5B3024AE4A9500F15376 /* RegistrationViewController.xib in Resources */,
+				E6496A9324DA6F6C00514AB9 /* ParcelTypeCollectionViewCell.xib in Resources */,
 				E60336D424C6ADC200D263C9 /* LoginView.xib in Resources */,
 				E60F187124BEF74100134353 /* AddDeliveryPointTableViewCell.xib in Resources */,
 				E630D98224BD9375006666A8 /* Roboto-Light.ttf in Resources */,
+				E6994C9824DF146800B935C1 /* RemoveAddressTableViewCell.xib in Resources */,
 				0F7F1C6424AE415F0011A754 /* TabBarViewController.xib in Resources */,
 				0F6C5B3D24AE509F00F15376 /* NewOrderFormTableViewController.xib in Resources */,
+				E6994C9024DF0FB400B935C1 /* ForOnlineStoreHeaderTableViewCell.xib in Resources */,
+				E68474A324DEEDD900BB339B /* PickAddressFieldTableViewCell.xib in Resources */,
+				E684749924DEC9A800BB339B /* NotificationTableViewCell.xib in Resources */,
 				E6AA98E424BF32CC006577F6 /* PaymentViewTableViewCell.xib in Resources */,
+				E672532D24DE514B008837CB /* nihar_font.ttf in Resources */,
 				0F7F1C5424AE3E7F0011A754 /* Assets.xcassets in Resources */,
 				E630D93824BD8D08006666A8 /* SplashScreenViewController.xib in Resources */,
-				E6CF2D4E24BE0BD600158CE0 /* PickUpDeliveryPointTableViewCell.xib in Resources */,
 				E65C384624C5FB94002DD732 /* TabbedView.xib in Resources */,
+				E684749D24DEEBFF00BB339B /* AddressHeaderTableViewCell.xib in Resources */,
+				E6496AA624DB1D6300514AB9 /* OrderReviewViewController.xib in Resources */,
 				0F7F1C6F24AE424E0011A754 /* ProfileViewController.xib in Resources */,
 				E65C385124C5FE93002DD732 /* RegistrationView.xib in Resources */,
+				E6465EAB24DBBB1C00AF591D /* VerifyOtpViewController.xib in Resources */,
 				E60F186D24BEEC2F00134353 /* OptimizeRouteTableViewCell.xib in Resources */,
+				E6496A9F24DB123A00514AB9 /* EmptyOrderView.xib in Resources */,
 				E630D9BD24BDDF32006666A8 /* WeightTableViewCell.xib in Resources */,
-				E6AA98E624BF3875006577F6 /* nihar_font.ttf in Resources */,
 				E6AA98EF24BF4651006577F6 /* PickAddressViewController.xib in Resources */,
+				E68474A724DEEF8100BB339B /* AddressCommonTableViewCell.xib in Resources */,
 				E630D98324BD9375006666A8 /* Roboto-Black.ttf in Resources */,
 				E60F187B24BF0CDC00134353 /* DatePickerViewController.xib in Resources */,
+				E6F81A4A24DDD46600E98351 /* InProgressTableViewCell.xib in Resources */,
 				0F7F1C6A24AE42020011A754 /* OrdersViewController.xib in Resources */,
 				E630D98924BD9375006666A8 /* Roboto-LightItalic.ttf in Resources */,
 				E630D9B724BDC5CC006666A8 /* BottomCreateOrderView.xib in Resources */,
 				E630D98524BD9375006666A8 /* Roboto-Medium.ttf in Resources */,
 				E60F187524BF033200134353 /* NotifyBySMSTableViewCell.xib in Resources */,
+				E672532724DE4DBA008837CB /* CancellationOrderViewController.xib in Resources */,
+				E684749524DEBFEB00BB339B /* NotificationViewController.xib in Resources */,
 				E630D98824BD9375006666A8 /* Roboto-BoldItalic.ttf in Resources */,
 				0F6C5B2624AE42BF00F15376 /* InfoViewController.xib in Resources */,
 				0F6C5B2124AE428D00F15376 /* HelpViewController.xib in Resources */,
 				E630D98624BD9375006666A8 /* Roboto-MediumItalic.ttf in Resources */,
+				E654782C24DD6F8800A1F697 /* CompletedOrderTableViewCell.xib in Resources */,
+				E672532B24DE5026008837CB /* RadioTableViewCell.xib in Resources */,
+				E6F81A3D24DDB7AE00E98351 /* OrderDetailsLocationTableViewCell.xib in Resources */,
 				E630D98724BD9375006666A8 /* Roboto-ThinItalic.ttf in Resources */,
 				E65C384B24C5FBE0002DD732 /* SingleLineCollectionViewCell.xib in Resources */,
+				E654782624DD5FE500A1F697 /* OrderAddressView.xib in Resources */,
 				0F6C5B3424AE4AA300F15376 /* LoginViewController.xib in Resources */,
+				E6F81A4624DDCBFE00E98351 /* OrderDeliveredTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -764,12 +1013,13 @@
 			files = (
 				E6AA98F324BF4D2D006577F6 /* GooglePlace.swift in Sources */,
 				E60F187024BEF74100134353 /* AddDeliveryPointTableViewCell.swift in Sources */,
+				E68474A224DEEDD900BB339B /* PickAddressFieldTableViewCell.swift in Sources */,
 				E60F187E24BF176B00134353 /* ParcelInfoTableViewCell.swift in Sources */,
 				0F7F1C4B24AE3E7D0011A754 /* AppDelegate.swift in Sources */,
 				0F6C5B2024AE428D00F15376 /* HelpViewController.swift in Sources */,
-				E6CF2D4D24BE0BD600158CE0 /* PickUpDeliveryPointTableViewCell.swift in Sources */,
 				E630D93924BD8D08006666A8 /* SplashScreenViewController.swift in Sources */,
 				E630D9B024BDBAC1006666A8 /* UIDevice_Extension.swift in Sources */,
+				E6994C9724DF146800B935C1 /* RemoveAddressTableViewCell.swift in Sources */,
 				E630D9A924BD9D6F006666A8 /* APIManager.swift in Sources */,
 				E630D99324BD9813006666A8 /* FontAwesome.swift in Sources */,
 				E60336D624C6ADD100D263C9 /* LoginView.swift in Sources */,
@@ -779,32 +1029,58 @@
 				E630D99824BD9C88006666A8 /* UIView_Extension.swift in Sources */,
 				0F7F1C6324AE415F0011A754 /* TabBarViewController.swift in Sources */,
 				E630D9A424BD9D0C006666A8 /* UIView_Utility.swift in Sources */,
+				E68474A624DEEF8100BB339B /* AddressCommonTableViewCell.swift in Sources */,
 				E6AA98F124BF4BBE006577F6 /* PlaceMarker.swift in Sources */,
 				E630D9BC24BDDF32006666A8 /* WeightTableViewCell.swift in Sources */,
 				E6AA98E924BF3914006577F6 /* RadioCellTableViewCell.swift in Sources */,
+				E6A6286B24DC7CC60015CC4A /* City.swift in Sources */,
+				E6496A9724DADFFA00514AB9 /* User.swift in Sources */,
 				E630D93B24BD916F006666A8 /* FontUtility.swift in Sources */,
+				E6496A9524DA835100514AB9 /* Category.swift in Sources */,
+				E6465EAA24DBBB1C00AF591D /* VerifyOtpViewController.swift in Sources */,
+				E6496A9224DA6F6C00514AB9 /* ParcelTypeCollectionViewCell.swift in Sources */,
+				E654782424DD5FCF00A1F697 /* OrderAddressView.swift in Sources */,
 				0F6C5B2F24AE4A9500F15376 /* RegistrationViewController.swift in Sources */,
+				E6994C8B24DEF71800B935C1 /* DateTimePickerTableViewCell.swift in Sources */,
+				E6496AA124DB125100514AB9 /* EmptyOrderView.swift in Sources */,
 				0F6C5B3C24AE509F00F15376 /* NewOrderFormTableViewController.swift in Sources */,
 				E630D93324BD7489006666A8 /* UIViewController_Extension.swift in Sources */,
+				E6496AA524DB1D6300514AB9 /* OrderReviewViewController.swift in Sources */,
 				E65C384A24C5FBE0002DD732 /* SingleLineCollectionViewCell.swift in Sources */,
 				0F6C5B2A24AE48A600F15376 /* Util.swift in Sources */,
 				E6AA98EE24BF4651006577F6 /* PickAddressViewController.swift in Sources */,
+				E6F81A4124DDC44F00E98351 /* InformationTableViewCell.swift in Sources */,
+				E654781C24DD2D6D00A1F697 /* Order.swift in Sources */,
+				E654781E24DD30DC00A1F697 /* OrderAddress.swift in Sources */,
 				E630D9A024BD9CD9006666A8 /* Date_Extension.swift in Sources */,
 				0F6C5B2524AE42BF00F15376 /* InfoViewController.swift in Sources */,
 				E6AA98E324BF32CC006577F6 /* PaymentViewTableViewCell.swift in Sources */,
 				E630D9B524BDC186006666A8 /* NavigationView.swift in Sources */,
+				E654782124DD59C300A1F697 /* InProgressOrdersTableViewCell.swift in Sources */,
+				E6FBE9A324DE9F2100787B61 /* StarRatingViewController.swift in Sources */,
 				E630D99624BD9BD1006666A8 /* ColorConstant.swift in Sources */,
+				E684749424DEBFEB00BB339B /* NotificationViewController.swift in Sources */,
+				E6496AA924DB28FE00514AB9 /* ReviewTableViewCell.swift in Sources */,
+				E6F81A4524DDCBFE00E98351 /* OrderDeliveredTableViewCell.swift in Sources */,
 				0F7F1C6E24AE424E0011A754 /* ProfileViewController.swift in Sources */,
+				E6994C9324DF124F00B935C1 /* TransactionTypeTableViewCell.swift in Sources */,
 				E630D9AB24BD9DBB006666A8 /* UserConstant.swift in Sources */,
+				E672532A24DE5026008837CB /* RadioTableViewCell.swift in Sources */,
 				E630D9B924BDC5D9006666A8 /* BottomCreateOrderView.swift in Sources */,
 				E65C384524C5FB94002DD732 /* TabModel.swift in Sources */,
 				0F7F1C4D24AE3E7D0011A754 /* SceneDelegate.swift in Sources */,
+				E684749824DEC9A800BB339B /* NotificationTableViewCell.swift in Sources */,
 				E630D99A24BD9C99006666A8 /* UITableView_Extension.swift in Sources */,
 				E630D9A624BD9D43006666A8 /* UIColor_Extension.swift in Sources */,
 				E630D9A224BD9CFC006666A8 /* UserDefaultManager.swift in Sources */,
+				E672532624DE4DBA008837CB /* CancellationOrderViewController.swift in Sources */,
+				E6F81A4924DDD46600E98351 /* InProgressTableViewCell.swift in Sources */,
 				E65C384F24C5FE8B002DD732 /* RegistrationView.swift in Sources */,
 				0F6C5B3324AE4AA300F15376 /* LoginViewController.swift in Sources */,
+				E6F81A3C24DDB7AE00E98351 /* OrderDetailsLocationTableViewCell.swift in Sources */,
+				E6496A9A24DAF05E00514AB9 /* ProfileTableViewCell.swift in Sources */,
 				E60F187424BF033200134353 /* NotifyBySMSTableViewCell.swift in Sources */,
+				E6506C6624DC09BC0044368B /* PriceInfo.swift in Sources */,
 				E630D99224BD9813006666A8 /* FontAwesomeEnum.swift in Sources */,
 				E6CF2D4824BE044200158CE0 /* FormFieldModel.swift in Sources */,
 				E65C384D24C5FD02002DD732 /* UIButton_Extension.swift in Sources */,
@@ -812,9 +1088,13 @@
 				E60F187A24BF0CDC00134353 /* DatePickerViewController.swift in Sources */,
 				E6CF2D4A24BE053700158CE0 /* FormSubFieldModel.swift in Sources */,
 				E630D93124BD7157006666A8 /* UINavigationController_Extension.swift in Sources */,
+				E6994C8F24DF0FB400B935C1 /* ForOnlineStoreHeaderTableViewCell.swift in Sources */,
+				E654782B24DD6F8800A1F697 /* CompletedOrderTableViewCell.swift in Sources */,
 				E65C384424C5FB94002DD732 /* TabbedView.swift in Sources */,
 				E630D99E24BD9CCB006666A8 /* Dictionary_Extension.swift in Sources */,
 				0FEF269124CBFFE400D2CD69 /* URLConstant.swift in Sources */,
+				E684749C24DEEBFF00BB339B /* AddressHeaderTableViewCell.swift in Sources */,
+				E6F81A3824DDB33600E98351 /* OrderDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

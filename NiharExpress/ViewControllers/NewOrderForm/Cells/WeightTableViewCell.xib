@@ -57,6 +57,9 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="txtWeightField" destination="FtD-Oj-c3a" id="U2f-wv-SoX"/>
+            </connections>
             <point key="canvasLocation" x="131.8840579710145" y="148.66071428571428"/>
         </tableViewCell>
     </objects>

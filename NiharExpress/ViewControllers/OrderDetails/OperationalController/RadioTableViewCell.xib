@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="57" id="KGk-i7-Jjw" customClass="RadioTableViewCell" customModule="NiharExpress" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="R" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g6x-Zo-TiF">
+                        <rect key="frame" x="16" y="16.5" width="24" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="24" id="6lx-Oe-JHq"/>
+                            <constraint firstAttribute="height" constant="24" id="sKh-0d-1Qg"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJc-Dh-kM4">
+                        <rect key="frame" x="52" y="12" width="248" height="33"/>
+                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="cJc-Dh-kM4" secondAttribute="trailing" constant="20" id="Agm-95-yhO"/>
+                    <constraint firstItem="cJc-Dh-kM4" firstAttribute="leading" secondItem="g6x-Zo-TiF" secondAttribute="trailing" constant="12" id="JC8-Qf-MiM"/>
+                    <constraint firstItem="g6x-Zo-TiF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="MJe-cE-mHB"/>
+                    <constraint firstItem="g6x-Zo-TiF" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Ssx-1k-0F1"/>
+                    <constraint firstItem="cJc-Dh-kM4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="kwV-Rq-vDf"/>
+                    <constraint firstAttribute="bottom" secondItem="cJc-Dh-kM4" secondAttribute="bottom" constant="12" id="lGa-4S-vDX"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="lblRadio" destination="g6x-Zo-TiF" id="tYT-hx-Rh1"/>
+                <outlet property="lblTitle" destination="cJc-Dh-kM4" id="Hae-bq-WbM"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="136.94196428571428"/>
+        </tableViewCell>
+    </objects>
+</document>

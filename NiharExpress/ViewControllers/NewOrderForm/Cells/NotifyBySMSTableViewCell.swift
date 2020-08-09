@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ReloadCellProtocol {
+    func reloadCell(for indexPath: IndexPath)
+}
+
 class NotifyBySMSTableViewCell: UITableViewCell {
     static var identifier = "NotifyBySMSTableViewCell"
     

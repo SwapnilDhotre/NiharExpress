@@ -11,6 +11,11 @@ target 'NiharExpress' do
   
   pod 'CryptoSwift', '~> 1.0'
   
+  pod 'Cosmos', '~> 22.1' ## StarRating
+  
+  # Image caching library
+  pod 'PINRemoteImage'
+  
   # Pods for NiharExpress
 
 end

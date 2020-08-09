@@ -9,8 +9,7 @@
 import UIKit
 
 protocol RegistrationViewProtocol {
-    func registerData(with fullName: String, phoneNumber: String, emailId: String, verifyOtp: String)
-    func getOTP(with fullName: String, phoneNumber: String)
+    func registerData(with fullName: String, phoneNumber: String, emailId: String)
 }
 
 class RegistrationView: UIView {
@@ -56,19 +55,11 @@ class RegistrationView: UIView {
     }
     
     // MARK: - Action Methods
-    @IBAction func requestOTPAction(_ sender: UIButton) {
-        let fullName = self.txtFieldFullName.text ?? ""
-        let phoneNumber = self.txtFieldPhoneNumber.text ?? ""
-        
-        self.delegate?.getOTP(with: fullName, phoneNumber: phoneNumber)
-    }
-    
     @IBAction func registerAction(_ sender: UIButton) {
         let fullName = self.txtFieldFullName.text ?? ""
         let phoneNumber = self.txtFieldPhoneNumber.text ?? ""
         let emailId = self.txtFieldEmail.text ?? ""
-        let verifyCode = self.txtFieldVerificationCode.text ?? ""
         
-        self.delegate?.registerData(with: fullName, phoneNumber: phoneNumber, emailId: emailId, verifyOtp: verifyCode)
+        self.delegate?.registerData(with: fullName, phoneNumber: phoneNumber, emailId: emailId)
     }
 }

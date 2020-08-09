@@ -36,6 +36,18 @@ public enum AppIcons: String {
     case conatctCard = "\u{e905}"
     case calendar = "\u{e907}"
     case clock = "\u{e906}"
+    
+    case profile = "\u{e90a}"
+    case location = "\u{e90c}"
+    case statistic = "\u{e90b}"
+    case refEarn = "\u{0b}"
+    case logout = "\u{e90d}"
+    
+    case cross = "\u{e90e}"
+    case bell = "\u{e910}"
+    
+    case radioSelected = "\u{e90f}"
+    case radioUnSelected = "\u{e911}"
 }
 
 class FontUtility {

@@ -19,7 +19,6 @@ class PaymentViewTableViewCell: UITableViewCell {
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     
     var delegate: ReloadCellProtocol?
-    var paymentLocation: [PaymentWillOccurAt] = []
     var formFieldModel: FormFieldModel!
     
     override func awakeFromNib() {
@@ -60,7 +59,7 @@ class PaymentViewTableViewCell: UITableViewCell {
                 }
             }
         }
-        self.paymentLocation = locations
+        self.formFieldModel.paymentLocation = locations
         self.tableView.reloadData()
         
         self.tableViewHeightConstraint.constant = CGFloat(locations.count * 40)
@@ -70,7 +69,7 @@ class PaymentViewTableViewCell: UITableViewCell {
 
 extension PaymentViewTableViewCell: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.paymentLocation.count
+        return self.formFieldModel.paymentLocation.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -80,7 +79,7 @@ extension PaymentViewTableViewCell: UITableViewDataSource, UITableViewDelegate {
         }
         
         cell.selectionStyle = .none
-        cell.updateData(with: self.paymentLocation[indexPath.row])
+        cell.updateData(with: self.formFieldModel.paymentLocation[indexPath.row])
         
         return cell
     }
@@ -90,8 +89,8 @@ extension PaymentViewTableViewCell: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.paymentLocation.forEach { $0.isSelected = false }
-        self.paymentLocation[indexPath.row].isSelected = true
+        self.formFieldModel.paymentLocation.forEach { $0.isSelected = false }
+        self.formFieldModel.paymentLocation[indexPath.row].isSelected = true
         
         self.tableView.reloadData()
     }

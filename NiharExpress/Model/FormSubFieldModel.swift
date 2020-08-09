@@ -9,14 +9,18 @@
 import Foundation
 
 enum FormSubFieldType {
+    case header
     case address
+    case name
     case phoneNo
     case whenToPickup
     case whenToDelivery
     case comment
+    case storeInfoHeader
     case contactPerson
     case contactNo
     case transaction
+    case removeAddress
     
     case parcelType
     case parcelValue
@@ -30,6 +34,8 @@ class FormSubFieldModel {
     var title: String
     var type: FormSubFieldType
     var value: Any
+    var indexPath: IndexPath!
+    var parentIndex: Int?
     
     init(title: String, type: FormSubFieldType, value: Any) {
         self.title = title

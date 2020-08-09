@@ -25,6 +25,7 @@
                 <outlet property="logoHeightConstraint" destination="4Y2-L0-vx6" id="1iK-gd-2tJ"/>
                 <outlet property="logoWidthConstraint" destination="V4M-Fj-cr3" id="WCq-T8-W1H"/>
                 <outlet property="registerButton" destination="HXS-bh-VqP" id="vog-7Q-dUQ"/>
+                <outlet property="tabbedView" destination="eJB-KU-oUf" id="2Mb-R8-Fc2"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -105,7 +106,7 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="maskToBounds" value="YES"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <action selector="loginBtnAction:" destination="-1" eventType="touchUpInside" id="Lam-gl-hrG"/>
+                        <action selector="createOrderAction:" destination="-1" eventType="touchUpInside" id="9M6-5y-cwR"/>
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order with no registration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BxZ-zF-oqi">
@@ -114,15 +115,23 @@
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eJB-KU-oUf" customClass="TabbedView" customModule="NiharExpress" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="eJB-KU-oUf" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="BdY-Qz-EFn"/>
                 <constraint firstItem="WBY-tO-7QE" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Fzw-bo-WBM"/>
                 <constraint firstItem="GcL-6b-eVw" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="MUL-CH-EsP"/>
                 <constraint firstItem="CU7-8X-X7c" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-220" id="TL9-yf-AgL"/>
                 <constraint firstItem="GcL-6b-eVw" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-60" id="WTj-LZ-JzZ"/>
                 <constraint firstItem="BxZ-zF-oqi" firstAttribute="centerX" secondItem="WBY-tO-7QE" secondAttribute="centerX" id="gSr-fZ-Rwz"/>
+                <constraint firstAttribute="bottom" secondItem="eJB-KU-oUf" secondAttribute="bottom" id="gp9-XV-GWE"/>
                 <constraint firstItem="BxZ-zF-oqi" firstAttribute="top" secondItem="WBY-tO-7QE" secondAttribute="bottom" constant="8" id="jbM-f0-T6L"/>
+                <constraint firstItem="eJB-KU-oUf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="tcx-YO-YKx"/>
+                <constraint firstItem="eJB-KU-oUf" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="v30-PH-2JI"/>
                 <constraint firstItem="CU7-8X-X7c" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="wZk-RK-oti"/>
                 <constraint firstItem="WBY-tO-7QE" firstAttribute="top" secondItem="GcL-6b-eVw" secondAttribute="bottom" constant="200" id="y34-qD-8HG"/>
             </constraints>

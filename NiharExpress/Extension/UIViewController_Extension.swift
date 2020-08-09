@@ -75,8 +75,8 @@ extension UIViewController {
     func titleView(title: String) -> UIView {
         let titleView = UILabel(frame: CGRect(x: 0, y: 0, width: 500, height: 40))
         titleView.text = "  \(title)"
-//        titleView.font = FontUtility.nunitoSans(style: .Regular, size: 20)
-//        titleView.textColor = ColorConstant.appBlackLabel.color
+        //        titleView.font = FontUtility.nunitoSans(style: .Regular, size: 20)
+        //        titleView.textColor = ColorConstant.appBlackLabel.color
         
         return titleView
     }
@@ -85,6 +85,19 @@ extension UIViewController {
         let iconButton = UIButton(frame:  CGRect(origin: CGPoint.zero, size: CGSize(width: 50, height: 40)))
         iconButton.setBackButton()
         return iconButton
+    }
+    
+    func getNotificationButton() -> UIButton {
+        let iconButton = UIButton(frame:  CGRect(origin: CGPoint.zero, size: CGSize(width: 50, height: 40)))
+        iconButton.setNotificationButton()
+        return iconButton
+    }
+    
+    func addNotificationBarButton(actionController: UIViewController, notificationAction: Selector) -> UIButton {
+        let notificationButton = self.getNotificationButton()
+        notificationButton.addTarget(actionController, action: notificationAction, for: .touchUpInside)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: notificationButton)
+        return notificationButton
     }
     
     func showAndUpdateNavigationBar(with title: String, withShadow: Bool, isHavingBackButton: Bool, actionController: UIViewController? = nil, backAction: Selector? = nil) {
@@ -107,6 +120,8 @@ extension UIViewController {
         
         if !shadow {
             self.navigationController?.navigationBar.shadowImage = UIImage()
+        } else {
+            self.navigationController?.navigationBar.shadowImage = nil
         }
     }
     
@@ -138,12 +153,12 @@ extension UIViewController {
     
     func showAlertLoader() -> UIAlertController {
         let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
-
+        
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
         loadingIndicator.hidesWhenStopped = true
         loadingIndicator.style = UIActivityIndicatorView.Style.gray
         loadingIndicator.startAnimating();
-
+        
         alert.view.addSubview(loadingIndicator)
         self.present(alert, animated: false, completion: nil)
         return alert

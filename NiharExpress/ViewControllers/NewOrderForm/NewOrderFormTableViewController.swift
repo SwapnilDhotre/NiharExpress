@@ -22,6 +22,12 @@ class NewOrderFormTableViewController: UITableViewController {
     var bottomPanelViewHeightConstraint: NSLayoutConstraint!
     
     var formFields: [FormFieldModel] = []
+    var tableViewFormFields: [Any] = []
+    
+    var parcelCategories: [Category] = []
+    var priceInfo: PriceInfo?
+    
+    var alertLoader: UIAlertController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +37,8 @@ class NewOrderFormTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.hideNavigationBar()
         self.configureTopBottomUI()
     }
     
@@ -43,7 +51,6 @@ class NewOrderFormTableViewController: UITableViewController {
     
     // MARK: - To Do Methods
     func configureUI() {
-        self.hideNavigationBar()
         self.formFields = FormFieldModel.getFormFields()
         
         self.tableView.dataSource = self
@@ -54,19 +61,32 @@ class NewOrderFormTableViewController: UITableViewController {
         self.tableView.estimatedRowHeight = 88.0
         self.tableView.rowHeight = UITableView.automaticDimension
         
-        let topPadding: CGFloat = 80
+        let topPadding: CGFloat = 70
         let bottomPadding: CGFloat = 110
         self.tableView.contentInset = UIEdgeInsets.init(top: topPadding, left: 0, bottom: bottomPadding, right: 0)
         
         self.tableView.register(UINib(nibName: WeightTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: WeightTableViewCell.identifier)
-        self.tableView.register(UINib(nibName: PickUpDeliveryPointTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: PickUpDeliveryPointTableViewCell.identifier)
         self.tableView.register(UINib(nibName: AddDeliveryPointTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: AddDeliveryPointTableViewCell.identifier)
         self.tableView.register(UINib(nibName: OptimizeRouteTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: OptimizeRouteTableViewCell.identifier)
         self.tableView.register(UINib(nibName: NotifyBySMSTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: NotifyBySMSTableViewCell.identifier)
         self.tableView.register(UINib(nibName: ParcelInfoTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: ParcelInfoTableViewCell.identifier)
         self.tableView.register(UINib(nibName: PaymentViewTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: PaymentViewTableViewCell.identifier)
         
+        self.tableView.register(UINib(nibName: AddressCommonTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: AddressCommonTableViewCell.identifier)
+        self.tableView.register(UINib(nibName: AddressHeaderTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: AddressHeaderTableViewCell.identifier)
+        self.tableView.register(UINib(nibName: DateTimePickerTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: DateTimePickerTableViewCell.identifier)
+        self.tableView.register(UINib(nibName: ForOnlineStoreHeaderTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: ForOnlineStoreHeaderTableViewCell.identifier)
+        self.tableView.register(UINib(nibName: PickAddressFieldTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: PickAddressFieldTableViewCell.identifier)
+        self.tableView.register(UINib(nibName: RemoveAddressTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: RemoveAddressTableViewCell.identifier)
+        self.tableView.register(UINib(nibName: TransactionTypeTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: TransactionTypeTableViewCell.identifier)
         
+        
+        self.fetchParcelCategories { (parcelTypes: [Category]) in
+            DispatchQueue.main.async {
+                self.parcelCategories = parcelTypes
+                self.tableView.reloadData()
+            }
+        }
     }
     
     func configureTopBottomUI() {
@@ -77,7 +97,7 @@ class NewOrderFormTableViewController: UITableViewController {
         self.navigationView.leftNavigationButton.addTarget(self, action: #selector(self.crossBtnAction(_:)), for: .touchUpInside)
         self.navigationView.rightNavigationButton.addTarget(self, action: #selector(self.clearDataBtnAction(_:)), for: .touchUpInside)
         self.bottomPanelView.btnAmountClick.addTarget(self, action: #selector(self.btnAmountClick), for: .touchUpInside)
-        self.bottomPanelView.btnCreateOrder.addTarget(self, action: #selector(self.btnAmountClick), for: .touchUpInside)
+        self.bottomPanelView.btnCreateOrder.addTarget(self, action: #selector(self.btnCreateOrderClick(_:)), for: .touchUpInside)
         
         if let view = UIApplication.shared.keyWindow{
             view.addSubview(self.navigationView)
@@ -103,6 +123,10 @@ class NewOrderFormTableViewController: UITableViewController {
                 self.bottomPanelViewHeightConstraint = self.bottomPanelView.heightAnchor.constraint(equalToConstant: 70)
                 self.bottomPanelViewHeightConstraint.isActive = true
             }
+            
+            self.bottomPanelView.lblTotalAmount.text = "₹00"
+            self.bottomPanelView.lblParcelSecurityFeeValue.text = "₹00"
+            self.bottomPanelView.lblForDeliveryValue.text = "₹00"
         }
     }
     
@@ -138,47 +162,8 @@ class NewOrderFormTableViewController: UITableViewController {
     }
     
     @objc func clearDataBtnAction(_ sender: UIButton) {
-        self.formFields.forEach { (formfield) in
-            self.setDefaultType(formfield: formfield)
-            
-            formfield.formSubFields.forEach { (subFormField) in
-                self.setDefaultType(formfield: subFormField)
-            }
-        }
-        
+        self.formFields = FormFieldModel.getFormFields()
         self.tableView.reloadData()
-    }
-    
-    func setDefaultType(formfield: FormFieldModel) {
-        if formfield.value is Int {
-            formfield.value = 0
-        } else if formfield.value is String {
-            formfield.value = ""
-        } else if formfield.value is Bool {
-            formfield.value = false
-        } else if formfield.value is Date {
-            formfield.value = Date()
-        }  else if formfield.value is (Date, Date) {
-            formfield.value = (Date(), Date())
-        } else if formfield.value is AddressModel {
-            formfield.value = AddressModel(address: "", coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0))
-        }
-    }
-    
-    func setDefaultType(formfield: FormSubFieldModel) {
-        if formfield.value is Int {
-            formfield.value = 0
-        } else if formfield.value is String {
-            formfield.value = ""
-        } else if formfield.value is Bool {
-            formfield.value = false
-        } else if formfield.value is Date {
-            formfield.value = Date()
-        }  else if formfield.value is (Date, Date) {
-            formfield.value = (Date(), Date())
-        } else if formfield.value is AddressModel {
-            formfield.value = AddressModel(address: "", coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0))
-        }
     }
     
     @objc func btnAmountClick(_ sender: UIButton) {
@@ -187,7 +172,167 @@ class NewOrderFormTableViewController: UITableViewController {
     }
     
     @objc func btnCreateOrderClick(_ sender: UIButton) {
+        var weight: String?
+        var optimizeRoute = false
+        var parcelPrice: String?
+        var category: Category?
+        var locations: [VisitLocation] = []
         
+        var paymentWillOccurAtIndex: Int = 0
+        
+        self.formFields.forEach { (formField) in
+            switch formField.type {
+            case .weight:
+                weight = (formField.value as? String)
+                break
+            case .pickUpPoint:
+                if let location = self.getPickUpDeliveryLocation(formField: formField) {
+                    locations.append(location)
+                }
+                break
+            case .deliveryPoint:
+                if let location = self.getPickUpDeliveryLocation(formField: formField) {
+                    locations.append(location)
+                }
+            case .addDeliveryPoint:
+                break
+            case .optimizeRoute:
+                optimizeRoute = (formField.value as? Bool) ?? false
+                break
+            case .parcelInfo:
+                formField.formSubFields.forEach { (subFormField) in
+                    switch subFormField.type {
+                    case .parcelType:
+                        category = subFormField.value as? Category
+                        break
+                    case .parcelValue:
+                        parcelPrice = subFormField.value as? String
+                        break
+                    case .promoCode:
+                        // Nothing here
+                        break
+                    default:
+                        print("Parcel Info case not found")
+                    }
+                }
+                break
+            case .notifyInfo:
+                // Nothing here
+                break
+            case .paymentInfo:
+                for index in 0..<formField.paymentLocation.count {
+                    paymentWillOccurAtIndex = index
+                }
+                
+                break
+            }
+        }
+        
+        let reviewController = OrderReviewViewController()
+        
+        if let weight = weight {
+            reviewController.weight = weight
+        } else {
+            self.showAlert(withMsg: "Please add weight")
+        }
+        
+        if let category = category {
+            reviewController.category = category
+        } else {
+            self.showAlert(withMsg: "Please select parcel category")
+        }
+        
+        if let price = parcelPrice {
+            reviewController.parcelPrice = price
+        } else {
+            self.showAlert(withMsg: "Parcel Price not set")
+        }
+        
+        if let price = self.priceInfo {
+            reviewController.priceInfo = price
+        } else {
+            self.showAlert(withMsg: "Price not calculated")
+        }
+        
+        reviewController.locations = locations
+        reviewController.locations[paymentWillOccurAtIndex].isDefaultPayment = true
+        reviewController.optimizeRoute = optimizeRoute
+        
+        self.navigationController?.pushViewController(reviewController, animated: true)
+    }
+    
+    func getPickUpDeliveryLocation(formField: FormFieldModel) -> VisitLocation? {
+        var userName: String!
+        var address: AddressModel!
+        var date: Date?
+        var phoneNo: String!
+        var comment: String?
+        var storeContactPerson: String?
+        var storeContactNo: String?
+        var transactionType: String?
+        var transactionAmount: String?
+        
+        formField.formSubFields.forEach { (subFormField) in
+            switch subFormField.type {
+            case .address:
+                address = (subFormField.value as? AddressModel)
+                break
+            case .name:
+                userName = (subFormField.value as? String) ?? ""
+                break
+            case .phoneNo:
+                phoneNo = (subFormField.value as? String) ?? ""
+                break
+            case .whenToPickup:
+                date = (subFormField.value as? (Date, Date))?.0
+                break
+            case .whenToDelivery:
+                date = (subFormField.value as? (Date, Date))?.0
+                break
+            case .comment:
+                comment = (subFormField.value as? String) ?? ""
+                break
+            case .contactPerson:
+                storeContactPerson = (subFormField.value as? String) ?? ""
+                break
+            case .contactNo:
+                storeContactNo = (subFormField.value as? String) ?? ""
+                break
+            case .transaction:
+                transactionType = (subFormField.value as? (transactionType: String, transactionAmount: String))?.transactionType
+                transactionAmount = (subFormField.value as? (transactionType: String, transactionAmount: String))?.transactionAmount
+                break
+            default:
+                print("PickUpDelivery point not handled here")
+            }
+        }
+        
+        if address == nil {
+            self.showAlert(withMsg: "Please select address for every pickUp/Delivery point")
+            return nil
+        }
+        
+        if phoneNo == nil {
+            self.showAlert(withMsg: "Please select phone number for every pickUp/Delivery point")
+            return nil
+        }
+        
+        if userName == nil {
+            self.showAlert(withMsg: "Please select user name for every pickUp/Delivery point")
+            return nil
+        }
+        
+        //        if date == nil {
+        //            self.showAlert(withMsg: "Please select date for every pickUp/Delivery point")
+        //            return nil
+        //        }
+        
+        let location = VisitLocation(userName: userName, address: address, dateTime: date ?? Date(), mobileNo: phoneNo, comment: comment ?? "", isDefaultPayment: false)
+        location.storeName = storeContactPerson
+        location.storeContactNo = storeContactNo
+        location.transactionType = transactionType
+        location.transactionAmount = transactionAmount
+        return location
     }
     
     // MARK: - Table view data source
@@ -196,114 +341,262 @@ class NewOrderFormTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.formFields.count
+        return self.calculateNoOfRows()
+    }
+    
+    func calculateNoOfRows() -> Int {
+        self.tableViewFormFields.removeAll()
+        
+        var count = 0
+        var addressFieldCount = 0
+        for index in 0..<self.formFields.count {
+            let formField = self.formFields[index]
+            switch formField.type {
+            case .weight, .addDeliveryPoint, .optimizeRoute, .parcelInfo, .notifyInfo, .paymentInfo:
+                count += 1
+                self.tableViewFormFields.append(formField)
+                break
+            case .pickUpPoint, .deliveryPoint:
+                addressFieldCount += 1
+                count += getCountForAddressFields(formField: formField, isNotDefaultField: addressFieldCount > 2, index: index)
+                break
+            }
+        }
+        
+        return count
+    }
+    
+    func getCountForAddressFields(formField: FormFieldModel, isNotDefaultField: Bool, index: Int) -> Int {
+        var count = 0
+        if let headerField = formField.formSubFields.first {
+            headerField.parentIndex = index
+            if (headerField.value as! Bool) {
+                if let storeInfoField = (formField.formSubFields.filter { $0.type == .storeInfoHeader }).first {
+                    if (storeInfoField.value as! Bool) {
+                        count += formField.formSubFields.count
+                        self.tableViewFormFields.append(contentsOf: formField.formSubFields)
+                        if isNotDefaultField {
+                            let formField = FormSubFieldModel(title: "Remove Address", type: .removeAddress, value: "")
+                            formField.parentIndex = index
+                            self.tableViewFormFields.append(formField)
+                        }
+                    } else {
+                        count += formField.formSubFields.count - 3
+                        self.tableViewFormFields.append(contentsOf: formField.formSubFields)
+                        self.tableViewFormFields.removeLast(3)
+                        if isNotDefaultField {
+                            let formField = FormSubFieldModel(title: "Remove Address", type: .removeAddress, value: "")
+                            formField.parentIndex = index
+                            self.tableViewFormFields.append(formField)
+                        }
+                    }
+                }
+            } else {
+                count += 1
+                self.tableViewFormFields.append(headerField)
+            }
+        }
+        
+        return count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch self.formFields[indexPath.row].type {
-        case .weight:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: WeightTableViewCell.identifier) as? WeightTableViewCell else {
-                assertionFailure("Couldn't dequeue:>> \(WeightTableViewCell.identifier)")
+        
+        let model = self.tableViewFormFields[indexPath.row]
+        if let formField = model as? FormFieldModel {
+            switch formField.type {
+            case .weight:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: WeightTableViewCell.identifier) as? WeightTableViewCell else {
+                    assertionFailure("Couldn't dequeue:>> \(WeightTableViewCell.identifier)")
+                    return UITableViewCell()
+                }
+                
+                cell.selectionStyle = .none
+                cell.updateData(with: formField)
+                
+                return cell
+            case .pickUpPoint, .deliveryPoint:
                 return UITableViewCell()
+            case .addDeliveryPoint:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: AddDeliveryPointTableViewCell.identifier) as? AddDeliveryPointTableViewCell else {
+                    assertionFailure("Couldn't dequeue:>> \(AddDeliveryPointTableViewCell.identifier)")
+                    return UITableViewCell()
+                }
+                
+                cell.selectionStyle = .none
+                cell.delegate = self
+                
+                return cell
+            case .optimizeRoute:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: OptimizeRouteTableViewCell.identifier) as? OptimizeRouteTableViewCell else {
+                    assertionFailure("Couldn't dequeue:>> \(OptimizeRouteTableViewCell.identifier)")
+                    return UITableViewCell()
+                }
+                
+                cell.selectionStyle = .none
+                cell.indexPath = indexPath
+                cell.delegate = self
+                cell.updateData(with: formField)
+                
+                return cell
+            case .parcelInfo:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: ParcelInfoTableViewCell.identifier) as? ParcelInfoTableViewCell else {
+                    assertionFailure("Couldn't dequeue:>> \(ParcelInfoTableViewCell.identifier)")
+                    return UITableViewCell()
+                }
+                
+                cell.selectionStyle = .none
+                cell.indexPath = indexPath
+                cell.delegate = self
+                cell.promoCodeDelegate = self
+                cell.updateData(with: formField)
+                cell.parcelValues = self.parcelCategories
+                cell.collectionView.reloadData()
+                
+                return cell
+            case .notifyInfo:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: NotifyBySMSTableViewCell.identifier) as? NotifyBySMSTableViewCell else {
+                    assertionFailure("Couldn't dequeue:>> \(NotifyBySMSTableViewCell.identifier)")
+                    return UITableViewCell()
+                }
+                
+                cell.selectionStyle = .none
+                cell.indexPath = indexPath
+                cell.delegate = self
+                cell.updateData(with: formField)
+                
+                return cell
+                
+            case .paymentInfo:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: PaymentViewTableViewCell.identifier) as? PaymentViewTableViewCell else {
+                    assertionFailure("Couldn't dequeue:>> \(PaymentViewTableViewCell.identifier)")
+                    return UITableViewCell()
+                }
+                
+                cell.selectionStyle = .none
+                cell.delegate = self
+                cell.updateData(with: formField, allFormFields: self.formFields)
+                
+                return cell
             }
+        } else if let subFormField = model as? FormSubFieldModel {
             
-            cell.selectionStyle = .none
-            
-            return cell
-        case .pickUpPoint, .deliveryPoint:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: PickUpDeliveryPointTableViewCell.identifier) as? PickUpDeliveryPointTableViewCell else {
-                assertionFailure("Couldn't dequeue:>> \(PickUpDeliveryPointTableViewCell.identifier)")
-                return UITableViewCell()
+            switch subFormField.type {
+            case .header:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: AddressHeaderTableViewCell.identifier) as? AddressHeaderTableViewCell else {
+                    assertionFailure("Couldn't dequeue:>> \(AddressHeaderTableViewCell.identifier)")
+                    return UITableViewCell()
+                }
+                
+                cell.selectionStyle = .none
+                cell.delegate = self
+                cell.updateData(with: subFormField)
+                cell.model.indexPath = indexPath
+                
+                return cell
+            case .address:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: PickAddressFieldTableViewCell.identifier) as? PickAddressFieldTableViewCell else {
+                    assertionFailure("Couldn't dequeue:>> \(PickAddressFieldTableViewCell.identifier)")
+                    return UITableViewCell()
+                }
+                
+                cell.selectionStyle = .none
+                cell.delegate = self
+                cell.updateData(with: subFormField)
+                cell.model.indexPath = indexPath
+                
+                return cell
+            case .name, .phoneNo, .comment, .contactNo, .contactPerson:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: AddressCommonTableViewCell.identifier, for: indexPath) as? AddressCommonTableViewCell else {
+                    assertionFailure("Couldn't dequeue:>> \(AddressCommonTableViewCell.identifier)")
+                    return UITableViewCell()
+                }
+                
+                cell.selectionStyle = .none
+                cell.delegate = self
+                cell.updateData(with: subFormField)
+                cell.model.indexPath = indexPath
+                
+                return cell
+            case .whenToPickup, .whenToDelivery:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: DateTimePickerTableViewCell.identifier) as? DateTimePickerTableViewCell else {
+                    assertionFailure("Couldn't dequeue:>> \(DateTimePickerTableViewCell.identifier)")
+                    return UITableViewCell()
+                }
+                
+                cell.selectionStyle = .none
+                cell.delegate = self
+                cell.updateData(with: subFormField)
+                cell.model.indexPath = indexPath
+                
+                return cell
+            case .storeInfoHeader:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: ForOnlineStoreHeaderTableViewCell.identifier) as? ForOnlineStoreHeaderTableViewCell else {
+                    assertionFailure("Couldn't dequeue:>> \(ForOnlineStoreHeaderTableViewCell.identifier)")
+                    return UITableViewCell()
+                }
+                
+                cell.selectionStyle = .none
+                cell.delegate = self
+                cell.updateData(with: subFormField)
+                cell.model.indexPath = indexPath
+                
+                return cell
+            case .transaction:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: TransactionTypeTableViewCell.identifier) as? TransactionTypeTableViewCell else {
+                    assertionFailure("Couldn't dequeue:>> \(TransactionTypeTableViewCell.identifier)")
+                    return UITableViewCell()
+                }
+                
+                cell.selectionStyle = .none
+                cell.delegate = self
+                cell.updateData(with: subFormField)
+                cell.model.indexPath = indexPath
+                
+                return cell
+            case .removeAddress:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: RemoveAddressTableViewCell.identifier) as? RemoveAddressTableViewCell else {
+                    assertionFailure("Couldn't dequeue:>> \(RemoveAddressTableViewCell.identifier)")
+                    return UITableViewCell()
+                }
+                
+                cell.selectionStyle = .none
+                cell.delegate = self
+                cell.updateData(with: subFormField)
+                cell.model.indexPath = indexPath
+                
+                return cell
+            case .parcelType, .parcelValue, .promoCode, .notifyMeBySMS, .notifyRecipientsBySMS:
+                // Nothing to do here
+                break
             }
-            
-            cell.selectionStyle = .none
-            cell.indexPath = indexPath
-            cell.delegate = self
-            cell.locationCellDelegate = self
-            cell.updateData(with: self.formFields[indexPath.row])
-            
-            return cell
-        case .addDeliveryPoint:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: AddDeliveryPointTableViewCell.identifier) as? AddDeliveryPointTableViewCell else {
-                assertionFailure("Couldn't dequeue:>> \(AddDeliveryPointTableViewCell.identifier)")
-                return UITableViewCell()
-            }
-            
-            cell.selectionStyle = .none
-            cell.delegate = self
-            
-            return cell
-        case .optimizeRoute:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: OptimizeRouteTableViewCell.identifier) as? OptimizeRouteTableViewCell else {
-                assertionFailure("Couldn't dequeue:>> \(OptimizeRouteTableViewCell.identifier)")
-                return UITableViewCell()
-            }
-            
-            cell.selectionStyle = .none
-            cell.indexPath = indexPath
-            cell.delegate = self
-            cell.updateData(with: self.formFields[indexPath.row])
-            
-            return cell
-        case .parcelInfo:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: ParcelInfoTableViewCell.identifier) as? ParcelInfoTableViewCell else {
-                assertionFailure("Couldn't dequeue:>> \(NotifyBySMSTableViewCell.identifier)")
-                return UITableViewCell()
-            }
-            
-            cell.selectionStyle = .none
-            cell.indexPath = indexPath
-            cell.delegate = self
-            cell.promoCodeDelegate = self
-            cell.updateData(with: self.formFields[indexPath.row])
-            
-            return cell
-        case .notifyInfo:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: NotifyBySMSTableViewCell.identifier) as? NotifyBySMSTableViewCell else {
-                assertionFailure("Couldn't dequeue:>> \(NotifyBySMSTableViewCell.identifier)")
-                return UITableViewCell()
-            }
-            
-            cell.selectionStyle = .none
-            cell.indexPath = indexPath
-            cell.delegate = self
-            cell.updateData(with: self.formFields[indexPath.row])
-            
-            return cell
-            
-        case .paymentInfo:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: PaymentViewTableViewCell.identifier) as? PaymentViewTableViewCell else {
-                assertionFailure("Couldn't dequeue:>> \(PaymentViewTableViewCell.identifier)")
-                return UITableViewCell()
-            }
-            
-            cell.selectionStyle = .none
-            cell.delegate = self
-            cell.updateData(with: self.formFields[indexPath.row], allFormFields: self.formFields)
-            
-            return cell
         }
+        
+        return UITableViewCell()
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch self.formFields[indexPath.row].type {
-        case .weight:
-            return 65
-        case .pickUpPoint:
-            return UITableView.automaticDimension
-        case .deliveryPoint:
-            return UITableView.automaticDimension
-        case .addDeliveryPoint:
-            return UITableView.automaticDimension
-        case .optimizeRoute:
-            return UITableView.automaticDimension
-        case .parcelInfo:
-            return UITableView.automaticDimension
-        case .notifyInfo:
-            return 120
-        case .paymentInfo:
-            return UITableView.automaticDimension
+        let model = self.tableViewFormFields[indexPath.row]
+        if let formField = model as? FormFieldModel {
+            switch formField.type {
+            case .weight:
+                return 65
+            case .pickUpPoint, .deliveryPoint, .addDeliveryPoint, .optimizeRoute, .parcelInfo, .paymentInfo:
+                return UITableView.automaticDimension
+            case .notifyInfo:
+                return 120
+            }
+        } else if let subFormField = model as? FormSubFieldModel {
+            switch subFormField.type {
+            case .header, .address, .name, .phoneNo, .whenToPickup, .whenToDelivery, .comment, .storeInfoHeader, .contactPerson, .contactNo, .transaction, .removeAddress:
+                return UITableView.automaticDimension
+            case .parcelType, .parcelValue, .promoCode, .notifyMeBySMS, .notifyRecipientsBySMS:
+                // Flow will never come here
+                return 200 // Dummy height if ever comes here we can modify the changes
+            }
         }
+        return 0
+        
     }
 }
 
@@ -322,9 +615,65 @@ extension NewOrderFormTableViewController: AddDeliveryProtocol {
     }
 }
 
-extension NewOrderFormTableViewController: LocationCellProtocol {
-    func showDatePicker(indexPath: IndexPath) {
-        
+extension NewOrderFormTableViewController {
+    func pickDate(completion: @escaping (Date?) -> Void) {
+        let picker = DatePickerViewController()
+        picker.modalPresentationStyle = .overCurrentContext
+        picker.datePicked = { (date) in
+            completion(date)
+        }
+        picker.dismissed = {
+            completion(nil)
+        }
+        self.present(picker, animated: false, completion: nil)
+    }
+    
+    func pickLocation(completion: @escaping (AddressModel) -> Void) {
+        let pickAddressConstroller = PickAddressViewController()
+        pickAddressConstroller.pickAddress = { (addressModel) in
+            completion(addressModel)
+        }
+        self.navigationController?.pushViewController(pickAddressConstroller, animated: true)
+    }
+}
+
+// MARK - AddressField Protocol
+extension NewOrderFormTableViewController: AddressHeaderProtocol {
+    func arrowActionPerformed(model: FormSubFieldModel) {
+        model.value = !(model.value as! Bool)
+        self.tableView.reloadData()
+    }
+}
+
+extension NewOrderFormTableViewController: ForOnLineStoreProtocol {
+    func onlineStoreToggle(model: FormSubFieldModel) {
+        model.value = !(model.value as! Bool)
+        self.tableView.reloadData()
+    }
+}
+
+extension NewOrderFormTableViewController: PickAddressFieldProtocol {
+    func fetchCurrentLocationAction(model: FormSubFieldModel) {
+        self.pickLocation { (addressModel) in
+            model.value = addressModel
+            DispatchQueue.main.async {
+                self.tableView.reloadRows(at: [model.indexPath], with: .automatic)
+            }
+        }
+    }
+}
+
+extension NewOrderFormTableViewController: RemoveAddressProtocol {
+    func removeAddress(model: FormSubFieldModel) {
+        if let index = model.parentIndex {
+            self.formFields.remove(at: index)
+            self.tableView.reloadData()
+        }
+    }
+}
+
+extension NewOrderFormTableViewController: DatePickerProtocol {
+    func datePickerAction(model: FormSubFieldModel) {
         self.navigationView?.removeFromSuperview()
         self.bottomPanelView?.removeFromSuperview()
         
@@ -339,42 +688,30 @@ extension NewOrderFormTableViewController: LocationCellProtocol {
                     DispatchQueue.main.async {
                         toDate = secondDate ?? Date()
                         self.configureTopBottomUI()
-                        self.reloadTableView(with: fromDate, toDate: toDate, indexPath: indexPath)
+                        model.value = (fromDate, toDate)
+                        self.tableView.reloadRows(at: [model.indexPath], with: .automatic)
                     }
                 }
             }
         }
     }
-    
-    func reloadTableView(with fromDate: Date, toDate: Date, indexPath: IndexPath) {
-        if let dateFormModel = (self.formFields[indexPath.row].formSubFields.filter { $0.type == .whenToPickup || $0.type == .whenToDelivery }).first {
-            dateFormModel.value = (fromDate, toDate)
-            self.tableView.reloadRows(at: [indexPath], with: .automatic)
+}
+
+extension NewOrderFormTableViewController: AddressCommonFieldProtocol {
+    func tralingActionPerformed(for subFormFieldModel: FormSubFieldModel) {
+        switch subFormFieldModel.type {
+        case .phoneNo:
+            print("Pick contact")
+            break
+        default:
+            assertionFailure("Case not handle in FormSubFieldModel")
         }
-        self.tableView.reloadData()
     }
-    
-    func pickDate(completion: @escaping (Date?) -> Void) {
-        let picker = DatePickerViewController()
-        picker.modalPresentationStyle = .overCurrentContext
-        picker.datePicked = { (date) in
-            completion(date)
-        }
-        picker.dismissed = {
-            completion(nil)
-        }
-        self.present(picker, animated: false, completion: nil)
-    }
-    
-    func pickLocation(indexPath: IndexPath) {
-        let pickAddressConstroller = PickAddressViewController()
-        pickAddressConstroller.pickAddress = { (addressModel) in
-            if let addressFormModel = (self.formFields[indexPath.row].formSubFields.filter { $0.type == .address }).first {
-                addressFormModel.value = addressModel
-                self.tableView.reloadRows(at: [indexPath], with: .automatic)
-            }
-        }
-        self.navigationController?.pushViewController(pickAddressConstroller, animated: true)
+}
+
+extension NewOrderFormTableViewController: TransactionTypeDelegate {
+    func transactionTypeAction(sender: UIButton, model: FormSubFieldModel) {
+        // Perform transactions
     }
 }
 
@@ -387,8 +724,103 @@ extension NewOrderFormTableViewController: ReloadCellProtocol {
 }
 
 extension NewOrderFormTableViewController: ApplyPromoProtocol {
+    func didSelectCategory(category: Category) {
+        self.formFields.forEach { (formField) in
+            if formField.type == .parcelInfo {
+                formField.formSubFields.forEach { (subFormField) in
+                    if subFormField.type == .parcelType {
+                        subFormField.value = category
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+        }
+        
+        var weight: String!
+        var pickUpCoordinate: CLLocationCoordinate2D!
+        var deliveryCoordinate: CLLocationCoordinate2D!
+        self.formFields.forEach { (formField) in
+            
+            if formField.type == .weight {
+                weight = formField.value as? String
+            } else if formField.type == .pickUpPoint {
+                formField.formSubFields.forEach { (subFormField) in
+                    if subFormField.type == .address {
+                        pickUpCoordinate = (subFormField.value as? AddressModel)?.coordinate
+                    }
+                }
+            } else if formField.type == .deliveryPoint {
+                formField.formSubFields.forEach { (subFormField) in
+                    if subFormField.type == .address {
+                        deliveryCoordinate = (subFormField.value as? AddressModel)?.coordinate
+                    }
+                }
+            }
+        }
+        self.fetchPrice(weight: weight, categoryId: category.id, pickUpCoordinate: pickUpCoordinate, deliveryCoordinates: deliveryCoordinate) { (priceInfo, apiStatus) in
+            DispatchQueue.main.async {
+                if let priceInfo = priceInfo {
+                    self.priceInfo = priceInfo
+                    self.bottomPanelView.lblTotalAmount.text = "₹\(priceInfo.totalCost)"
+                    self.bottomPanelView.lblParcelSecurityFeeValue.text = "₹\(priceInfo.insuranceCost)"
+                    self.bottomPanelView.lblForDeliveryValue.text = "₹\(priceInfo.insuranceCost)"
+                } else {
+                    self.showAlert(withMsg: apiStatus?.message ?? "Something went wrong")
+                }
+            }
+        }
+    }
+    
     func applyPromo(code: String) {
         print("promoCode:>>\(code)")
         self.view.resignFirstResponder()
+    }
+}
+
+// MARK: - API Methods
+extension NewOrderFormTableViewController {
+    func fetchParcelCategories(completion: @escaping ([Category]) -> Void) {
+        let params: Parameters = [
+            Constants.API.method: Constants.MethodType.listCategory.rawValue,
+            Constants.API.key: "77945ae2ba04d73771d9c5d10cd428eb1095f489",
+        ]
+        
+        APIManager.shared.executeDataRequest(urlString: URLConstant.niharBaseURL, method: .get, parameters: params, headers: nil) { (data, error) in
+            DispatchQueue.main.async {
+                self.alertLoader?.dismiss(animated: true, completion: nil)
+            }
+            if let responseData = data {
+                if let categoryData = responseData[keyPath: "\(Constants.Response.response).\(Constants.Response.data)"] as? [[String: Any]] {
+                    if let jsonData = try? JSONSerialization.data(withJSONObject: categoryData) {
+                        
+                        let categories: [Category] = try! JSONDecoder().decode([Category].self, from: jsonData)
+                        completion(categories)
+                    }
+                }
+            }
+        }
+    }
+    
+    func fetchPrice(weight: String, categoryId: String, pickUpCoordinate: CLLocationCoordinate2D, deliveryCoordinates: CLLocationCoordinate2D,  completion: @escaping (PriceInfo?, APIStatus?) -> Void) {
+        let params: Parameters = [
+            Constants.API.method: Constants.MethodType.getPrice.rawValue,
+            Constants.API.key: "234039b43a8652db154f669ddf87a78d6c54a6b2",
+            Constants.API.categoryId: categoryId,
+            Constants.API.weight: weight,
+            Constants.API.pickUpPoint: "\(pickUpCoordinate.latitude),\(pickUpCoordinate.longitude)",
+            Constants.API.deliveryPoint: "\(deliveryCoordinates.latitude),\(deliveryCoordinates.longitude)",
+            Constants.API.optimizeRoute: "N"
+        ]
+        
+        APIManager.shared.executeDataRequest(urlString: URLConstant.niharBaseURL, method: .get, parameters: params, headers: nil) { (data, error) in
+            APIManager.shared.parseResponse(responseData: data) { (responseData, apiStatus) in
+                if let response = responseData?.first, let jsonData = try? JSONSerialization.data(withJSONObject: response) {
+                    let priceInfo: PriceInfo = try! JSONDecoder().decode(PriceInfo.self, from: jsonData)
+                    completion(priceInfo, apiStatus)
+                } else {
+                    completion(nil, apiStatus)
+                }
+            }
+        }
     }
 }

@@ -44,7 +44,7 @@ enum APIStatus: String {
     }
 }
 
-typealias Parameters = [String: String]
+typealias Parameters = [String: String?]
 typealias Headers = [String: String]
 typealias APICallCompletionHandler = (_ response: [String:Any]?, _ error: Error?) -> Void
 
@@ -94,6 +94,7 @@ class APIManager {
                 request.url = urlComponents.url
             }
             
+            print("URL Request hit:>> \(request.url)")
             self.executeRequest(urlRequest: request, completionHandler: completionHandler)
             
         case .post, .put, .delete:
@@ -163,13 +164,17 @@ class APIManager {
         return body.data(using: .utf8)!
     }
     
-    func parseResponse(responseData: [String: Any]?, completion: ([String: Any]?, APIStatus?) -> Void) {
+    func parseResponse(responseData: [String: Any]?, completion: ([[String: Any]]?, APIStatus?) -> Void) {
         if let data = responseData {
-            if let data = data[keyPath: "\(Constants.Response.response).\(Constants.Response.data)"] as? [String: Any] {
+            if let data = data[keyPath: "\(Constants.Response.response).\(Constants.Response.data)"] as? [[String: Any]] {
                 completion(data, nil)
+            } else if let data = data[keyPath: "\(Constants.Response.response).\(Constants.Response.data)"] as? [String: Any] {
+                completion([data], nil)
             } else if let value = data[keyPath: "\(Constants.Response.response).\(Constants.Response.data)"] as? String {
-                completion(["value": value], nil)
+                completion([["value": value]], nil)
             } else if let status = data[keyPath: "\(Constants.Response.response).\(Constants.Response.responseCode)"] as? String, let apiStatus = APIStatus(rawValue: status) {
+                completion(nil, apiStatus)
+            } else if let status = data[keyPath: "\(Constants.Response.response).\(Constants.Response.code)"] as? String, let apiStatus = APIStatus(rawValue: status) {
                 completion(nil, apiStatus)
             } else {
                 completion(nil, APIStatus.ambiguous)

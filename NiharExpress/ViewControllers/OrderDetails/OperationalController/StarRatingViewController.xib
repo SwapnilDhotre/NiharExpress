@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Bold.ttf">
+            <string>Roboto-Bold</string>
+        </array>
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StarRatingViewController" customModule="NiharExpress" customModuleProvider="target">
+            <connections>
+                <outlet property="crossBtn" destination="nmo-6a-ltU" id="IIh-Bv-A3d"/>
+                <outlet property="driverRatingView" destination="amk-A1-x9K" id="GZn-42-ZC0"/>
+                <outlet property="lblDriverRating" destination="K3B-bu-HdJ" id="Cx0-Rw-PTv"/>
+                <outlet property="lblOverallRating" destination="X5M-jr-cPM" id="0IG-S7-hqU"/>
+                <outlet property="lblRatingTitle" destination="G3b-er-kMR" id="ZxF-np-XC1"/>
+                <outlet property="overallRatingView" destination="Ra8-vf-Vq2" id="LXr-Zn-nAa"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view alpha="0.40000000596046448" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qhf-uF-egu">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VGn-Zk-JZz" customClass="DesignableView" customModule="NiharExpress" customModuleProvider="target">
+                    <rect key="frame" x="40" y="259" width="334" height="358"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G3b-er-kMR">
+                            <rect key="frame" x="24" y="15" width="49.5" height="20"/>
+                            <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="17"/>
+                            <color key="textColor" red="0.50196078430000002" green="0.1176470588" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wgY-Jl-El9">
+                            <rect key="frame" x="0.0" y="47" width="334" height="1"/>
+                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="xKi-aa-oUC"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nmo-6a-ltU">
+                            <rect key="frame" x="278" y="6" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="Hum-Zw-q3Q"/>
+                                <constraint firstAttribute="width" constant="40" id="rXB-hi-uB0"/>
+                            </constraints>
+                            <state key="normal" title="X"/>
+                            <connections>
+                                <action selector="crossBtnAction:" destination="-1" eventType="touchUpInside" id="VPh-ui-twi"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bI7-UN-0DH">
+                            <rect key="frame" x="0.0" y="308" width="334" height="1"/>
+                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="1fP-Nq-Cdf"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0VU-2V-oh6">
+                            <rect key="frame" x="283" y="319" width="31" height="29"/>
+                            <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="14"/>
+                            <state key="normal" title="Save">
+                                <color key="titleColor" red="0.50196078430000002" green="0.1176470588" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="saveRating:" destination="-1" eventType="touchUpInside" id="maw-zo-Ubo"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overall Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X5M-jr-cPM">
+                            <rect key="frame" x="24" y="78" width="98.5" height="19"/>
+                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
+                            <color key="textColor" red="0.45098039220000002" green="0.45098039220000002" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Driver Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K3B-bu-HdJ">
+                            <rect key="frame" x="24" y="157" width="91" height="19"/>
+                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
+                            <color key="textColor" red="0.45098039220000002" green="0.45098039220000002" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ra8-vf-Vq2" customClass="CosmosView" customModule="Cosmos">
+                            <rect key="frame" x="24" y="107" width="120" height="20"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="mVQ-9o-IKD"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="rating">
+                                    <real key="value" value="0.0"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
+                                    <color key="value" red="0.50196078430000002" green="0.1176470588" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="filledBorderWidth">
+                                    <real key="value" value="0.0"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="emptyBorderWidth">
+                                    <real key="value" value="0.0"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="emptyColor">
+                                    <color key="value" red="0.74901960779999999" green="0.74901960779999999" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="amk-A1-x9K" customClass="CosmosView" customModule="Cosmos">
+                            <rect key="frame" x="24" y="186" width="120" height="20"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="olk-q3-fTN"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="rating">
+                                    <real key="value" value="0.0"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
+                                    <color key="value" red="0.50196078430000002" green="0.1176470588" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="filledBorderWidth">
+                                    <real key="value" value="0.0"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="emptyBorderWidth">
+                                    <real key="value" value="0.0"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="emptyColor">
+                                    <color key="value" red="0.74901960779999999" green="0.74901960779999999" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="G3b-er-kMR" firstAttribute="top" secondItem="VGn-Zk-JZz" secondAttribute="top" constant="15" id="2OA-X9-hDL"/>
+                        <constraint firstAttribute="trailing" secondItem="0VU-2V-oh6" secondAttribute="trailing" constant="20" id="2of-TJ-Bxe"/>
+                        <constraint firstItem="X5M-jr-cPM" firstAttribute="leading" secondItem="G3b-er-kMR" secondAttribute="leading" id="3LD-B8-zij"/>
+                        <constraint firstItem="Ra8-vf-Vq2" firstAttribute="top" secondItem="X5M-jr-cPM" secondAttribute="bottom" constant="10" id="4pJ-vU-qmo"/>
+                        <constraint firstItem="wgY-Jl-El9" firstAttribute="top" secondItem="G3b-er-kMR" secondAttribute="bottom" constant="12" id="5uU-Tg-MHx"/>
+                        <constraint firstItem="X5M-jr-cPM" firstAttribute="top" secondItem="wgY-Jl-El9" secondAttribute="bottom" constant="30" id="6Gg-lf-arf"/>
+                        <constraint firstItem="nmo-6a-ltU" firstAttribute="top" secondItem="VGn-Zk-JZz" secondAttribute="top" constant="6" id="8CH-zy-fcd"/>
+                        <constraint firstItem="amk-A1-x9K" firstAttribute="leading" secondItem="K3B-bu-HdJ" secondAttribute="leading" id="FPl-Wh-jGG"/>
+                        <constraint firstItem="Ra8-vf-Vq2" firstAttribute="leading" secondItem="X5M-jr-cPM" secondAttribute="leading" id="HT5-Uo-2l5"/>
+                        <constraint firstItem="K3B-bu-HdJ" firstAttribute="top" secondItem="Ra8-vf-Vq2" secondAttribute="bottom" constant="30" id="Lz8-OS-2Kz"/>
+                        <constraint firstAttribute="bottom" secondItem="0VU-2V-oh6" secondAttribute="bottom" constant="10" id="NKc-um-e2i"/>
+                        <constraint firstItem="amk-A1-x9K" firstAttribute="top" secondItem="K3B-bu-HdJ" secondAttribute="bottom" constant="10" id="RCs-SA-peo"/>
+                        <constraint firstAttribute="trailing" secondItem="wgY-Jl-El9" secondAttribute="trailing" id="dh5-63-82U"/>
+                        <constraint firstItem="0VU-2V-oh6" firstAttribute="top" secondItem="bI7-UN-0DH" secondAttribute="bottom" constant="10" id="eEX-dy-bWZ"/>
+                        <constraint firstAttribute="trailing" secondItem="bI7-UN-0DH" secondAttribute="trailing" id="feO-xK-LSZ"/>
+                        <constraint firstItem="G3b-er-kMR" firstAttribute="leading" secondItem="VGn-Zk-JZz" secondAttribute="leading" constant="24" id="gg2-hH-AzR"/>
+                        <constraint firstItem="bI7-UN-0DH" firstAttribute="leading" secondItem="VGn-Zk-JZz" secondAttribute="leading" id="kYz-FV-gjW"/>
+                        <constraint firstItem="wgY-Jl-El9" firstAttribute="leading" secondItem="VGn-Zk-JZz" secondAttribute="leading" id="oFQ-UV-hyU"/>
+                        <constraint firstItem="K3B-bu-HdJ" firstAttribute="leading" secondItem="Ra8-vf-Vq2" secondAttribute="leading" id="yJU-2j-aSr"/>
+                        <constraint firstAttribute="trailing" secondItem="nmo-6a-ltU" secondAttribute="trailing" constant="16" id="zBq-x7-aij"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="maskToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="VGn-Zk-JZz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="Mdq-03-egp"/>
+                <constraint firstItem="Qhf-uF-egu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="N0J-mX-34x"/>
+                <constraint firstAttribute="trailing" secondItem="VGn-Zk-JZz" secondAttribute="trailing" constant="40" id="bLn-8S-Xm2"/>
+                <constraint firstAttribute="trailing" secondItem="Qhf-uF-egu" secondAttribute="trailing" id="cXj-KB-7De"/>
+                <constraint firstItem="VGn-Zk-JZz" firstAttribute="height" secondItem="Qhf-uF-egu" secondAttribute="height" multiplier="0.4" id="nfJ-xh-8MW"/>
+                <constraint firstAttribute="bottom" secondItem="Qhf-uF-egu" secondAttribute="bottom" id="pOq-PC-iph"/>
+                <constraint firstItem="VGn-Zk-JZz" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-10" id="xUl-vD-a2D"/>
+                <constraint firstItem="Qhf-uF-egu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="zVf-SK-DZK"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="131.8840579710145" y="127.90178571428571"/>
+        </view>
+    </objects>
+</document>
