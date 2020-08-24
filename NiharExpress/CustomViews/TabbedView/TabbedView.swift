@@ -146,13 +146,22 @@ extension TabbedView: UICollectionViewDataSource, UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.setSelectedIndex(tabIndex: indexPath.row)
+    }
+    
+    func setSelectedIndex(tabIndex: Int) {
+        if tabIndex > self.tabs.count - 1 || tabIndex < 0 {
+            print("Invalid tab index to select")
+            return
+        }
+        
         for tab in self.tabs {
             tab.isSelected = false
         }
+        let indexPath = IndexPath(row: tabIndex, section: 0)
         self.tabs[indexPath.row].isSelected = true
-        collectionView.reloadData()
-        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        
+        self.tabsCollectionView.reloadData()
+        self.tabsCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
 }
 

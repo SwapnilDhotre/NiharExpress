@@ -51,6 +51,8 @@ class CancellationOrderViewController: UIViewController {
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     var reasons: [CancellationReason] = []
     
+    var cancelOrderSuccess: (() -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -91,6 +93,13 @@ class CancellationOrderViewController: UIViewController {
     @IBAction func cancelOrderBtnAction(_ sender: UIButton) {
         if let cancellationReason = (self.reasons.filter { $0.isSelected }).first {
             self.cancelOrder(orderId: self.order.orderId, reason: cancellationReason) { (isSuccess, apiStatus) in
+                if let status = apiStatus, status == .success {
+                    DispatchQueue.main.async {
+                        self.dismiss(animated: false) {
+                            self.cancelOrderSuccess?()
+                        }
+                    }
+                }
                 print("APIStatus :\(String(describing: apiStatus))")
             }
         }

@@ -54,7 +54,9 @@ class NewOrderFormTableViewController: UITableViewController {
     
     // MARK: - To Do Methods
     func configureUI() {
-        self.formFields = FormFieldModel.getFormFields()
+        if self.formFields.isEmpty {
+            self.formFields = FormFieldModel.getFormFields()
+        }
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -130,6 +132,10 @@ class NewOrderFormTableViewController: UITableViewController {
             self.bottomPanelView.lblTotalAmount.text = "₹00"
             self.bottomPanelView.lblParcelSecurityFeeValue.text = "₹00"
             self.bottomPanelView.lblForDeliveryValue.text = "₹00"
+        }
+        
+        if let priceInfo = priceInfo {
+            self.updateUI(with: priceInfo)
         }
     }
     
@@ -218,9 +224,6 @@ class NewOrderFormTableViewController: UITableViewController {
                         print("Parcel Info case not found")
                     }
                 }
-                break
-            case .notifyInfo:
-                // Nothing here
                 break
             case .paymentInfo:
                 for index in 0..<formField.paymentLocation.count {
@@ -336,6 +339,7 @@ class NewOrderFormTableViewController: UITableViewController {
         location.storeContactNo = storeContactNo
         location.transactionType = transactionType
         location.transactionAmount = transactionAmount
+        location.orderType = "N"
         return location
     }
     
@@ -356,7 +360,7 @@ class NewOrderFormTableViewController: UITableViewController {
         for index in 0..<self.formFields.count {
             let formField = self.formFields[index]
             switch formField.type {
-            case .weight, .addDeliveryPoint, .optimizeRoute, .parcelInfo, .notifyInfo, .paymentInfo:
+            case .weight, .addDeliveryPoint, .optimizeRoute, .parcelInfo, .paymentInfo:
                 count += 1
                 self.tableViewFormFields.append(formField)
                 break
@@ -458,18 +462,18 @@ class NewOrderFormTableViewController: UITableViewController {
                 cell.collectionView.reloadData()
                 
                 return cell
-            case .notifyInfo:
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: NotifyBySMSTableViewCell.identifier) as? NotifyBySMSTableViewCell else {
-                    assertionFailure("Couldn't dequeue:>> \(NotifyBySMSTableViewCell.identifier)")
-                    return UITableViewCell()
-                }
-                
-                cell.selectionStyle = .none
-                cell.indexPath = indexPath
-                cell.delegate = self
-                cell.updateData(with: formField)
-                
-                return cell
+//            case .notifyInfo:
+//                guard let cell = tableView.dequeueReusableCell(withIdentifier: NotifyBySMSTableViewCell.identifier) as? NotifyBySMSTableViewCell else {
+//                    assertionFailure("Couldn't dequeue:>> \(NotifyBySMSTableViewCell.identifier)")
+//                    return UITableViewCell()
+//                }
+//
+//                cell.selectionStyle = .none
+//                cell.indexPath = indexPath
+//                cell.delegate = self
+//                cell.updateData(with: formField)
+//
+//                return cell
                 
             case .paymentInfo:
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: PaymentViewTableViewCell.identifier) as? PaymentViewTableViewCell else {
@@ -570,7 +574,7 @@ class NewOrderFormTableViewController: UITableViewController {
                 cell.model.indexPath = indexPath
                 
                 return cell
-            case .parcelType, .parcelValue, .promoCode, .notifyMeBySMS, .notifyRecipientsBySMS:
+            case .parcelType, .parcelValue, .promoCode:
                 // Nothing to do here
                 break
             }
@@ -589,14 +593,12 @@ class NewOrderFormTableViewController: UITableViewController {
                 return UITableView.automaticDimension
             case .paymentInfo:
                 return 200
-            case .notifyInfo:
-                return 120
             }
         } else if let subFormField = model as? FormSubFieldModel {
             switch subFormField.type {
             case .header, .address, .name, .phoneNo, .whenToPickup, .whenToDelivery, .comment, .storeInfoHeader, .contactPerson, .contactNo, .transaction, .removeAddress:
                 return UITableView.automaticDimension
-            case .parcelType, .parcelValue, .promoCode, .notifyMeBySMS, .notifyRecipientsBySMS:
+            case .parcelType, .parcelValue, .promoCode: //.notifyMeBySMS, .notifyRecipientsBySMS:
                 // Flow will never come here
                 return 200 // Dummy height if ever comes here we can modify the changes
             }
@@ -828,15 +830,19 @@ extension NewOrderFormTableViewController: ApplyPromoProtocol {
         self.fetchPrice(weight: weight, categoryId: category.id, pickUpCoordinate: pickUpCoordinate, deliveryCoordinates: deliveryCoordinate) { (priceInfo, apiStatus) in
             DispatchQueue.main.async {
                 if let priceInfo = priceInfo {
-                    self.priceInfo = priceInfo
-                    self.bottomPanelView.lblTotalAmount.text = "₹\(priceInfo.totalCost)"
-                    self.bottomPanelView.lblParcelSecurityFeeValue.text = "₹\(priceInfo.insuranceCost)"
-                    self.bottomPanelView.lblForDeliveryValue.text = "₹\(priceInfo.insuranceCost)"
+                    self.updateUI(with: priceInfo)
                 } else {
                     self.showAlert(withMsg: apiStatus?.message ?? "Something went wrong")
                 }
             }
         }
+    }
+    
+    func updateUI(with priceInfo: PriceInfo) {
+        self.priceInfo = priceInfo
+        self.bottomPanelView.lblTotalAmount.text = "₹\(priceInfo.totalCost)"
+        self.bottomPanelView.lblParcelSecurityFeeValue.text = "₹\(priceInfo.insuranceCost)"
+        self.bottomPanelView.lblForDeliveryValue.text = "₹\(priceInfo.insuranceCost)"
     }
     
     func applyPromo(code: String) {

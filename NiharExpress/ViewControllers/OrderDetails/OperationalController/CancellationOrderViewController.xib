@@ -79,8 +79,8 @@
                                 <action selector="cancelOrderBtnAction:" destination="-1" eventType="touchUpInside" id="5kZ-Ch-cW1"/>
                             </connections>
                         </button>
-                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="0m3-uj-lbA">
-                            <rect key="frame" x="157" y="213" width="20" height="20"/>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="0m3-uj-lbA">
+                            <rect key="frame" x="148.5" y="204.5" width="37" height="37"/>
                         </activityIndicatorView>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

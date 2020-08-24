@@ -37,29 +37,29 @@ class NotifyBySMSTableViewCell: UITableViewCell {
     func updateData(with model: FormFieldModel) {
         self.formFieldModel = model
         
-        for formSubField in model.formSubFields {
-            switch formSubField.type {
-            case .notifyMeBySMS:
-                self.lblNotifyMe.text = formSubField.title
-                self.switchNotifyMe.setOn(formSubField.value as! Bool, animated: true)
-            case .notifyRecipientsBySMS:
-                self.lblNotifyRecipients.text = formSubField.title
-                self.switchNotifyRecipients.setOn(formSubField.value as! Bool, animated: true)
-            default:
-                assertionFailure("Wrong field appears here")
-            }
-        }
+//        for formSubField in model.formSubFields {
+//            switch formSubField.type {
+//            case .notifyMeBySMS:
+//                self.lblNotifyMe.text = formSubField.title
+//                self.switchNotifyMe.setOn(formSubField.value as! Bool, animated: true)
+//            case .notifyRecipientsBySMS:
+//                self.lblNotifyRecipients.text = formSubField.title
+//                self.switchNotifyRecipients.setOn(formSubField.value as! Bool, animated: true)
+//            default:
+//                assertionFailure("Wrong field appears here")
+//            }
+//        }
     }
     
     @IBAction func notifyAction(_ sender: UISwitch) {
-        if sender == switchNotifyMe {
-            if let formField = (formFieldModel.formSubFields.filter { $0.type == .notifyMeBySMS }).first {
-                formField.value = sender.isOn
-            }
-        } else {
-            if let formField = (formFieldModel.formSubFields.filter { $0.type == .notifyRecipientsBySMS }).first {
-                formField.value = sender.isOn
-            }
-        }
+//        if sender == switchNotifyMe {
+//            if let formField = (formFieldModel.formSubFields.filter { $0.type == .notifyMeBySMS }).first {
+//                formField.value = sender.isOn
+//            }
+//        } else {
+//            if let formField = (formFieldModel.formSubFields.filter { $0.type == .notifyRecipientsBySMS }).first {
+//                formField.value = sender.isOn
+//            }
+//        }
     }
 }

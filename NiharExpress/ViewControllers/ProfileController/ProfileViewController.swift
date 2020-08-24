@@ -95,7 +95,7 @@ class ProfileViewController: UIViewController {
         
         self.profileData = [
             ProfileInfo(icon: .profile, title: "Personal Details", subTitle: "\(self.lblUserName.text ?? ""), \(UserConstant.shared.userModel.emailId ?? "")", trailingString: ""),
-            ProfileInfo(icon: .location, title: "Change Region", subTitle: "", trailingString: "Mumbai"),
+            ProfileInfo(icon: .location, title: "Change Region", subTitle: "", trailingString: UserConstant.shared.city?.name ?? "Mumbai"),
             ProfileInfo(icon: .statistic, title: "Statistics", subTitle: "", trailingString: ""),
             ProfileInfo(icon: .refEarn, title: "Refer n Earn", subTitle: "", trailingString: ""),
             ProfileInfo(icon: .logout, title: "Log out", subTitle: "", trailingString: ""),
@@ -145,6 +145,15 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch self.profileData[indexPath.row].icon {
+        case .location:
+            let locationController = ChangeLocationViewController()
+            locationController.modalPresentationStyle = .overCurrentContext
+            locationController.locationModified = {
+                DispatchQueue.main.async {
+                    self.configureTableUI()
+                }
+            }
+            self.present(locationController, animated: false, completion: nil)
         case .logout:
             UserDefaultManager.shared.clear()
             UserConstant.shared.reset()

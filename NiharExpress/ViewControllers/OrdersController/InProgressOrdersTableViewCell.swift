@@ -17,6 +17,8 @@ class InProgressOrdersTableViewCell: UITableViewCell {
     @IBOutlet weak var locationsStack: UIStackView!
     @IBOutlet weak var btnBell: UIButton!
     
+    var btnNotificationAction: (() -> Void)?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -31,9 +33,13 @@ class InProgressOrdersTableViewCell: UITableViewCell {
         self.lblStatus.text = order.orderStatus
         self.lblOrderNo.text = order.orderNo
         
-        self.btnBell.titleLabel?.font = FontUtility.niharExpress(size: 22)
+        self.btnBell.titleLabel?.font = FontUtility.niharExpress(size: 20)
         self.btnBell.setTitle(AppIcons.bell.rawValue, for: .normal)
         self.btnBell.setTitleColor(ColorConstant.themePrimary.color, for: .normal)
+        
+        if let unreadNotification = order.unreadNotification, let notificationNo = Int(unreadNotification) {
+            self.btnBell.badge(with: notificationNo, badgeBackgroundColor: ColorConstant.orderDetailsActiveBanner.color)
+        }
         
         self.locationsStack.arrangedSubviews.forEach({ (view) in
             view.removeFromSuperview()
@@ -54,5 +60,9 @@ class InProgressOrdersTableViewCell: UITableViewCell {
             deliveryAddressView.title.text = address.address
             self.locationsStack.addArrangedSubview(deliveryAddressView)
         }
+    }
+    
+    @IBAction func btnNotificationTapped(_ sender: UIButton) {
+        self.btnNotificationAction?()
     }
 }

@@ -16,7 +16,7 @@ enum FormFieldType {
     case addDeliveryPoint
     case optimizeRoute
     case parcelInfo
-    case notifyInfo
+//    case notifyInfo
     case paymentInfo
 }
 
@@ -45,7 +45,7 @@ class FormFieldModel {
             FormFieldModel(title: "Add Delivery Point", type: .addDeliveryPoint, value: ""),
             FormFieldModel(title: "Optimize the route", type: .optimizeRoute, value: false),
             FormFieldModel(title: "", type: .parcelInfo, formSubFields: self.getParcelInfoFields(), value: ""),
-            FormFieldModel(title: "", type: .notifyInfo, formSubFields: self.getNotifyFields(), value: ""),
+//            FormFieldModel(title: "", type: .notifyInfo, formSubFields: self.getNotifyFields(), value: ""),
             FormFieldModel(title: "", type: .paymentInfo, value: "")
         ]
     }
@@ -87,10 +87,10 @@ class FormFieldModel {
         ]
     }
     
-    static func getNotifyFields() -> [FormSubFieldModel] {
-        return [
-            FormSubFieldModel(title: "Notify me by SMS", type: .notifyMeBySMS, value: false),
-            FormSubFieldModel(title: "Notify recipients by SMS", type: .notifyRecipientsBySMS, value: false)
-        ]
-    }
+//    static func getNotifyFields() -> [FormSubFieldModel] {
+//        return [
+//            FormSubFieldModel(title: "Notify me by SMS", type: .notifyMeBySMS, value: false),
+//            FormSubFieldModel(title: "Notify recipients by SMS", type: .notifyRecipientsBySMS, value: false)
+//        ]
+//    }
 }

@@ -11,6 +11,7 @@ import UIKit
 enum ColorConstant: String {
     case themePrimary = "#801e75"
     case appBlackLabel = "#4C4C4C"
+    case orderDetailsActiveBanner = "#00bfb0"
     
     var color: UIColor {
         return UIColor(hex: self.rawValue)

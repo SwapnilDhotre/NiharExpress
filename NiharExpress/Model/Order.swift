@@ -112,7 +112,7 @@ class Order: Codable {
         let parcelType: String = try container.decode(String.self, forKey: .parcelType)
         let orderType: String = try container.decode(String.self, forKey: .orderType)
         let pickUp: OrderAddress = try container.decode(OrderAddress.self, forKey: .pickUp)
-        let delivery: [OrderAddress] = try container.decode([OrderAddress].self, forKey: .delivery)
+        let delivery: [OrderAddress] = (try? container.decode([OrderAddress].self, forKey: .delivery)) ?? []
         
         let parcelValue: String = try container.decode(String.self, forKey: .parcelValue)
         let insurancePrice: String = try container.decode(String.self, forKey: .insurancePrice)

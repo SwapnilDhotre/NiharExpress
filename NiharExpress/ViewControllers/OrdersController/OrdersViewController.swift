@@ -29,6 +29,8 @@ class OrdersViewController: UIViewController {
     
     var selectedTabIndex: Int = 0
     
+    var cloneOrderWithFields: [FormFieldModel] = []
+    
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,21 +41,28 @@ class OrdersViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if UserConstant.shared.userModel == nil {
-            self.showAndUpdateNavigationBar(with: "SAME DAY DELIVERY PARTNER", withShadow: true, isHavingBackButton: false, actionController: self, backAction: #selector(self.backBtnAction(_:)))
-            self.tabbedView.isHidden = true
-            self.resetAnimatedView()
+        if self.cloneOrderWithFields.isEmpty {
+            
+            if UserConstant.shared.userModel == nil {
+                self.showAndUpdateNavigationBar(with: "SAME DAY DELIVERY PARTNER", withShadow: true, isHavingBackButton: false, actionController: self, backAction: #selector(self.backBtnAction(_:)))
+                self.tabbedView.isHidden = true
+                self.resetAnimatedView()
+            } else {
+                self.showAndUpdateNavigationBar(with: "Orders", withShadow: false, isHavingBackButton: false, actionController: self, backAction: #selector(self.backBtnAction(_:)))
+                
+                self.tabbedView.isHidden = false
+                
+                self.addNotificationBarButton(actionController: self, notificationAction: #selector(self.notificationAction(_:)))
+            }
+            
+            self.tabbedView.tabbedDatasource = self
+            self.tabbedView.cellBackgroundColor = UIColor.white
+            self.tabbedView.reloadTabs()
+            
         } else {
-            self.showAndUpdateNavigationBar(with: "Orders", withShadow: false, isHavingBackButton: false, actionController: self, backAction: #selector(self.backBtnAction(_:)))
-            
-            self.tabbedView.isHidden = false
-            
-            self.addNotificationBarButton(actionController: self, notificationAction: #selector(self.notificationAction(_:)))
+            self.createNewOrder(with: self.cloneOrderWithFields)
+            self.cloneOrderWithFields = []
         }
-        
-        self.tabbedView.tabbedDatasource = self
-        self.tabbedView.cellBackgroundColor = UIColor.white
-        self.tabbedView.reloadTabs()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -112,15 +121,35 @@ class OrdersViewController: UIViewController {
         self.createNewOrder()
     }
     
-    func createNewOrder() {
+    func createNewOrder(with formFields: [FormFieldModel]? = nil) {
         let controller = NewOrderFormTableViewController()
+        controller.formFields = formFields ?? []
+        
         let formController = UINavigationController(rootViewController: controller)
         formController.modalPresentationStyle = .fullScreen
         self.present(formController, animated: true, completion: nil)
     }
     
     //MARK: - Api Methods
-    
+    func fetchOrders(with tag: String, completion: @escaping ([Order]?, APIStatus?) -> Void) {
+        let params: Parameters = [
+            Constants.API.method: Constants.MethodType.listOrder.rawValue,
+            Constants.API.key: "1c2bc3708d69c02412c9bdbae96967a1d77bbc24",
+            Constants.API.customerId: UserConstant.shared.userModel.id,
+            Constants.API.orderStatus: tag
+        ]
+        
+        APIManager.shared.executeDataRequest(urlString: URLConstant.niharBaseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
+            APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
+                if let response = responseData, let jsonData = try? JSONSerialization.data(withJSONObject: response) {
+                    let orders: [Order] = try! JSONDecoder().decode([Order].self, from: jsonData)
+                    completion(orders, nil)
+                } else {
+                    completion(nil, apiStatus)
+                }
+            }
+        }
+    }
 }
 
 extension OrdersViewController: TabbedViewDataSource {
@@ -192,26 +221,6 @@ extension OrdersViewController: TabbedViewDataSource {
         emptyOrdersView.delegate = self
         return emptyOrdersView
     }
-    
-    func fetchOrders(with tag: String, completion: @escaping ([Order]?, APIStatus?) -> Void) {
-        let params: Parameters = [
-            Constants.API.method: Constants.MethodType.listOrder.rawValue,
-            Constants.API.key: "1c2bc3708d69c02412c9bdbae96967a1d77bbc24",
-            Constants.API.customerId: UserConstant.shared.userModel.id,
-            Constants.API.orderStatus: tag
-        ]
-        
-        APIManager.shared.executeDataRequest(urlString: URLConstant.niharBaseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
-            APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
-                if let response = responseData, let jsonData = try? JSONSerialization.data(withJSONObject: response) {
-                    let categories: [Order] = try! JSONDecoder().decode([Order].self, from: jsonData)
-                    completion(categories, nil)
-                } else {
-                    completion(nil, apiStatus)
-                }
-            }
-        }
-    }
 }
 
 extension OrdersViewController: UITableViewDataSource, UITableViewDelegate {
@@ -231,6 +240,10 @@ extension OrdersViewController: UITableViewDataSource, UITableViewDelegate {
             cell.updateData(with: order)
             cell.selectionStyle = .none
             
+            cell.btnNotificationAction = {
+                self.navigateToNotification(with: order)
+            }
+            
             return cell
         case 1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: CompletedOrderTableViewCell.identifier) as? CompletedOrderTableViewCell else {
@@ -243,6 +256,21 @@ extension OrdersViewController: UITableViewDataSource, UITableViewDelegate {
             cell.selectionStyle = .none
             
             return cell
+        case 2:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: InProgressOrdersTableViewCell.identifier) as? InProgressOrdersTableViewCell else {
+                assertionFailure("Couldn't dequeue:>> \(InProgressOrdersTableViewCell.identifier)")
+                return UITableViewCell()
+            }
+            
+            let order = self.orderData[indexPath.row]
+            cell.updateData(with: order)
+            cell.selectionStyle = .none
+            
+            cell.btnNotificationAction = {
+                self.navigateToNotification(with: order)
+            }
+            
+            return cell
         default:
             return UITableViewCell()
         }
@@ -252,20 +280,33 @@ extension OrdersViewController: UITableViewDataSource, UITableViewDelegate {
         switch self.selectedTabIndex {
         case 0:
             let order = self.orderData[indexPath.row];
-            self.navigateToOrderDetails(with: order)
+            self.navigateToOrderDetails(with: order, orderStatus: .awaiting)
             break
         case 1:
             let order = self.orderData[indexPath.row];
-            self.navigateToOrderDetails(with: order)
+            self.navigateToOrderDetails(with: order, orderStatus: .completed)
+            break
+        case 2:
+            let order = self.orderData[indexPath.row];
+            self.navigateToOrderDetails(with: order, orderStatus: .inProgress)
             break
         default:
             print("Do nothing here")
         }
     }
     
-    func navigateToOrderDetails(with order: Order) {
+    func navigateToNotification(with order: Order) {
+        let notificationController = NotificationViewController()
+        notificationController.orderId = order.orderId
+        self.navigationController?.pushViewController(notificationController, animated: true)
+    }
+    
+    func navigateToOrderDetails(with order: Order, orderStatus: OrderStatus) {
         let orderDetailsController = OrderDetailsViewController()
         orderDetailsController.order = order
+        orderDetailsController.orderStatus = orderStatus
+        orderDetailsController.delegate = self
+        
         self.navigationController?.pushViewController(orderDetailsController, animated: true)
     }
 }
@@ -275,12 +316,14 @@ extension OrdersViewController: EmptyOrderViewActionsProtocol {
         self.createNewOrder()
     }
     
-    func buyFromStore() {
-        self.createNewOrder()
-    }
-    
     func trackMyOrder() {
-        
+        self.tabbedView.setSelectedIndex(tabIndex: 2)
+    }
+}
+
+extension OrdersViewController: NewOrderCloningProtocol {
+    func cloneOrder(with formFields: [FormFieldModel]) {
+        self.cloneOrderWithFields = formFields
     }
 }
 

@@ -54,9 +54,9 @@ class NotificationViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    var orderId: String?
     var notifications: [NotificationModel] = []
     var alertLoader: UIAlertController?
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,11 +97,16 @@ class NotificationViewController: UIViewController {
     }
     
     func fetchNotification(completion: @escaping ([NotificationModel]?, APIStatus?) -> Void) {
-        let params: Parameters = [
+        var params: Parameters = [
             Constants.API.method: Constants.MethodType.listNotification.rawValue,
             Constants.API.key: "41979bf5da2d2bfbae66fda5ac59ed132216b87b",
             Constants.API.customerId: UserConstant.shared.userModel.id
         ]
+        
+        if let id = self.orderId {
+            params[Constants.API.orderId] = id
+        }
+        
         APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
             APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
                 if let response = responseData, let jsonData = try? JSONSerialization.data(withJSONObject: response) {

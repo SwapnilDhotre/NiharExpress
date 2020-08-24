@@ -11,6 +11,7 @@ import Foundation
 class City: Codable {
     var id: String
     var name: String
+    var isSelected: Bool = false
     
     init(id: String, name: String) {
         self.id = id
@@ -19,7 +20,7 @@ class City: Codable {
     
     enum CodingKeys: String, CodingKey {
         case id
-        case name
+        case name = "title"
     }
     
     required convenience init(from decoder: Decoder) throws {

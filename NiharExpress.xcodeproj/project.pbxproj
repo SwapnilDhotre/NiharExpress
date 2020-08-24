@@ -103,6 +103,8 @@
 		E6496AA624DB1D6300514AB9 /* OrderReviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6496AA424DB1D6300514AB9 /* OrderReviewViewController.xib */; };
 		E6496AA924DB28FE00514AB9 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6496AA724DB28FE00514AB9 /* ReviewTableViewCell.swift */; };
 		E6496AAA24DB28FE00514AB9 /* ReviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6496AA824DB28FE00514AB9 /* ReviewTableViewCell.xib */; };
+		E64E2DAE24E03B2F0018041F /* TrackOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64E2DAC24E03B2F0018041F /* TrackOrderViewController.swift */; };
+		E64E2DAF24E03B2F0018041F /* TrackOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E64E2DAD24E03B2F0018041F /* TrackOrderViewController.xib */; };
 		E6506C6624DC09BC0044368B /* PriceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6506C6524DC09BC0044368B /* PriceInfo.swift */; };
 		E654781C24DD2D6D00A1F697 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = E654781B24DD2D6D00A1F697 /* Order.swift */; };
 		E654781E24DD30DC00A1F697 /* OrderAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = E654781D24DD30DC00A1F697 /* OrderAddress.swift */; };
@@ -112,6 +114,10 @@
 		E654782624DD5FE500A1F697 /* OrderAddressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E654782524DD5FE500A1F697 /* OrderAddressView.xib */; };
 		E654782B24DD6F8800A1F697 /* CompletedOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E654782924DD6F8800A1F697 /* CompletedOrderTableViewCell.swift */; };
 		E654782C24DD6F8800A1F697 /* CompletedOrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E654782A24DD6F8800A1F697 /* CompletedOrderTableViewCell.xib */; };
+		E656287524F231230030B5E0 /* TrackOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E656287324F231230030B5E0 /* TrackOrderTableViewCell.swift */; };
+		E656287624F231230030B5E0 /* TrackOrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E656287424F231230030B5E0 /* TrackOrderTableViewCell.xib */; };
+		E656287C24F23F250030B5E0 /* DriverInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E656287B24F23F250030B5E0 /* DriverInfo.swift */; };
+		E656287E24F2885F0030B5E0 /* GoogleMapSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E656287D24F2885F0030B5E0 /* GoogleMapSessionManager.swift */; };
 		E65C384424C5FB94002DD732 /* TabbedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C384124C5FB94002DD732 /* TabbedView.swift */; };
 		E65C384524C5FB94002DD732 /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C384224C5FB94002DD732 /* TabModel.swift */; };
 		E65C384624C5FB94002DD732 /* TabbedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E65C384324C5FB94002DD732 /* TabbedView.xib */; };
@@ -134,6 +140,8 @@
 		E68474A324DEEDD900BB339B /* PickAddressFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E68474A124DEEDD900BB339B /* PickAddressFieldTableViewCell.xib */; };
 		E68474A624DEEF8100BB339B /* AddressCommonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68474A424DEEF8100BB339B /* AddressCommonTableViewCell.swift */; };
 		E68474A724DEEF8100BB339B /* AddressCommonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E68474A524DEEF8100BB339B /* AddressCommonTableViewCell.xib */; };
+		E696FD7624E10250004D60B6 /* ChangeLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E696FD7424E10250004D60B6 /* ChangeLocationViewController.swift */; };
+		E696FD7724E10250004D60B6 /* ChangeLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E696FD7524E10250004D60B6 /* ChangeLocationViewController.xib */; };
 		E6994C8B24DEF71800B935C1 /* DateTimePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6994C8924DEF71800B935C1 /* DateTimePickerTableViewCell.swift */; };
 		E6994C8C24DEF71800B935C1 /* DateTimePickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6994C8A24DEF71800B935C1 /* DateTimePickerTableViewCell.xib */; };
 		E6994C8F24DF0FB400B935C1 /* ForOnlineStoreHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6994C8D24DF0FB400B935C1 /* ForOnlineStoreHeaderTableViewCell.swift */; };
@@ -268,6 +276,8 @@
 		E6496AA424DB1D6300514AB9 /* OrderReviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderReviewViewController.xib; sourceTree = "<group>"; };
 		E6496AA724DB28FE00514AB9 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		E6496AA824DB28FE00514AB9 /* ReviewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewTableViewCell.xib; sourceTree = "<group>"; };
+		E64E2DAC24E03B2F0018041F /* TrackOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackOrderViewController.swift; sourceTree = "<group>"; };
+		E64E2DAD24E03B2F0018041F /* TrackOrderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackOrderViewController.xib; sourceTree = "<group>"; };
 		E6506C6524DC09BC0044368B /* PriceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceInfo.swift; sourceTree = "<group>"; };
 		E654781B24DD2D6D00A1F697 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		E654781D24DD30DC00A1F697 /* OrderAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderAddress.swift; sourceTree = "<group>"; };
@@ -277,6 +287,10 @@
 		E654782524DD5FE500A1F697 /* OrderAddressView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderAddressView.xib; sourceTree = "<group>"; };
 		E654782924DD6F8800A1F697 /* CompletedOrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedOrderTableViewCell.swift; sourceTree = "<group>"; };
 		E654782A24DD6F8800A1F697 /* CompletedOrderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompletedOrderTableViewCell.xib; sourceTree = "<group>"; };
+		E656287324F231230030B5E0 /* TrackOrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackOrderTableViewCell.swift; sourceTree = "<group>"; };
+		E656287424F231230030B5E0 /* TrackOrderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackOrderTableViewCell.xib; sourceTree = "<group>"; };
+		E656287B24F23F250030B5E0 /* DriverInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverInfo.swift; sourceTree = "<group>"; };
+		E656287D24F2885F0030B5E0 /* GoogleMapSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapSessionManager.swift; sourceTree = "<group>"; };
 		E65C384124C5FB94002DD732 /* TabbedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbedView.swift; sourceTree = "<group>"; };
 		E65C384224C5FB94002DD732 /* TabModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
 		E65C384324C5FB94002DD732 /* TabbedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabbedView.xib; sourceTree = "<group>"; };
@@ -299,6 +313,8 @@
 		E68474A124DEEDD900BB339B /* PickAddressFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickAddressFieldTableViewCell.xib; sourceTree = "<group>"; };
 		E68474A424DEEF8100BB339B /* AddressCommonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCommonTableViewCell.swift; sourceTree = "<group>"; };
 		E68474A524DEEF8100BB339B /* AddressCommonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressCommonTableViewCell.xib; sourceTree = "<group>"; };
+		E696FD7424E10250004D60B6 /* ChangeLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLocationViewController.swift; sourceTree = "<group>"; };
+		E696FD7524E10250004D60B6 /* ChangeLocationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangeLocationViewController.xib; sourceTree = "<group>"; };
 		E6994C8924DEF71800B935C1 /* DateTimePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimePickerTableViewCell.swift; sourceTree = "<group>"; };
 		E6994C8A24DEF71800B935C1 /* DateTimePickerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateTimePickerTableViewCell.xib; sourceTree = "<group>"; };
 		E6994C8D24DF0FB400B935C1 /* ForOnlineStoreHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForOnlineStoreHeaderTableViewCell.swift; sourceTree = "<group>"; };
@@ -488,6 +504,7 @@
 				0F6C5B2224AE429500F15376 /* HelpController */,
 				0F6C5B2724AE42C400F15376 /* InfoController */,
 				0F7F1C6524AE419B0011A754 /* TabBarController */,
+				E64E2DB024E03B340018041F /* TrackOrder */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -519,6 +536,7 @@
 		0F7F1C6B24AE422C0011A754 /* ProfileController */ = {
 			isa = PBXGroup;
 			children = (
+				E696FD7324E10235004D60B6 /* ProfileOperational */,
 				0F7F1C6C24AE424E0011A754 /* ProfileViewController.swift */,
 				0F7F1C6D24AE424E0011A754 /* ProfileViewController.xib */,
 				E6496A9824DAF05E00514AB9 /* ProfileTableViewCell.swift */,
@@ -655,6 +673,7 @@
 			isa = PBXGroup;
 			children = (
 				E630D9A824BD9D6F006666A8 /* APIManager.swift */,
+				E656287D24F2885F0030B5E0 /* GoogleMapSessionManager.swift */,
 			);
 			path = APIManager;
 			sourceTree = "<group>";
@@ -713,6 +732,15 @@
 				E6496AA824DB28FE00514AB9 /* ReviewTableViewCell.xib */,
 			);
 			path = OrderReviewController;
+			sourceTree = "<group>";
+		};
+		E64E2DB024E03B340018041F /* TrackOrder */ = {
+			isa = PBXGroup;
+			children = (
+				E64E2DAC24E03B2F0018041F /* TrackOrderViewController.swift */,
+				E64E2DAD24E03B2F0018041F /* TrackOrderViewController.xib */,
+			);
+			path = TrackOrder;
 			sourceTree = "<group>";
 		};
 		E65C384024C5FB94002DD732 /* TabbedView */ = {
@@ -780,6 +808,15 @@
 			path = AddressCells;
 			sourceTree = "<group>";
 		};
+		E696FD7324E10235004D60B6 /* ProfileOperational */ = {
+			isa = PBXGroup;
+			children = (
+				E696FD7424E10250004D60B6 /* ChangeLocationViewController.swift */,
+				E696FD7524E10250004D60B6 /* ChangeLocationViewController.xib */,
+			);
+			path = ProfileOperational;
+			sourceTree = "<group>";
+		};
 		E6AA98EB24BF4625006577F6 /* PickAddressForLocation */ = {
 			isa = PBXGroup;
 			children = (
@@ -802,6 +839,7 @@
 				E6A6286A24DC7CC60015CC4A /* City.swift */,
 				E654781B24DD2D6D00A1F697 /* Order.swift */,
 				E654781D24DD30DC00A1F697 /* OrderAddress.swift */,
+				E656287B24F23F250030B5E0 /* DriverInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -828,6 +866,8 @@
 				E6F81A4424DDCBFE00E98351 /* OrderDeliveredTableViewCell.xib */,
 				E6F81A4724DDD46600E98351 /* InProgressTableViewCell.swift */,
 				E6F81A4824DDD46600E98351 /* InProgressTableViewCell.xib */,
+				E656287324F231230030B5E0 /* TrackOrderTableViewCell.swift */,
+				E656287424F231230030B5E0 /* TrackOrderTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -897,6 +937,7 @@
 				E6496A9B24DAF05E00514AB9 /* ProfileTableViewCell.xib in Resources */,
 				0F7F1C5724AE3E7F0011A754 /* LaunchScreen.storyboard in Resources */,
 				E630D96024BD9192006666A8 /* fa-light-300.ttf in Resources */,
+				E656287624F231230030B5E0 /* TrackOrderTableViewCell.xib in Resources */,
 				E630D98424BD9375006666A8 /* Roboto-Bold.ttf in Resources */,
 				E60F187F24BF176B00134353 /* ParcelInfoTableViewCell.xib in Resources */,
 				E6F81A3924DDB33600E98351 /* OrderDetailsViewController.xib in Resources */,
@@ -930,6 +971,7 @@
 				E6AA98E424BF32CC006577F6 /* PaymentViewTableViewCell.xib in Resources */,
 				0F7F1C5424AE3E7F0011A754 /* Assets.xcassets in Resources */,
 				E630D93824BD8D08006666A8 /* SplashScreenViewController.xib in Resources */,
+				E64E2DAF24E03B2F0018041F /* TrackOrderViewController.xib in Resources */,
 				E65C384624C5FB94002DD732 /* TabbedView.xib in Resources */,
 				E684749D24DEEBFF00BB339B /* AddressHeaderTableViewCell.xib in Resources */,
 				E6496AA624DB1D6300514AB9 /* OrderReviewViewController.xib in Resources */,
@@ -964,6 +1006,7 @@
 				E654782624DD5FE500A1F697 /* OrderAddressView.xib in Resources */,
 				0F6C5B3424AE4AA300F15376 /* LoginViewController.xib in Resources */,
 				E6F81A4624DDCBFE00E98351 /* OrderDeliveredTableViewCell.xib in Resources */,
+				E696FD7724E10250004D60B6 /* ChangeLocationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1045,10 +1088,12 @@
 				E630D9A924BD9D6F006666A8 /* APIManager.swift in Sources */,
 				E630D99324BD9813006666A8 /* FontAwesome.swift in Sources */,
 				E60336D624C6ADD100D263C9 /* LoginView.swift in Sources */,
+				E656287E24F2885F0030B5E0 /* GoogleMapSessionManager.swift in Sources */,
 				E60F186C24BEEC2F00134353 /* OptimizeRouteTableViewCell.swift in Sources */,
 				E630D9AD24BD9DFC006666A8 /* Constants.swift in Sources */,
 				E630D99C24BD9CB4006666A8 /* String_Extension.swift in Sources */,
 				E630D99824BD9C88006666A8 /* UIView_Extension.swift in Sources */,
+				E656287524F231230030B5E0 /* TrackOrderTableViewCell.swift in Sources */,
 				0F7F1C6324AE415F0011A754 /* TabBarViewController.swift in Sources */,
 				E630D9A424BD9D0C006666A8 /* UIView_Utility.swift in Sources */,
 				E609BD5824E02ABA00B505EB /* WebViewViewController.swift in Sources */,
@@ -1064,6 +1109,7 @@
 				E6496A9224DA6F6C00514AB9 /* ParcelTypeCollectionViewCell.swift in Sources */,
 				E654782424DD5FCF00A1F697 /* OrderAddressView.swift in Sources */,
 				0F6C5B2F24AE4A9500F15376 /* RegistrationViewController.swift in Sources */,
+				E696FD7624E10250004D60B6 /* ChangeLocationViewController.swift in Sources */,
 				E6994C8B24DEF71800B935C1 /* DateTimePickerTableViewCell.swift in Sources */,
 				E6496AA124DB125100514AB9 /* EmptyOrderView.swift in Sources */,
 				0F6C5B3C24AE509F00F15376 /* NewOrderFormTableViewController.swift in Sources */,
@@ -1081,6 +1127,7 @@
 				E630D9B524BDC186006666A8 /* NavigationView.swift in Sources */,
 				E654782124DD59C300A1F697 /* InProgressOrdersTableViewCell.swift in Sources */,
 				E6FBE9A324DE9F2100787B61 /* StarRatingViewController.swift in Sources */,
+				E64E2DAE24E03B2F0018041F /* TrackOrderViewController.swift in Sources */,
 				E630D99624BD9BD1006666A8 /* ColorConstant.swift in Sources */,
 				E684749424DEBFEB00BB339B /* NotificationViewController.swift in Sources */,
 				E6496AA924DB28FE00514AB9 /* ReviewTableViewCell.swift in Sources */,
@@ -1099,6 +1146,7 @@
 				E672532624DE4DBA008837CB /* CancellationOrderViewController.swift in Sources */,
 				E6F81A4924DDD46600E98351 /* InProgressTableViewCell.swift in Sources */,
 				E609BD5124E011BF00B505EB /* EmptyFormViewController.swift in Sources */,
+				E656287C24F23F250030B5E0 /* DriverInfo.swift in Sources */,
 				E65C384F24C5FE8B002DD732 /* RegistrationView.swift in Sources */,
 				0F6C5B3324AE4AA300F15376 /* LoginViewController.swift in Sources */,
 				E6F81A3C24DDB7AE00E98351 /* OrderDetailsLocationTableViewCell.swift in Sources */,

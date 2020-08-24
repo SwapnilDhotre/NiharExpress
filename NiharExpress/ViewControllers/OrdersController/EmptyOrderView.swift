@@ -10,7 +10,6 @@ import UIKit
 
 protocol EmptyOrderViewActionsProtocol {
     func bookACourier()
-    func buyFromStore()
     func trackMyOrder()
 }
 
@@ -45,10 +44,6 @@ class EmptyOrderView: UIView {
     
     @IBAction func btnBookCourierAction(_ sender: UIButton) {
         self.delegate?.bookACourier()
-    }
-    
-    @IBAction func buyFromStoreAction(_ sender: UIButton) {
-        self.delegate?.buyFromStore()
     }
     
     @IBAction func trackMyOrdersAction(_ sender: UIButton) {

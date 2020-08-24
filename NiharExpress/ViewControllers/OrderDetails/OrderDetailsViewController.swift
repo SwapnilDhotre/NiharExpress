@@ -7,16 +7,31 @@
 //
 
 import UIKit
+import CoreLocation
+
+enum OrderStatus {
+    case awaiting
+    case inProgress
+    case completed
+}
+
+protocol NewOrderCloningProtocol {
+    func cloneOrder(with formField: [FormFieldModel])
+}
 
 class OrderDetailsViewController: UIViewController {
     
     var order: Order!
+    var orderStatus: OrderStatus = .awaiting
     
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var bannerViewTitle: UILabel!
     @IBOutlet weak var bannerView: UIView!
+    
     var addressViews: [OrderAddress] = []
+    
+    var delegate: NewOrderCloningProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,12 +42,17 @@ class OrderDetailsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if self.order.orderStatus.lowercased() == "delivered" {
+        switch self.orderStatus {
+            
+        case .awaiting:
+            self.bannerViewTitle.text = self.order.orderStatus
+            self.bannerView.backgroundColor = ColorConstant.orderDetailsActiveBanner.color
+        case .inProgress:
+            self.bannerViewTitle.text = self.order.orderStatus
+            self.bannerView.backgroundColor = ColorConstant.orderDetailsActiveBanner.color
+        case .completed:
             self.bannerViewTitle.text = "\(self.order.orderStatus) \(self.order.orderDate.toString(withFormat: "MMM dd, yyyy"))"
             self.bannerView.backgroundColor = UIColor.darkGray
-        } else {
-            self.bannerViewTitle.text = self.order.orderStatus
-            self.bannerView.backgroundColor = UIColor(hex: "#00bfb0")
         }
         
         self.showAndUpdateNavigationBar(with: "Order \(order.orderNo)", withShadow: true, isHavingBackButton: true, actionController: self, backAction: #selector(self.backBtnPressed(_:)))
@@ -60,6 +80,7 @@ class OrderDetailsViewController: UIViewController {
         self.tableView.register(UINib(nibName: InformationTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: InformationTableViewCell.identifier)
         self.tableView.register(UINib(nibName: OrderDeliveredTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: OrderDeliveredTableViewCell.identifier)
         self.tableView.register(UINib(nibName: InProgressTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: InProgressTableViewCell.identifier)
+        self.tableView.register(UINib(nibName: TrackOrderTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: TrackOrderTableViewCell.identifier)
     }
     
     // MARK: - Action Methods
@@ -76,9 +97,10 @@ extension OrderDetailsViewController: UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            if self.order.orderStatus.lowercased() == "delivered" {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: OrderDeliveredTableViewCell.identifier) as? OrderDeliveredTableViewCell else {
-                    assertionFailure("Couldn't dequeue:>> \(OrderDeliveredTableViewCell.identifier)")
+            switch self.orderStatus {
+            case .awaiting:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: InProgressTableViewCell.identifier) as? InProgressTableViewCell else {
+                    assertionFailure("Couldn't dequeue:>> \(InProgressTableViewCell.identifier)")
                     return UITableViewCell()
                 }
                 
@@ -87,9 +109,20 @@ extension OrderDetailsViewController: UITableViewDataSource, UITableViewDelegate
                 cell.delegate = self
                 
                 return cell
-            } else {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: InProgressTableViewCell.identifier) as? InProgressTableViewCell else {
-                    assertionFailure("Couldn't dequeue:>> \(InProgressTableViewCell.identifier)")
+            case .inProgress:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: TrackOrderTableViewCell.identifier) as? TrackOrderTableViewCell else {
+                    assertionFailure("Couldn't dequeue:>> \(TrackOrderTableViewCell.identifier)")
+                    return UITableViewCell()
+                }
+                
+                cell.selectionStyle = .none
+                cell.updateData(with: self.order)
+                cell.delegate = self
+                
+                return cell
+            case .completed:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: OrderDeliveredTableViewCell.identifier) as? OrderDeliveredTableViewCell else {
+                    assertionFailure("Couldn't dequeue:>> \(OrderDeliveredTableViewCell.identifier)")
                     return UITableViewCell()
                 }
                 
@@ -117,7 +150,7 @@ extension OrderDetailsViewController: UITableViewDataSource, UITableViewDelegate
             }
             
             let address = self.addressViews[indexPath.row - 2]
-            cell.updateData(with: address, isDelivered: self.order.orderStatus.lowercased() == "delivered")
+            cell.updateData(with: address, isDelivered: self.orderStatus == .completed)
             cell.selectionStyle = .none
             
             cell.lblCounter.text = "\(indexPath.row - 1)"
@@ -128,33 +161,141 @@ extension OrderDetailsViewController: UITableViewDataSource, UITableViewDelegate
             return cell
         }
     }
+    
+    func createClone(of order: Order) {
+        let formFields = FormFieldModel.getFormFields()
+        
+        for formField in formFields {
+            switch formField.type {
+            case .weight:
+                formField.value = order.weight
+            case .pickUpPoint:
+                self.addPointsData(to: formField, orderAddress: order.pickUp)
+                break
+            case .deliveryPoint:
+                for orderAddress in order.delivery {
+                    self.addPointsData(to: formField, orderAddress: orderAddress)
+                }
+                break
+            case .addDeliveryPoint:
+                break
+            case .optimizeRoute:
+                break
+            case .parcelInfo:
+                self.addParcelInfo(to: formField, order: order)
+            case .paymentInfo:
+                break
+            }
+        }
+        
+        self.delegate?.cloneOrder(with: formFields)
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func addPointsData(to formField: FormFieldModel, orderAddress: OrderAddress) {
+        for subFormField in formField.formSubFields {
+            switch subFormField.type {
+            case .header:
+                // Nothing
+                break
+            case .address:
+                let lat = NSString(string: orderAddress.lat).doubleValue
+                let long = NSString(string: orderAddress.lat).doubleValue
+                let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+                let addressModel = AddressModel(address: orderAddress.address, coordinate: coordinate)
+                
+                subFormField.value = addressModel
+                break
+            case .name:
+                subFormField.value = orderAddress.userName
+                break
+            case .phoneNo:
+                subFormField.value = orderAddress.mobileNo
+                break
+            case .whenToPickup:
+                subFormField.value = (fromDate: Date(), toDate: Date())
+                break
+            case .whenToDelivery:
+                subFormField.value = (fromDate: Date(), toDate: Date())
+                break
+            case .comment:
+                subFormField.value = ""
+                break
+            case .storeInfoHeader:
+                break
+            case .contactPerson:
+                subFormField.value = orderAddress.storeName ?? ""
+                break
+            case .contactNo:
+                subFormField.value = orderAddress.storeContactNo ?? ""
+                break
+            case .transaction:
+                subFormField.value = (transactionType: orderAddress.transactionType ?? "", transactionAmount: "")
+                break
+            case .removeAddress, .parcelType, .parcelValue, .promoCode:
+                break
+            }
+        }
+    }
+    
+    func addParcelInfo(to formField: FormFieldModel, order: Order) {
+        for subFormField in formField.formSubFields {
+            switch subFormField.type {
+            case .header, .address, .name, .phoneNo, .whenToPickup, .whenToDelivery, .comment, .storeInfoHeader, .contactPerson, .contactNo, .transaction,  .removeAddress:
+                break
+            case .parcelType:
+                subFormField.value = Category(id: "", title: self.order.parcelType, isSelected: false)
+                break
+            case .parcelValue:
+                subFormField.value = order.parcelValue
+                break
+            case .promoCode:
+                subFormField.value = ""
+                break
+            }
+        }
+    }
 }
 
 extension OrderDetailsViewController: OrderDeliveredProtocol {
     func cloneAction() {
-        
+        self.createClone(of: self.order)
     }
     
     func starAction() {
-        
+        let starRatingController = StarRatingViewController()
+        starRatingController.modalPresentationStyle = .overCurrentContext
+        starRatingController.order = self.order
+        self.present(starRatingController, animated: false, completion: nil)
     }
 }
 
 extension OrderDetailsViewController: InProgressOrderProtocol {
     func modifyOrder() {
-    
+        self.createClone(of: self.order)
     }
     
     func cloneOrder() {
-        
+        self.createClone(of: self.order)
     }
     
     func cancelOrder() {
         let cancelOrderController = CancellationOrderViewController()
         cancelOrderController.modalPresentationStyle = .overCurrentContext
+        cancelOrderController.order = self.order
+        
+        cancelOrderController.cancelOrderSuccess = {
+            self.navigationController?.popViewController(animated: true)
+        }
         
         self.present(cancelOrderController, animated: false, completion: nil)
     }
-    
+}
 
+extension OrderDetailsViewController: TrackOrderProtocol {
+    func trackOrderAction() {
+        let trackOrderController = TrackOrderViewController()
+        trackOrderController.order = self.order
+        self.navigationController?.pushViewController(trackOrderController, animated: true)
+    }
 }

@@ -25,9 +25,9 @@ enum FormSubFieldType {
     case parcelType
     case parcelValue
     case promoCode
-    
-    case notifyMeBySMS
-    case notifyRecipientsBySMS
+//    
+//    case notifyMeBySMS
+//    case notifyRecipientsBySMS
 }
 
 class FormSubFieldModel {

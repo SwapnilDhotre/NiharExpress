@@ -43,16 +43,6 @@
                         <color key="textColor" red="0.50196078430000002" green="0.1176470588" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="teR-87-Qb8">
-                        <rect key="frame" x="264" y="36.5" width="40" height="40"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="40" id="Nmu-S6-oYm"/>
-                            <constraint firstAttribute="height" constant="40" id="a72-iB-c2R"/>
-                        </constraints>
-                        <state key="normal" title="B">
-                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </state>
-                    </button>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="bRG-Mj-aST">
                         <rect key="frame" x="16" y="65" width="288" height="90"/>
                     </stackView>
@@ -69,6 +59,19 @@
                         <color key="textColor" red="0.50196078430000002" green="0.1176470588" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="teR-87-Qb8">
+                        <rect key="frame" x="264" y="36.5" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="Nmu-S6-oYm"/>
+                            <constraint firstAttribute="height" constant="40" id="a72-iB-c2R"/>
+                        </constraints>
+                        <state key="normal" title="B">
+                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <connections>
+                            <action selector="btnNotificationTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="7dX-Qd-kJC"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="teR-87-Qb8" firstAttribute="top" secondItem="IdB-gQ-WUP" secondAttribute="bottom" id="36p-ar-7Sh"/>

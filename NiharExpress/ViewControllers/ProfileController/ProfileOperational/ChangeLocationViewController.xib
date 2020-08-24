@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Bold.ttf">
+            <string>Roboto-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChangeLocationViewController" customModule="NiharExpress" customModuleProvider="target">
+            <connections>
+                <outlet property="btnClose" destination="KCv-V4-FvN" id="vnE-AD-rv4"/>
+                <outlet property="btnSave" destination="thH-p9-Lsu" id="Gg8-K8-Bkj"/>
+                <outlet property="spinner" destination="xlF-yT-Ofl" id="Fzo-3A-yqf"/>
+                <outlet property="tableView" destination="GUI-1R-3aM" id="8V5-7w-FRS"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view alpha="0.40000000596046448" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eug-6Y-Siv">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XM5-qi-7Rf" customClass="DesignableView" customModule="NiharExpress" customModuleProvider="target">
+                    <rect key="frame" x="40" y="224" width="334" height="448"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="idi-ve-0K1">
+                            <rect key="frame" x="24" y="15" width="83" height="20"/>
+                            <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="17"/>
+                            <color key="textColor" red="0.50196078430000002" green="0.1176470588" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p9g-Rq-ndW">
+                            <rect key="frame" x="0.0" y="47" width="334" height="1"/>
+                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="caf-VK-uln"/>
+                            </constraints>
+                        </view>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GUI-1R-3aM">
+                            <rect key="frame" x="0.0" y="48" width="334" height="352"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        </tableView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KCv-V4-FvN">
+                            <rect key="frame" x="278" y="6" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="40" id="0uU-lW-yXX"/>
+                                <constraint firstAttribute="height" constant="40" id="5WW-no-vt0"/>
+                            </constraints>
+                            <state key="normal" title="X"/>
+                            <connections>
+                                <action selector="closeBtnAction:" destination="-1" eventType="touchUpInside" id="DcE-jY-WEb"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E5h-Th-lX4">
+                            <rect key="frame" x="0.0" y="400" width="334" height="1"/>
+                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="ej8-Gg-tad"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="thH-p9-Lsu">
+                            <rect key="frame" x="239" y="411" width="75" height="27"/>
+                            <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="14"/>
+                            <inset key="contentEdgeInsets" minX="20" minY="5" maxX="20" maxY="5"/>
+                            <state key="normal" title="SAVE">
+                                <color key="titleColor" red="0.50196078430000002" green="0.1176470588" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="saveBtnAction:" destination="-1" eventType="touchUpInside" id="vHF-6b-q3N"/>
+                            </connections>
+                        </button>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="xlF-yT-Ofl">
+                            <rect key="frame" x="148.5" y="205.5" width="37" height="37"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="E5h-Th-lX4" secondAttribute="trailing" id="0FB-AO-ndg"/>
+                        <constraint firstItem="xlF-yT-Ofl" firstAttribute="centerY" secondItem="GUI-1R-3aM" secondAttribute="centerY" id="0gB-bv-Q3F"/>
+                        <constraint firstAttribute="bottom" secondItem="thH-p9-Lsu" secondAttribute="bottom" constant="10" id="2A4-0d-xnS"/>
+                        <constraint firstAttribute="trailing" secondItem="KCv-V4-FvN" secondAttribute="trailing" constant="16" id="4MC-SC-5vI"/>
+                        <constraint firstItem="E5h-Th-lX4" firstAttribute="leading" secondItem="XM5-qi-7Rf" secondAttribute="leading" id="4qP-Ct-xHV"/>
+                        <constraint firstItem="p9g-Rq-ndW" firstAttribute="top" secondItem="idi-ve-0K1" secondAttribute="bottom" constant="12" id="DNc-ED-V5g"/>
+                        <constraint firstItem="GUI-1R-3aM" firstAttribute="top" secondItem="p9g-Rq-ndW" secondAttribute="bottom" id="EWN-Hl-ugH"/>
+                        <constraint firstItem="E5h-Th-lX4" firstAttribute="top" secondItem="GUI-1R-3aM" secondAttribute="bottom" id="H8w-yI-eC0"/>
+                        <constraint firstAttribute="trailing" secondItem="GUI-1R-3aM" secondAttribute="trailing" id="Od2-UF-n9C"/>
+                        <constraint firstItem="thH-p9-Lsu" firstAttribute="top" secondItem="E5h-Th-lX4" secondAttribute="bottom" constant="10" id="Tk2-CQ-jt6"/>
+                        <constraint firstItem="xlF-yT-Ofl" firstAttribute="centerX" secondItem="GUI-1R-3aM" secondAttribute="centerX" id="YEV-gs-05U"/>
+                        <constraint firstAttribute="trailing" secondItem="thH-p9-Lsu" secondAttribute="trailing" constant="20" id="cdX-Nk-68e"/>
+                        <constraint firstItem="GUI-1R-3aM" firstAttribute="leading" secondItem="XM5-qi-7Rf" secondAttribute="leading" id="cqP-OV-Peb"/>
+                        <constraint firstItem="p9g-Rq-ndW" firstAttribute="leading" secondItem="XM5-qi-7Rf" secondAttribute="leading" id="cyY-fs-NrL"/>
+                        <constraint firstItem="idi-ve-0K1" firstAttribute="top" secondItem="XM5-qi-7Rf" secondAttribute="top" constant="15" id="iUy-GS-qfx"/>
+                        <constraint firstAttribute="trailing" secondItem="p9g-Rq-ndW" secondAttribute="trailing" id="rkA-Od-8lw"/>
+                        <constraint firstItem="idi-ve-0K1" firstAttribute="leading" secondItem="XM5-qi-7Rf" secondAttribute="leading" constant="24" id="sha-vs-Mk1"/>
+                        <constraint firstItem="KCv-V4-FvN" firstAttribute="top" secondItem="XM5-qi-7Rf" secondAttribute="top" constant="6" id="u7g-Wd-nPL"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="maskToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="eug-6Y-Siv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="30J-bZ-dr2"/>
+                <constraint firstItem="eug-6Y-Siv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="90P-P5-a4o"/>
+                <constraint firstAttribute="trailing" secondItem="eug-6Y-Siv" secondAttribute="trailing" id="AT6-kr-DQI"/>
+                <constraint firstAttribute="bottom" secondItem="eug-6Y-Siv" secondAttribute="bottom" id="GDh-2I-iU5"/>
+                <constraint firstItem="XM5-qi-7Rf" firstAttribute="leading" secondItem="eug-6Y-Siv" secondAttribute="leading" constant="40" id="ICs-gl-eo2"/>
+                <constraint firstItem="XM5-qi-7Rf" firstAttribute="trailing" secondItem="eug-6Y-Siv" secondAttribute="trailing" constant="-40" id="OUw-OB-jFV"/>
+                <constraint firstItem="XM5-qi-7Rf" firstAttribute="centerY" secondItem="eug-6Y-Siv" secondAttribute="centerY" id="YiZ-hO-pDW"/>
+                <constraint firstItem="XM5-qi-7Rf" firstAttribute="height" secondItem="eug-6Y-Siv" secondAttribute="height" multiplier="0.5" id="v64-Se-GNV"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="131.8840579710145" y="125.89285714285714"/>
+        </view>
+    </objects>
+</document>

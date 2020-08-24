@@ -12,7 +12,7 @@ import Cosmos
 class StarRatingViewController: UIViewController {
     
     var order: Order!
-
+    
     @IBOutlet weak var lblRatingTitle: UILabel!
     @IBOutlet weak var lblOverallRating: UILabel!
     @IBOutlet weak var lblDriverRating: UILabel!
@@ -26,7 +26,7 @@ class StarRatingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.overallRatingView.didFinishTouchingCosmos = { rating in
             self.overallRating = rating
         }
@@ -34,6 +34,14 @@ class StarRatingViewController: UIViewController {
         self.driverRatingView.didFinishTouchingCosmos = { rating in
             self.driverRating = rating
         }
+        
+        self.configureUI()
+    }
+    
+    func configureUI() {
+        self.crossBtn.titleLabel?.font = FontUtility.niharExpress(size: 12)
+        self.crossBtn.setTitle(AppIcons.cross.rawValue, for: .normal)
+        self.crossBtn.setTitleColor(UIColor.darkGray, for: .normal)
     }
     
     @IBAction func crossBtnAction(_ sender: UIButton) {
@@ -42,7 +50,13 @@ class StarRatingViewController: UIViewController {
     
     @IBAction func saveRating(_ sender: UIButton) {
         self.saveRating(orderId: self.order.orderId, overallRating: self.overallRating, driverRating: self.driverRating) { (isSucceded, apiStatus) in
-            print("APIStatus:>> \(apiStatus)")
+            DispatchQueue.main.async {
+                if isSucceded {
+                    self.dismiss(animated: false, completion: nil)
+                } else {
+                    self.showAlert(withMsg: apiStatus?.message ?? "Something went wrong")
+                }
+            }
         }
     }
     
@@ -56,8 +70,8 @@ class StarRatingViewController: UIViewController {
         ]
         APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
             APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
-                if let response = responseData {
-                    completion(true, nil)
+                if let status = apiStatus, status == .success {
+                    completion(true, apiStatus)
                 } else {
                     completion(false, apiStatus)
                 }

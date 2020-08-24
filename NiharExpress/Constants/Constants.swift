@@ -9,6 +9,8 @@
 import Foundation
 
 class Constants {
+    static let googleApiKey = "AIzaSyCaAqBQK94LMz7gPiEpdqIBAHDoQ0npm_k"
+    
     struct API {
         static let method = "method"
         static let key = "key"
@@ -95,6 +97,8 @@ class Constants {
         case orderRating = "orderRating"
         
         case listNotification = "listNotification"
+        case listCity = "listCity"
+        case getLocation = "getLocation"
     }
     
     struct headers {

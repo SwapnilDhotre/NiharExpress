@@ -24,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="cgI-eN-fjg">
-                    <rect key="frame" x="24" y="30" width="366" height="350"/>
+                    <rect key="frame" x="24" y="30" width="366" height="225"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ls-rU-Phj" customClass="DesignableView" customModule="NiharExpress" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="366" height="100"/>
@@ -107,89 +107,8 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BP6-Fs-fP1" customClass="DesignableView" customModule="NiharExpress" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="125" width="366" height="100"/>
-                            <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rfz-X4-cdP" customClass="DesignableView" customModule="NiharExpress" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="366" height="100"/>
-                                    <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="DzQ-kD-2m0">
-                                            <rect key="frame" x="15" y="8" width="80" height="80"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="80" id="ppv-s7-EAD"/>
-                                                <constraint firstAttribute="width" constant="80" id="vue-p5-HYI"/>
-                                            </constraints>
-                                        </imageView>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="R5B-qy-Xts">
-                                            <rect key="frame" x="107" y="19.5" width="247" height="61"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Buy from store" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yAg-ce-0of">
-                                                    <rect key="frame" x="0.0" y="0.0" width="247" height="23.5"/>
-                                                    <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="20"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have you order bought and delivered from any store" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ra3-me-2QM">
-                                                    <rect key="frame" x="0.0" y="23.5" width="247" height="37.5"/>
-                                                    <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="16"/>
-                                                    <color key="textColor" red="0.29803921570000003" green="0.29803921570000003" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </stackView>
-                                    </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                    <constraints>
-                                        <constraint firstItem="DzQ-kD-2m0" firstAttribute="centerY" secondItem="rfz-X4-cdP" secondAttribute="centerY" constant="-2" id="3kJ-di-IJl"/>
-                                        <constraint firstItem="R5B-qy-Xts" firstAttribute="leading" secondItem="DzQ-kD-2m0" secondAttribute="trailing" constant="12" id="Fit-SL-3Sg"/>
-                                        <constraint firstAttribute="trailing" secondItem="R5B-qy-Xts" secondAttribute="trailing" constant="12" id="LKL-VW-Xe0"/>
-                                        <constraint firstAttribute="height" constant="100" id="Lp6-tW-0Te"/>
-                                        <constraint firstItem="R5B-qy-Xts" firstAttribute="centerY" secondItem="rfz-X4-cdP" secondAttribute="centerY" id="myV-Yp-6lo"/>
-                                        <constraint firstItem="DzQ-kD-2m0" firstAttribute="leading" secondItem="rfz-X4-cdP" secondAttribute="leading" constant="15" id="zEZ-uC-Rc6"/>
-                                    </constraints>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                            <real key="value" value="16"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="maskToBounds" value="YES"/>
-                                    </userDefinedRuntimeAttributes>
-                                </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOp-D9-U0j">
-                                    <rect key="frame" x="0.0" y="0.0" width="366" height="100"/>
-                                    <connections>
-                                        <action selector="buyFromStoreAction:" destination="-1" eventType="touchUpInside" id="g21-aS-5kT"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            <constraints>
-                                <constraint firstItem="rfz-X4-cdP" firstAttribute="leading" secondItem="BP6-Fs-fP1" secondAttribute="leading" id="2dj-GN-i1O"/>
-                                <constraint firstAttribute="bottom" secondItem="SOp-D9-U0j" secondAttribute="bottom" id="4tU-OU-JIl"/>
-                                <constraint firstItem="rfz-X4-cdP" firstAttribute="top" secondItem="BP6-Fs-fP1" secondAttribute="top" id="7Pu-HU-Jas"/>
-                                <constraint firstAttribute="trailing" secondItem="rfz-X4-cdP" secondAttribute="trailing" id="MzR-2m-Rjq"/>
-                                <constraint firstAttribute="trailing" secondItem="SOp-D9-U0j" secondAttribute="trailing" id="Pzg-ls-66e"/>
-                                <constraint firstAttribute="height" constant="100" id="a1w-fu-kf1"/>
-                                <constraint firstItem="SOp-D9-U0j" firstAttribute="top" secondItem="BP6-Fs-fP1" secondAttribute="top" id="jZv-PO-3jf"/>
-                                <constraint firstItem="SOp-D9-U0j" firstAttribute="leading" secondItem="BP6-Fs-fP1" secondAttribute="leading" id="l9S-aC-vpJ"/>
-                                <constraint firstAttribute="bottom" secondItem="rfz-X4-cdP" secondAttribute="bottom" id="lgx-al-Z8F"/>
-                            </constraints>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="16"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                    <real key="value" value="4"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                    <real key="value" value="0.20000000000000001"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                    <size key="value" width="0.0" height="2"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8vL-t6-FLQ" customClass="DesignableView" customModule="NiharExpress" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="250" width="366" height="100"/>
+                            <rect key="frame" x="0.0" y="125" width="366" height="100"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gah-SO-ebz" customClass="DesignableView" customModule="NiharExpress" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="366" height="100"/>
