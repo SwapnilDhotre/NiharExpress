@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TransactonTypeSelectionViewController" customModule="NiharExpress" customModuleProvider="target">
+            <connections>
+                <outlet property="tableHeightConstraint" destination="sLe-3p-nTl" id="g8v-jH-ub1"/>
+                <outlet property="tableView" destination="Zj5-NQ-dPK" id="r0f-Dq-81Q"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewLeadingConstraint" destination="kRu-AW-qku" id="C4k-fe-JUA"/>
+                <outlet property="viewTopConstraint" destination="KPy-AI-Nlm" id="wzc-Ew-R7w"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vg9-6X-ByU">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pMa-jI-Rdt">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <connections>
+                        <action selector="btnBackdropAction:" destination="-1" eventType="touchUpInside" id="wmt-ri-dvK"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FZm-co-MSI" customClass="DesignableView" customModule="NiharExpress" customModuleProvider="target">
+                    <rect key="frame" x="90" y="244" width="150" height="200"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Zj5-NQ-dPK">
+                            <rect key="frame" x="0.0" y="0.0" width="150" height="200"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="Zj5-NQ-dPK" firstAttribute="top" secondItem="FZm-co-MSI" secondAttribute="top" id="3WZ-jh-KEq"/>
+                        <constraint firstAttribute="width" constant="150" id="AlX-fd-zcj"/>
+                        <constraint firstAttribute="trailing" secondItem="Zj5-NQ-dPK" secondAttribute="trailing" id="D9p-aq-QgW"/>
+                        <constraint firstAttribute="bottom" secondItem="Zj5-NQ-dPK" secondAttribute="bottom" id="TA1-z3-5kh"/>
+                        <constraint firstAttribute="height" constant="200" id="sLe-3p-nTl"/>
+                        <constraint firstItem="Zj5-NQ-dPK" firstAttribute="leading" secondItem="FZm-co-MSI" secondAttribute="leading" id="vkU-KK-nWT"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="maskToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="vg9-6X-ByU" secondAttribute="bottom" id="1fy-Xh-sZs"/>
+                <constraint firstItem="vg9-6X-ByU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="DaX-hv-Mts"/>
+                <constraint firstItem="pMa-jI-Rdt" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Gl4-EL-0fX"/>
+                <constraint firstItem="FZm-co-MSI" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="200" id="KPy-AI-Nlm"/>
+                <constraint firstAttribute="trailing" secondItem="vg9-6X-ByU" secondAttribute="trailing" id="LHp-kf-YRv"/>
+                <constraint firstItem="pMa-jI-Rdt" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="b5E-gl-HF7"/>
+                <constraint firstItem="vg9-6X-ByU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="hjY-18-gcx"/>
+                <constraint firstItem="FZm-co-MSI" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="90" id="kRu-AW-qku"/>
+                <constraint firstAttribute="bottom" secondItem="pMa-jI-Rdt" secondAttribute="bottom" id="r9q-jL-XVF"/>
+                <constraint firstAttribute="trailing" secondItem="pMa-jI-Rdt" secondAttribute="trailing" id="sPR-3z-s70"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="137.68115942028987" y="107.8125"/>
+        </view>
+    </objects>
+</document>

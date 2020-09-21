@@ -14,7 +14,6 @@ enum FormSubFieldType {
     case name
     case phoneNo
     case whenToPickup
-    case whenToDelivery
     case comment
     case storeInfoHeader
     case contactPerson

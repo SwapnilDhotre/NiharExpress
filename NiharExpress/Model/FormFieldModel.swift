@@ -56,7 +56,7 @@ class FormFieldModel {
             FormSubFieldModel(title: "Address", type: .address, value: AddressModel(address: "", coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0))),
             FormSubFieldModel(title: "Name", type: .name, value: ""),
             FormSubFieldModel(title: "PhoneNumber", type: .phoneNo, value: ""),
-            FormSubFieldModel(title: "When to arrive at this address", type: .whenToPickup, value: (fromDate: Date(), toDate: Date())),
+            FormSubFieldModel(title: "When to arrive at this address", type: .whenToPickup, value: Date()),
             FormSubFieldModel(title: "Comments", type: .comment, value: ""),
             FormSubFieldModel(title: "For online store", type: .storeInfoHeader, value: false),
             FormSubFieldModel(title: "Contact Person", type: .contactPerson, value: ""),

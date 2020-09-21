@@ -213,10 +213,7 @@ extension OrderDetailsViewController: UITableViewDataSource, UITableViewDelegate
                 subFormField.value = orderAddress.mobileNo
                 break
             case .whenToPickup:
-                subFormField.value = (fromDate: Date(), toDate: Date())
-                break
-            case .whenToDelivery:
-                subFormField.value = (fromDate: Date(), toDate: Date())
+                subFormField.value = Date()
                 break
             case .comment:
                 subFormField.value = ""
@@ -241,7 +238,7 @@ extension OrderDetailsViewController: UITableViewDataSource, UITableViewDelegate
     func addParcelInfo(to formField: FormFieldModel, order: Order) {
         for subFormField in formField.formSubFields {
             switch subFormField.type {
-            case .header, .address, .name, .phoneNo, .whenToPickup, .whenToDelivery, .comment, .storeInfoHeader, .contactPerson, .contactNo, .transaction,  .removeAddress:
+            case .header, .address, .name, .phoneNo, .whenToPickup, .comment, .storeInfoHeader, .contactPerson, .contactNo, .transaction,  .removeAddress:
                 break
             case .parcelType:
                 subFormField.value = Category(id: "", title: self.order.parcelType, isSelected: false)

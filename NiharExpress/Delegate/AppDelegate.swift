@@ -27,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().backgroundColor = .clear
         UINavigationBar.appearance().isTranslucent = true
         
+        UITextViewWorkaround.unique.executeWorkaround()
+        
         GMSServices.provideAPIKey(Constants.googleApiKey)
         
         return true

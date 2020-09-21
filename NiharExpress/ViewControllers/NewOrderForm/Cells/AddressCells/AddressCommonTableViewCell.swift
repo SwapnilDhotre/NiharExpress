@@ -14,7 +14,7 @@ protocol AddressCommonFieldProtocol {
 
 class AddressCommonTableViewCell: UITableViewCell {
     static var identifier = "AddressCommonTableViewCell"
-
+    
     @IBOutlet weak var lblTitle: UILabel!
     
     @IBOutlet weak var btnTraling: UIButton!
@@ -30,7 +30,7 @@ class AddressCommonTableViewCell: UITableViewCell {
         
         self.configureUI()
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
@@ -38,7 +38,7 @@ class AddressCommonTableViewCell: UITableViewCell {
     func configureUI() {
         self.txtField.delegate = self
     }
-
+    
     func updateData(with model: FormSubFieldModel) {
         self.model = model
         
@@ -49,15 +49,38 @@ class AddressCommonTableViewCell: UITableViewCell {
         case .phoneNo:
             self.btnTraling.isHidden = false
             self.setPhoneButton(btn: self.btnTraling)
+            
+            self.txtField.delegate = self
+            addPrefix91()
             break
-        case .contactPerson, .contactNo:
+        case .contactNo:
+            self.textFieldLeadingConstraint.constant = 40
+            self.txtField.delegate = self
+            addPrefix91()
+            break
+        case .comment:
+            self.lblTitle.font = FontUtility.roboto(style: .Italic, size: 12)
+            break
+        case .contactPerson:
             self.textFieldLeadingConstraint.constant = 40
             break
+            
         default:
             break
         }
         
         self.txtField.text = model.value as? String
+    }
+    
+    func addPrefix91() {
+        let prefix = UILabel()
+        prefix.text = "+91 "
+        // set font, color etc.
+        prefix.font = FontUtility.roboto(style: .Regular, size: 14)
+        prefix.sizeToFit()
+        
+        self.txtField.leftView = prefix
+        self.txtField.leftViewMode = .always
     }
     
     func setPhoneButton(btn: UIButton) {
@@ -79,5 +102,30 @@ extension AddressCommonTableViewCell: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if self.model.type == .phoneNo {
+            
+            // This will avoid any non-digit no to enter and will allow backspace
+            if let char = string.cString(using: String.Encoding.utf8) {
+                let isBackSpace = strcmp(char, "\\b")
+                if (isBackSpace == -92) {
+                    return true
+                } else if let _ = string.rangeOfCharacter(from: NSCharacterSet.decimalDigits) {} else {
+                    return false
+                }
+            }
+            
+            let currentCharacterCount = textField.text?.count ?? 0
+            if range.length + range.location > currentCharacterCount {
+                return false
+            }
+            let newLength = currentCharacterCount + string.count - range.length
+            return newLength <= 10
+        } else {
+            return true
+        }
     }
 }

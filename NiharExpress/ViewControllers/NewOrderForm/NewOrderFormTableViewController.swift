@@ -291,10 +291,7 @@ class NewOrderFormTableViewController: UITableViewController {
                 phoneNo = (subFormField.value as? String) ?? ""
                 break
             case .whenToPickup:
-                date = (subFormField.value as? (Date, Date))?.0
-                break
-            case .whenToDelivery:
-                date = (subFormField.value as? (Date, Date))?.0
+                date = (subFormField.value as? Date) ?? Date()
                 break
             case .comment:
                 comment = (subFormField.value as? String) ?? ""
@@ -462,18 +459,18 @@ class NewOrderFormTableViewController: UITableViewController {
                 cell.collectionView.reloadData()
                 
                 return cell
-//            case .notifyInfo:
-//                guard let cell = tableView.dequeueReusableCell(withIdentifier: NotifyBySMSTableViewCell.identifier) as? NotifyBySMSTableViewCell else {
-//                    assertionFailure("Couldn't dequeue:>> \(NotifyBySMSTableViewCell.identifier)")
-//                    return UITableViewCell()
-//                }
-//
-//                cell.selectionStyle = .none
-//                cell.indexPath = indexPath
-//                cell.delegate = self
-//                cell.updateData(with: formField)
-//
-//                return cell
+                //            case .notifyInfo:
+                //                guard let cell = tableView.dequeueReusableCell(withIdentifier: NotifyBySMSTableViewCell.identifier) as? NotifyBySMSTableViewCell else {
+                //                    assertionFailure("Couldn't dequeue:>> \(NotifyBySMSTableViewCell.identifier)")
+                //                    return UITableViewCell()
+                //                }
+                //
+                //                cell.selectionStyle = .none
+                //                cell.indexPath = indexPath
+                //                cell.delegate = self
+                //                cell.updateData(with: formField)
+                //
+                //                return cell
                 
             case .paymentInfo:
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: PaymentViewTableViewCell.identifier) as? PaymentViewTableViewCell else {
@@ -526,7 +523,7 @@ class NewOrderFormTableViewController: UITableViewController {
                 cell.model.indexPath = indexPath
                 
                 return cell
-            case .whenToPickup, .whenToDelivery:
+            case .whenToPickup:
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: DateTimePickerTableViewCell.identifier) as? DateTimePickerTableViewCell else {
                     assertionFailure("Couldn't dequeue:>> \(DateTimePickerTableViewCell.identifier)")
                     return UITableViewCell()
@@ -560,6 +557,10 @@ class NewOrderFormTableViewController: UITableViewController {
                 cell.delegate = self
                 cell.updateData(with: subFormField)
                 cell.model.indexPath = indexPath
+                
+                cell.btnTransaction.tag = indexPath.row
+                
+                cell.btnTransaction.addTarget(self, action: #selector(self.btnTransactionType(sender:)), for: .touchUpInside)
                 
                 return cell
             case .removeAddress:
@@ -596,7 +597,7 @@ class NewOrderFormTableViewController: UITableViewController {
             }
         } else if let subFormField = model as? FormSubFieldModel {
             switch subFormField.type {
-            case .header, .address, .name, .phoneNo, .whenToPickup, .whenToDelivery, .comment, .storeInfoHeader, .contactPerson, .contactNo, .transaction, .removeAddress:
+            case .header, .address, .name, .phoneNo, .whenToPickup, .comment, .storeInfoHeader, .contactPerson, .contactNo, .transaction, .removeAddress:
                 return UITableView.automaticDimension
             case .parcelType, .parcelValue, .promoCode: //.notifyMeBySMS, .notifyRecipientsBySMS:
                 // Flow will never come here
@@ -605,6 +606,43 @@ class NewOrderFormTableViewController: UITableViewController {
         }
         return 0
         
+    }
+    
+    @objc func btnTransactionType(sender: UIButton) {
+        self.view.endEditing(true)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.tableView.scrollToRow(at: IndexPath(item: sender.tag, section: 0), at: .middle, animated: false)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.navigationView?.removeFromSuperview()
+                self.bottomPanelView?.removeFromSuperview()
+                
+                if let model = self.tableViewFormFields[sender.tag] as? FormSubFieldModel, model.type == .transaction {
+                    let transactionController = TransactonTypeSelectionViewController()
+                    transactionController.delegate = self
+                    transactionController.topConstraint = self.view.center.y
+                    transactionController.indexPath = IndexPath(item: sender.tag, section: 0)
+                    
+                    transactionController.modalPresentationStyle = .overCurrentContext
+                    self.navigationController?.present(transactionController, animated: false, completion: nil)
+                }
+            }
+        }
+    }
+}
+
+extension NewOrderFormTableViewController: TransactionTypeSelectionDelegate {
+    func transactionSelected(indexPath: IndexPath, type: String) {
+        self.configureTopBottomUI()
+        if type == "" {
+            //  Do nothing as nothing selected
+        } else {
+            if let model = self.tableViewFormFields[indexPath.row] as? FormSubFieldModel, model.type == .transaction {
+                model.value = (transactionType: type, transactionAmount: "")
+                self.tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
+        }
     }
 }
 
@@ -687,20 +725,14 @@ extension NewOrderFormTableViewController: DatePickerProtocol {
         self.bottomPanelView?.removeFromSuperview()
         
         var fromDate: Date!
-        var toDate: Date!
         
         self.pickDate { (firstDate) in
             fromDate = firstDate ?? Date()
             
             DispatchQueue.main.async {
-                self.pickDate(previousDate: fromDate) { (secondDate) in
-                    DispatchQueue.main.async {
-                        toDate = secondDate ?? Date()
-                        self.configureTopBottomUI()
-                        model.value = (fromDate, toDate)
-                        self.tableView.reloadRows(at: [model.indexPath], with: .automatic)
-                    }
-                }
+                self.configureTopBottomUI()
+                model.value = fromDate!
+                self.tableView.reloadRows(at: [model.indexPath], with: .automatic)
             }
         }
     }

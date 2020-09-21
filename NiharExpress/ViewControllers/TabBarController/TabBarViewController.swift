@@ -21,9 +21,7 @@ class TabBarViewController: UITabBarController {
         super.viewWillAppear(animated)
     }
     
-    func configureUI() {
-        self.delegate = self
-        
+    func configureUI() {        
         self.tabBar.tintColor = UIColor.white
         self.tabBar.barTintColor = ColorConstant.themePrimary.color
         self.tabBar.unselectedItemTintColor = UIColor.white.withAlphaComponent(0.8)
@@ -75,11 +73,5 @@ class TabBarViewController: UITabBarController {
         item5.image = FontUtility.appImageIcon(code: AppIcons.outlineInfo.rawValue, textColor: .white, size: CGSize(width: 24, height: 24))
         
         infoNavigationController.tabBarItem = item5
-    }
-}
-
-extension TabBarViewController: UITabBarControllerDelegate {
-    
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
     }
 }

@@ -44,24 +44,22 @@ class DateTimePickerTableViewCell: UITableViewCell {
         self.lblTimerIcon.font = FontUtility.niharExpress(size: 20)
         self.lblTimerIcon.text = AppIcons.clock.rawValue
         self.lblTimerIcon.textColor = ColorConstant.appBlackLabel.color
+        
+        self.lblDateHolder.textAlignment = .center
+        self.lblTimeHolder.textAlignment = .center
     }
     
     func updateData(with model: FormSubFieldModel) {
         self.model = model
         
-        let firstDate = (model.value as? (Date, Date))?.0
-        let secondDate = (model.value as? (Date, Date))?.1
+        let firstDate = model.value as? Date
         
         if let date = firstDate {
-            self.lblDateHolder.text = date.toString(withFormat: "dd.MM") + "       "
+            self.lblDateHolder.text = date.toString(withFormat: "dd.MM")
         }
         
-        if let fDate = firstDate, let sDate = secondDate {
-            var time = ""
-            time += fDate.toString(withFormat: "HH:mm")
-            time += "-"
-            time += sDate.toString(withFormat: "HH:mm")
-            self.lblTimeHolder.text = "      " + time
+        if let fDate = firstDate {
+            self.lblTimeHolder.text = fDate.toString(withFormat: "HH:mm")
         }
     }
     

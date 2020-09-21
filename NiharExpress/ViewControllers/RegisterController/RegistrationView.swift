@@ -52,6 +52,19 @@ class RegistrationView: UIView {
         Bundle.main.loadNibNamed(kCONTENT_XIB_NAME, owner: self, options: nil)
         contentView.fixInView(self)
         
+        self.txtFieldPhoneNumber.delegate = self
+        self.addPrefix91()
+    }
+    
+    func addPrefix91() {
+        let prefix = UILabel()
+        prefix.text = "+91 "
+        // set font, color etc.
+        prefix.font = UIFont.systemFont(ofSize: 14)
+        prefix.sizeToFit()
+
+        self.txtFieldPhoneNumber.leftView = prefix
+        self.txtFieldPhoneNumber.leftViewMode = .always
     }
     
     // MARK: - Action Methods
@@ -61,5 +74,32 @@ class RegistrationView: UIView {
         let emailId = self.txtFieldEmail.text ?? ""
         
         self.delegate?.registerData(with: fullName, phoneNumber: phoneNumber, emailId: emailId)
+    }
+}
+
+extension RegistrationView: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if textField == self.txtFieldPhoneNumber {
+            
+            // This will avoid any non-digit no to enter and will allow backspace
+            if let char = string.cString(using: String.Encoding.utf8) {
+                let isBackSpace = strcmp(char, "\\b")
+                if (isBackSpace == -92) {
+                    return true
+                } else if let _ = string.rangeOfCharacter(from: NSCharacterSet.decimalDigits) {} else {
+                    return false
+                }
+            }
+            
+            let currentCharacterCount = textField.text?.count ?? 0
+            if range.length + range.location > currentCharacterCount {
+                return false
+            }
+            let newLength = currentCharacterCount + string.count - range.length
+            return newLength <= 10
+        } else {
+            return true
+        }
     }
 }
