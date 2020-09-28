@@ -7,10 +7,24 @@
 //
 
 import UIKit
+import GooglePlaces
+import GoogleMaps
 
-class PickUpAddressViewController: UIViewController {
+protocol SearchAddressDelegate {
+    func previousAddressSelected(userAddressModel: UserAddressModel)
+    func newLocationPicked(address: String)
+}
+
+struct SearchAddress {
+    var placeID: String
+    var title: NSAttributedString
+    var subTitle: NSAttributedString
+}
+
+class SearchAddressViewController: UIViewController {
     
     var userAddressModels: [UserAddressModel] = []
+    var searchAddresses: [SearchAddress] = []
     
     @IBOutlet weak var txtAddressSearch: UITextField!
     @IBOutlet weak var btnClearSearch: UIButton!
@@ -19,6 +33,14 @@ class PickUpAddressViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var alertLoader: UIAlertController?
+    
+    var likelyPlaces: [GMSPlace] = []
+    
+    var placesClient: GMSPlacesClient!
+    var placesToken: GMSAutocompleteSessionToken!
+    var searchStarted: Bool = false
+    
+    var delegate: SearchAddressDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +53,8 @@ class PickUpAddressViewController: UIViewController {
         self.btnClearSearch.setTitle(AppIcons.cross.rawValue, for: .normal)
         self.btnClearSearch.setTitleColor(.gray, for: .normal)
         self.btnClearSearch.titleLabel?.font = FontUtility.niharExpress(size: 14)
+        
+        self.txtAddressSearch.addTarget(self, action: #selector(self.textEditing(_:)), for: .editingChanged)
         
         self.btnPickAddress.setImage(UIImage.fontAwesomeIcon(code: FontAwesome.mapMarkerAlt.rawValue, style: .solid, textColor: ColorConstant.themePrimary.color, size: CGSize(width: 24, height: 24)), for: .normal)
         
@@ -55,16 +79,57 @@ class PickUpAddressViewController: UIViewController {
                 }
             }
         }
+        
+        
+        // Setup Google search operation
+        placesClient = GMSPlacesClient.shared()
+        self.placesToken = GMSAutocompleteSessionToken.init()
     }
     
-    
+    // MARK: - Action Methods
     @IBAction func btnClearSearchAction(_ sender: UIButton) {
     }
     
     @IBAction func btnSelectLocationAction(_ sender: UIButton) {
     }
     
+    @objc func textEditing(_ textField: UITextField) {
+        if textField.text! == "" {
+            self.searchStarted = false
+        } else {
+            self.searchStarted = true
+            
+            self.searchResults(for: textField.text!)
+        }
+        
+        self.tableView.reloadData()
+    }
+    
     // MARK: - API Methods
+    func searchResults(for text: String) {
+        // Create a type filter.
+        let filter = GMSAutocompleteFilter()
+        filter.type = .establishment
+        
+        placesClient?
+            .findAutocompletePredictions(fromQuery: text,
+                                         filter: filter,
+                                         sessionToken: self.placesToken,
+                                         callback: { (results, error) in
+                                            if let error = error {
+                                                print("Autocomplete error: \(error)")
+                                                return
+                                            }
+                                            if let results = results {
+                                                
+                                                self.searchAddresses = []
+                                                for result in results {
+                                                    self.searchAddresses.append(SearchAddress(placeID: result.placeID, title: result.attributedPrimaryText, subTitle: result.attributedSecondaryText ?? NSAttributedString()))
+                                                }
+                                            }
+            })
+    }
+    
     func fetchPreviousAddresses(completion: @escaping (([UserAddressModel], APIStatus?) -> Void)) {
         
         let params: Parameters = [
@@ -85,19 +150,28 @@ class PickUpAddressViewController: UIViewController {
     }
 }
 
-extension PickUpAddressViewController: UITableViewDataSource, UITableViewDelegate {
+extension SearchAddressViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.userAddressModels.count
+        if self.searchStarted {
+            return self.searchAddresses.count
+        } else {
+            return self.userAddressModels.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        let user = self.userAddressModels[indexPath.row]
-        cell.textLabel?.text = "\(user.name)\n\(user.address)\n\(user.mobileNo)"
         cell.textLabel?.numberOfLines = 0
-        
         cell.selectionStyle = .none
+        
+        if self.searchStarted {
+            cell.textLabel?.attributedText = self.searchAddresses[indexPath.row].title
+            cell.detailTextLabel?.attributedText = self.searchAddresses[indexPath.row].subTitle
+        } else {
+            let user = self.userAddressModels[indexPath.row]
+            cell.textLabel?.text = "\(user.name)\n\(user.address)\n\(user.mobileNo)"
+        }
         
         return cell
     }

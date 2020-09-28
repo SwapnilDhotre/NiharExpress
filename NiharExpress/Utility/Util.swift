@@ -12,7 +12,7 @@ class Util {
     
     static func setIntialController(window: UIWindow) {
         
-        window.rootViewController = UINavigationController(rootViewController: PickUpAddressViewController())
+        window.rootViewController = UINavigationController(rootViewController: SearchAddressViewController())
         window.makeKeyAndVisible()
     }
     

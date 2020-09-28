@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMaps
+import GooglePlaces
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -30,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITextViewWorkaround.unique.executeWorkaround()
         
         GMSServices.provideAPIKey(Constants.googleApiKey)
+        GMSPlacesClient.provideAPIKey("AIzaSyDWI7jF12WdwKtAQW_TrCtI_2P_9EfFySI")
         
         return true
     }

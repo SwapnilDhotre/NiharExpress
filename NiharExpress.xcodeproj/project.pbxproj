@@ -33,8 +33,8 @@
 		0F8EF9412518B9EB00128C10 /* TransactonTypeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8EF93F2518B9EB00128C10 /* TransactonTypeSelectionViewController.swift */; };
 		0F8EF9422518B9EB00128C10 /* TransactonTypeSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F8EF9402518B9EB00128C10 /* TransactonTypeSelectionViewController.xib */; };
 		0F8EF94425191A1E00128C10 /* UITextViewWorkAround.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8EF94325191A1E00128C10 /* UITextViewWorkAround.swift */; };
-		0FBD97C52520A948000BA30A /* PickUpAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBD97C32520A948000BA30A /* PickUpAddressViewController.swift */; };
-		0FBD97C62520A948000BA30A /* PickUpAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FBD97C42520A948000BA30A /* PickUpAddressViewController.xib */; };
+		0FBD97C52520A948000BA30A /* SearchAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBD97C32520A948000BA30A /* SearchAddressViewController.swift */; };
+		0FBD97C62520A948000BA30A /* SearchAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FBD97C42520A948000BA30A /* SearchAddressViewController.xib */; };
 		0FBD97C82520B0FC000BA30A /* UserAddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBD97C72520B0FC000BA30A /* UserAddressModel.swift */; };
 		0FEF269124CBFFE400D2CD69 /* URLConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEF269024CBFFE300D2CD69 /* URLConstant.swift */; };
 		C43D0B0E6A4EBCD9DA632D09 /* Pods_NiharExpress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACD65CF2FAE382A706B66B97 /* Pods_NiharExpress.framework */; };
@@ -212,8 +212,8 @@
 		0F8EF93F2518B9EB00128C10 /* TransactonTypeSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactonTypeSelectionViewController.swift; sourceTree = "<group>"; };
 		0F8EF9402518B9EB00128C10 /* TransactonTypeSelectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactonTypeSelectionViewController.xib; sourceTree = "<group>"; };
 		0F8EF94325191A1E00128C10 /* UITextViewWorkAround.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextViewWorkAround.swift; sourceTree = "<group>"; };
-		0FBD97C32520A948000BA30A /* PickUpAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpAddressViewController.swift; sourceTree = "<group>"; };
-		0FBD97C42520A948000BA30A /* PickUpAddressViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickUpAddressViewController.xib; sourceTree = "<group>"; };
+		0FBD97C32520A948000BA30A /* SearchAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAddressViewController.swift; sourceTree = "<group>"; };
+		0FBD97C42520A948000BA30A /* SearchAddressViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchAddressViewController.xib; sourceTree = "<group>"; };
 		0FBD97C72520B0FC000BA30A /* UserAddressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAddressModel.swift; sourceTree = "<group>"; };
 		0FEF269024CBFFE300D2CD69 /* URLConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLConstant.swift; sourceTree = "<group>"; };
 		820DDFDA1D3278D30ADBC68A /* Pods-NiharExpress.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NiharExpress.release.xcconfig"; path = "Target Support Files/Pods-NiharExpress/Pods-NiharExpress.release.xcconfig"; sourceTree = "<group>"; };
@@ -578,8 +578,8 @@
 		0FBD97C22520A925000BA30A /* PickUpAddressController */ = {
 			isa = PBXGroup;
 			children = (
-				0FBD97C32520A948000BA30A /* PickUpAddressViewController.swift */,
-				0FBD97C42520A948000BA30A /* PickUpAddressViewController.xib */,
+				0FBD97C32520A948000BA30A /* SearchAddressViewController.swift */,
+				0FBD97C42520A948000BA30A /* SearchAddressViewController.xib */,
 			);
 			path = PickUpAddressController;
 			sourceTree = "<group>";
@@ -1044,7 +1044,7 @@
 				E672532B24DE5026008837CB /* RadioTableViewCell.xib in Resources */,
 				E6F81A3D24DDB7AE00E98351 /* OrderDetailsLocationTableViewCell.xib in Resources */,
 				E630D98724BD9375006666A8 /* Roboto-ThinItalic.ttf in Resources */,
-				0FBD97C62520A948000BA30A /* PickUpAddressViewController.xib in Resources */,
+				0FBD97C62520A948000BA30A /* SearchAddressViewController.xib in Resources */,
 				E65C384B24C5FBE0002DD732 /* SingleLineCollectionViewCell.xib in Resources */,
 				E654782624DD5FE500A1F697 /* OrderAddressView.xib in Resources */,
 				0F6C5B3424AE4AA300F15376 /* LoginViewController.xib in Resources */,
@@ -1186,7 +1186,7 @@
 				0F7F1C4D24AE3E7D0011A754 /* SceneDelegate.swift in Sources */,
 				E684749824DEC9A800BB339B /* NotificationTableViewCell.swift in Sources */,
 				E630D99A24BD9C99006666A8 /* UITableView_Extension.swift in Sources */,
-				0FBD97C52520A948000BA30A /* PickUpAddressViewController.swift in Sources */,
+				0FBD97C52520A948000BA30A /* SearchAddressViewController.swift in Sources */,
 				0FBD97C82520B0FC000BA30A /* UserAddressModel.swift in Sources */,
 				E630D9A624BD9D43006666A8 /* UIColor_Extension.swift in Sources */,
 				E630D9A224BD9CFC006666A8 /* UserDefaultManager.swift in Sources */,
