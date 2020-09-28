@@ -608,6 +608,15 @@ class NewOrderFormTableViewController: UITableViewController {
         
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let model = self.tableViewFormFields[indexPath.row]
+        if let subFormField = model as? FormSubFieldModel {
+            if subFormField.type == .address {
+                
+            }
+        }
+    }
+    
     @objc func btnTransactionType(sender: UIButton) {
         self.view.endEditing(true)
         

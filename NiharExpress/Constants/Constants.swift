@@ -99,6 +99,7 @@ class Constants {
         case listNotification = "listNotification"
         case listCity = "listCity"
         case getLocation = "getLocation"
+        case getSuggestedAddress = "getSuggestedAddress"
     }
     
     struct headers {

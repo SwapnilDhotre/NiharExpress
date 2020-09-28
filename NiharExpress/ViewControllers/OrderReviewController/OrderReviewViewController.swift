@@ -56,6 +56,8 @@ class OrderReviewViewController: UIViewController {
     var alertLoader: UIAlertController?
     var formDelegate: FormDelegate?
     
+    var temporaryUser: User!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,7 +67,24 @@ class OrderReviewViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        if UserConstant.shared.userModel == nil {
+            if let location = self.locations.first {
+                let userInfoController = TempLoginViewController()
+                userInfoController.mobileNo = location.mobileNo
+                userInfoController.titleString = "Phone Verification"
+                userInfoController.delegate = self
+                
+                let navigationController = UINavigationController(rootViewController: userInfoController)
+                self.present(navigationController, animated: true, completion: nil)
+            }
+        }
         self.showAndUpdateNavigationBar(with: "Order Review", withShadow: true, isHavingBackButton: true, actionController: self, backAction: #selector(self.backBtnPressed(_:)))
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.view.endEditing(true)
     }
     
     // MARK: - Custom Methods
@@ -104,7 +123,26 @@ class OrderReviewViewController: UIViewController {
     @IBAction func createOrderAction(_ sender: UIButton) {
         self.view.endEditing(true)
         if UserConstant.shared.userModel == nil {
-            self.onFlyCreateOrder()
+            if self.temporaryUser == nil {
+                self.showAlert(withMsg: "User could be registered!!!", title: "Nihar Express") { (alertAction) in
+                    DispatchQueue.main.async {
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+            } else {
+                self.alertLoader = self.showAlertLoader()
+                self.createOrder(customerId: self.temporaryUser.id) { (responseData, apiStatus) in
+                    DispatchQueue.main.async {
+                        self.alertLoader?.dismiss(animated: false, completion: nil)
+                        if let _ = responseData {
+                            self.formDelegate?.formDismissal()
+                            self.dismiss(animated: false, completion: nil)
+                        } else {
+                            self.showAlert(withMsg: apiStatus?.message ?? "Something went wrong.")
+                        }
+                    }
+                }
+            }
         } else {
             self.createOrder { (responseData, apiStatus) in
                 DispatchQueue.main.async {
@@ -135,34 +173,6 @@ class OrderReviewViewController: UIViewController {
     }
     
     // MARK: - API Methods
-    func onFlyCreateOrder() {
-        if let location = self.locations.first {
-            
-            self.alertLoader = self.showAlertLoader()
-            self.hitGetOTP(with: location.mobileNo, completion: { (customerId, apiStatus) in
-                
-                DispatchQueue.main.async {
-                    self.alertLoader?.dismiss(animated: false, completion: nil)
-                    if let status = apiStatus {
-                        self.showAlert(withMsg: status.message)
-                    } else {
-                        self.createOrder(customerId: customerId) { (responseData, apiStatus) in
-                            DispatchQueue.main.async {
-                                self.alertLoader?.dismiss(animated: false, completion: nil)
-                                if let _ = responseData {
-                                    self.formDelegate?.formDismissal()
-                                    self.dismiss(animated: false, completion: nil)
-                                } else {
-                                    self.showAlert(withMsg: apiStatus?.message ?? "Something went wrong.")
-                                }
-                            }
-                        }
-                    }
-                }
-            })
-        }
-    }
-    
     func hitGetOTP(with mobileNoEmail: String, completion: @escaping (String, APIStatus?) -> Void) {
         let params: Parameters = [
             Constants.API.method: Constants.MethodType.getOTP.rawValue,
@@ -264,5 +274,15 @@ extension OrderReviewViewController: UITableViewDataSource, UITableViewDelegate 
         cell.updateData(with: "\(indexPath.row + 1)", address: data.address.address, dateTime: data.dateTime.toString(withFormat: "dd.MM HH:mm"), mobileNo: data.mobileNo)
         
         return cell
+    }
+}
+
+extension OrderReviewViewController: TempLoginProtocol {
+    func loginSuccess(user: User) {
+        self.temporaryUser = user
+    }
+    
+    func backPressed() {
+        self.navigationController?.popViewController(animated: true)
     }
 }

@@ -52,7 +52,9 @@ class RegistrationView: UIView {
         Bundle.main.loadNibNamed(kCONTENT_XIB_NAME, owner: self, options: nil)
         contentView.fixInView(self)
         
+        self.txtFieldFullName.delegate = self
         self.txtFieldPhoneNumber.delegate = self
+        self.txtFieldEmail.delegate = self
         self.addPrefix91()
     }
     
@@ -69,6 +71,8 @@ class RegistrationView: UIView {
     
     // MARK: - Action Methods
     @IBAction func registerAction(_ sender: UIButton) {
+        self.contentView.endEditing(true)
+        
         let fullName = self.txtFieldFullName.text ?? ""
         let phoneNumber = self.txtFieldPhoneNumber.text ?? ""
         let emailId = self.txtFieldEmail.text ?? ""
@@ -78,6 +82,10 @@ class RegistrationView: UIView {
 }
 
 extension RegistrationView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return textField.resignFirstResponder()
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         if textField == self.txtFieldPhoneNumber {

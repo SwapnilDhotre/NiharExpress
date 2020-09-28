@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F21D81A25206ABC0058F390 /* TempLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F21D81825206ABC0058F390 /* TempLoginViewController.swift */; };
+		0F21D81B25206ABC0058F390 /* TempLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F21D81925206ABC0058F390 /* TempLoginViewController.xib */; };
 		0F6C5B2024AE428D00F15376 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6C5B1E24AE428D00F15376 /* HelpViewController.swift */; };
 		0F6C5B2124AE428D00F15376 /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F6C5B1F24AE428D00F15376 /* HelpViewController.xib */; };
 		0F6C5B2524AE42BF00F15376 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6C5B2324AE42BF00F15376 /* InfoViewController.swift */; };
@@ -31,6 +33,9 @@
 		0F8EF9412518B9EB00128C10 /* TransactonTypeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8EF93F2518B9EB00128C10 /* TransactonTypeSelectionViewController.swift */; };
 		0F8EF9422518B9EB00128C10 /* TransactonTypeSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F8EF9402518B9EB00128C10 /* TransactonTypeSelectionViewController.xib */; };
 		0F8EF94425191A1E00128C10 /* UITextViewWorkAround.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8EF94325191A1E00128C10 /* UITextViewWorkAround.swift */; };
+		0FBD97C52520A948000BA30A /* PickUpAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBD97C32520A948000BA30A /* PickUpAddressViewController.swift */; };
+		0FBD97C62520A948000BA30A /* PickUpAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FBD97C42520A948000BA30A /* PickUpAddressViewController.xib */; };
+		0FBD97C82520B0FC000BA30A /* UserAddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBD97C72520B0FC000BA30A /* UserAddressModel.swift */; };
 		0FEF269124CBFFE400D2CD69 /* URLConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEF269024CBFFE300D2CD69 /* URLConstant.swift */; };
 		C43D0B0E6A4EBCD9DA632D09 /* Pods_NiharExpress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACD65CF2FAE382A706B66B97 /* Pods_NiharExpress.framework */; };
 		E60336D424C6ADC200D263C9 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E60336D324C6ADC200D263C9 /* LoginView.xib */; };
@@ -179,6 +184,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F21D81825206ABC0058F390 /* TempLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempLoginViewController.swift; sourceTree = "<group>"; };
+		0F21D81925206ABC0058F390 /* TempLoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TempLoginViewController.xib; sourceTree = "<group>"; };
 		0F6C5B1E24AE428D00F15376 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		0F6C5B1F24AE428D00F15376 /* HelpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
 		0F6C5B2324AE42BF00F15376 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
@@ -205,6 +212,9 @@
 		0F8EF93F2518B9EB00128C10 /* TransactonTypeSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactonTypeSelectionViewController.swift; sourceTree = "<group>"; };
 		0F8EF9402518B9EB00128C10 /* TransactonTypeSelectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactonTypeSelectionViewController.xib; sourceTree = "<group>"; };
 		0F8EF94325191A1E00128C10 /* UITextViewWorkAround.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextViewWorkAround.swift; sourceTree = "<group>"; };
+		0FBD97C32520A948000BA30A /* PickUpAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpAddressViewController.swift; sourceTree = "<group>"; };
+		0FBD97C42520A948000BA30A /* PickUpAddressViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickUpAddressViewController.xib; sourceTree = "<group>"; };
+		0FBD97C72520B0FC000BA30A /* UserAddressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAddressModel.swift; sourceTree = "<group>"; };
 		0FEF269024CBFFE300D2CD69 /* URLConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLConstant.swift; sourceTree = "<group>"; };
 		820DDFDA1D3278D30ADBC68A /* Pods-NiharExpress.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NiharExpress.release.xcconfig"; path = "Target Support Files/Pods-NiharExpress/Pods-NiharExpress.release.xcconfig"; sourceTree = "<group>"; };
 		ACD65CF2FAE382A706B66B97 /* Pods_NiharExpress.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NiharExpress.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -374,6 +384,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		0F21D81725206A7E0058F390 /* TempLoginController */ = {
+			isa = PBXGroup;
+			children = (
+				0F21D81825206ABC0058F390 /* TempLoginViewController.swift */,
+				0F21D81925206ABC0058F390 /* TempLoginViewController.xib */,
+			);
+			path = TempLoginController;
+			sourceTree = "<group>";
+		};
 		0F6C5B2224AE429500F15376 /* HelpController */ = {
 			isa = PBXGroup;
 			children = (
@@ -498,6 +517,8 @@
 		0F7F1C6024AE3F080011A754 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				0FBD97C22520A925000BA30A /* PickUpAddressController */,
+				0F21D81725206A7E0058F390 /* TempLoginController */,
 				E609BD5524E02AA200B505EB /* WebView */,
 				E684749124DEBFDA00BB339B /* Notification */,
 				E6465EA724DBBAF700AF591D /* VerifyOTP */,
@@ -552,6 +573,15 @@
 				E6496A9924DAF05E00514AB9 /* ProfileTableViewCell.xib */,
 			);
 			path = ProfileController;
+			sourceTree = "<group>";
+		};
+		0FBD97C22520A925000BA30A /* PickUpAddressController */ = {
+			isa = PBXGroup;
+			children = (
+				0FBD97C32520A948000BA30A /* PickUpAddressViewController.swift */,
+				0FBD97C42520A948000BA30A /* PickUpAddressViewController.xib */,
+			);
+			path = PickUpAddressController;
 			sourceTree = "<group>";
 		};
 		0FE4B807B4C509E8EE5C1BAA /* Pods */ = {
@@ -849,6 +879,7 @@
 				E654781B24DD2D6D00A1F697 /* Order.swift */,
 				E654781D24DD30DC00A1F697 /* OrderAddress.swift */,
 				E656287B24F23F250030B5E0 /* DriverInfo.swift */,
+				0FBD97C72520B0FC000BA30A /* UserAddressModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -996,6 +1027,7 @@
 				E68474A724DEEF8100BB339B /* AddressCommonTableViewCell.xib in Resources */,
 				E630D98324BD9375006666A8 /* Roboto-Black.ttf in Resources */,
 				E60F187B24BF0CDC00134353 /* DatePickerViewController.xib in Resources */,
+				0F21D81B25206ABC0058F390 /* TempLoginViewController.xib in Resources */,
 				E6F81A4A24DDD46600E98351 /* InProgressTableViewCell.xib in Resources */,
 				0F7F1C6A24AE42020011A754 /* OrdersViewController.xib in Resources */,
 				E630D98924BD9375006666A8 /* Roboto-LightItalic.ttf in Resources */,
@@ -1012,6 +1044,7 @@
 				E672532B24DE5026008837CB /* RadioTableViewCell.xib in Resources */,
 				E6F81A3D24DDB7AE00E98351 /* OrderDetailsLocationTableViewCell.xib in Resources */,
 				E630D98724BD9375006666A8 /* Roboto-ThinItalic.ttf in Resources */,
+				0FBD97C62520A948000BA30A /* PickUpAddressViewController.xib in Resources */,
 				E65C384B24C5FBE0002DD732 /* SingleLineCollectionViewCell.xib in Resources */,
 				E654782624DD5FE500A1F697 /* OrderAddressView.xib in Resources */,
 				0F6C5B3424AE4AA300F15376 /* LoginViewController.xib in Resources */,
@@ -1130,6 +1163,7 @@
 				E6AA98EE24BF4651006577F6 /* PickAddressViewController.swift in Sources */,
 				E6F81A4124DDC44F00E98351 /* InformationTableViewCell.swift in Sources */,
 				E654781C24DD2D6D00A1F697 /* Order.swift in Sources */,
+				0F21D81A25206ABC0058F390 /* TempLoginViewController.swift in Sources */,
 				E654781E24DD30DC00A1F697 /* OrderAddress.swift in Sources */,
 				E630D9A024BD9CD9006666A8 /* Date_Extension.swift in Sources */,
 				0F6C5B2524AE42BF00F15376 /* InfoViewController.swift in Sources */,
@@ -1152,6 +1186,8 @@
 				0F7F1C4D24AE3E7D0011A754 /* SceneDelegate.swift in Sources */,
 				E684749824DEC9A800BB339B /* NotificationTableViewCell.swift in Sources */,
 				E630D99A24BD9C99006666A8 /* UITableView_Extension.swift in Sources */,
+				0FBD97C52520A948000BA30A /* PickUpAddressViewController.swift in Sources */,
+				0FBD97C82520B0FC000BA30A /* UserAddressModel.swift in Sources */,
 				E630D9A624BD9D43006666A8 /* UIColor_Extension.swift in Sources */,
 				E630D9A224BD9CFC006666A8 /* UserDefaultManager.swift in Sources */,
 				E672532624DE4DBA008837CB /* CancellationOrderViewController.swift in Sources */,

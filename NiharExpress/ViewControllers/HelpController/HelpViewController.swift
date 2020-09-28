@@ -60,9 +60,9 @@ extension HelpViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            self.loadWebPage(url: "", title: "FAQ's")
+            self.loadWebPage(url: "http://niharexpress.com/site/getFaq?type=C", title: "FAQ's")
         } else if indexPath.row == 1 {
-            self.loadWebPage(url: "", title: "Support")
+            self.loadWebPage(url: "https://niharexpress.com/site/getContent?type=C&section=Support", title: "Support")
         }
     }
     

@@ -10,15 +10,14 @@ import UIKit
 import WebKit
 
 class WebViewViewController: UIViewController, WKUIDelegate {
-
+    
     var titleString: String!
     var urlString: String!
     
-    @IBOutlet weak var webpageView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.configureUI()
     }
     
@@ -32,15 +31,18 @@ class WebViewViewController: UIViewController, WKUIDelegate {
         let webConfiguration = WKWebViewConfiguration()
         let webkitView = WKWebView(frame: .zero, configuration: webConfiguration)
         webkitView.uiDelegate = self
-        self.webpageView = webkitView
         
         if let url = URL(string: self.urlString) {
             let request = URLRequest(url: url)
             webkitView.load(request)
         }
+        
+        self.view = webkitView
     }
     
     @objc func backBtnPressed(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
 }
+
+

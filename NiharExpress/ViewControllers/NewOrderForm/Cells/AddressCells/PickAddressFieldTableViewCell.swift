@@ -39,6 +39,8 @@ class PickAddressFieldTableViewCell: UITableViewCell {
     func updateData(with model: FormSubFieldModel) {
         self.model = model
         
+        self.btnMapAction.isHidden = !(model.isPickUpAddress ?? false)
+        
         if let model = (self.model.value as? AddressModel) {
             self.txtAddressField.text = model.address
         }

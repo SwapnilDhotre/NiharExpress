@@ -36,6 +36,8 @@ class FormSubFieldModel {
     var indexPath: IndexPath!
     var parentIndex: Int?
     
+    var isPickUpAddress: Bool?
+    
     init(title: String, type: FormSubFieldType, value: Any) {
         self.title = title
         self.type = type

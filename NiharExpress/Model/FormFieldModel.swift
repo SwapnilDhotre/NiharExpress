@@ -51,9 +51,11 @@ class FormFieldModel {
     }
     
     static func getPickupPointFields() -> [FormSubFieldModel] {
+        let pickUpAddress = FormSubFieldModel(title: "Address", type: .address, value: AddressModel(address: "", coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0)))
+        pickUpAddress.isPickUpAddress = true
         return [
             FormSubFieldModel(title: "Pickup Point", type: .header, value: true),
-            FormSubFieldModel(title: "Address", type: .address, value: AddressModel(address: "", coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0))),
+            pickUpAddress,
             FormSubFieldModel(title: "Name", type: .name, value: ""),
             FormSubFieldModel(title: "PhoneNumber", type: .phoneNo, value: ""),
             FormSubFieldModel(title: "When to arrive at this address", type: .whenToPickup, value: Date()),

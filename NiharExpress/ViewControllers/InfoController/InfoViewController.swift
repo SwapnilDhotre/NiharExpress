@@ -12,6 +12,7 @@ struct InfoModel {
     var icon: AppIcons
     var title: String
     var subTitle: String
+    var url: String
 }
 
 class InfoViewController: UIViewController {
@@ -34,10 +35,10 @@ class InfoViewController: UIViewController {
     
     func configureUI() {
         self.data = [
-            InfoModel(icon: .cards, title: "Service Information", subTitle: "More about Nihar Express"),
-            InfoModel(icon: .outlineInfo, title: "About", subTitle: "Version etc"),
-            InfoModel(icon: .paperPad, title: "Terms and Conditions", subTitle: ""),
-            InfoModel(icon: .businessBriefcase, title: "Business Packages", subTitle: "")
+            InfoModel(icon: .cards, title: "Service Information", subTitle: "More about Nihar Express", url: "https://niharexpress.com/site/getContent?type=C&section=Service%20information"),
+            InfoModel(icon: .outlineInfo, title: "About", subTitle: "Version etc", url: "https://niharexpress.com/site/getContent?type=C&section=About"),
+            InfoModel(icon: .paperPad, title: "Terms and Conditions", subTitle: "", url: "https://niharexpress.com/site/getContent?type=C&section=Terms%20and%20Conditions"),
+            InfoModel(icon: .businessBriefcase, title: "Business Packages", subTitle: "", url: "https://niharexpress.com/site/getContent?type=C&section=Business%20Packages")
         ]
         
         self.tableView.dataSource = self
@@ -77,7 +78,7 @@ extension InfoViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let infoModel = self.data[indexPath.row]
-        self.loadWebPage(url: "", title: infoModel.title)
+        self.loadWebPage(url: infoModel.url, title: infoModel.title)
     }
     
     func loadWebPage(url: String, title: String) {

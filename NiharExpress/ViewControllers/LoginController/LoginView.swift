@@ -41,6 +41,7 @@ class LoginView: UIView {
     }
     
     @IBAction func requestOTPAction(_ sender: UIButton) {
+        self.contentView.endEditing(true)
         self.delegate?.loginData(with: self.txtFieldPhoneOrEmail.text!)
     }
 }
