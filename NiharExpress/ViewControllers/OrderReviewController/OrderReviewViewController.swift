@@ -246,7 +246,7 @@ class OrderReviewViewController: UIViewController {
         
         params.printPrettyJSON()
         
-        APIManager.shared.executeDataRequest(urlString: URLConstant.niharBaseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
+        APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
             APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
                 if let data = responseData?.first {
                     completion(data, nil)

@@ -612,7 +612,10 @@ class NewOrderFormTableViewController: UITableViewController {
         let model = self.tableViewFormFields[indexPath.row]
         if let subFormField = model as? FormSubFieldModel {
             if subFormField.type == .address {
-                
+                let searchAddressController = SearchAddressViewController()
+                searchAddressController.indexPath = indexPath
+                searchAddressController.delegate = self
+                self.navigationController?.pushViewController(searchAddressController, animated: true)
             }
         }
     }
@@ -636,6 +639,28 @@ class NewOrderFormTableViewController: UITableViewController {
                     transactionController.modalPresentationStyle = .overCurrentContext
                     self.navigationController?.present(transactionController, animated: false, completion: nil)
                 }
+            }
+        }
+    }
+}
+
+extension NewOrderFormTableViewController: SearchAddressDelegate {
+    func previousAddressSelected(userAddressModel: UserAddressModel, indexPath: IndexPath) {
+        let model = self.tableViewFormFields[indexPath.row]
+        if let subFormField = model as? FormSubFieldModel {
+            if subFormField.type == .address {
+                subFormField.value = AddressModel(address: userAddressModel.address, coordinate: CLLocationCoordinate2D(latitude: userAddressModel.latitude, longitude: userAddressModel.longitude))
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func newLocationPicked(address: AddressModel, indexPath: IndexPath) {
+        let model = self.tableViewFormFields[indexPath.row]
+        if let subFormField = model as? FormSubFieldModel {
+            if subFormField.type == .address {
+                subFormField.value = address
+                self.tableView.reloadData()
             }
         }
     }
@@ -685,6 +710,8 @@ extension NewOrderFormTableViewController {
     }
     
     func pickLocation(completion: @escaping (AddressModel) -> Void) {
+        
+        
         let pickAddressConstroller = PickAddressViewController()
         pickAddressConstroller.pickAddress = { (addressModel) in
             completion(addressModel)
@@ -900,7 +927,7 @@ extension NewOrderFormTableViewController {
             Constants.API.key: "77945ae2ba04d73771d9c5d10cd428eb1095f489",
         ]
         
-        APIManager.shared.executeDataRequest(urlString: URLConstant.niharBaseURL, method: .get, parameters: params, headers: nil) { (data, error) in
+        APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (data, error) in
             DispatchQueue.main.async {
                 self.alertLoader?.dismiss(animated: true, completion: nil)
             }
@@ -927,7 +954,7 @@ extension NewOrderFormTableViewController {
             Constants.API.optimizeRoute: "N"
         ]
         
-        APIManager.shared.executeDataRequest(urlString: URLConstant.niharBaseURL, method: .get, parameters: params, headers: nil) { (data, error) in
+        APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (data, error) in
             APIManager.shared.parseResponse(responseData: data) { (responseData, apiStatus) in
                 if let response = responseData?.first, let jsonData = try? JSONSerialization.data(withJSONObject: response) {
                     let priceInfo: PriceInfo = try! JSONDecoder().decode(PriceInfo.self, from: jsonData)

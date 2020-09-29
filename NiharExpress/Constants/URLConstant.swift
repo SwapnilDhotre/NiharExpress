@@ -10,7 +10,6 @@ import Foundation
 
 class URLConstant {
     
-    static let baseURL = "https://niharexpress.com/appApi/api"
-    static let niharBaseURL = "https://niharexpress.com/appApi/api"
+    static let baseURL = "http://jaspertechlabs.com/nihaar/appApi/api"
     static var imageBaseURL = ""
 }

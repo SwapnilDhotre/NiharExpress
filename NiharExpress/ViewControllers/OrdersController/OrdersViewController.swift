@@ -139,7 +139,7 @@ class OrdersViewController: UIViewController {
             Constants.API.orderStatus: tag
         ]
         
-        APIManager.shared.executeDataRequest(urlString: URLConstant.niharBaseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
+        APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
             APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
                 if let response = responseData, let jsonData = try? JSONSerialization.data(withJSONObject: response) {
                     let orders: [Order] = try! JSONDecoder().decode([Order].self, from: jsonData)

@@ -11,8 +11,8 @@ import GooglePlaces
 import GoogleMaps
 
 protocol SearchAddressDelegate {
-    func previousAddressSelected(userAddressModel: UserAddressModel)
-    func newLocationPicked(address: String)
+    func previousAddressSelected(userAddressModel: UserAddressModel, indexPath: IndexPath)
+    func newLocationPicked(address: AddressModel, indexPath: IndexPath)
 }
 
 struct SearchAddress {
@@ -22,6 +22,7 @@ struct SearchAddress {
 }
 
 class SearchAddressViewController: UIViewController {
+    var indexPath: IndexPath!
     
     var userAddressModels: [UserAddressModel] = []
     var searchAddresses: [SearchAddress] = []
@@ -42,6 +43,8 @@ class SearchAddressViewController: UIViewController {
     
     var delegate: SearchAddressDelegate?
     
+    var addressSelected: Any?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,17 +53,27 @@ class SearchAddressViewController: UIViewController {
     
     func configureUI() {
         
+        self.showAndUpdateNavigationBar(with: "Address Selection", withShadow: true, isHavingBackButton: true, actionController: self, backAction: #selector(self.backBtnAction(_:)))
+        
         self.btnClearSearch.setTitle(AppIcons.cross.rawValue, for: .normal)
         self.btnClearSearch.setTitleColor(.gray, for: .normal)
         self.btnClearSearch.titleLabel?.font = FontUtility.niharExpress(size: 14)
         
         self.txtAddressSearch.addTarget(self, action: #selector(self.textEditing(_:)), for: .editingChanged)
         
+//        let doneBarUttonn = UIButton(type: .custom)
+//        doneBarUttonn.setTitle("Done", for: .normal)
+//        doneBarUttonn.setTitleColor(ColorConstant.themePrimary.color, for: .normal)
+//        doneBarUttonn.addTarget(self, action: #selector(self.doneBarButtonAction(_:)), for: .touchUpInside)
+//
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: doneBarUttonn)
+        
         self.btnPickAddress.setImage(UIImage.fontAwesomeIcon(code: FontAwesome.mapMarkerAlt.rawValue, style: .solid, textColor: ColorConstant.themePrimary.color, size: CGSize(width: 24, height: 24)), for: .normal)
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
+        self.tableView.register(UINib(nibName: SearchAddressTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: SearchAddressTableViewCell.identifier)
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         self.tableView.tableFooterView = UIView()
@@ -88,9 +101,28 @@ class SearchAddressViewController: UIViewController {
     
     // MARK: - Action Methods
     @IBAction func btnClearSearchAction(_ sender: UIButton) {
+        self.searchStarted = false
+        self.txtAddressSearch.text = ""
+        self.tableView.reloadData()
     }
     
     @IBAction func btnSelectLocationAction(_ sender: UIButton) {
+        let pickAddressConstroller = PickAddressViewController()
+        pickAddressConstroller.pickAddress = { (addressModel) in
+            DispatchQueue.main.async {
+                self.delegate?.newLocationPicked(address: addressModel, indexPath: self.indexPath)
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+        self.navigationController?.pushViewController(pickAddressConstroller, animated: true)
+    }
+    
+    @objc func backBtnAction(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func doneBarButtonAction(_ sender: UIButton) {
+        
     }
     
     @objc func textEditing(_ textField: UITextField) {
@@ -148,6 +180,33 @@ class SearchAddressViewController: UIViewController {
             }
         }
     }
+    
+    func getCoordinateAndMoveForward(for searchedAddress: SearchAddress) {
+        
+        placesClient.lookUpPlaceID(searchedAddress.placeID) { (place, error) in
+            if let error = error {
+                print("lookup place id query error: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let place = place else {
+                print("No place details for \(searchedAddress.placeID)")
+                return
+            }
+            
+            let searchedLatitude = place.coordinate.latitude
+            let searchedLongitude = place.coordinate.longitude
+            
+            var fullAddress = searchedAddress.title.string
+            fullAddress += searchedAddress.subTitle.string
+            
+//            let pinCode = place.addressComponents?.valueFor(placeType: kGMSPlaceTypePostalCode, shortName: true)
+            let address = AddressModel(address: fullAddress, coordinate: CLLocationCoordinate2D(latitude: searchedLatitude, longitude: searchedLongitude))
+            self.delegate?.newLocationPicked(address: address, indexPath: self.indexPath)
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+    }
 }
 
 extension SearchAddressViewController: UITableViewDataSource, UITableViewDelegate {
@@ -160,19 +219,35 @@ extension SearchAddressViewController: UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
-        cell.textLabel?.numberOfLines = 0
-        cell.selectionStyle = .none
         
         if self.searchStarted {
-            cell.textLabel?.attributedText = self.searchAddresses[indexPath.row].title
-            cell.detailTextLabel?.attributedText = self.searchAddresses[indexPath.row].subTitle
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchAddressTableViewCell.identifier, for: indexPath) as? SearchAddressTableViewCell else {
+                return UITableViewCell()
+            }
+            
+            cell.selectionStyle = .none
+            cell.titleLabel.attributedText = self.searchAddresses[indexPath.row].title
+            cell.lblSubtitle.attributedText = self.searchAddresses[indexPath.row].subTitle
+            
+            return cell
         } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+            
+            cell.textLabel?.numberOfLines = 0
+            cell.selectionStyle = .none
+            
             let user = self.userAddressModels[indexPath.row]
             cell.textLabel?.text = "\(user.name)\n\(user.address)\n\(user.mobileNo)"
+            return cell
         }
-        
-        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if self.searchStarted {
+            self.getCoordinateAndMoveForward(for: self.searchAddresses[indexPath.row])
+        } else {
+            self.delegate?.previousAddressSelected(userAddressModel: self.userAddressModels[indexPath.row], indexPath: self.indexPath)
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }
