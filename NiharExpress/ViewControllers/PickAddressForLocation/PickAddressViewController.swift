@@ -10,13 +10,42 @@ import UIKit
 import GoogleMaps
 import CoreLocation
 
-class AddressModel {
+class AddressModel: Codable {
+    var id: String
     var address: String
     var coordinate: CLLocationCoordinate2D
     
-    init(address: String, coordinate: CLLocationCoordinate2D) {
+    init(id: String, address: String, coordinate: CLLocationCoordinate2D) {
+        self.id = id
         self.address = address
         self.coordinate = coordinate
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case address = "address"
+        case latitude = "lattitude"
+        case longitude = "longitude"
+    }
+    
+    required convenience init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+                
+        let id: String = (try? container.decode(String.self, forKey: .id)) ?? ""
+        let address: String = (try? container.decode(String.self, forKey: .address)) ?? ""
+        let latitude: Double = NSString(string: (try? container.decode(String.self, forKey: .latitude)) ?? "0").doubleValue
+        let longitude: Double = NSString(string: (try? container.decode(String.self, forKey: .longitude)) ?? "0").doubleValue
+        
+        self.init(id: id, address: address, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(self.id, forKey: .id)
+        try container.encode(self.address, forKey: .address)
+        try container.encode(self.coordinate.latitude, forKey: .latitude)
+        try container.encode(self.coordinate.longitude, forKey: .longitude)
     }
 }
 
@@ -52,7 +81,7 @@ class PickAddressViewController: UIViewController {
     }
     
     @objc func doneBtnAction(_ sender: UIBarButtonItem) {
-        self.pickAddress?(AddressModel(address: self.addressLabel.text!, coordinate: self.coordinate))
+        self.pickAddress?(AddressModel(id: "", address: self.addressLabel.text!, coordinate: self.coordinate))
         self.navigationController?.popViewController(animated: true)
     }
     

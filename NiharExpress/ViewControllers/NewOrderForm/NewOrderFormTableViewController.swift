@@ -649,7 +649,18 @@ extension NewOrderFormTableViewController: SearchAddressDelegate {
         let model = self.tableViewFormFields[indexPath.row]
         if let subFormField = model as? FormSubFieldModel {
             if subFormField.type == .address {
-                subFormField.value = AddressModel(address: userAddressModel.address, coordinate: CLLocationCoordinate2D(latitude: userAddressModel.latitude, longitude: userAddressModel.longitude))
+                subFormField.value = AddressModel(id: "", address: userAddressModel.address, coordinate: CLLocationCoordinate2D(latitude: userAddressModel.latitude, longitude: userAddressModel.longitude))
+                var nameIndex = indexPath.row
+                var mobileNoIndex = indexPath.row
+                
+                if let subFormField = self.tableViewFormFields[nameIndex] as? FormSubFieldModel, subFormField.type == .name {
+                    subFormField.value = userAddressModel.name
+                }
+                
+                if let subFormField = self.tableViewFormFields[mobileNoIndex] as? FormSubFieldModel, subFormField.type == .name {
+                    subFormField.value = userAddressModel.mobileNo
+                }
+                
                 self.tableView.reloadData()
             }
         }

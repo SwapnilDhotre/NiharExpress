@@ -15,17 +15,11 @@ protocol SearchAddressDelegate {
     func newLocationPicked(address: AddressModel, indexPath: IndexPath)
 }
 
-struct SearchAddress {
-    var placeID: String
-    var title: NSAttributedString
-    var subTitle: NSAttributedString
-}
-
 class SearchAddressViewController: UIViewController {
     var indexPath: IndexPath!
     
     var userAddressModels: [UserAddressModel] = []
-    var searchAddresses: [SearchAddress] = []
+    var searchAddresses: [AddressModel] = []
     
     @IBOutlet weak var txtAddressSearch: UITextField!
     @IBOutlet weak var btnClearSearch: UIButton!
@@ -35,10 +29,6 @@ class SearchAddressViewController: UIViewController {
     
     var alertLoader: UIAlertController?
     
-    var likelyPlaces: [GMSPlace] = []
-    
-    var placesClient: GMSPlacesClient!
-    var placesToken: GMSAutocompleteSessionToken!
     var searchStarted: Bool = false
     
     var delegate: SearchAddressDelegate?
@@ -61,12 +51,12 @@ class SearchAddressViewController: UIViewController {
         
         self.txtAddressSearch.addTarget(self, action: #selector(self.textEditing(_:)), for: .editingChanged)
         
-//        let doneBarUttonn = UIButton(type: .custom)
-//        doneBarUttonn.setTitle("Done", for: .normal)
-//        doneBarUttonn.setTitleColor(ColorConstant.themePrimary.color, for: .normal)
-//        doneBarUttonn.addTarget(self, action: #selector(self.doneBarButtonAction(_:)), for: .touchUpInside)
-//
-//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: doneBarUttonn)
+        let doneBarUttonn = UIButton(type: .custom)
+        doneBarUttonn.setTitle("Done", for: .normal)
+        doneBarUttonn.setTitleColor(ColorConstant.themePrimary.color, for: .normal)
+        doneBarUttonn.addTarget(self, action: #selector(self.doneBarButtonAction(_:)), for: .touchUpInside)
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: doneBarUttonn)
         
         self.btnPickAddress.setImage(UIImage.fontAwesomeIcon(code: FontAwesome.mapMarkerAlt.rawValue, style: .solid, textColor: ColorConstant.themePrimary.color, size: CGSize(width: 24, height: 24)), for: .normal)
         
@@ -92,11 +82,6 @@ class SearchAddressViewController: UIViewController {
                 }
             }
         }
-        
-        
-        // Setup Google search operation
-        placesClient = GMSPlacesClient.shared()
-        self.placesToken = GMSAutocompleteSessionToken.init()
     }
     
     // MARK: - Action Methods
@@ -122,7 +107,12 @@ class SearchAddressViewController: UIViewController {
     }
     
     @objc func doneBarButtonAction(_ sender: UIButton) {
-        
+        if let addressModel = self.addressSelected as? UserAddressModel {
+            self.delegate?.previousAddressSelected(userAddressModel: addressModel, indexPath: self.indexPath)
+        } else if let addressModel = self.addressSelected as? AddressModel {
+            self.delegate?.newLocationPicked(address: addressModel, indexPath: self.indexPath)
+        }
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func textEditing(_ textField: UITextField) {
@@ -131,44 +121,53 @@ class SearchAddressViewController: UIViewController {
         } else {
             self.searchStarted = true
             
-            self.searchResults(for: textField.text!)
+            self.searchResults(for: textField.text!, completion: { (models, apiStatus) in
+                DispatchQueue.main.async {
+                    self.alertLoader?.dismiss(animated: false, completion: nil)
+                    if let status = apiStatus {
+                        self.showAlert(withMsg: status.message)
+                    } else {
+                        self.searchAddresses = models
+                        self.tableView.reloadData()
+                    }
+                }
+            })
         }
         
         self.tableView.reloadData()
     }
     
     // MARK: - API Methods
-    func searchResults(for text: String) {
-        // Create a type filter.
-        let filter = GMSAutocompleteFilter()
-        filter.type = .establishment
+    func searchResults(for text: String, completion: @escaping (([AddressModel], APIStatus?) -> Void)) {
+        let params: Parameters = [
+            Constants.API.method: Constants.MethodType.getLocationAutocomplete.rawValue,
+            Constants.API.key: "19885432d6ac3d08d46ca1543b66c685d580b738",
+            Constants.API.term: text
+        ]
         
-        placesClient?
-            .findAutocompletePredictions(fromQuery: text,
-                                         filter: filter,
-                                         sessionToken: self.placesToken,
-                                         callback: { (results, error) in
-                                            if let error = error {
-                                                print("Autocomplete error: \(error)")
-                                                return
-                                            }
-                                            if let results = results {
-                                                
-                                                self.searchAddresses = []
-                                                for result in results {
-                                                    self.searchAddresses.append(SearchAddress(placeID: result.placeID, title: result.attributedPrimaryText, subTitle: result.attributedSecondaryText ?? NSAttributedString()))
-                                                }
-                                            }
-            })
+        APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
+            APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
+                if let response = responseData?.first, let jsonAddresses = response["data"], let jsonData = try? JSONSerialization.data(withJSONObject: jsonAddresses) {
+                    let models: [AddressModel] = try! JSONDecoder().decode([AddressModel].self, from: jsonData)
+                    completion(models, nil)
+                } else {
+                    completion([], apiStatus)
+                }
+            }
+        }
     }
     
     func fetchPreviousAddresses(completion: @escaping (([UserAddressModel], APIStatus?) -> Void)) {
         
-        let params: Parameters = [
+        var params: Parameters = [
             Constants.API.method: Constants.MethodType.getSuggestedAddress.rawValue,
-            Constants.API.key: "c81988890f85c5dda3b0a48606e25edbe03f3a0e",
-            Constants.API.customerId: "49"
+            Constants.API.key: "c81988890f85c5dda3b0a48606e25edbe03f3a0e"
         ]
+        
+        if (UserConstant.shared.userModel != nil) {
+            params[Constants.API.customerId] = UserConstant.shared.userModel.id
+        }
+        
         APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
             APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
                 if let response = responseData?.first, let jsonAddresses = response["address"], let jsonData = try? JSONSerialization.data(withJSONObject: jsonAddresses) {
@@ -179,33 +178,6 @@ class SearchAddressViewController: UIViewController {
                 }
             }
         }
-    }
-    
-    func getCoordinateAndMoveForward(for searchedAddress: SearchAddress) {
-        
-        placesClient.lookUpPlaceID(searchedAddress.placeID) { (place, error) in
-            if let error = error {
-                print("lookup place id query error: \(error.localizedDescription)")
-                return
-            }
-            
-            guard let place = place else {
-                print("No place details for \(searchedAddress.placeID)")
-                return
-            }
-            
-            let searchedLatitude = place.coordinate.latitude
-            let searchedLongitude = place.coordinate.longitude
-            
-            var fullAddress = searchedAddress.title.string
-            fullAddress += searchedAddress.subTitle.string
-            
-//            let pinCode = place.addressComponents?.valueFor(placeType: kGMSPlaceTypePostalCode, shortName: true)
-            let address = AddressModel(address: fullAddress, coordinate: CLLocationCoordinate2D(latitude: searchedLatitude, longitude: searchedLongitude))
-            self.delegate?.newLocationPicked(address: address, indexPath: self.indexPath)
-            self.navigationController?.popViewController(animated: true)
-        }
-        
     }
 }
 
@@ -220,34 +192,39 @@ extension SearchAddressViewController: UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
+        cell.textLabel?.numberOfLines = 0
+        cell.selectionStyle = .none
+        
         if self.searchStarted {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchAddressTableViewCell.identifier, for: indexPath) as? SearchAddressTableViewCell else {
-                return UITableViewCell()
-            }
-            
-            cell.selectionStyle = .none
-            cell.titleLabel.attributedText = self.searchAddresses[indexPath.row].title
-            cell.lblSubtitle.attributedText = self.searchAddresses[indexPath.row].subTitle
-            
-            return cell
+            cell.textLabel?.text = self.searchAddresses[indexPath.row].address
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-            
-            cell.textLabel?.numberOfLines = 0
-            cell.selectionStyle = .none
-            
             let user = self.userAddressModels[indexPath.row]
             cell.textLabel?.text = "\(user.name)\n\(user.address)\n\(user.mobileNo)"
-            return cell
         }
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.searchStarted {
-            self.getCoordinateAndMoveForward(for: self.searchAddresses[indexPath.row])
+            self.addressSelected = self.searchAddresses[indexPath.row]
+            self.searchAddresses = []
+            self.searchAddresses.append(self.addressSelected as! AddressModel)
         } else {
-            self.delegate?.previousAddressSelected(userAddressModel: self.userAddressModels[indexPath.row], indexPath: self.indexPath)
-            self.navigationController?.popViewController(animated: true)
+            self.addressSelected = self.userAddressModels[indexPath.row]
+            self.userAddressModels = []
+            self.userAddressModels.append(self.addressSelected as! UserAddressModel)
         }
+        self.updateAddressSelected()
+    }
+    
+    func updateAddressSelected() {
+        if let address = self.addressSelected as? AddressModel {
+            self.txtAddressSearch.text = address.address
+        } else if let address = self.addressSelected as? UserAddressModel {
+            self.txtAddressSearch.text = address.address
+        }
+        self.tableView.reloadData()
     }
 }

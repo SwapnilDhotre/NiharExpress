@@ -80,6 +80,7 @@ class Constants {
         static let overAllRating = "overall_rating"
         static let driverRating = "driver_rating"
  
+        static let term = "term"
     }
     
     enum MethodType: String {
@@ -100,6 +101,7 @@ class Constants {
         case listCity = "listCity"
         case getLocation = "getLocation"
         case getSuggestedAddress = "getSuggestedAddress"
+        case getLocationAutocomplete = "getLocationAutocomplete"
     }
     
     struct headers {

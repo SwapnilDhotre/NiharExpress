@@ -202,7 +202,7 @@ extension OrderDetailsViewController: UITableViewDataSource, UITableViewDelegate
                 let lat = NSString(string: orderAddress.lat).doubleValue
                 let long = NSString(string: orderAddress.lat).doubleValue
                 let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-                let addressModel = AddressModel(address: orderAddress.address, coordinate: coordinate)
+                let addressModel = AddressModel(id: "", address: orderAddress.address, coordinate: coordinate)
                 
                 subFormField.value = addressModel
                 break
