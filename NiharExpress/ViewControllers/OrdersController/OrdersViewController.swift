@@ -83,6 +83,10 @@ class OrdersViewController: UIViewController {
         self.createOrderTopConstraint.constant = 200
         self.createOrderButton.alpha = 0
         self.lblOrderWithNoOrganization.alpha = 0
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.performShowAnimation()
+        }
     }
     
     func performShowAnimation() {

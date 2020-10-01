@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -67,20 +67,20 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YnD-11-F4o">
-                    <rect key="frame" x="0.0" y="177.5" width="414" height="578.5"/>
+                    <rect key="frame" x="0.0" y="177.5" width="414" height="618.5"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gQG-7a-hP2">
-                    <rect key="frame" x="0.0" y="756" width="414" height="140"/>
+                    <rect key="frame" x="0.0" y="796" width="414" height="100"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="₹0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AiZ-RX-NJU">
-                            <rect key="frame" x="25" y="86" width="65.5" height="30.5"/>
+                            <rect key="frame" x="25" y="46" width="65.5" height="30.5"/>
                             <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="26"/>
                             <color key="textColor" red="0.50196078430000002" green="0.1176470588" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h7c-Tq-MlN" customClass="DesignableButton" customModule="NiharExpress" customModuleProvider="target">
-                            <rect key="frame" x="259" y="82" width="140" height="38"/>
+                            <rect key="frame" x="259" y="42" width="140" height="38"/>
                             <color key="backgroundColor" red="0.50196078430000002" green="0.1176470588" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="38" id="BGR-uO-zad"/>
@@ -100,8 +100,8 @@
                                 <action selector="createOrderAction:" destination="-1" eventType="touchUpInside" id="hBD-Tp-0gQ"/>
                             </connections>
                         </button>
-                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gi3-RS-HE9">
-                            <rect key="frame" x="16" y="32" width="120.5" height="30"/>
+                        <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gi3-RS-HE9">
+                            <rect key="frame" x="16" y="-8" width="120.5" height="30"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="i" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGx-AI-kPg">
                                     <rect key="frame" x="0.0" y="0.0" width="4" height="30"/>
@@ -117,14 +117,14 @@
                                 </label>
                             </subviews>
                         </stackView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q3e-06-lTy">
-                            <rect key="frame" x="16" y="32" width="120.5" height="30"/>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q3e-06-lTy">
+                            <rect key="frame" x="16" y="-8" width="120.5" height="30"/>
                             <connections>
                                 <action selector="cashOnDeliveryAction:" destination="-1" eventType="touchUpInside" id="eu3-BU-41G"/>
                             </connections>
                         </button>
-                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="s3j-me-WYq">
-                            <rect key="frame" x="317" y="32" width="81" height="30"/>
+                        <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="s3j-me-WYq">
+                            <rect key="frame" x="317" y="-8" width="81" height="30"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="i" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a4A-ui-pRf">
                                     <rect key="frame" x="0.0" y="0.0" width="4" height="30"/>
@@ -140,8 +140,8 @@
                                 </label>
                             </subviews>
                         </stackView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sf0-u1-uoe">
-                            <rect key="frame" x="317" y="32" width="81" height="30"/>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sf0-u1-uoe">
+                            <rect key="frame" x="317" y="-8" width="81" height="30"/>
                             <connections>
                                 <action selector="payOnlineAction:" destination="-1" eventType="touchUpInside" id="UZe-my-vQ8"/>
                             </connections>
@@ -156,7 +156,7 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
                         <constraint firstItem="Q3e-06-lTy" firstAttribute="leading" secondItem="gi3-RS-HE9" secondAttribute="leading" id="17s-PY-h6D"/>
-                        <constraint firstAttribute="height" constant="140" id="3BX-23-LR8"/>
+                        <constraint firstAttribute="height" constant="100" id="3BX-23-LR8"/>
                         <constraint firstItem="sf0-u1-uoe" firstAttribute="bottom" secondItem="s3j-me-WYq" secondAttribute="bottom" id="A3V-F6-fpC"/>
                         <constraint firstItem="AiZ-RX-NJU" firstAttribute="centerY" secondItem="h7c-Tq-MlN" secondAttribute="centerY" id="IUK-1z-naS"/>
                         <constraint firstItem="xtD-HH-dyU" firstAttribute="centerX" secondItem="gQG-7a-hP2" secondAttribute="centerX" id="KyG-cZ-QfX"/>

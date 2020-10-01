@@ -56,11 +56,11 @@ class DateTimePickerTableViewCell: UITableViewCell {
         let firstDate = model.value as? Date
         
         if let date = firstDate {
-            self.lblDateHolder.text = date.toString(withFormat: "dd.MM")
+            self.lblDateHolder.text = date.toString(withFormat: "dd-MM-yyyy")
         }
         
         if let fDate = firstDate {
-            self.lblTimeHolder.text = fDate.toString(withFormat: "HH:mm")
+            self.lblTimeHolder.text = fDate.toString(withFormat: "hh:mm a")
             
             self.lblOneDifference.text = "Your Order Pickup Between \(fDate.toString(withFormat: "hh:mm a")) - \(fDate.adding(minutes: 60).toString(withFormat: "hh:mm a"))"
         }

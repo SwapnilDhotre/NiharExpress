@@ -271,7 +271,7 @@ extension OrderReviewViewController: UITableViewDataSource, UITableViewDelegate 
         
         cell.selectionStyle = .none
         let data = self.locations[indexPath.row]
-        cell.updateData(with: "\(indexPath.row + 1)", address: data.address.address, dateTime: data.dateTime.toString(withFormat: "dd.MM HH:mm"), mobileNo: data.mobileNo)
+        cell.updateData(with: "\(indexPath.row + 1)", address: data.address.address, dateTime: data.dateTime.toString(withFormat: "dd-MM-yyyy hh:mm a"), mobileNo: data.mobileNo)
         
         return cell
     }

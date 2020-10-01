@@ -42,7 +42,8 @@ class BottomCreateOrderView: UIView {
         Bundle.main.loadNibNamed(kCONTENT_XIB_NAME, owner: self, options: nil)
         contentView.fixInView(self)
         
-        self.toggleArrowUI()
+        self.lblArrowUpDown.text = ""
+//        self.toggleArrowUI()
     }
     
     func toggleArrowUI() {

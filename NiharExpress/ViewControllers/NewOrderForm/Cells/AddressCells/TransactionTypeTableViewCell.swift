@@ -14,10 +14,13 @@ protocol TransactionTypeDelegate {
 
 class TransactionTypeTableViewCell: UITableViewCell {
     static var identifier = "TransactionTypeTableViewCell"
-
+    
     @IBOutlet weak var btnTransaction: UIButton!
+    @IBOutlet weak var lblRupeeTitle: UILabel!
     @IBOutlet weak var txtTransactionAmountField: UITextField!
-
+    @IBOutlet weak var amountLineView: UIView!
+    
+    @IBOutlet weak var lblDownCaret: UILabel!
     var model: FormSubFieldModel!
     var delegate: TransactionTypeDelegate?
     
@@ -26,20 +29,36 @@ class TransactionTypeTableViewCell: UITableViewCell {
         
         self.configureUI()
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
     func configureUI() {
+        self.btnTransaction.setTitle("No Transaction", for: .normal)
         
+        self.lblDownCaret.text = FontAwesome.angleDown.rawValue
+        self.lblDownCaret.textColor = UIColor.gray
+        self.lblDownCaret.font = UIFont.fontAwesome(ofSize: 14, style: .regular)
     }
     
     func updateData(with model: FormSubFieldModel) {
         self.model  = model
         
-        self.btnTransaction.setTitle((model.value as? (transactionType: String, transactionAmount: String))?.transactionType, for: .normal)
-        self.txtTransactionAmountField.text = (model.value as? (transactionType: String, transactionAmount: String))?.transactionAmount
+        self.lblRupeeTitle.isHidden = true
+        self.amountLineView.isHidden = true
+        self.txtTransactionAmountField.isHidden = true
+        
+        if let valueType = model.value as? (transactionType: String, transactionAmount: String) {
+            if valueType.transactionType != "No Transaction" {
+                self.lblRupeeTitle.isHidden = false
+                self.amountLineView.isHidden = false
+                self.txtTransactionAmountField.isHidden = false
+                
+                self.btnTransaction.setTitle(valueType.transactionType, for: .normal)
+                self.txtTransactionAmountField.text = valueType.transactionAmount
+            }
+        }
     }
     
     @IBAction func btnTransactionAction(_ sender: UIButton) {

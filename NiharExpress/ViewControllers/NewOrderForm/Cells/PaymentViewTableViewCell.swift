@@ -8,15 +8,47 @@
 
 import UIKit
 
+protocol ContentFittingTableViewDelegate: UITableViewDelegate {
+    func tableViewDidUpdateContentSize(_ tableView: UITableView)
+}
+
+class ContentFittingTableView: UITableView {
+
+    override var contentSize: CGSize {
+        didSet {
+            if !constraints.isEmpty {
+                invalidateIntrinsicContentSize()
+            } else {
+                sizeToFit()
+            }
+
+            if contentSize != oldValue {
+                if let delegate = delegate as? ContentFittingTableViewDelegate {
+                    delegate.tableViewDidUpdateContentSize(self)
+                }
+            }
+        }
+    }
+
+    override var intrinsicContentSize: CGSize {
+        return contentSize
+    }
+
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        return contentSize
+    }
+}
+
 class PaymentViewTableViewCell: UITableViewCell {
     static var identifier = "PaymentViewTableViewCell"
     
+    @IBOutlet weak var lblRadioIcon: UILabel!
     @IBOutlet weak var lblRupeeAmount: UILabel!
     @IBOutlet weak var lblCashAmount: UILabel!
     @IBOutlet weak var lblTickAmount: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
+//    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     
     var delegate: ReloadCellProtocol?
     var formFieldModel: FormFieldModel!
@@ -34,6 +66,10 @@ class PaymentViewTableViewCell: UITableViewCell {
     }
     
     func configureUI() {
+        self.lblRadioIcon.text = FontAwesome.dotCircle.rawValue
+        self.lblRadioIcon.textColor = ColorConstant.themePrimary.color
+        self.lblRadioIcon.font = UIFont.fontAwesome(ofSize: 20, style: .regular)
+        
         self.lblTickAmount.font = UIFont.fontAwesome(ofSize: 22, style: .regular)
         self.lblTickAmount.text = FontAwesome.check.rawValue
         self.lblTickAmount.textColor = ColorConstant.appBlackLabel.color
@@ -51,7 +87,7 @@ class PaymentViewTableViewCell: UITableViewCell {
     func updateData(with model: FormFieldModel, allFormFields: [FormFieldModel]) {
         self.formFieldModel = model
         
-        self.tableViewHeightConstraint.constant = 500
+//        self.tableViewHeightConstraint.constant = 500
         
         var locations: [PaymentWillOccurAt] = []
         for formModel in allFormFields {
@@ -66,24 +102,6 @@ class PaymentViewTableViewCell: UITableViewCell {
         }
         self.formFieldModel.paymentLocation = locations
         self.tableView.reloadData()
-        
-//        UIView.animate(withDuration: 0, animations: {
-//            self.tableView.layoutIfNeeded()
-//            }) { (complete) in
-//                var heightOfTableView: CGFloat = 0.0
-//                // Get visible cells and sum up their heights
-//                let cells = self.tableView.visibleCells
-//                for cell in cells {
-//                    heightOfTableView += cell.frame.height
-//                }
-//                // Edit heightOfTableViewConstraint's constant to update height of table view
-//                self.tableViewHeightConstraint.constant = heightOfTableView
-//        }
-        
-//        self.tableViewHeightConstraint.constant = CGFloat(locations.count * 40)
-//        self.layoutIfNeeded()
-        
-        
     }
 }
 
@@ -101,20 +119,20 @@ extension PaymentViewTableViewCell: UITableViewDataSource, UITableViewDelegate {
         cell.selectionStyle = .none
         cell.updateData(with: self.formFieldModel.paymentLocation[indexPath.row])
         
-        if indexPath.row ==  self.formFieldModel.paymentLocation.count - 1 {
-        UIView.animate(withDuration: 0, animations: {
-        self.tableView.layoutIfNeeded()
-        }) { (complete) in
-            var heightOfTableView: CGFloat = 0.0
-            // Get visible cells and sum up their heights
-            let cells = self.tableView.visibleCells
-            for cell in cells {
-                heightOfTableView += cell.frame.height
-            }
-            // Edit heightOfTableViewConstraint's constant to update height of table view
-            self.tableViewHeightConstraint.constant = heightOfTableView
-        }
-        }
+//        if indexPath.row ==  self.formFieldModel.paymentLocation.count - 1 {
+//            UIView.animate(withDuration: 0, animations: {
+//                self.tableView.layoutIfNeeded()
+//            }) { (complete) in
+//                var heightOfTableView: CGFloat = 0.0
+//                // Get visible cells and sum up their heights
+//                let cells = self.tableView.visibleCells
+//                for cell in cells {
+//                    heightOfTableView += cell.frame.height
+//                }
+//                // Edit heightOfTableViewConstraint's constant to update height of table view
+//                self.tableViewHeightConstraint.constant = heightOfTableView
+//            }
+//        }
         
         return cell
     }

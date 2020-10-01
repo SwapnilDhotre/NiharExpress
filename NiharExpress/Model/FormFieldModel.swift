@@ -63,7 +63,7 @@ class FormFieldModel {
             FormSubFieldModel(title: "For online store", type: .storeInfoHeader, value: false),
             FormSubFieldModel(title: "Contact Person", type: .contactPerson, value: ""),
             FormSubFieldModel(title: "Contact No", type: .contactNo, value: ""),
-            FormSubFieldModel(title: "Transaction Type", type: .transaction, value: (transactionType: "", transactionAmount: "")),
+            FormSubFieldModel(title: "Transaction Type", type: .transaction, value: (transactionType: "No Transaction", transactionAmount: "")),
         ]
     }
     
@@ -77,7 +77,7 @@ class FormFieldModel {
             FormSubFieldModel(title: "For online store", type: .storeInfoHeader, value: false),
             FormSubFieldModel(title: "Contact Person", type: .contactPerson, value: ""),
             FormSubFieldModel(title: "Contact No", type: .contactNo, value: ""),
-            FormSubFieldModel(title: "Transaction Type", type: .transaction, value: (transactionType: "", transactionAmount: "")),
+            FormSubFieldModel(title: "Transaction Type", type: .transaction, value: (transactionType: "No Transaction", transactionAmount: "")),
         ]
     }
     

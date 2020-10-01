@@ -101,7 +101,7 @@ class NewOrderFormTableViewController: UITableViewController {
         
         self.navigationView.leftNavigationButton.addTarget(self, action: #selector(self.crossBtnAction(_:)), for: .touchUpInside)
         self.navigationView.rightNavigationButton.addTarget(self, action: #selector(self.clearDataBtnAction(_:)), for: .touchUpInside)
-        self.bottomPanelView.btnAmountClick.addTarget(self, action: #selector(self.btnAmountClick), for: .touchUpInside)
+//        self.bottomPanelView.btnAmountClick.addTarget(self, action: #selector(self.btnAmountClick), for: .touchUpInside)
         self.bottomPanelView.btnCreateOrder.addTarget(self, action: #selector(self.btnCreateOrderClick(_:)), for: .touchUpInside)
         
         if let view = UIApplication.shared.keyWindow{
@@ -166,13 +166,41 @@ class NewOrderFormTableViewController: UITableViewController {
     
     // MARK: - Action Methods
     @objc func crossBtnAction(_ sender: UIButton) {
-        self.delegate?.formDismissal()
-        self.dismiss(animated: true, completion: nil)
+        self.view.endEditing(true)
+        
+        var alertController: UIAlertController?
+        let okAction = UIAlertAction(title: "OK", style: .destructive, handler: { (action) in
+            alertController?.dismiss(animated: true, completion: {
+                 self.delegate?.formDismissal()
+                       self.dismiss(animated: true, completion: nil)
+            })
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+            alertController?.dismiss(animated: true, completion: nil)
+        })
+        
+        
+        alertController = self.showAlertAndCustomAction(withMsg: "Do you want to cancel the order?", actions: [okAction, cancelAction])
     }
     
     @objc func clearDataBtnAction(_ sender: UIButton) {
-        self.formFields = FormFieldModel.getFormFields()
-        self.tableView.reloadData()
+        self.view.endEditing(true)
+        
+        var alertController: UIAlertController?
+        let okAction = UIAlertAction(title: "OK", style: .destructive, handler: { (action) in
+            alertController?.dismiss(animated: true, completion: {
+                 self.formFields = FormFieldModel.getFormFields()
+                 self.tableView.reloadData()
+            })
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+            alertController?.dismiss(animated: true, completion: nil)
+        })
+        
+        
+        alertController = self.showAlertAndCustomAction(withMsg: "Do you want to cancel the order?", actions: [okAction, cancelAction])
     }
     
     @objc func btnAmountClick(_ sender: UIButton) {
@@ -181,6 +209,8 @@ class NewOrderFormTableViewController: UITableViewController {
     }
     
     @objc func btnCreateOrderClick(_ sender: UIButton) {
+        self.view.endEditing(true)
+        
         var weight: String?
         var optimizeRoute = false
         var parcelPrice: String?
@@ -612,6 +642,8 @@ class NewOrderFormTableViewController: UITableViewController {
         let model = self.tableViewFormFields[indexPath.row]
         if let subFormField = model as? FormSubFieldModel {
             if subFormField.type == .address {
+                self.view.endEditing(true)
+                
                 let searchAddressController = SearchAddressViewController()
                 searchAddressController.indexPath = indexPath
                 searchAddressController.delegate = self
@@ -708,6 +740,8 @@ extension NewOrderFormTableViewController: AddDeliveryProtocol {
 
 extension NewOrderFormTableViewController {
     func pickDate(previousDate: Date? = nil, completion: @escaping (Date?) -> Void) {
+        self.view.endEditing(true)
+        
         let picker = DatePickerViewController()
         picker.previousPickedDate = previousDate
         picker.modalPresentationStyle = .overCurrentContext
@@ -721,7 +755,7 @@ extension NewOrderFormTableViewController {
     }
     
     func pickLocation(completion: @escaping (AddressModel) -> Void) {
-        
+        self.view.endEditing(true)
         
         let pickAddressConstroller = PickAddressViewController()
         pickAddressConstroller.pickAddress = { (addressModel) in
