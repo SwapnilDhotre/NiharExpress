@@ -11,6 +11,9 @@
         <array key="Roboto-Bold.ttf">
             <string>Roboto-Bold</string>
         </array>
+        <array key="Roboto-Medium.ttf">
+            <string>Roboto-Medium</string>
+        </array>
         <array key="Roboto-Regular.ttf">
             <string>Roboto-Regular</string>
         </array>
@@ -44,8 +47,8 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Completed " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g0x-dx-Kem">
-                        <rect key="frame" x="16" y="46.5" width="82" height="19"/>
-                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
+                        <rect key="frame" x="16" y="46.5" width="72" height="16.5"/>
+                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -83,10 +86,18 @@
                             <constraint firstAttribute="height" constant="1" id="EOc-wI-Wt4"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Completed " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JAI-pF-ysr" userLabel="Completed">
+                        <rect key="frame" x="93" y="47.5" width="66.5" height="15.5"/>
+                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="13"/>
+                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="JAI-pF-ysr" firstAttribute="firstBaseline" secondItem="g0x-dx-Kem" secondAttribute="firstBaseline" id="5yS-Qv-fEg"/>
                     <constraint firstAttribute="trailing" secondItem="va4-er-uaZ" secondAttribute="trailing" id="8Q5-gQ-66d"/>
                     <constraint firstItem="6OM-vv-R5I" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="Q6I-Td-gym"/>
+                    <constraint firstItem="JAI-pF-ysr" firstAttribute="leading" secondItem="g0x-dx-Kem" secondAttribute="trailing" constant="5" id="RjA-ws-erh"/>
                     <constraint firstAttribute="trailing" secondItem="PMZ-hE-LMS" secondAttribute="trailing" constant="16" id="VjX-07-Bpg"/>
                     <constraint firstAttribute="bottom" secondItem="va4-er-uaZ" secondAttribute="bottom" id="alx-Y8-fDF"/>
                     <constraint firstAttribute="bottom" secondItem="dzd-G2-Tkl" secondAttribute="bottom" constant="10" id="bTh-or-qOF"/>
@@ -107,7 +118,8 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="lblAmount" destination="e2G-XA-ohm" id="T6i-ss-stJ"/>
-                <outlet property="lblCompletedDate" destination="g0x-dx-Kem" id="kET-5D-pFS"/>
+                <outlet property="lblCompletedDate" destination="JAI-pF-ysr" id="5Ij-Rp-Fwu"/>
+                <outlet property="lblCompletedTitle" destination="g0x-dx-Kem" id="rVO-8c-rTR"/>
                 <outlet property="lblOrderNo" destination="NDG-fj-3su" id="7rJ-1Q-p8H"/>
                 <outlet property="locationsStack" destination="PMZ-hE-LMS" id="XFC-TN-tKf"/>
                 <outlet property="ratingView" destination="dzd-G2-Tkl" id="Lxm-kT-1RL"/>

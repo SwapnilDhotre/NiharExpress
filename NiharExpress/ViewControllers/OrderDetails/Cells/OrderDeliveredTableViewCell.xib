@@ -136,15 +136,6 @@
                             <userDefinedRuntimeAttribute type="boolean" keyPath="maskToBounds" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Courier Boy" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1C-El-dyl">
-                        <rect key="frame" x="86" y="277" width="78.5" height="16"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="16" id="V5V-OA-v9J"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
-                        <color key="textColor" red="0.45098039220000002" green="0.45098039220000002" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K8h-bA-aAU">
                         <rect key="frame" x="16" y="133.5" width="120" height="20"/>
                         <connections>
@@ -158,6 +149,29 @@
                             <constraint firstAttribute="height" constant="1" id="sbZ-62-NZI"/>
                         </constraints>
                     </view>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="qXc-uZ-Rc0">
+                        <rect key="frame" x="83" y="265.5" width="80" height="35"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Courier Boy" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iqt-sL-RiT">
+                                <rect key="frame" x="0.0" y="0.0" width="80" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="GoA-qq-1de"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
+                                <color key="textColor" red="0.45098039220000002" green="0.45098039220000002" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8855095575" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TpD-E9-9TH">
+                                <rect key="frame" x="0.0" y="19" width="80" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="HIB-R6-Zuk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="LMT-IZ-02E" secondAttribute="bottom" constant="16" id="2M0-rV-QuQ"/>
@@ -171,6 +185,7 @@
                     <constraint firstAttribute="trailing" secondItem="KPh-PK-7xy" secondAttribute="trailing" id="FvP-fM-9Ey"/>
                     <constraint firstItem="K8h-bA-aAU" firstAttribute="bottom" secondItem="3H2-Ui-sSI" secondAttribute="bottom" id="HGK-Hn-8q1"/>
                     <constraint firstAttribute="bottom" secondItem="KPh-PK-7xy" secondAttribute="bottom" id="Hka-ym-QPa"/>
+                    <constraint firstItem="qXc-uZ-Rc0" firstAttribute="centerY" secondItem="CQQ-8g-kYt" secondAttribute="centerY" constant="-2" id="IUS-fb-pQg"/>
                     <constraint firstAttribute="trailing" secondItem="Shq-j7-tcW" secondAttribute="trailing" id="IWO-ja-kej"/>
                     <constraint firstItem="K8h-bA-aAU" firstAttribute="trailing" secondItem="3H2-Ui-sSI" secondAttribute="trailing" id="JRj-lD-kwG"/>
                     <constraint firstAttribute="trailing" secondItem="fFP-Of-pU3" secondAttribute="trailing" constant="16" id="KAD-NB-ijU"/>
@@ -181,7 +196,6 @@
                     <constraint firstItem="p4o-fN-EVh" firstAttribute="leading" secondItem="RBY-Hp-K0e" secondAttribute="trailing" constant="2" id="R3m-Mr-TZU"/>
                     <constraint firstItem="Shq-j7-tcW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="VAa-Ca-cgh"/>
                     <constraint firstItem="p4o-fN-EVh" firstAttribute="centerY" secondItem="RBY-Hp-K0e" secondAttribute="centerY" id="VgS-zz-KZt"/>
-                    <constraint firstItem="j1C-El-dyl" firstAttribute="leading" secondItem="CQQ-8g-kYt" secondAttribute="trailing" constant="10" id="WR9-QP-s25"/>
                     <constraint firstItem="pau-IO-iFz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="cd1-xJ-Koq"/>
                     <constraint firstItem="3H2-Ui-sSI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="djr-eE-sVj"/>
                     <constraint firstItem="K8h-bA-aAU" firstAttribute="leading" secondItem="3H2-Ui-sSI" secondAttribute="leading" id="faZ-JM-mJO"/>
@@ -192,7 +206,7 @@
                     <constraint firstItem="3Lj-1g-dAF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="t9M-Ep-W0g"/>
                     <constraint firstItem="3Lj-1g-dAF" firstAttribute="top" secondItem="pau-IO-iFz" secondAttribute="bottom" constant="4" id="tNo-SY-lsb"/>
                     <constraint firstItem="Shq-j7-tcW" firstAttribute="top" secondItem="3Lj-1g-dAF" secondAttribute="bottom" constant="5" id="tb5-N9-aYM"/>
-                    <constraint firstItem="j1C-El-dyl" firstAttribute="centerY" secondItem="CQQ-8g-kYt" secondAttribute="centerY" id="uqq-Tc-Tfq"/>
+                    <constraint firstItem="qXc-uZ-Rc0" firstAttribute="leading" secondItem="CQQ-8g-kYt" secondAttribute="trailing" constant="7" id="x0y-nW-qDa"/>
                     <constraint firstItem="fFP-Of-pU3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="ymR-kd-llM"/>
                 </constraints>
             </tableViewCellContentView>
@@ -202,7 +216,8 @@
                 <outlet property="courierBoyImage" destination="CQQ-8g-kYt" id="bjh-Yl-Gjx"/>
                 <outlet property="lblAddress" destination="fFP-Of-pU3" id="eCh-UV-RbK"/>
                 <outlet property="lblAmount" destination="p4o-fN-EVh" id="Msm-4K-G5h"/>
-                <outlet property="lblCourierBoyName" destination="j1C-El-dyl" id="UGO-OK-S0o"/>
+                <outlet property="lblCourierBoyMob" destination="TpD-E9-9TH" id="PwG-HT-oMA"/>
+                <outlet property="lblCourierBoyName" destination="Iqt-sL-RiT" id="kdq-BU-wdh"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="236.71875"/>
         </tableViewCell>

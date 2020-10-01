@@ -10,6 +10,8 @@ import UIKit
 import CoreLocation
 
 enum OrderStatus {
+    case assigned
+    case pickUp
     case awaiting
     case inProgress
     case completed
@@ -44,7 +46,7 @@ class OrderDetailsViewController: UIViewController {
         
         switch self.orderStatus {
             
-        case .awaiting:
+        case .awaiting, .assigned, .pickUp:
             self.bannerViewTitle.text = self.order.orderStatus
             self.bannerView.backgroundColor = ColorConstant.orderDetailsActiveBanner.color
         case .inProgress:
@@ -67,7 +69,12 @@ class OrderDetailsViewController: UIViewController {
     }
     
     func configureUI() {
+        self.order.pickUp.orderStatusType = .pickUp
         self.addressViews.append(self.order.pickUp)
+        
+        self.order.delivery.forEach { (order) in
+            order.orderStatusType = .delivery
+        }
         self.addressViews.append(contentsOf: self.order.delivery)
         
         self.addressViews.first?.isFirstCell = true
@@ -101,6 +108,17 @@ extension OrderDetailsViewController: UITableViewDataSource, UITableViewDelegate
             case .awaiting:
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: InProgressTableViewCell.identifier) as? InProgressTableViewCell else {
                     assertionFailure("Couldn't dequeue:>> \(InProgressTableViewCell.identifier)")
+                    return UITableViewCell()
+                }
+                
+                cell.selectionStyle = .none
+                cell.updateData(with: self.order)
+                cell.delegate = self
+                
+                return cell
+            case .assigned, .pickUp:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: TrackOrderTableViewCell.identifier) as? TrackOrderTableViewCell else {
+                    assertionFailure("Couldn't dequeue:>> \(TrackOrderTableViewCell.identifier)")
                     return UITableViewCell()
                 }
                 

@@ -13,8 +13,8 @@ protocol TrackOrderProtocol {
 }
 
 class TrackOrderTableViewCell: UITableViewCell {
-     static var identifier = "TrackOrderTableViewCell"
-
+    static var identifier = "TrackOrderTableViewCell"
+    
     @IBOutlet weak var markerImage: UIImageView!
     @IBOutlet var lblOrderAmount: UILabel!
     @IBOutlet var lblDetailedAddress: UILabel!
@@ -22,13 +22,16 @@ class TrackOrderTableViewCell: UITableViewCell {
     
     @IBOutlet var lblCourierBoyName: UILabel!
     @IBOutlet var lblCourierBoyNo: UILabel!
+    @IBOutlet weak var btnTrackOrder: DesignableButton!
+    @IBOutlet weak var btnPhone: UIButton!
     
     var delegate: TrackOrderProtocol?
+    var contactNo: String = ""
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
@@ -37,6 +40,11 @@ class TrackOrderTableViewCell: UITableViewCell {
         self.lblOrderAmount.text = order.price
         self.lblDetailedAddress.text = order.pickUp.address
         self.lblCourierBoyName.text = order.driverName
+        self.contactNo = order.driveMobileNo
+        
+        self.btnPhone.titleLabel?.font = UIFont.fontAwesome(ofSize: 18, style: .solid)
+        self.btnPhone.setTitle(FontAwesome.phone.rawValue, for: .normal)
+        self.btnPhone.setTitleColor(.darkGray, for: .normal)
         
         self.imgCourierBoy.pin_updateWithProgress = true
         self.imgCourierBoy.pin_setImage(from: URL(string: order.driverImage))
@@ -44,5 +52,11 @@ class TrackOrderTableViewCell: UITableViewCell {
     
     @IBAction func trackOrderAction(_ sender: UIButton) {
         self.delegate?.trackOrderAction()
+    }
+    
+    @IBAction func callCourierBoy(_ sender: Any) {
+        if let url = URL(string: "tel://\(self.contactNo)") {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
 }

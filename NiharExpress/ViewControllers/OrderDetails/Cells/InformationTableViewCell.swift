@@ -34,7 +34,7 @@ class InformationTableViewCell: UITableViewCell {
         self.lblWeight.text = order.weight
         self.lblDeliveryMethod.text = order.orderType
         self.lblContent.text = order.parcelType
-        self.lblStatedValue.text = "₹\(order.price)"
+        self.lblStatedValue.text = "₹\(order.parcelValue)"
         self.lblPaymentType.text = order.paymentMethod
     }
 }

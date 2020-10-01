@@ -20,6 +20,7 @@ class InProgressTableViewCell: UITableViewCell {
 
     @IBOutlet weak var mapView: GMSMapView!
     
+    @IBOutlet weak var rupeeMapConstraint: NSLayoutConstraint!
     @IBOutlet weak var lblAmount: UILabel!
     @IBOutlet weak var lblAddress: UILabel!
     
@@ -37,6 +38,15 @@ class InProgressTableViewCell: UITableViewCell {
     }
     
     func updateData(with order: Order) {
+
+        if order.orderStatus == "Assigned" {
+            self.mapView.isHidden = false
+            self.rupeeMapConstraint.priority = UILayoutPriority(950)
+        } else {
+            self.mapView.isHidden = true
+            self.rupeeMapConstraint.priority = UILayoutPriority(850)
+        }
+        
         self.lblAmount.text = order.price
         self.lblAddress.text = order.pickUp.address
         self.lblCourierBoyName.text = order.driverName

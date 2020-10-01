@@ -20,6 +20,7 @@ class OrderDeliveredTableViewCell: UITableViewCell {
     @IBOutlet weak var lblAmount: UILabel!
     @IBOutlet weak var lblAddress: UILabel!
     @IBOutlet weak var lblCourierBoyName: UILabel!
+    @IBOutlet weak var lblCourierBoyMob: UILabel!
     @IBOutlet weak var courierBoyImage: UIImageView!
     
     @IBOutlet weak var btnClone: UIButton!
@@ -41,6 +42,7 @@ class OrderDeliveredTableViewCell: UITableViewCell {
         self.lblAmount.text = order.price
         self.lblAddress.text = order.pickUp.address
         self.lblCourierBoyName.text = order.driverName
+        self.lblCourierBoyMob.text = order.driveMobileNo
         
         self.courierBoyImage.pin_updateWithProgress = true
         self.courierBoyImage.pin_setImage(from: URL(string: order.driverImage))

@@ -171,6 +171,7 @@
 		E6AA98F324BF4D2D006577F6 /* GooglePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AA98F224BF4D2D006577F6 /* GooglePlace.swift */; };
 		E6CF2D4824BE044200158CE0 /* FormFieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CF2D4724BE044200158CE0 /* FormFieldModel.swift */; };
 		E6CF2D4A24BE053700158CE0 /* FormSubFieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CF2D4924BE053700158CE0 /* FormSubFieldModel.swift */; };
+		E6DF3FB6252668F600533915 /* UIImage_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DF3FB5252668F600533915 /* UIImage_Extension.swift */; };
 		E6F81A3824DDB33600E98351 /* OrderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F81A3624DDB33600E98351 /* OrderDetailsViewController.swift */; };
 		E6F81A3924DDB33600E98351 /* OrderDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6F81A3724DDB33600E98351 /* OrderDetailsViewController.xib */; };
 		E6F81A3C24DDB7AE00E98351 /* OrderDetailsLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F81A3A24DDB7AE00E98351 /* OrderDetailsLocationTableViewCell.swift */; };
@@ -354,6 +355,7 @@
 		E6AA98F224BF4D2D006577F6 /* GooglePlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlace.swift; sourceTree = "<group>"; };
 		E6CF2D4724BE044200158CE0 /* FormFieldModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldModel.swift; sourceTree = "<group>"; };
 		E6CF2D4924BE053700158CE0 /* FormSubFieldModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSubFieldModel.swift; sourceTree = "<group>"; };
+		E6DF3FB5252668F600533915 /* UIImage_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage_Extension.swift; sourceTree = "<group>"; };
 		E6F81A3624DDB33600E98351 /* OrderDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsViewController.swift; sourceTree = "<group>"; };
 		E6F81A3724DDB33600E98351 /* OrderDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderDetailsViewController.xib; sourceTree = "<group>"; };
 		E6F81A3A24DDB7AE00E98351 /* OrderDetailsLocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsLocationTableViewCell.swift; sourceTree = "<group>"; };
@@ -641,6 +643,7 @@
 				E630D99B24BD9CB4006666A8 /* String_Extension.swift */,
 				E630D9AF24BDBAC1006666A8 /* UIDevice_Extension.swift */,
 				E65C384C24C5FD02002DD732 /* UIButton_Extension.swift */,
+				E6DF3FB5252668F600533915 /* UIImage_Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1207,6 +1210,7 @@
 				E6F81A3C24DDB7AE00E98351 /* OrderDetailsLocationTableViewCell.swift in Sources */,
 				E6496A9A24DAF05E00514AB9 /* ProfileTableViewCell.swift in Sources */,
 				E60F187424BF033200134353 /* NotifyBySMSTableViewCell.swift in Sources */,
+				E6DF3FB6252668F600533915 /* UIImage_Extension.swift in Sources */,
 				E6506C6624DC09BC0044368B /* PriceInfo.swift in Sources */,
 				E630D99224BD9813006666A8 /* FontAwesomeEnum.swift in Sources */,
 				E6CF2D4824BE044200158CE0 /* FormFieldModel.swift in Sources */,

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ESPullToRefresh
 
 class OrdersViewController: UIViewController {
     
@@ -170,36 +171,42 @@ extension OrdersViewController: TabbedViewDataSource {
             self.orderData = []
             self.selectedTabIndex = index
             
-            var orderStatus = ""
-            if index == 0 {
-                orderStatus = "A"
-            } else if index == 1 {
-                orderStatus = "C"
-            } else if index == 2 {
-                orderStatus = "I"
-            }
-            
             self.setUpTableView()
-            
-            self.alertLoader = self.showAlertLoader()
-            self.fetchOrders(with: orderStatus) { (orders, apiStatus) in
-                DispatchQueue.main.async {
-                    self.alertLoader?.dismiss(animated: false, completion: nil)
-                    if let ordersData = orders {
-                        self.orderData = ordersData
-                        self.tableView?.backgroundView = nil
-                    } else {
-                        self.showAlert(withMsg: apiStatus?.message ?? "Something went wrong")
-                        self.tableView?.backgroundView = self.emptyWidget()
-                    }
-                    self.tableView?.reloadData()
-                }
-            }
+            self.fetchData(for: index, isFromPullDownRefresh: false, completion: nil)
             
             return self.tableView!
         }
         
         return self.emptyWidget()
+    }
+    
+    func fetchData(for index: Int, isFromPullDownRefresh: Bool, completion: (() -> Void)?) {
+        var orderStatus = ""
+        if index == 0 {
+            orderStatus = "A"
+        } else if index == 1 {
+            orderStatus = "C"
+        } else if index == 2 {
+            orderStatus = "I"
+        }
+        
+        if !isFromPullDownRefresh {
+            self.alertLoader = self.showAlertLoader()
+        }
+        self.fetchOrders(with: orderStatus) { (orders, apiStatus) in
+            DispatchQueue.main.async {
+                self.alertLoader?.dismiss(animated: false, completion: nil)
+                completion?()
+                if let ordersData = orders {
+                    self.orderData = ordersData.reversed()
+                    self.tableView?.backgroundView = nil
+                } else {
+                    self.showAlert(withMsg: apiStatus?.message ?? "Something went wrong")
+                    self.tableView?.backgroundView = self.emptyWidget()
+                }
+                self.tableView?.reloadData()
+            }
+        }
     }
     
     func setUpTableView() {
@@ -218,6 +225,14 @@ extension OrdersViewController: TabbedViewDataSource {
         self.tableView?.register(UINib(nibName: InProgressOrdersTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: InProgressOrdersTableViewCell.identifier)
         self.tableView?.register(UINib(nibName: CompletedOrderTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: CompletedOrderTableViewCell.identifier)
         self.tableView?.reloadData()
+        
+        self.tableView?.es.addPullToRefresh {
+            [unowned self] in
+            
+            self.fetchData(for: self.selectedTabIndex, isFromPullDownRefresh: true, completion: { [unowned self] in
+                self.tableView?.es.stopPullToRefresh()
+            })
+        }
     }
     
     func emptyWidget() -> EmptyOrderView {
@@ -284,7 +299,14 @@ extension OrdersViewController: UITableViewDataSource, UITableViewDelegate {
         switch self.selectedTabIndex {
         case 0:
             let order = self.orderData[indexPath.row];
-            self.navigateToOrderDetails(with: order, orderStatus: .awaiting)
+            var status: OrderStatus = .awaiting
+            if order.orderStatus == "Assigned" {
+                status = .assigned
+            } else if order.orderStatus == "Pickup" {
+                status = .pickUp
+            }
+            
+            self.navigateToOrderDetails(with: order, orderStatus: status)
             break
         case 1:
             let order = self.orderData[indexPath.row];

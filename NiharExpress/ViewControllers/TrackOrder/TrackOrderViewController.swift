@@ -9,6 +9,12 @@
 import UIKit
 import GoogleMaps
 
+enum MarkerType {
+    case driverMarker
+    case pickUpMarker
+    case dropMarker
+}
+
 class TrackOrderViewController: UIViewController {
     var order: Order!
     var timer: Timer?
@@ -55,12 +61,12 @@ class TrackOrderViewController: UIViewController {
     func setUpMap(driverInfo: DriverInfo) {
         var bounds: GMSCoordinateBounds = GMSCoordinateBounds()
         
-        bounds = bounds.includingCoordinate(self.placeMarker(address: order.pickUp).position)
-        for deliveryAddr in order.delivery {
-            bounds = bounds.includingCoordinate(self.placeMarker(address: deliveryAddr).position)
+        bounds = bounds.includingCoordinate(self.placeMarker(address: order.pickUp, markerType: .pickUpMarker).position)
+        for (index, deliveryAddr) in order.delivery.enumerated() {
+            bounds = bounds.includingCoordinate(self.placeMarker(index: index, address: deliveryAddr, markerType: .dropMarker).position)
         }
         
-        bounds = bounds.includingCoordinate(self.addPinAtLocation(coordinate: CLLocationCoordinate2D(latitude: driverInfo.latitude, longitude: driverInfo.longitude), title: self.order.driverName, address: "", isDriversLocation: true).position)
+        bounds = bounds.includingCoordinate(self.addPinAtLocation(coordinate: CLLocationCoordinate2D(latitude: driverInfo.latitude, longitude: driverInfo.longitude), title: self.order.driverName, mobileNo: self.order.driveMobileNo, address: "", isDriversLocation: true).position)
         
         self.gmsMap.animate(with: GMSCameraUpdate.fit(bounds))
         
@@ -70,49 +76,65 @@ class TrackOrderViewController: UIViewController {
         let sessionManager = GoogleMapSessionManager()
         let start = CLLocationCoordinate2D(latitude: driverInfo.latitude, longitude: driverInfo.longitude)
         let end = CLLocationCoordinate2D(latitude: lat, longitude: long)
-
+        
         sessionManager.requestDirections(from: start, to: end, completionHandler: { (path, error) in
-
+            
             if let error = error {
                 print("Something went wrong, abort drawing!\nError: \(error)")
             } else {
                 // Create a GMSPolyline object from the GMSPath
                 let polyline = GMSPolyline(path: path!)
-
+                
                 // Add the GMSPolyline object to the mapView
                 polyline.map = self.gmsMap
                 
                 // Configure polyline
-                polyline.strokeColor = UIColor.orange
+                polyline.strokeColor = ColorConstant.themePrimary.color
                 polyline.strokeWidth = 2
-
+                
                 // Move the camera to the polyline
                 let bounds = GMSCoordinateBounds(path: path!)
                 let cameraUpdate = GMSCameraUpdate.fit(bounds, with: UIEdgeInsets(top: 40, left: 15, bottom: 10, right: 15))
                 self.gmsMap.animate(with: cameraUpdate)
             }
-
+            
         })
-
+        
     }
     
-    func placeMarker(address: OrderAddress) -> GMSMarker {
+    func placeMarker(index: Int? = nil, address: OrderAddress, markerType: MarkerType) -> GMSMarker {
         let lat: Double = NSString(string: address.lat).doubleValue
         let long: Double = NSString(string: address.long).doubleValue
         
-        let marker = self.addPinAtLocation(coordinate: CLLocationCoordinate2D(latitude: lat, longitude: long), title: address.userName, address: address.address, isDriversLocation: false)
+        let marker = self.addPinAtLocation(coordinate: CLLocationCoordinate2D(latitude: lat, longitude: long), title: address.userName, mobileNo: address.mobileNo, address: address.address, isDriversLocation: false)
+        if index != nil {
+            marker.title = "Drop \(index!)"
+        }
+        
+        switch markerType {
+        case .pickUpMarker:
+            marker.icon = UIImage(named: "pickup-png")?.resizeImage(targetSize: CGSize(width: 60, height: 60))
+            break
+        case .driverMarker:
+            marker.icon = UIImage(named: "driver-png")?.resizeImage(targetSize: CGSize(width: 60, height: 60))
+            break
+        case .dropMarker:
+            marker.icon = UIImage(named: "drop-png")?.resizeImage(targetSize: CGSize(width: 60, height: 60))
+            break
+        }
         
         return marker
     }
     
-    @discardableResult func addPinAtLocation(coordinate: CLLocationCoordinate2D, title: String, address: String, isDriversLocation: Bool) -> GMSMarker {
+    @discardableResult func addPinAtLocation(coordinate: CLLocationCoordinate2D, title: String, mobileNo: String, address: String, isDriversLocation: Bool) -> GMSMarker {
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
         marker.title = title
-        marker.snippet = address
         marker.map = self.gmsMap
+        marker.snippet = "\(mobileNo)\n\(address)"
+
         if isDriversLocation {
-            marker.icon = UIImage.fontAwesomeIcon(code: FontAwesome.mapMarkerAlt.rawValue, style: .solid, textColor: UIColor.purple, size: CGSize(width: 24, height: 36))
+            marker.icon = UIImage(named: "driver-png")?.resizeImage(targetSize: CGSize(width: 60, height: 60))
         }
         
         return marker

@@ -26,6 +26,8 @@ class OrderDetailsLocationTableViewCell: UITableViewCell {
     @IBOutlet weak var upperLine: UIView!
     @IBOutlet weak var bottomLine: UIView!
     
+    var contactNo: String = ""
+    
     var isFirst: Bool = false {
         didSet {
             if self.isFirst {
@@ -70,10 +72,23 @@ class OrderDetailsLocationTableViewCell: UITableViewCell {
             self.lblCourierTitle.text = "Delivery Time"
         }
         
+        if address.orderStatusType == .pickUp {
+            self.lblCourierTitle.text = "Pickup Time"
+            self.lblCourierTimeValue.text = address.completedDate?.toString(withFormat: "dd-MM-yyyy hh:mm:ss a")
+        } else {
+            self.lblCourierTitle.text = "Delivery Time"
+        }
+        
         self.lblDetailedAddress.text = address.address
-        self.lblCourierTimeValue.text = address.time
         
         self.lblContactPersonValue.text = address.userName
         self.lblContactNo.text = address.mobileNo
+        self.contactNo = address.mobileNo
+    }
+    
+    @IBAction func btnPhoneCallAction(_ sender: UIButton) {
+        if let url = URL(string: "tel://\(self.contactNo)") {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
 }

@@ -12,6 +12,11 @@ func ==(lhs: OrderAddress, rhs: OrderAddress) -> Bool {
     return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
 }
 
+enum OrderStatusType {
+    case pickUp
+    case delivery
+}
+
 class OrderAddress: Codable {
     var userName: String
     var mobileNo: String
@@ -25,6 +30,9 @@ class OrderAddress: Codable {
     var storeContactNo: String?
     var orderType: String?
     var transactionType: String?
+    var completedDate: Date?
+    
+    var orderStatusType: OrderStatusType = .pickUp // Only local use
     
     var isFirstCell: Bool = false // Only local use
     var isLastCell: Bool = false // Only local use
@@ -53,6 +61,7 @@ class OrderAddress: Codable {
         case storeContactNo = "store_contact_no"
         case orderType = "order_type"
         case transactionType = "transaction_type"
+        case completedDate = "completed_date"
     }
     
     required convenience init(from decoder: Decoder) throws {
@@ -73,6 +82,11 @@ class OrderAddress: Codable {
         self.storeContactNo = try? container.decode(String.self, forKey: .storeContactNo)
         self.orderType = try? container.decode(String.self, forKey: .orderType)
         self.transactionType = try? container.decode(String.self, forKey: .transactionType)
+        
+        let completedDateString = try? container.decode(String.self, forKey: .completedDate)
+        if let str = completedDateString {
+            self.completedDate = str.toDate(withFormat: "dd-MM-yyyy hh:mm:ss a")
+        }
     }
     
     func encode(to encoder: Encoder) throws {

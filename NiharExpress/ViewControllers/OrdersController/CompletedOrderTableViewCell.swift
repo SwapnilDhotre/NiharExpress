@@ -14,6 +14,7 @@ class CompletedOrderTableViewCell: UITableViewCell {
 
     @IBOutlet weak var lblOrderNo: UILabel!
     @IBOutlet weak var lblAmount: UILabel!
+    @IBOutlet weak var lblCompletedTitle: UILabel!
     @IBOutlet weak var lblCompletedDate: UILabel!
     
     @IBOutlet weak var locationsStack: UIStackView!
@@ -32,7 +33,10 @@ class CompletedOrderTableViewCell: UITableViewCell {
     
     func updateData(with order: Order) {
         self.lblAmount.text = order.price
-        self.lblCompletedDate.text = "Completed \(order.orderDate.toString(withFormat: "dd-MM-yyyy hh:mm:ss a"))"
+        self.lblCompletedTitle.text = "Delivered"
+        self.lblCompletedTitle.textColor = ColorConstant.themePrimary.color
+        
+        self.lblCompletedDate.text = "\(order.orderDate.toString(withFormat: "dd-MM-yyyy hh:mm:ss a"))"
         self.lblOrderNo.text = order.orderNo
         
         self.locationsStack.arrangedSubviews.forEach({ (view) in
