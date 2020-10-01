@@ -86,9 +86,8 @@ class TempLoginViewController: UIViewController {
             DispatchQueue.main.async {
                 self.alertLoader?.dismiss(animated: false, completion: nil)
                 if let user = user {
-                    self.dismiss(animated: false, completion: {
-                        self.delegate?.loginSuccess(user: user)
-                    })
+                     self.delegate?.loginSuccess(user: user)
+                    self.dismiss(animated: false, completion: nil)
                 } else {
                     self.timer?.invalidate()
                     self.timer = nil
@@ -100,9 +99,8 @@ class TempLoginViewController: UIViewController {
     }
     
     @objc func backBtnPressed(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: {
-            self.delegate?.backPressed()
-        })
+        self.delegate?.backPressed()
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - API Methods

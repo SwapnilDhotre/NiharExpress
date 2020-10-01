@@ -425,6 +425,10 @@ class NewOrderFormTableViewController: UITableViewController {
                             self.tableViewFormFields.append(formField)
                         }
                     }
+                    
+                    if isNotDefaultField {
+                        count += 1
+                    }
                 }
             } else {
                 count += 1
@@ -623,7 +627,7 @@ class NewOrderFormTableViewController: UITableViewController {
             case .pickUpPoint, .deliveryPoint, .addDeliveryPoint, .optimizeRoute, .parcelInfo:
                 return UITableView.automaticDimension
             case .paymentInfo:
-                return 200
+                return UITableView.automaticDimension
             }
         } else if let subFormField = model as? FormSubFieldModel {
             switch subFormField.type {

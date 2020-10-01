@@ -53,7 +53,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "139"
             endingLineNumber = "139"
-            landmarkName = "onFlyCreateOrder()"
+            landmarkName = "createOrderAction(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -92,32 +92,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4767E1C8-5018-4970-B561-ECFB0DB546E0"
+            uuid = "D2086A22-6CBC-4746-A906-BD403F5025C0"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NiharExpress/ViewControllers/PickUpAddressController/SearchAddressViewController.swift"
+            filePath = "NiharExpress/ViewControllers/NewOrderForm/NewOrderFormTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "configureUI()"
+            startingLineNumber = "740"
+            endingLineNumber = "740"
+            landmarkName = "addDeliveryPoint()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "EDCF88BF-EAB8-4972-872D-FD500955DEFF"
+            uuid = "E5DFB2F2-0D24-4CD7-8234-758B4E1C762F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NiharExpress/ViewControllers/NewOrderForm/Cells/PaymentViewTableViewCell.swift"
+            filePath = "NiharExpress/ViewControllers/NewOrderForm/NewOrderFormTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "updateData(with:allFormFields:)"
+            startingLineNumber = "401"
+            endingLineNumber = "401"
+            landmarkName = "calculateNoOfRows()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "ED64358F-580A-4D05-9FA1-95EF23773583"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NiharExpress/ViewControllers/OrderReviewController/OrderReviewViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "282"
+            endingLineNumber = "282"
+            landmarkName = "loginSuccess(user:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DF35E520-FEB5-4A44-86AE-4505B4448482"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NiharExpress/ViewControllers/OrderReviewController/OrderReviewViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "viewWillAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

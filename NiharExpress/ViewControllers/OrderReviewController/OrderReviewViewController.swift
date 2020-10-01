@@ -67,7 +67,7 @@ class OrderReviewViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if UserConstant.shared.userModel == nil {
+        if UserConstant.shared.userModel == nil && temporaryUser == nil {
             if let location = self.locations.first {
                 let userInfoController = TempLoginViewController()
                 userInfoController.mobileNo = location.mobileNo
