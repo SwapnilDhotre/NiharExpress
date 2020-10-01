@@ -17,6 +17,7 @@ class DateTimePickerTableViewCell: UITableViewCell {
     
     var model: FormSubFieldModel!
     
+    @IBOutlet weak var lblOneDifference: UILabel!
     @IBOutlet weak var lblDateTitle: UILabel!
     @IBOutlet weak var lblDateHolder: UILabel!
     @IBOutlet weak var lblTimeHolder: UILabel!
@@ -60,6 +61,8 @@ class DateTimePickerTableViewCell: UITableViewCell {
         
         if let fDate = firstDate {
             self.lblTimeHolder.text = fDate.toString(withFormat: "HH:mm")
+            
+            self.lblOneDifference.text = "Your Order Pickup Between \(fDate.toString(withFormat: "hh:mm a")) - \(fDate.adding(minutes: 60).toString(withFormat: "hh:mm a"))"
         }
     }
     

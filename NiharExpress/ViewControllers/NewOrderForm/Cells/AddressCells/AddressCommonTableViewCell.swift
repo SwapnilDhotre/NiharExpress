@@ -45,6 +45,9 @@ class AddressCommonTableViewCell: UITableViewCell {
         self.lblTitle.text = model.title
         self.btnTraling.isHidden = true
         
+        self.txtField.leftView = nil
+        self.textFieldLeadingConstraint.constant = 16
+        
         switch model.type {
         case .phoneNo:
             self.btnTraling.isHidden = false

@@ -10,6 +10,8 @@ import UIKit
 import GooglePlaces
 import GoogleMaps
 
+let ACCEPTABLE_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 _,"
+
 protocol SearchAddressDelegate {
     func previousAddressSelected(userAddressModel: UserAddressModel, indexPath: IndexPath)
     func newLocationPicked(address: AddressModel, indexPath: IndexPath)
@@ -50,6 +52,7 @@ class SearchAddressViewController: UIViewController {
         self.btnClearSearch.titleLabel?.font = FontUtility.niharExpress(size: 14)
         
         self.txtAddressSearch.addTarget(self, action: #selector(self.textEditing(_:)), for: .editingChanged)
+        self.txtAddressSearch.delegate = self
         
         let doneBarUttonn = UIButton(type: .custom)
         doneBarUttonn.setTitle("Done", for: .normal)
@@ -116,12 +119,16 @@ class SearchAddressViewController: UIViewController {
     }
     
     @objc func textEditing(_ textField: UITextField) {
-        if textField.text! == "" {
+        self.searchBy(text: textField.text!)
+    }
+    
+    func searchBy(text: String) {
+        if text == "" {
             self.searchStarted = false
         } else {
             self.searchStarted = true
             
-            self.searchResults(for: textField.text!, completion: { (models, apiStatus) in
+            self.searchResults(for: text, completion: { (models, apiStatus) in
                 DispatchQueue.main.async {
                     self.alertLoader?.dismiss(animated: false, completion: nil)
                     if let status = apiStatus {
@@ -178,6 +185,21 @@ class SearchAddressViewController: UIViewController {
                 }
             }
         }
+    }
+}
+
+extension SearchAddressViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.searchBy(text: textField.text!)
+        return textField.resignFirstResponder()
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let cs = NSCharacterSet(charactersIn: ACCEPTABLE_CHARACTERS).inverted
+        let filtered = string.components(separatedBy: cs).joined(separator: "")
+
+        return (string == filtered)
     }
 }
 

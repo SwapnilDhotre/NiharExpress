@@ -30,7 +30,7 @@ class AddressModel: Codable {
     
     required convenience init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-                
+        
         let id: String = (try? container.decode(String.self, forKey: .id)) ?? ""
         let address: String = (try? container.decode(String.self, forKey: .address)) ?? ""
         let latitude: Double = NSString(string: (try? container.decode(String.self, forKey: .latitude)) ?? "0").doubleValue
@@ -53,10 +53,11 @@ class PickAddressViewController: UIViewController {
     
     private let locationManager = CLLocationManager()
     
+    @IBOutlet weak var addressHeightConstraint: NSLayoutConstraint!
     var coordinate: CLLocationCoordinate2D!
     
+    @IBOutlet weak var addressView: UITextView!
     @IBOutlet weak var imageViiew: UIImageView!
-    @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var mapView: GMSMapView!
     
     @IBOutlet weak var pinImageVerticalConstraint: NSLayoutConstraint!
@@ -66,10 +67,12 @@ class PickAddressViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.addressView.delegate = self
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         
         mapView.delegate = self
+        self.addTextFieldObserver()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,8 +83,14 @@ class PickAddressViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(self.doneBtnAction(_:)))
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.removeTextFieldObserver()
+    }
+    
     @objc func doneBtnAction(_ sender: UIBarButtonItem) {
-        self.pickAddress?(AddressModel(id: "", address: self.addressLabel.text!, coordinate: self.coordinate))
+        self.pickAddress?(AddressModel(id: "", address: self.addressView.text!, coordinate: self.coordinate))
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -90,7 +99,7 @@ class PickAddressViewController: UIViewController {
     }
     
     private func reverseGeocodeCoordinate(_ coordinate: CLLocationCoordinate2D) {
-        self.addressLabel.unlock()
+        self.addressView.unlock()
         
         self.coordinate = coordinate
         let geocoder = GMSGeocoder()
@@ -100,9 +109,10 @@ class PickAddressViewController: UIViewController {
                 return
             }
             
-            self.addressLabel.text = lines.joined(separator: "\n")
+            self.addressView.text = lines.joined(separator: "\n")
+            self.adjustUITextViewHeight(arg: self.addressView)
             
-            let labelHeight = self.addressLabel.intrinsicContentSize.height
+            let labelHeight = self.addressView.intrinsicContentSize.height
             if #available(iOS 11.0, *) {
                 self.mapView.padding = UIEdgeInsets(top: self.view.safeAreaInsets.top, left: 0,
                                                     bottom: labelHeight, right: 0)
@@ -115,6 +125,10 @@ class PickAddressViewController: UIViewController {
                 // Fallback on earlier versions
             }
         }
+    }
+    
+    func adjustUITextViewHeight(arg : UITextView) {
+        self.addressHeightConstraint.constant = self.addressView.contentSize.height
     }
 }
 
@@ -148,10 +162,25 @@ extension PickAddressViewController: CLLocationManagerDelegate {
 // MARK: - GMSMapViewDelegate
 extension PickAddressViewController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
-        addressLabel.lock()
+        addressView.lock()
     }
     
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
         self.reverseGeocodeCoordinate(position.target)
+    }
+}
+
+extension PickAddressViewController: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            textView.resignFirstResponder()
+            return false
+        } else {
+            
+            let cs = NSCharacterSet(charactersIn: ACCEPTABLE_CHARACTERS).inverted
+            let filtered = text.components(separatedBy: cs).joined(separator: "")
+            
+            return (text == filtered)
+        }
     }
 }

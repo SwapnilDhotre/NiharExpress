@@ -51,6 +51,7 @@ class PickAddressFieldTableViewCell: UITableViewCell {
         } else {
             self.txtAddressField.isUserInteractionEnabled = false
         }
+        
     }
     
     func setMapIcon(to btn: UIButton) {
@@ -70,5 +71,20 @@ extension PickAddressFieldTableViewCell: UITextViewDelegate {
             model.address = textView.text
             self.model.value = model
         }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) { //Handle the text changes here
+        if textView.text == "" {
+            self.txtAddressField.isUserInteractionEnabled = false
+        } else {
+            self.txtAddressField.isUserInteractionEnabled = true
+        }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let cs = NSCharacterSet(charactersIn: ACCEPTABLE_CHARACTERS).inverted
+        let filtered = text.components(separatedBy: cs).joined(separator: "")
+        
+        return (text == filtered)
     }
 }

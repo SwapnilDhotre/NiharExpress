@@ -43,7 +43,7 @@ class FormFieldModel {
             FormFieldModel(title: "Pickup Point", type: .pickUpPoint, formSubFields: self.getPickupPointFields(), value: ""),
             FormFieldModel(title: "Delivery Point", type: .deliveryPoint, formSubFields: self.getDeliveryPointFields(), value: ""),
             FormFieldModel(title: "Add Delivery Point", type: .addDeliveryPoint, value: ""),
-            FormFieldModel(title: "Optimize the route", type: .optimizeRoute, value: false),
+//            FormFieldModel(title: "Optimize the route", type: .optimizeRoute, value: false),
             FormFieldModel(title: "", type: .parcelInfo, formSubFields: self.getParcelInfoFields(), value: ""),
 //            FormFieldModel(title: "", type: .notifyInfo, formSubFields: self.getNotifyFields(), value: ""),
             FormFieldModel(title: "", type: .paymentInfo, value: "")

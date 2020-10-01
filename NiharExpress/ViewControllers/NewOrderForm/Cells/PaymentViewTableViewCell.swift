@@ -42,11 +42,16 @@ class PaymentViewTableViewCell: UITableViewCell {
         self.tableView.delegate = self
         self.tableView.separatorStyle = .none
         
+        self.tableView.estimatedRowHeight = 40
+        self.tableView.rowHeight = UITableView.automaticDimension
+        
         self.tableView.register(UINib(nibName: RadioCellTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: RadioCellTableViewCell.identifier)
     }
     
     func updateData(with model: FormFieldModel, allFormFields: [FormFieldModel]) {
         self.formFieldModel = model
+        
+        self.tableViewHeightConstraint.constant = 500
         
         var locations: [PaymentWillOccurAt] = []
         for formModel in allFormFields {
@@ -62,8 +67,23 @@ class PaymentViewTableViewCell: UITableViewCell {
         self.formFieldModel.paymentLocation = locations
         self.tableView.reloadData()
         
-        self.tableViewHeightConstraint.constant = CGFloat(locations.count * 40)
-        self.layoutIfNeeded()
+//        UIView.animate(withDuration: 0, animations: {
+//            self.tableView.layoutIfNeeded()
+//            }) { (complete) in
+//                var heightOfTableView: CGFloat = 0.0
+//                // Get visible cells and sum up their heights
+//                let cells = self.tableView.visibleCells
+//                for cell in cells {
+//                    heightOfTableView += cell.frame.height
+//                }
+//                // Edit heightOfTableViewConstraint's constant to update height of table view
+//                self.tableViewHeightConstraint.constant = heightOfTableView
+//        }
+        
+//        self.tableViewHeightConstraint.constant = CGFloat(locations.count * 40)
+//        self.layoutIfNeeded()
+        
+        
     }
 }
 
@@ -81,11 +101,22 @@ extension PaymentViewTableViewCell: UITableViewDataSource, UITableViewDelegate {
         cell.selectionStyle = .none
         cell.updateData(with: self.formFieldModel.paymentLocation[indexPath.row])
         
+        if indexPath.row ==  self.formFieldModel.paymentLocation.count - 1 {
+        UIView.animate(withDuration: 0, animations: {
+        self.tableView.layoutIfNeeded()
+        }) { (complete) in
+            var heightOfTableView: CGFloat = 0.0
+            // Get visible cells and sum up their heights
+            let cells = self.tableView.visibleCells
+            for cell in cells {
+                heightOfTableView += cell.frame.height
+            }
+            // Edit heightOfTableViewConstraint's constant to update height of table view
+            self.tableViewHeightConstraint.constant = heightOfTableView
+        }
+        }
+        
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 40
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

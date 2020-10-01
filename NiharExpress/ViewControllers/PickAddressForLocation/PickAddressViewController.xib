@@ -7,15 +7,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="Roboto-Regular.ttf">
-            <string>Roboto-Regular</string>
-        </array>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PickAddressViewController" customModule="NiharExpress" customModuleProvider="target">
             <connections>
-                <outlet property="addressLabel" destination="2G7-Tm-27E" id="Yea-s2-G2h"/>
+                <outlet property="addressHeightConstraint" destination="4mP-Mu-xy0" id="W6b-Ng-KnB"/>
+                <outlet property="addressView" destination="cGG-oP-Art" id="4LY-6R-60x"/>
                 <outlet property="imageViiew" destination="yeC-RW-8CS" id="nFo-1a-dHa"/>
                 <outlet property="mapView" destination="sxx-Y6-HiB" id="X7Z-CC-Chk"/>
                 <outlet property="pinImageVerticalConstraint" destination="102-7i-X2G" id="8lM-du-vQS"/>
@@ -38,25 +34,47 @@
                         <constraint firstAttribute="height" constant="30" id="gbl-wx-1w9"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2G7-Tm-27E">
-                    <rect key="frame" x="0.0" y="840.5" width="414" height="21.5"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wMI-iD-gUu">
+                    <rect key="frame" x="20" y="812" width="374" height="30"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="maskToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Address" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cGG-oP-Art">
+                    <rect key="frame" x="20" y="812" width="374" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="4mP-Mu-xy0"/>
+                    </constraints>
+                    <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="maskToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </textView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstItem="yeC-RW-8CS" firstAttribute="bottom" secondItem="sxx-Y6-HiB" secondAttribute="centerY" id="102-7i-X2G"/>
                 <constraint firstItem="sxx-Y6-HiB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="AZH-0x-m6J"/>
-                <constraint firstAttribute="trailing" secondItem="2G7-Tm-27E" secondAttribute="trailing" id="G8Z-7H-mrU"/>
-                <constraint firstItem="2G7-Tm-27E" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="KXB-ii-tpd"/>
                 <constraint firstAttribute="bottom" secondItem="sxx-Y6-HiB" secondAttribute="bottom" id="KiY-kt-LCs"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sxx-Y6-HiB" secondAttribute="trailing" id="T9d-O7-x8f"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="2G7-Tm-27E" secondAttribute="bottom" id="buT-zh-XI6"/>
+                <constraint firstItem="wMI-iD-gUu" firstAttribute="leading" secondItem="cGG-oP-Art" secondAttribute="leading" id="V9C-sz-ty6"/>
+                <constraint firstItem="cGG-oP-Art" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="WM8-pB-5LA"/>
+                <constraint firstItem="wMI-iD-gUu" firstAttribute="trailing" secondItem="cGG-oP-Art" secondAttribute="trailing" id="aSg-78-ga0"/>
                 <constraint firstItem="sxx-Y6-HiB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="fkS-I4-DbC"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="cGG-oP-Art" secondAttribute="trailing" constant="20" id="gFK-cp-bj7"/>
+                <constraint firstItem="wMI-iD-gUu" firstAttribute="bottom" secondItem="cGG-oP-Art" secondAttribute="bottom" id="hew-e5-1iI"/>
+                <constraint firstItem="wMI-iD-gUu" firstAttribute="top" secondItem="cGG-oP-Art" secondAttribute="top" id="l84-gq-GD5"/>
                 <constraint firstItem="yeC-RW-8CS" firstAttribute="centerX" secondItem="sxx-Y6-HiB" secondAttribute="centerX" id="qo4-Yx-XuB"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="cGG-oP-Art" secondAttribute="bottom" constant="20" id="wCe-A9-1vQ"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="131.8840579710145" y="153.34821428571428"/>
