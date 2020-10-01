@@ -8,12 +8,17 @@
 
 import UIKit
 
+protocol WeightChangeProtocol {
+    func weightChanged(text: String)
+}
+
 class WeightTableViewCell: UITableViewCell {
     static var identifier = "WeightTableViewCell"
 
     @IBOutlet weak var txtWeightField: UITextField!
     
     var formModel: FormFieldModel?
+    var delegate: WeightChangeProtocol?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,6 +42,7 @@ class WeightTableViewCell: UITableViewCell {
 extension WeightTableViewCell: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.formModel?.value = textField.text!
+        self.delegate?.weightChanged(text: textField.text!)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

@@ -1359,18 +1359,18 @@
 			baseConfigurationReference = DAC0C6EAEB1AA2E7906AC099 /* Pods-NiharExpress.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development: ISS 247 (UGTGY4JDL7)";
+				CODE_SIGN_IDENTITY = "Apple Development: NIHAR Sejpal (YMTKMALA8S)";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = EFF562SLKT;
+				DEVELOPMENT_TEAM = GG38H3R5L8;
 				INFOPLIST_FILE = NiharExpress/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.a247software.cmms;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nihar-express.delivery";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = v4_Flutter_CMMS_Development;
+				PROVISIONING_PROFILE_SPECIFIER = NiharExpressDevelopmentProvsioningProfile;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1381,18 +1381,18 @@
 			baseConfigurationReference = 820DDFDA1D3278D30ADBC68A /* Pods-NiharExpress.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development: ISS 247 (UGTGY4JDL7)";
+				CODE_SIGN_IDENTITY = "Apple Development: NIHAR Sejpal (YMTKMALA8S)";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = EFF562SLKT;
+				DEVELOPMENT_TEAM = GG38H3R5L8;
 				INFOPLIST_FILE = NiharExpress/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.a247software.cmms;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nihar-express.delivery";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = v4_Flutter_CMMS_Development;
+				PROVISIONING_PROFILE_SPECIFIER = NiharExpressDevelopmentProvsioningProfile;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

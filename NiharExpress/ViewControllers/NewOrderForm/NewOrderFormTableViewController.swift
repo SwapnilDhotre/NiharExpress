@@ -101,7 +101,7 @@ class NewOrderFormTableViewController: UITableViewController {
         
         self.navigationView.leftNavigationButton.addTarget(self, action: #selector(self.crossBtnAction(_:)), for: .touchUpInside)
         self.navigationView.rightNavigationButton.addTarget(self, action: #selector(self.clearDataBtnAction(_:)), for: .touchUpInside)
-//        self.bottomPanelView.btnAmountClick.addTarget(self, action: #selector(self.btnAmountClick), for: .touchUpInside)
+        //        self.bottomPanelView.btnAmountClick.addTarget(self, action: #selector(self.btnAmountClick), for: .touchUpInside)
         self.bottomPanelView.btnCreateOrder.addTarget(self, action: #selector(self.btnCreateOrderClick(_:)), for: .touchUpInside)
         
         if let view = UIApplication.shared.keyWindow{
@@ -168,39 +168,43 @@ class NewOrderFormTableViewController: UITableViewController {
     @objc func crossBtnAction(_ sender: UIButton) {
         self.view.endEditing(true)
         
-        var alertController: UIAlertController?
+        let alertController = UIAlertController(title: title, message: "Do you want to cancel the order?", preferredStyle: .alert)
+        
         let okAction = UIAlertAction(title: "OK", style: .destructive, handler: { (action) in
-            alertController?.dismiss(animated: true, completion: {
-                 self.delegate?.formDismissal()
-                       self.dismiss(animated: true, completion: nil)
-            })
+            alertController.dismiss(animated: true, completion: nil)
+            self.delegate?.formDismissal()
+            self.dismiss(animated: true, completion: nil)
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
-            alertController?.dismiss(animated: true, completion: nil)
+            alertController.dismiss(animated: true, completion: nil)
         })
         
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
         
-        alertController = self.showAlertAndCustomAction(withMsg: "Do you want to cancel the order?", actions: [okAction, cancelAction])
+        self.present(alertController, animated: true)
     }
     
     @objc func clearDataBtnAction(_ sender: UIButton) {
         self.view.endEditing(true)
         
-        var alertController: UIAlertController?
+        let alertController = UIAlertController(title: title, message: "Do you want to cancel the order?", preferredStyle: .alert)
+        
         let okAction = UIAlertAction(title: "OK", style: .destructive, handler: { (action) in
-            alertController?.dismiss(animated: true, completion: {
-                 self.formFields = FormFieldModel.getFormFields()
-                 self.tableView.reloadData()
-            })
+            alertController.dismiss(animated: true, completion: nil)
+            self.formFields = FormFieldModel.getFormFields()
+            self.tableView.reloadData()
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
-            alertController?.dismiss(animated: true, completion: nil)
+            alertController.dismiss(animated: true, completion: nil)
         })
         
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
         
-        alertController = self.showAlertAndCustomAction(withMsg: "Do you want to cancel the order?", actions: [okAction, cancelAction])
+        self.present(alertController, animated: true)
     }
     
     @objc func btnAmountClick(_ sender: UIButton) {
@@ -452,6 +456,8 @@ class NewOrderFormTableViewController: UITableViewController {
                 
                 cell.selectionStyle = .none
                 cell.updateData(with: formField)
+                
+                cell.delegate = self
                 
                 return cell
             case .pickUpPoint, .deliveryPoint:
@@ -769,6 +775,12 @@ extension NewOrderFormTableViewController {
     }
 }
 
+extension NewOrderFormTableViewController: WeightChangeProtocol {
+    func weightChanged(text: String) {
+        self.calculatePrice()
+    }
+}
+
 // MARK: - AddressField Protocol
 extension NewOrderFormTableViewController: AddressHeaderProtocol {
     func arrowActionPerformed(model: FormSubFieldModel) {
@@ -789,6 +801,7 @@ extension NewOrderFormTableViewController: PickAddressFieldProtocol {
         self.pickLocation { (addressModel) in
             model.value = addressModel
             DispatchQueue.main.async {
+                self.calculatePrice()
                 self.tableView.reloadRows(at: [model.indexPath], with: .automatic)
             }
         }
@@ -799,6 +812,7 @@ extension NewOrderFormTableViewController: RemoveAddressProtocol {
     func removeAddress(model: FormSubFieldModel) {
         if let index = model.parentIndex {
             self.formFields.remove(at: index)
+            self.calculatePrice()
             self.tableView.reloadData()
         }
     }
@@ -923,9 +937,14 @@ extension NewOrderFormTableViewController: ApplyPromoProtocol {
             }
         }
         
+        self.calculatePrice()
+    }
+    
+    func calculatePrice() {
         var weight: String!
+        var category: Category!
         var pickUpCoordinate: CLLocationCoordinate2D!
-        var deliveryCoordinate: CLLocationCoordinate2D!
+        var deliveryCoordinates: [CLLocationCoordinate2D]!
         self.formFields.forEach { (formField) in
             
             if formField.type == .weight {
@@ -933,23 +952,47 @@ extension NewOrderFormTableViewController: ApplyPromoProtocol {
             } else if formField.type == .pickUpPoint {
                 formField.formSubFields.forEach { (subFormField) in
                     if subFormField.type == .address {
-                        pickUpCoordinate = (subFormField.value as? AddressModel)?.coordinate
+                        if let addressModel = subFormField.value as? AddressModel, addressModel.address != "" {
+                            pickUpCoordinate = addressModel.coordinate
+                        }
                     }
                 }
             } else if formField.type == .deliveryPoint {
                 formField.formSubFields.forEach { (subFormField) in
                     if subFormField.type == .address {
-                        deliveryCoordinate = (subFormField.value as? AddressModel)?.coordinate
+                        if deliveryCoordinates == nil {
+                            deliveryCoordinates = []
+                        }
+                        
+                        if let addressModel = subFormField.value as? AddressModel, addressModel.address != "" {
+                            deliveryCoordinates.append(addressModel.coordinate)
+                        }
                     }
                 }
             }
         }
-        self.fetchPrice(weight: weight, categoryId: category.id, pickUpCoordinate: pickUpCoordinate, deliveryCoordinates: deliveryCoordinate) { (priceInfo, apiStatus) in
-            DispatchQueue.main.async {
-                if let priceInfo = priceInfo {
-                    self.updateUI(with: priceInfo)
-                } else {
-                    self.showAlert(withMsg: apiStatus?.message ?? "Something went wrong")
+        
+        self.formFields.forEach { (formField) in
+            if formField.type == .parcelInfo {
+                formField.formSubFields.forEach { (subFormField) in
+                    if subFormField.type == .parcelType {
+                        category = subFormField.value as? Category
+                    }
+                }
+            }
+        }
+        
+        if weight != nil && category != nil && pickUpCoordinate != nil && deliveryCoordinates != nil {
+            if weight != "" && category.id != "" && !deliveryCoordinates.isEmpty {
+                
+                self.fetchPrice(weight: weight, categoryId: category.id, pickUpCoordinate: pickUpCoordinate, deliveryCoordinates: deliveryCoordinates) { (priceInfo, apiStatus) in
+                    DispatchQueue.main.async {
+                        if let priceInfo = priceInfo {
+                            self.updateUI(with: priceInfo)
+                        } else {
+                            self.showAlert(withMsg: apiStatus?.message ?? "Something went wrong")
+                        }
+                    }
                 }
             }
         }
@@ -992,14 +1035,15 @@ extension NewOrderFormTableViewController {
         }
     }
     
-    func fetchPrice(weight: String, categoryId: String, pickUpCoordinate: CLLocationCoordinate2D, deliveryCoordinates: CLLocationCoordinate2D,  completion: @escaping (PriceInfo?, APIStatus?) -> Void) {
+    func fetchPrice(weight: String, categoryId: String, pickUpCoordinate: CLLocationCoordinate2D, deliveryCoordinates: [CLLocationCoordinate2D],  completion: @escaping (PriceInfo?, APIStatus?) -> Void) {
+        let firstCoordinate = deliveryCoordinates.first!
         let params: Parameters = [
             Constants.API.method: Constants.MethodType.getPrice.rawValue,
             Constants.API.key: "234039b43a8652db154f669ddf87a78d6c54a6b2",
             Constants.API.categoryId: categoryId,
             Constants.API.weight: weight,
             Constants.API.pickUpPoint: "\(pickUpCoordinate.latitude),\(pickUpCoordinate.longitude)",
-            Constants.API.deliveryPoint: "\(deliveryCoordinates.latitude),\(deliveryCoordinates.longitude)",
+            Constants.API.deliveryPoint: "\(firstCoordinate.latitude),\(firstCoordinate.longitude)",
             Constants.API.optimizeRoute: "N"
         ]
         
