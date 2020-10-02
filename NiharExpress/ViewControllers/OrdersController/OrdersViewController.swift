@@ -274,6 +274,10 @@ extension OrdersViewController: UITableViewDataSource, UITableViewDelegate {
             cell.updateData(with: order)
             cell.selectionStyle = .none
             
+            cell.btnNotificationAction = {
+                self.navigateToNotification(with: order)
+            }
+            
             return cell
         case 2:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: InProgressOrdersTableViewCell.identifier) as? InProgressOrdersTableViewCell else {

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -92,12 +92,26 @@
                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AuU-vf-xc1">
+                        <rect key="frame" x="264" y="36.5" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="5Vf-BJ-Whr"/>
+                            <constraint firstAttribute="width" constant="40" id="o2B-bf-tcp"/>
+                        </constraints>
+                        <state key="normal" title="B">
+                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <connections>
+                            <action selector="bellBtnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="FFr-B3-p8k"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="JAI-pF-ysr" firstAttribute="firstBaseline" secondItem="g0x-dx-Kem" secondAttribute="firstBaseline" id="5yS-Qv-fEg"/>
                     <constraint firstAttribute="trailing" secondItem="va4-er-uaZ" secondAttribute="trailing" id="8Q5-gQ-66d"/>
                     <constraint firstItem="6OM-vv-R5I" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="Q6I-Td-gym"/>
                     <constraint firstItem="JAI-pF-ysr" firstAttribute="leading" secondItem="g0x-dx-Kem" secondAttribute="trailing" constant="5" id="RjA-ws-erh"/>
+                    <constraint firstAttribute="trailing" secondItem="AuU-vf-xc1" secondAttribute="trailing" constant="16" id="SvP-Ly-NEW"/>
                     <constraint firstAttribute="trailing" secondItem="PMZ-hE-LMS" secondAttribute="trailing" constant="16" id="VjX-07-Bpg"/>
                     <constraint firstAttribute="bottom" secondItem="va4-er-uaZ" secondAttribute="bottom" id="alx-Y8-fDF"/>
                     <constraint firstAttribute="bottom" secondItem="dzd-G2-Tkl" secondAttribute="bottom" constant="10" id="bTh-or-qOF"/>
@@ -108,6 +122,7 @@
                     <constraint firstItem="e2G-XA-ohm" firstAttribute="centerY" secondItem="6OM-vv-R5I" secondAttribute="centerY" id="ib6-MU-hF9"/>
                     <constraint firstItem="PMZ-hE-LMS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="65" id="it2-0I-TpQ"/>
                     <constraint firstItem="NDG-fj-3su" firstAttribute="centerY" secondItem="e2G-XA-ohm" secondAttribute="centerY" id="n18-pT-HBK"/>
+                    <constraint firstItem="AuU-vf-xc1" firstAttribute="top" secondItem="NDG-fj-3su" secondAttribute="bottom" id="nhs-nz-AqE"/>
                     <constraint firstItem="PMZ-hE-LMS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="pCF-bN-l4A"/>
                     <constraint firstItem="e2G-XA-ohm" firstAttribute="leading" secondItem="6OM-vv-R5I" secondAttribute="trailing" constant="2" id="uPz-7I-85E"/>
                     <constraint firstItem="g0x-dx-Kem" firstAttribute="top" secondItem="6OM-vv-R5I" secondAttribute="bottom" constant="8" id="vaB-G1-XZL"/>
@@ -117,6 +132,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="btnBellIcon" destination="AuU-vf-xc1" id="BIh-UT-FEH"/>
                 <outlet property="lblAmount" destination="e2G-XA-ohm" id="T6i-ss-stJ"/>
                 <outlet property="lblCompletedDate" destination="JAI-pF-ysr" id="5Ij-Rp-Fwu"/>
                 <outlet property="lblCompletedTitle" destination="g0x-dx-Kem" id="rVO-8c-rTR"/>

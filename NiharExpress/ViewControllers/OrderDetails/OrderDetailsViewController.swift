@@ -207,7 +207,7 @@ extension OrderDetailsViewController: UITableViewDataSource, UITableViewDelegate
         }
         
         self.delegate?.cloneOrder(with: formFields)
-        self.navigationController?.popViewController(animated: true)
+    self.navigationController?.popViewController(animated: true)
     }
     
     func addPointsData(to formField: FormFieldModel, orderAddress: OrderAddress) {

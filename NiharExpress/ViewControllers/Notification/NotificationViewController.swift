@@ -24,7 +24,7 @@ class NotificationModel: Codable {
     enum CodingKeys: String, CodingKey {
         case id = "notification_id"
         case title = "notification"
-        case date = "timestamp"
+        case date = "date"
         case isRead = "is_read"
     }
     
@@ -68,6 +68,13 @@ class NotificationViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.showAndUpdateNavigationBar(with: "Notifications", withShadow: true, isHavingBackButton: true, actionController: self, backAction: #selector(self.backBtnPressed(_:)))
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     @objc func backBtnPressed(_ sender: UIButton) {
@@ -87,7 +94,7 @@ class NotificationViewController: UIViewController {
             DispatchQueue.main.async {
                 self.alertLoader?.dismiss(animated: false, completion: nil)
                 if let notifications = notifications {
-                    self.notifications = notifications
+                    self.notifications = notifications.reversed()
                     self.tableView.reloadData()
                 } else {
                     self.showAlert(withMsg: apiStatus?.message ?? "Something went wrong")
@@ -98,8 +105,8 @@ class NotificationViewController: UIViewController {
     
     func fetchNotification(completion: @escaping ([NotificationModel]?, APIStatus?) -> Void) {
         var params: Parameters = [
-            Constants.API.method: Constants.MethodType.listNotification.rawValue,
-            Constants.API.key: "41979bf5da2d2bfbae66fda5ac59ed132216b87b",
+            Constants.API.method: Constants.MethodType.listOrderNotification.rawValue,
+            Constants.API.key: "78ede517f5d1a60a6f69b3410ebcb92b39d19fe9",
             Constants.API.customerId: UserConstant.shared.userModel.id
         ]
         
@@ -109,7 +116,7 @@ class NotificationViewController: UIViewController {
         
         APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
             APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
-                if let response = responseData, let jsonData = try? JSONSerialization.data(withJSONObject: response) {
+                if let response = responseData?.first, let notificationData = response["notification"], let jsonData = try? JSONSerialization.data(withJSONObject: notificationData) {
                     let notifications: [NotificationModel] = try! JSONDecoder().decode([NotificationModel].self, from: jsonData)
                     completion(notifications, apiStatus)
                 } else {
@@ -134,6 +141,12 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
         cell.selectionStyle = .none
         
         cell.lblNotificationDetailed.text = self.notifications[indexPath.row].title
+        
+        if Calendar.current.isDateInToday(self.notifications[indexPath.row].date) {
+            cell.lblNotificationDate.text = "Today"
+        } else {
+           cell.lblNotificationDate.text = "\(self.notifications[indexPath.row].date.toString(withFormat: "MMM dd, yyyy"))"
+        }
         
         return cell
     }

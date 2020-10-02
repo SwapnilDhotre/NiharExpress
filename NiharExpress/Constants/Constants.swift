@@ -98,6 +98,7 @@ class Constants {
         case orderRating = "orderRating"
         
         case listNotification = "listNotification"
+        case listOrderNotification = "listOrderNotification"
         case listCity = "listCity"
         case getLocation = "getLocation"
         case getSuggestedAddress = "getSuggestedAddress"

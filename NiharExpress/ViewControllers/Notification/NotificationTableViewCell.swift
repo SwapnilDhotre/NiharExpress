@@ -11,6 +11,7 @@ import UIKit
 class NotificationTableViewCell: UITableViewCell {
     static var identifier = "NotificationTableViewCell"
 
+    @IBOutlet weak var lblNotificationDate: UILabel!
     @IBOutlet weak var lblNotificationDetailed: UILabel!
     @IBOutlet weak var logoImage: UIImageView!
     

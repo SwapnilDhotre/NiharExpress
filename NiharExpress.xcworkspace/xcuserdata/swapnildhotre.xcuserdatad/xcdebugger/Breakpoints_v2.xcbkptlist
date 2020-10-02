@@ -18,38 +18,6 @@
             endingLineNumber = "911"
             landmarkName = "didSelectCategory(category:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "CFA16B68-1706-454C-A25A-5437A332E232 - abe05e5e007d7921"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "NiharExpress.NewOrderFormTableViewController.didSelectCategory(category: NiharExpress.Category) -&gt; ()"
-                  moduleName = "NiharExpress"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Shared/projects/personal/git/NiharExpress/NiharExpress/ViewControllers/NewOrderForm/NewOrderFormTableViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "911"
-                  endingLineNumber = "911"
-                  offsetFromSymbolStart = "43">
-               </Location>
-               <Location
-                  uuid = "CFA16B68-1706-454C-A25A-5437A332E232 - ad7a3324a00d4c09"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (NiharExpress.FormFieldModel) -&gt; () in NiharExpress.NewOrderFormTableViewController.didSelectCategory(category: NiharExpress.Category) -&gt; ()"
-                  moduleName = "NiharExpress"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Shared/projects/personal/git/NiharExpress/NiharExpress/ViewControllers/NewOrderForm/NewOrderFormTableViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "912"
-                  endingLineNumber = "912"
-                  offsetFromSymbolStart = "56">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -97,6 +65,22 @@
             startingLineNumber = "58"
             endingLineNumber = "58"
             landmarkName = "updateData(with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "902DECC5-F021-4B9D-8002-BBC58954E192"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NiharExpress/ViewControllers/Notification/NotificationViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "init(from:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
