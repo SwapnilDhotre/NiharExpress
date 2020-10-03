@@ -11,6 +11,9 @@
 		0F21D81B25206ABC0058F390 /* TempLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F21D81925206ABC0058F390 /* TempLoginViewController.xib */; };
 		0F3751C62522339B00D48516 /* SearchAddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3751C42522339B00D48516 /* SearchAddressTableViewCell.swift */; };
 		0F3751C72522339B00D48516 /* SearchAddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F3751C52522339B00D48516 /* SearchAddressTableViewCell.xib */; };
+		0F44481B2527795F00F97B9B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0F44481A2527795E00F97B9B /* GoogleService-Info.plist */; };
+		0F49379125279E3500909CD1 /* MarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F49379025279E3500909CD1 /* MarkerView.swift */; };
+		0F49379325279E4B00909CD1 /* MarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F49379225279E4B00909CD1 /* MarkerView.xib */; };
 		0F6C5B2024AE428D00F15376 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6C5B1E24AE428D00F15376 /* HelpViewController.swift */; };
 		0F6C5B2124AE428D00F15376 /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F6C5B1F24AE428D00F15376 /* HelpViewController.xib */; };
 		0F6C5B2524AE42BF00F15376 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6C5B2324AE42BF00F15376 /* InfoViewController.swift */; };
@@ -191,6 +194,9 @@
 		0F21D81925206ABC0058F390 /* TempLoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TempLoginViewController.xib; sourceTree = "<group>"; };
 		0F3751C42522339B00D48516 /* SearchAddressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAddressTableViewCell.swift; sourceTree = "<group>"; };
 		0F3751C52522339B00D48516 /* SearchAddressTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchAddressTableViewCell.xib; sourceTree = "<group>"; };
+		0F44481A2527795E00F97B9B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0F49379025279E3500909CD1 /* MarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerView.swift; sourceTree = "<group>"; };
+		0F49379225279E4B00909CD1 /* MarkerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkerView.xib; sourceTree = "<group>"; };
 		0F6C5B1E24AE428D00F15376 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		0F6C5B1F24AE428D00F15376 /* HelpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
 		0F6C5B2324AE42BF00F15376 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
@@ -497,6 +503,7 @@
 				E6CF2D4624BE042A00158CE0 /* Model */,
 				0F7F1C6024AE3F080011A754 /* ViewControllers */,
 				0F7F1C5524AE3E7F0011A754 /* LaunchScreen.storyboard */,
+				0F44481A2527795E00F97B9B /* GoogleService-Info.plist */,
 				0F7F1C5824AE3E7F0011A754 /* Info.plist */,
 			);
 			path = NiharExpress;
@@ -787,6 +794,8 @@
 			children = (
 				E64E2DAC24E03B2F0018041F /* TrackOrderViewController.swift */,
 				E64E2DAD24E03B2F0018041F /* TrackOrderViewController.xib */,
+				0F49379025279E3500909CD1 /* MarkerView.swift */,
+				0F49379225279E4B00909CD1 /* MarkerView.xib */,
 			);
 			path = TrackOrder;
 			sourceTree = "<group>";
@@ -994,6 +1003,7 @@
 				E630D98124BD9375006666A8 /* Roboto-BlackItalic.ttf in Resources */,
 				E609BD5924E02ABA00B505EB /* WebViewViewController.xib in Resources */,
 				E630D9B324BDC172006666A8 /* NavigationView.xib in Resources */,
+				0F49379325279E4B00909CD1 /* MarkerView.xib in Resources */,
 				E654782224DD59C300A1F697 /* InProgressOrdersTableViewCell.xib in Resources */,
 				E6FBE9A424DE9F2100787B61 /* StarRatingViewController.xib in Resources */,
 				E630D98A24BD9375006666A8 /* Roboto-Italic.ttf in Resources */,
@@ -1049,6 +1059,7 @@
 				E630D98824BD9375006666A8 /* Roboto-BoldItalic.ttf in Resources */,
 				0F6C5B2624AE42BF00F15376 /* InfoViewController.xib in Resources */,
 				0F6C5B2124AE428D00F15376 /* HelpViewController.xib in Resources */,
+				0F44481B2527795F00F97B9B /* GoogleService-Info.plist in Resources */,
 				E630D98624BD9375006666A8 /* Roboto-MediumItalic.ttf in Resources */,
 				E654782C24DD6F8800A1F697 /* CompletedOrderTableViewCell.xib in Resources */,
 				E672532B24DE5026008837CB /* RadioTableViewCell.xib in Resources */,
@@ -1223,6 +1234,7 @@
 				E654782B24DD6F8800A1F697 /* CompletedOrderTableViewCell.swift in Sources */,
 				0F8EF9412518B9EB00128C10 /* TransactonTypeSelectionViewController.swift in Sources */,
 				E65C384424C5FB94002DD732 /* TabbedView.swift in Sources */,
+				0F49379125279E3500909CD1 /* MarkerView.swift in Sources */,
 				E630D99E24BD9CCB006666A8 /* Dictionary_Extension.swift in Sources */,
 				0FEF269124CBFFE400D2CD69 /* URLConstant.swift in Sources */,
 				E684749C24DEEBFF00BB339B /* AddressHeaderTableViewCell.swift in Sources */,

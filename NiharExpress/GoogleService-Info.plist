@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>267486432396-ah3ofr6tejr84guqrs3dj7apljhpcn86.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.267486432396-ah3ofr6tejr84guqrs3dj7apljhpcn86</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>267486432396-dic9q86bh9jaaqarhpltrhbjkq6p65mk.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAq-U8Sn3d54nt_uZc1MuOitnYw1vgfbgc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>267486432396</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.nihar-express.delivery</string>
+	<key>PROJECT_ID</key>
+	<string>niharexpress-d3c12</string>
+	<key>STORAGE_BUCKET</key>
+	<string>niharexpress-d3c12.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:267486432396:ios:3388642bb25ad12fd8ffa9</string>
+	<key>DATABASE_URL</key>
+	<string>https://niharexpress-d3c12.firebaseio.com</string>
+</dict>
+</plist>

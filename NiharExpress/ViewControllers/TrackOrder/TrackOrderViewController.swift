@@ -70,12 +70,24 @@ class TrackOrderViewController: UIViewController {
         
         self.gmsMap.animate(with: GMSCameraUpdate.fit(bounds))
         
-        let lat: Double = NSString(string: order.delivery.first?.lat ?? "").doubleValue
-        let long: Double = NSString(string: order.delivery.first?.long ?? "").doubleValue
-        
         let sessionManager = GoogleMapSessionManager()
         let start = CLLocationCoordinate2D(latitude: driverInfo.latitude, longitude: driverInfo.longitude)
-        let end = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        var end: CLLocationCoordinate2D!
+        
+        if order.pickUp.isComplete == "N" {
+            let lat: Double = NSString(string: order.pickUp.lat).doubleValue
+            let long: Double = NSString(string: order.pickUp.long).doubleValue
+            end = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        } else {
+            for location in order.delivery {
+                if location.isComplete == "N" {
+                    let lat: Double = NSString(string: location.lat).doubleValue
+                    let long: Double = NSString(string: location.long).doubleValue
+                    end = CLLocationCoordinate2D(latitude: lat, longitude: long)
+                    break
+                }
+            }
+        }
         
         sessionManager.requestDirections(from: start, to: end, completionHandler: { (path, error) in
             
@@ -107,20 +119,32 @@ class TrackOrderViewController: UIViewController {
         let long: Double = NSString(string: address.long).doubleValue
         
         let marker = self.addPinAtLocation(coordinate: CLLocationCoordinate2D(latitude: lat, longitude: long), title: address.userName, mobileNo: address.mobileNo, address: address.address, isDriversLocation: false)
-        if index != nil {
-            marker.title = "Drop \(index!)"
-        }
         
+        let image: UIImage!
         switch markerType {
         case .pickUpMarker:
-            marker.icon = UIImage(named: "pickup-png")?.resizeImage(targetSize: CGSize(width: 60, height: 60))
+            image = UIImage(named: "pickup-png")?.resizeImage(targetSize: CGSize(width: 60, height: 60))
             break
         case .driverMarker:
-            marker.icon = UIImage(named: "driver-png")?.resizeImage(targetSize: CGSize(width: 60, height: 60))
+            image = UIImage(named: "driver-png")?.resizeImage(targetSize: CGSize(width: 60, height: 60))
             break
         case .dropMarker:
-            marker.icon = UIImage(named: "drop-png")?.resizeImage(targetSize: CGSize(width: 60, height: 60))
+            image = UIImage(named: "drop-png")?.resizeImage(targetSize: CGSize(width: 60, height: 60))
             break
+        }
+        
+        if index != nil {
+            marker.title = "Drop \(index! + 1)"
+            let markerView = MarkerView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+            markerView.imgView.image = image
+            markerView.lblTitle.text = "Drop \(index! + 1)"
+            marker.iconView = markerView
+        } else {
+            marker.title = "Pick Up"
+            let markerView = MarkerView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+            markerView.imgView.image = image
+            markerView.lblTitle.text = "Pick Up"
+            marker.iconView = markerView
         }
         
         return marker
@@ -132,9 +156,12 @@ class TrackOrderViewController: UIViewController {
         marker.title = title
         marker.map = self.gmsMap
         marker.snippet = "\(mobileNo)\n\(address)"
-
+        
         if isDriversLocation {
-            marker.icon = UIImage(named: "driver-png")?.resizeImage(targetSize: CGSize(width: 60, height: 60))
+            let markerView = MarkerView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+            markerView.imgView.image = UIImage(named: "driver-png")?.resizeImage(targetSize: CGSize(width: 60, height: 60))
+            markerView.lblTitle.text = "Driver"
+            marker.iconView = markerView
         }
         
         return marker

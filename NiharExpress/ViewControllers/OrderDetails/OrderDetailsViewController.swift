@@ -12,6 +12,7 @@ import CoreLocation
 enum OrderStatus {
     case assigned
     case pickUp
+    case deliveryInProgress
     case awaiting
     case inProgress
     case completed
@@ -46,7 +47,7 @@ class OrderDetailsViewController: UIViewController {
         
         switch self.orderStatus {
             
-        case .awaiting, .assigned, .pickUp:
+        case .awaiting, .assigned, .pickUp, .deliveryInProgress:
             self.bannerViewTitle.text = self.order.orderStatus
             self.bannerView.backgroundColor = ColorConstant.orderDetailsActiveBanner.color
         case .inProgress:
@@ -116,7 +117,7 @@ extension OrderDetailsViewController: UITableViewDataSource, UITableViewDelegate
                 cell.delegate = self
                 
                 return cell
-            case .assigned, .pickUp:
+            case .assigned, .pickUp, .deliveryInProgress:
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: TrackOrderTableViewCell.identifier) as? TrackOrderTableViewCell else {
                     assertionFailure("Couldn't dequeue:>> \(TrackOrderTableViewCell.identifier)")
                     return UITableViewCell()

@@ -19,6 +19,9 @@ target 'NiharExpress' do
   # pull to refresh
   pod "ESPullToRefresh"
   
+  # Google Firebase for Notifications
+  pod 'Firebase/Analytics'
+  
   # Pods for NiharExpress
 
 end

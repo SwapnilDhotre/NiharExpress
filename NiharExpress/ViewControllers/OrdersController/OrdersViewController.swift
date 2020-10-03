@@ -308,6 +308,8 @@ extension OrdersViewController: UITableViewDataSource, UITableViewDelegate {
                 status = .assigned
             } else if order.orderStatus == "Pickup" {
                 status = .pickUp
+            } else if order.orderStatus == "Delivery In Progress" {
+                status = .deliveryInProgress
             }
             
             self.navigateToOrderDetails(with: order, orderStatus: status)

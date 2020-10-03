@@ -231,7 +231,7 @@ class OrderReviewViewController: UIViewController {
             Constants.API.deliveryTransactionType: "[\((array.map { $0.transactionType ?? "" }).joined(separator: ", "))]",
             
             Constants.API.orderType: "N",
-            Constants.API.price: self.priceInfo.price,
+            Constants.API.price: self.priceInfo.totalCost,
             Constants.API.customerId: customerId ?? UserConstant.shared.userModel.id,
             Constants.API.cityId: UserConstant.shared.city?.id ?? "1",
             Constants.API.paymentMethod: self.isCashOnDelivery ? "CA" : "CO",
@@ -247,7 +247,7 @@ class OrderReviewViewController: UIViewController {
         params.printPrettyJSON()
         
         APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
-            APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
+           APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
                 if let data = responseData?.first {
                     completion(data, nil)
                 } else {
