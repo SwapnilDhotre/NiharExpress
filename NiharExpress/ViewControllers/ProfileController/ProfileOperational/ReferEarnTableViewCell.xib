@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Medium.ttf">
+            <string>Roboto-Medium</string>
+        </array>
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="154" id="KGk-i7-Jjw" customClass="ReferEarnTableViewCell" customModule="NiharExpress" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="154"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="154"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CMz-yQ-MXA" customClass="DesignableView" customModule="NiharExpress" customModuleProvider="target">
+                        <rect key="frame" x="8" y="8" width="304" height="138"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JC8-DU-b4T" customClass="DesignableView" customModule="NiharExpress" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="304" height="138"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mRa-Mq-5yP">
+                                        <rect key="frame" x="12" y="15" width="280" height="73"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wtJ-Sv-emR" customClass="DesignableButton" customModule="NiharExpress" customModuleProvider="target">
+                                        <rect key="frame" x="12" y="103" width="66" height="30"/>
+                                        <color key="backgroundColor" red="0.50196078430000002" green="0.1176470588" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="XmC-nu-Cw7"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="12"/>
+                                        <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                                        <state key="normal" title="REFER NOW">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="mRa-Mq-5yP" firstAttribute="leading" secondItem="JC8-DU-b4T" secondAttribute="leading" constant="12" id="8iT-T0-8KM"/>
+                                    <constraint firstAttribute="trailing" secondItem="mRa-Mq-5yP" secondAttribute="trailing" constant="12" id="UiB-Os-Bmj"/>
+                                    <constraint firstItem="wtJ-Sv-emR" firstAttribute="top" secondItem="mRa-Mq-5yP" secondAttribute="bottom" constant="15" id="gOF-Fc-aP1"/>
+                                    <constraint firstItem="mRa-Mq-5yP" firstAttribute="top" secondItem="JC8-DU-b4T" secondAttribute="top" constant="15" id="hgd-Wv-bbv"/>
+                                    <constraint firstItem="wtJ-Sv-emR" firstAttribute="leading" secondItem="JC8-DU-b4T" secondAttribute="leading" constant="12" id="vDs-4u-Lcl"/>
+                                    <constraint firstAttribute="bottom" secondItem="wtJ-Sv-emR" secondAttribute="bottom" constant="5" id="zId-bj-Lve"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="0.29999999999999999"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                        <size key="value" width="0.0" height="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="maskToBounds" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="JC8-DU-b4T" firstAttribute="leading" secondItem="CMz-yQ-MXA" secondAttribute="leading" id="VBq-bz-b1V"/>
+                            <constraint firstAttribute="trailing" secondItem="JC8-DU-b4T" secondAttribute="trailing" id="VSJ-6H-VFX"/>
+                            <constraint firstAttribute="bottom" secondItem="JC8-DU-b4T" secondAttribute="bottom" id="ZT7-Zu-O9J"/>
+                            <constraint firstItem="JC8-DU-b4T" firstAttribute="top" secondItem="CMz-yQ-MXA" secondAttribute="top" id="oOq-m5-Ve8"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="maskToBounds" value="NO"/>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="CMz-yQ-MXA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="EOl-qQ-zRV"/>
+                    <constraint firstAttribute="trailing" secondItem="CMz-yQ-MXA" secondAttribute="trailing" constant="8" id="LDg-Ci-nhl"/>
+                    <constraint firstItem="CMz-yQ-MXA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="OAS-cW-Daq"/>
+                    <constraint firstAttribute="bottom" secondItem="CMz-yQ-MXA" secondAttribute="bottom" constant="8" id="qyy-dT-fFM"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="btnReferNow" destination="wtJ-Sv-emR" id="BdM-4p-oBK"/>
+                <outlet property="lblTitle" destination="mRa-Mq-5yP" id="rXw-lh-ptQ"/>
+            </connections>
+            <point key="canvasLocation" x="76.811594202898561" y="132.58928571428572"/>
+        </tableViewCell>
+    </objects>
+</document>
