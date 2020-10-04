@@ -66,7 +66,7 @@ extension UIButton {
     }
     
     func setNotificationButton() {
-        self.titleLabel?.font = UIFont.fontAwesome(ofSize: 16, style: .solid)
+        self.titleLabel?.font = UIFont.fontAwesome(ofSize: 20, style: .solid)
         self.setTitle(FontAwesome.bell.rawValue, for: .normal)
         self.setTitleColor(ColorConstant.appBlackLabel.color, for: .normal)
     }

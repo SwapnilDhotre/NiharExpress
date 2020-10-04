@@ -32,6 +32,8 @@ class OrdersViewController: UIViewController {
     
     var cloneOrderWithFields: [FormFieldModel] = []
     
+    var notificationBarButton: UIButton!
+    
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +55,7 @@ class OrdersViewController: UIViewController {
                 
                 self.tabbedView.isHidden = false
                 
-                self.addNotificationBarButton(actionController: self, notificationAction: #selector(self.notificationAction(_:)))
+                self.notificationBarButton = self.addNotificationBarButton(actionController: self, notificationAction: #selector(self.notificationAction(_:)))
             }
             
             self.tabbedView.tabbedDatasource = self
@@ -70,6 +72,9 @@ class OrdersViewController: UIViewController {
         super.viewDidAppear(animated)
         
         self.performShowAnimation()
+        if let barBtn = self.notificationBarButton {
+            Util.setNotificationCount(btn: barBtn)
+        }
     }
     
     // MARK: - ToDo Methods

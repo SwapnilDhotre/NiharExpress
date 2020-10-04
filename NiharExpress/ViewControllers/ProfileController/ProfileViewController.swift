@@ -145,6 +145,14 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch self.profileData[indexPath.row].icon {
+        case .profile:
+            let editProfileController = EditProfileViewController()
+            self.navigationController?.pushViewController(editProfileController, animated: true)
+            break
+        case .refEarn:
+            let referEarnController = ReferNEarnViewController()
+            self.navigationController?.pushViewController(referEarnController, animated: true)
+            break
         case .location:
             let locationController = ChangeLocationViewController()
             locationController.modalPresentationStyle = .overCurrentContext

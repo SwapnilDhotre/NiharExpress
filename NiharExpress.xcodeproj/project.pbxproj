@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		0F21D81A25206ABC0058F390 /* TempLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F21D81825206ABC0058F390 /* TempLoginViewController.swift */; };
 		0F21D81B25206ABC0058F390 /* TempLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F21D81925206ABC0058F390 /* TempLoginViewController.xib */; };
+		0F2DC2DA2529DFF600D59FFC /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2DC2D82529DFF600D59FFC /* EditProfileViewController.swift */; };
+		0F2DC2DB2529DFF600D59FFC /* EditProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F2DC2D92529DFF600D59FFC /* EditProfileViewController.xib */; };
+		0F2DC2DE2529E98800D59FFC /* ReferNEarnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2DC2DC2529E98800D59FFC /* ReferNEarnViewController.swift */; };
+		0F2DC2DF2529E98800D59FFC /* ReferNEarnViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F2DC2DD2529E98800D59FFC /* ReferNEarnViewController.xib */; };
+		0F2DC2E22529E9EF00D59FFC /* ReferEarnTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2DC2E02529E9EF00D59FFC /* ReferEarnTableViewCell.swift */; };
+		0F2DC2E32529E9EF00D59FFC /* ReferEarnTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F2DC2E12529E9EF00D59FFC /* ReferEarnTableViewCell.xib */; };
 		0F3751C62522339B00D48516 /* SearchAddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3751C42522339B00D48516 /* SearchAddressTableViewCell.swift */; };
 		0F3751C72522339B00D48516 /* SearchAddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F3751C52522339B00D48516 /* SearchAddressTableViewCell.xib */; };
 		0F44481B2527795F00F97B9B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0F44481A2527795E00F97B9B /* GoogleService-Info.plist */; };
@@ -192,6 +198,12 @@
 /* Begin PBXFileReference section */
 		0F21D81825206ABC0058F390 /* TempLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempLoginViewController.swift; sourceTree = "<group>"; };
 		0F21D81925206ABC0058F390 /* TempLoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TempLoginViewController.xib; sourceTree = "<group>"; };
+		0F2DC2D82529DFF600D59FFC /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		0F2DC2D92529DFF600D59FFC /* EditProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditProfileViewController.xib; sourceTree = "<group>"; };
+		0F2DC2DC2529E98800D59FFC /* ReferNEarnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferNEarnViewController.swift; sourceTree = "<group>"; };
+		0F2DC2DD2529E98800D59FFC /* ReferNEarnViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReferNEarnViewController.xib; sourceTree = "<group>"; };
+		0F2DC2E02529E9EF00D59FFC /* ReferEarnTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferEarnTableViewCell.swift; sourceTree = "<group>"; };
+		0F2DC2E12529E9EF00D59FFC /* ReferEarnTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReferEarnTableViewCell.xib; sourceTree = "<group>"; };
 		0F3751C42522339B00D48516 /* SearchAddressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAddressTableViewCell.swift; sourceTree = "<group>"; };
 		0F3751C52522339B00D48516 /* SearchAddressTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchAddressTableViewCell.xib; sourceTree = "<group>"; };
 		0F44481A2527795E00F97B9B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -870,6 +882,12 @@
 			children = (
 				E696FD7424E10250004D60B6 /* ChangeLocationViewController.swift */,
 				E696FD7524E10250004D60B6 /* ChangeLocationViewController.xib */,
+				0F2DC2D82529DFF600D59FFC /* EditProfileViewController.swift */,
+				0F2DC2D92529DFF600D59FFC /* EditProfileViewController.xib */,
+				0F2DC2DC2529E98800D59FFC /* ReferNEarnViewController.swift */,
+				0F2DC2DD2529E98800D59FFC /* ReferNEarnViewController.xib */,
+				0F2DC2E02529E9EF00D59FFC /* ReferEarnTableViewCell.swift */,
+				0F2DC2E12529E9EF00D59FFC /* ReferEarnTableViewCell.xib */,
 			);
 			path = ProfileOperational;
 			sourceTree = "<group>";
@@ -1023,6 +1041,7 @@
 				E630D98224BD9375006666A8 /* Roboto-Light.ttf in Resources */,
 				E6994C9824DF146800B935C1 /* RemoveAddressTableViewCell.xib in Resources */,
 				0F7F1C6424AE415F0011A754 /* TabBarViewController.xib in Resources */,
+				0F2DC2DF2529E98800D59FFC /* ReferNEarnViewController.xib in Resources */,
 				0F6C5B3D24AE509F00F15376 /* NewOrderFormTableViewController.xib in Resources */,
 				E609BD5B24E0380200B505EB /* nihar_font.ttf in Resources */,
 				E6994C9024DF0FB400B935C1 /* ForOnlineStoreHeaderTableViewCell.xib in Resources */,
@@ -1061,7 +1080,9 @@
 				0F6C5B2124AE428D00F15376 /* HelpViewController.xib in Resources */,
 				0F44481B2527795F00F97B9B /* GoogleService-Info.plist in Resources */,
 				E630D98624BD9375006666A8 /* Roboto-MediumItalic.ttf in Resources */,
+				0F2DC2E32529E9EF00D59FFC /* ReferEarnTableViewCell.xib in Resources */,
 				E654782C24DD6F8800A1F697 /* CompletedOrderTableViewCell.xib in Resources */,
+				0F2DC2DB2529DFF600D59FFC /* EditProfileViewController.xib in Resources */,
 				E672532B24DE5026008837CB /* RadioTableViewCell.xib in Resources */,
 				E6F81A3D24DDB7AE00E98351 /* OrderDetailsLocationTableViewCell.xib in Resources */,
 				E630D98724BD9375006666A8 /* Roboto-ThinItalic.ttf in Resources */,
@@ -1164,6 +1185,7 @@
 				E609BD5824E02ABA00B505EB /* WebViewViewController.swift in Sources */,
 				E68474A624DEEF8100BB339B /* AddressCommonTableViewCell.swift in Sources */,
 				E6AA98F124BF4BBE006577F6 /* PlaceMarker.swift in Sources */,
+				0F2DC2E22529E9EF00D59FFC /* ReferEarnTableViewCell.swift in Sources */,
 				E630D9BC24BDDF32006666A8 /* WeightTableViewCell.swift in Sources */,
 				E6AA98E924BF3914006577F6 /* RadioCellTableViewCell.swift in Sources */,
 				E6A6286B24DC7CC60015CC4A /* City.swift in Sources */,
@@ -1177,6 +1199,7 @@
 				E696FD7624E10250004D60B6 /* ChangeLocationViewController.swift in Sources */,
 				E6994C8B24DEF71800B935C1 /* DateTimePickerTableViewCell.swift in Sources */,
 				E6496AA124DB125100514AB9 /* EmptyOrderView.swift in Sources */,
+				0F2DC2DE2529E98800D59FFC /* ReferNEarnViewController.swift in Sources */,
 				0F6C5B3C24AE509F00F15376 /* NewOrderFormTableViewController.swift in Sources */,
 				E630D93324BD7489006666A8 /* UIViewController_Extension.swift in Sources */,
 				E6496AA524DB1D6300514AB9 /* OrderReviewViewController.swift in Sources */,
@@ -1188,6 +1211,7 @@
 				0F21D81A25206ABC0058F390 /* TempLoginViewController.swift in Sources */,
 				E654781E24DD30DC00A1F697 /* OrderAddress.swift in Sources */,
 				E630D9A024BD9CD9006666A8 /* Date_Extension.swift in Sources */,
+				0F2DC2DA2529DFF600D59FFC /* EditProfileViewController.swift in Sources */,
 				0F6C5B2524AE42BF00F15376 /* InfoViewController.swift in Sources */,
 				E6AA98E324BF32CC006577F6 /* PaymentViewTableViewCell.swift in Sources */,
 				E630D9B524BDC186006666A8 /* NavigationView.swift in Sources */,

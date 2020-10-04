@@ -26,6 +26,7 @@ class NotificationModel: Codable {
         case title = "notification"
         case date = "date"
         case isRead = "is_read"
+        case timestamp = "timestamp"
     }
     
     required convenience init(from decoder: Decoder) throws {
@@ -33,11 +34,14 @@ class NotificationModel: Codable {
         
         let id: String = try container.decode(String.self, forKey: .id)
         let title: String = try container.decode(String.self, forKey: .title)
-        let dateString: String = try container.decode(String.self, forKey: .date)
-        let date = dateString.toDate(withFormat: "dd-MM-yyyy hh:mm:ss a")!
+        var dateString: String? = try? container.decode(String.self, forKey: .date)
+        if dateString == nil {
+            dateString = try? container.decode(String.self, forKey: .timestamp)
+        }
+        let date = dateString?.toDate(withFormat: "dd-MM-yyyy hh:mm:ss a")
         let isRead: String = try container.decode(String.self, forKey: .isRead)
         
-        self.init(id: id, title: title, date: date, isRead: isRead)
+        self.init(id: id, title: title, date: date!, isRead: isRead)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -112,15 +116,27 @@ class NotificationViewController: UIViewController {
         
         if let id = self.orderId {
             params[Constants.API.orderId] = id
+        } else {
+            params[Constants.API.method] = Constants.MethodType.listNotification.rawValue
+            params[Constants.API.key] = "41979bf5da2d2bfbae66fda5ac59ed132216b87b"
         }
         
         APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
             APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
-                if let response = responseData?.first, let notificationData = response["notification"], let jsonData = try? JSONSerialization.data(withJSONObject: notificationData) {
-                    let notifications: [NotificationModel] = try! JSONDecoder().decode([NotificationModel].self, from: jsonData)
-                    completion(notifications, apiStatus)
+                if self.orderId == nil {
+                    if let response = responseData, let jsonData = try? JSONSerialization.data(withJSONObject: response) {
+                        let notifications: [NotificationModel] = try! JSONDecoder().decode([NotificationModel].self, from: jsonData)
+                        completion(notifications, apiStatus)
+                    } else {
+                        completion(nil, apiStatus)
+                    }
                 } else {
-                    completion(nil, apiStatus)
+                    if let response = responseData?.first, let notificationData = response["notification"], let jsonData = try? JSONSerialization.data(withJSONObject: notificationData) {
+                        let notifications: [NotificationModel] = try! JSONDecoder().decode([NotificationModel].self, from: jsonData)
+                        completion(notifications, apiStatus)
+                    } else {
+                        completion(nil, apiStatus)
+                    }
                 }
             }
         }
