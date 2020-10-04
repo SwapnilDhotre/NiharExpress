@@ -101,8 +101,8 @@ class TrackOrderViewController: UIViewController {
                 polyline.map = self.gmsMap
                 
                 // Configure polyline
-                polyline.strokeColor = ColorConstant.themePrimary.color
-                polyline.strokeWidth = 2
+                polyline.strokeColor = #colorLiteral(red: 0.937254902, green: 0.1882352941, blue: 0.1294117647, alpha: 1)
+                polyline.strokeWidth = 3
                 
                 // Move the camera to the polyline
                 let bounds = GMSCoordinateBounds(path: path!)
@@ -169,6 +169,19 @@ class TrackOrderViewController: UIViewController {
     
     @objc func backBtnPressed(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func btnToggleMapView(_ sender: UIButton) {
+        sender.tag = sender.tag == 0 ? 1 : 0
+        self.updateBtnView(sender: sender, flag: sender.tag)
+    }
+    
+    func updateBtnView(sender: UIButton, flag: Int) {
+        if flag == 0 {
+            sender.setImage(UIImage(named: "logo"), for: .normal)
+        } else {
+            sender.setImage(UIImage(named: "logo"), for: .normal)
+        }
     }
     
     func fetchDriversLocation(completion: @escaping ((DriverInfo?, APIStatus?) -> Void)) {

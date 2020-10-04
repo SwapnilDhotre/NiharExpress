@@ -359,6 +359,7 @@
 		E6AA98ED24BF4651006577F6 /* PickAddressViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickAddressViewController.xib; sourceTree = "<group>"; };
 		E6AA98F024BF4BBE006577F6 /* PlaceMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceMarker.swift; sourceTree = "<group>"; };
 		E6AA98F224BF4D2D006577F6 /* GooglePlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlace.swift; sourceTree = "<group>"; };
+		E6C1DFB32528E83E00DC22C3 /* NiharExpress.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NiharExpress.entitlements; sourceTree = "<group>"; };
 		E6CF2D4724BE044200158CE0 /* FormFieldModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldModel.swift; sourceTree = "<group>"; };
 		E6CF2D4924BE053700158CE0 /* FormSubFieldModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSubFieldModel.swift; sourceTree = "<group>"; };
 		E6DF3FB5252668F600533915 /* UIImage_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage_Extension.swift; sourceTree = "<group>"; };
@@ -493,6 +494,7 @@
 		0F7F1C4924AE3E7D0011A754 /* NiharExpress */ = {
 			isa = PBXGroup;
 			children = (
+				E6C1DFB32528E83E00DC22C3 /* NiharExpress.entitlements */,
 				0F7F1C5E24AE3E8F0011A754 /* Delegate */,
 				0F6C5B2824AE487700F15376 /* Utility */,
 				0F7F1C5F24AE3EFB0011A754 /* Assets */,
@@ -1375,6 +1377,7 @@
 			baseConfigurationReference = DAC0C6EAEB1AA2E7906AC099 /* Pods-NiharExpress.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = NiharExpress/NiharExpress.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development: NIHAR Sejpal (YMTKMALA8S)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = GG38H3R5L8;
@@ -1397,6 +1400,7 @@
 			baseConfigurationReference = 820DDFDA1D3278D30ADBC68A /* Pods-NiharExpress.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = NiharExpress/NiharExpress.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development: NIHAR Sejpal (YMTKMALA8S)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = GG38H3R5L8;

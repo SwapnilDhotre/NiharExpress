@@ -1036,14 +1036,14 @@ extension NewOrderFormTableViewController {
     }
     
     func fetchPrice(weight: String, categoryId: String, pickUpCoordinate: CLLocationCoordinate2D, deliveryCoordinates: [CLLocationCoordinate2D],  completion: @escaping (PriceInfo?, APIStatus?) -> Void) {
-        let firstCoordinate = deliveryCoordinates.first!
+        let coordinates = (deliveryCoordinates.map { "\($0.latitude),\($0.longitude)" }).joined(separator: "::")
         let params: Parameters = [
             Constants.API.method: Constants.MethodType.getPrice.rawValue,
             Constants.API.key: "234039b43a8652db154f669ddf87a78d6c54a6b2",
             Constants.API.categoryId: categoryId,
             Constants.API.weight: weight,
             Constants.API.pickUpPoint: "\(pickUpCoordinate.latitude),\(pickUpCoordinate.longitude)",
-            Constants.API.deliveryPoint: "\(firstCoordinate.latitude),\(firstCoordinate.longitude)",
+            Constants.API.deliveryPoint: coordinates,
             Constants.API.optimizeRoute: "N"
         ]
         
