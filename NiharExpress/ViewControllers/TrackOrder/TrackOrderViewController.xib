@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TrackOrderViewController" customModule="NiharExpress" customModuleProvider="target">
             <connections>
+                <outlet property="btnToggleMapView" destination="qZS-tI-1ok" id="YRN-In-SnE"/>
                 <outlet property="gmsMap" destination="c2t-Lu-qCV" id="Orc-Qf-5Z1"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -23,12 +24,18 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qZS-tI-1ok">
-                    <rect key="frame" x="20" y="760" width="110" height="116"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qZS-tI-1ok" customClass="DesignableButton" customModule="NiharExpress" customModuleProvider="target">
+                    <rect key="frame" x="20" y="816" width="60" height="60"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="116" id="Acg-5f-nXD"/>
-                        <constraint firstAttribute="width" constant="110" id="OIb-Qa-eua"/>
+                        <constraint firstAttribute="height" constant="60" id="Acg-5f-nXD"/>
+                        <constraint firstAttribute="width" constant="60" id="OIb-Qa-eua"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="30"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="maskToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="btnToggleMapView:" destination="-1" eventType="touchUpInside" id="PB8-Zm-we4"/>
                     </connections>

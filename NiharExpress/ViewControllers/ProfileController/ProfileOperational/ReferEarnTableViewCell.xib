@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -32,20 +32,21 @@
                                 <rect key="frame" x="0.0" y="0.0" width="304" height="138"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mRa-Mq-5yP">
-                                        <rect key="frame" x="12" y="15" width="280" height="73"/>
+                                        <rect key="frame" x="12" y="15" width="280" height="77"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wtJ-Sv-emR" customClass="DesignableButton" customModule="NiharExpress" customModuleProvider="target">
-                                        <rect key="frame" x="12" y="103" width="66" height="30"/>
+                                        <rect key="frame" x="12" y="100" width="170" height="30"/>
                                         <color key="backgroundColor" red="0.50196078430000002" green="0.1176470588" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
+                                            <constraint firstAttribute="width" constant="170" id="Pj0-Qb-BGX"/>
                                             <constraint firstAttribute="height" constant="30" id="XmC-nu-Cw7"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="12"/>
                                         <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
-                                        <state key="normal" title="REFER NOW">
+                                        <state key="normal" title="REFERENCE DISCOUNT">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -59,14 +60,14 @@
                                 <constraints>
                                     <constraint firstItem="mRa-Mq-5yP" firstAttribute="leading" secondItem="JC8-DU-b4T" secondAttribute="leading" constant="12" id="8iT-T0-8KM"/>
                                     <constraint firstAttribute="trailing" secondItem="mRa-Mq-5yP" secondAttribute="trailing" constant="12" id="UiB-Os-Bmj"/>
-                                    <constraint firstItem="wtJ-Sv-emR" firstAttribute="top" secondItem="mRa-Mq-5yP" secondAttribute="bottom" constant="15" id="gOF-Fc-aP1"/>
+                                    <constraint firstItem="wtJ-Sv-emR" firstAttribute="top" secondItem="mRa-Mq-5yP" secondAttribute="bottom" constant="8" id="gOF-Fc-aP1"/>
                                     <constraint firstItem="mRa-Mq-5yP" firstAttribute="top" secondItem="JC8-DU-b4T" secondAttribute="top" constant="15" id="hgd-Wv-bbv"/>
                                     <constraint firstItem="wtJ-Sv-emR" firstAttribute="leading" secondItem="JC8-DU-b4T" secondAttribute="leading" constant="12" id="vDs-4u-Lcl"/>
-                                    <constraint firstAttribute="bottom" secondItem="wtJ-Sv-emR" secondAttribute="bottom" constant="5" id="zId-bj-Lve"/>
+                                    <constraint firstAttribute="bottom" secondItem="wtJ-Sv-emR" secondAttribute="bottom" constant="8" id="zId-bj-Lve"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="5"/>
+                                        <real key="value" value="12"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
                                         <real key="value" value="4"/>
@@ -90,7 +91,7 @@
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="5"/>
+                                <real key="value" value="12"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="maskToBounds" value="NO"/>
                         </userDefinedRuntimeAttributes>
@@ -106,6 +107,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="btnReferNow" destination="wtJ-Sv-emR" id="BdM-4p-oBK"/>
+                <outlet property="btnWith" destination="Pj0-Qb-BGX" id="vcJ-vP-C6w"/>
                 <outlet property="lblTitle" destination="mRa-Mq-5yP" id="rXw-lh-ptQ"/>
             </connections>
             <point key="canvasLocation" x="76.811594202898561" y="132.58928571428572"/>

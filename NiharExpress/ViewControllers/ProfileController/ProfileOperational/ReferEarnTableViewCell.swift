@@ -15,6 +15,7 @@ class ReferEarnTableViewCell: UITableViewCell {
     var indexPath: IndexPath!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var btnReferNow: DesignableButton!
+    @IBOutlet weak var btnWith: NSLayoutConstraint!
     
     var btnAction: ((IndexPath) -> Void)?
     
@@ -33,7 +34,12 @@ class ReferEarnTableViewCell: UITableViewCell {
     func updateData(with title: String, btnTitle: String) {
         self.lblTitle.text = title
         self.btnReferNow.setTitle(btnTitle, for: .normal)
-        self.btnReferNow.sizeToFit()
+        
+        if indexPath.row == 0 {
+            self.btnWith.constant = 120
+        } else{
+            self.btnWith.constant = 170
+        }
         
         self.btnReferNow.addTarget(self, action: #selector(self.referBtnAction), for: .touchUpInside)
     }

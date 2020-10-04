@@ -105,6 +105,9 @@ class Constants {
         case getLocationAutocomplete = "getLocationAutocomplete"
         
         case updateDeviceToken = "updateDeviceToken"
+        case getReferralCode = "getReferralCode"
+        case listReferenceCoupon = "listReferenceCoupon"
+        case editProfile = "editProfile"
     }
     
     struct headers {

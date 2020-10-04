@@ -19,6 +19,9 @@ class TrackOrderViewController: UIViewController {
     var order: Order!
     var timer: Timer?
     
+    var driversZoomMode: Bool = false
+    
+    @IBOutlet weak var btnToggleMapView: UIButton!
     @IBOutlet weak var gmsMap: GMSMapView!
     
     override func viewDidLoad() {
@@ -44,6 +47,8 @@ class TrackOrderViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
         self.updateDriversLocation()
         self.timer = Timer.scheduledTimer(timeInterval: 60.0, target: self, selector: #selector(self.updateDriversLocation), userInfo: nil, repeats: true)
+        
+        self.updateBtnView(sender: self.btnToggleMapView, flag: 0)
     }
     
     @objc func updateDriversLocation() {
@@ -65,10 +70,10 @@ class TrackOrderViewController: UIViewController {
         for (index, deliveryAddr) in order.delivery.enumerated() {
             bounds = bounds.includingCoordinate(self.placeMarker(index: index, address: deliveryAddr, markerType: .dropMarker).position)
         }
-        
+
         bounds = bounds.includingCoordinate(self.addPinAtLocation(coordinate: CLLocationCoordinate2D(latitude: driverInfo.latitude, longitude: driverInfo.longitude), title: self.order.driverName, mobileNo: self.order.driveMobileNo, address: "", isDriversLocation: true).position)
-        
-        self.gmsMap.animate(with: GMSCameraUpdate.fit(bounds))
+
+//        self.gmsMap.animate(with: GMSCameraUpdate.fit(bounds))
         
         let sessionManager = GoogleMapSessionManager()
         let start = CLLocationCoordinate2D(latitude: driverInfo.latitude, longitude: driverInfo.longitude)
@@ -104,14 +109,20 @@ class TrackOrderViewController: UIViewController {
                 polyline.strokeColor = #colorLiteral(red: 0.937254902, green: 0.1882352941, blue: 0.1294117647, alpha: 1)
                 polyline.strokeWidth = 3
                 
-                // Move the camera to the polyline
-                let bounds = GMSCoordinateBounds(path: path!)
-                let cameraUpdate = GMSCameraUpdate.fit(bounds, with: UIEdgeInsets(top: 40, left: 15, bottom: 10, right: 15))
-                self.gmsMap.animate(with: cameraUpdate)
+                if self.driversZoomMode {
+                    var bounds: GMSCoordinateBounds = GMSCoordinateBounds()
+                    bounds = bounds.includingCoordinate(CLLocationCoordinate2D(latitude: driverInfo.latitude, longitude: driverInfo.longitude))
+                    self.gmsMap.animate(with: GMSCameraUpdate.fit(bounds))
+                } else {
+                    
+                    // Move the camera to the polyline
+                    let bounds = GMSCoordinateBounds(path: path!)
+                    let cameraUpdate = GMSCameraUpdate.fit(bounds, with: UIEdgeInsets(top: 40, left: 15, bottom: 10, right: 15))
+                    self.gmsMap.animate(with: cameraUpdate)
+                }
             }
             
         })
-        
     }
     
     func placeMarker(index: Int? = nil, address: OrderAddress, markerType: MarkerType) -> GMSMarker {
@@ -178,10 +189,13 @@ class TrackOrderViewController: UIViewController {
     
     func updateBtnView(sender: UIButton, flag: Int) {
         if flag == 0 {
-            sender.setImage(UIImage(named: "logo"), for: .normal)
+            sender.setImage(UIImage(named: "direction_icon"), for: .normal)
+            self.driversZoomMode = false
         } else {
             sender.setImage(UIImage(named: "logo"), for: .normal)
+            self.driversZoomMode = true
         }
+        self.updateDriversLocation()
     }
     
     func fetchDriversLocation(completion: @escaping ((DriverInfo?, APIStatus?) -> Void)) {

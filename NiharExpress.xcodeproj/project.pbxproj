@@ -137,6 +137,11 @@
 		E656287624F231230030B5E0 /* TrackOrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E656287424F231230030B5E0 /* TrackOrderTableViewCell.xib */; };
 		E656287C24F23F250030B5E0 /* DriverInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E656287B24F23F250030B5E0 /* DriverInfo.swift */; };
 		E656287E24F2885F0030B5E0 /* GoogleMapSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E656287D24F2885F0030B5E0 /* GoogleMapSessionManager.swift */; };
+		E65ADDDF252A47B5000A28D0 /* ReferralCodesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65ADDDD252A47B5000A28D0 /* ReferralCodesViewController.swift */; };
+		E65ADDE0252A47B5000A28D0 /* ReferralCodesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E65ADDDE252A47B5000A28D0 /* ReferralCodesViewController.xib */; };
+		E65ADDE2252A495F000A28D0 /* CouponModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65ADDE1252A495F000A28D0 /* CouponModel.swift */; };
+		E65ADDE5252A5342000A28D0 /* PromoCodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65ADDE3252A5342000A28D0 /* PromoCodeTableViewCell.swift */; };
+		E65ADDE6252A5342000A28D0 /* PromoCodeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E65ADDE4252A5342000A28D0 /* PromoCodeTableViewCell.xib */; };
 		E65C384424C5FB94002DD732 /* TabbedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C384124C5FB94002DD732 /* TabbedView.swift */; };
 		E65C384524C5FB94002DD732 /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C384224C5FB94002DD732 /* TabModel.swift */; };
 		E65C384624C5FB94002DD732 /* TabbedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E65C384324C5FB94002DD732 /* TabbedView.xib */; };
@@ -330,6 +335,11 @@
 		E656287424F231230030B5E0 /* TrackOrderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackOrderTableViewCell.xib; sourceTree = "<group>"; };
 		E656287B24F23F250030B5E0 /* DriverInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverInfo.swift; sourceTree = "<group>"; };
 		E656287D24F2885F0030B5E0 /* GoogleMapSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapSessionManager.swift; sourceTree = "<group>"; };
+		E65ADDDD252A47B5000A28D0 /* ReferralCodesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralCodesViewController.swift; sourceTree = "<group>"; };
+		E65ADDDE252A47B5000A28D0 /* ReferralCodesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReferralCodesViewController.xib; sourceTree = "<group>"; };
+		E65ADDE1252A495F000A28D0 /* CouponModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponModel.swift; sourceTree = "<group>"; };
+		E65ADDE3252A5342000A28D0 /* PromoCodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeTableViewCell.swift; sourceTree = "<group>"; };
+		E65ADDE4252A5342000A28D0 /* PromoCodeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PromoCodeTableViewCell.xib; sourceTree = "<group>"; };
 		E65C384124C5FB94002DD732 /* TabbedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbedView.swift; sourceTree = "<group>"; };
 		E65C384224C5FB94002DD732 /* TabModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
 		E65C384324C5FB94002DD732 /* TabbedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabbedView.xib; sourceTree = "<group>"; };
@@ -890,6 +900,10 @@
 				0F2DC2DD2529E98800D59FFC /* ReferNEarnViewController.xib */,
 				0F2DC2E02529E9EF00D59FFC /* ReferEarnTableViewCell.swift */,
 				0F2DC2E12529E9EF00D59FFC /* ReferEarnTableViewCell.xib */,
+				E65ADDDD252A47B5000A28D0 /* ReferralCodesViewController.swift */,
+				E65ADDDE252A47B5000A28D0 /* ReferralCodesViewController.xib */,
+				E65ADDE3252A5342000A28D0 /* PromoCodeTableViewCell.swift */,
+				E65ADDE4252A5342000A28D0 /* PromoCodeTableViewCell.xib */,
 			);
 			path = ProfileOperational;
 			sourceTree = "<group>";
@@ -918,6 +932,7 @@
 				E654781D24DD30DC00A1F697 /* OrderAddress.swift */,
 				E656287B24F23F250030B5E0 /* DriverInfo.swift */,
 				0FBD97C72520B0FC000BA30A /* UserAddressModel.swift */,
+				E65ADDE1252A495F000A28D0 /* CouponModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1027,6 +1042,7 @@
 				E654782224DD59C300A1F697 /* InProgressOrdersTableViewCell.xib in Resources */,
 				E6FBE9A424DE9F2100787B61 /* StarRatingViewController.xib in Resources */,
 				E630D98A24BD9375006666A8 /* Roboto-Italic.ttf in Resources */,
+				E65ADDE0252A47B5000A28D0 /* ReferralCodesViewController.xib in Resources */,
 				E6496AAA24DB28FE00514AB9 /* ReviewTableViewCell.xib in Resources */,
 				E630D98B24BD9375006666A8 /* Roboto-Regular.ttf in Resources */,
 				E6994C9424DF124F00B935C1 /* TransactionTypeTableViewCell.xib in Resources */,
@@ -1061,6 +1077,7 @@
 				E6465EAB24DBBB1C00AF591D /* VerifyOtpViewController.xib in Resources */,
 				E60F186D24BEEC2F00134353 /* OptimizeRouteTableViewCell.xib in Resources */,
 				E6496A9F24DB123A00514AB9 /* EmptyOrderView.xib in Resources */,
+				E65ADDE6252A5342000A28D0 /* PromoCodeTableViewCell.xib in Resources */,
 				E609BD5224E011BF00B505EB /* EmptyFormViewController.xib in Resources */,
 				E630D9BD24BDDF32006666A8 /* WeightTableViewCell.xib in Resources */,
 				E6AA98EF24BF4651006577F6 /* PickAddressViewController.xib in Resources */,
@@ -1176,6 +1193,7 @@
 				E630D99324BD9813006666A8 /* FontAwesome.swift in Sources */,
 				E60336D624C6ADD100D263C9 /* LoginView.swift in Sources */,
 				E656287E24F2885F0030B5E0 /* GoogleMapSessionManager.swift in Sources */,
+				E65ADDDF252A47B5000A28D0 /* ReferralCodesViewController.swift in Sources */,
 				E60F186C24BEEC2F00134353 /* OptimizeRouteTableViewCell.swift in Sources */,
 				0F3751C62522339B00D48516 /* SearchAddressTableViewCell.swift in Sources */,
 				E630D9AD24BD9DFC006666A8 /* Constants.swift in Sources */,
@@ -1249,6 +1267,7 @@
 				E60F187424BF033200134353 /* NotifyBySMSTableViewCell.swift in Sources */,
 				E6DF3FB6252668F600533915 /* UIImage_Extension.swift in Sources */,
 				E6506C6624DC09BC0044368B /* PriceInfo.swift in Sources */,
+				E65ADDE5252A5342000A28D0 /* PromoCodeTableViewCell.swift in Sources */,
 				E630D99224BD9813006666A8 /* FontAwesomeEnum.swift in Sources */,
 				E6CF2D4824BE044200158CE0 /* FormFieldModel.swift in Sources */,
 				E65C384D24C5FD02002DD732 /* UIButton_Extension.swift in Sources */,
@@ -1259,6 +1278,7 @@
 				E6994C8F24DF0FB400B935C1 /* ForOnlineStoreHeaderTableViewCell.swift in Sources */,
 				E654782B24DD6F8800A1F697 /* CompletedOrderTableViewCell.swift in Sources */,
 				0F8EF9412518B9EB00128C10 /* TransactonTypeSelectionViewController.swift in Sources */,
+				E65ADDE2252A495F000A28D0 /* CouponModel.swift in Sources */,
 				E65C384424C5FB94002DD732 /* TabbedView.swift in Sources */,
 				0F49379125279E3500909CD1 /* MarkerView.swift in Sources */,
 				E630D99E24BD9CCB006666A8 /* Dictionary_Extension.swift in Sources */,
@@ -1404,6 +1424,7 @@
 				CODE_SIGN_ENTITLEMENTS = NiharExpress/NiharExpress.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development: NIHAR Sejpal (YMTKMALA8S)";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = GG38H3R5L8;
 				INFOPLIST_FILE = NiharExpress/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1427,6 +1448,7 @@
 				CODE_SIGN_ENTITLEMENTS = NiharExpress/NiharExpress.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development: NIHAR Sejpal (YMTKMALA8S)";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = GG38H3R5L8;
 				INFOPLIST_FILE = NiharExpress/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

@@ -10,6 +10,7 @@ import UIKit
 
 class ReferNEarnViewController: UIViewController {
     
+    var alertLoader: UIAlertController?
     @IBOutlet weak var tableView: UITableView!
     
     var data: [(title: String, btnTitle: String)] = [
@@ -72,9 +73,49 @@ extension ReferNEarnViewController: UITableViewDataSource, UITableViewDelegate {
         cell.updateData(with: self.data[indexPath.row].title, btnTitle: self.data[indexPath.row].btnTitle)
         
         cell.btnAction = { (indexPath) in
-            
+            if indexPath.row == 0 {
+                self.getReferralCode()
+            } else if indexPath.row == 1 {
+                self.navigateToReferralCodes()
+            }
         }
         
         return cell
+    }
+    
+    func navigateToReferralCodes() {
+        let couponsController = ReferralCodesViewController()
+        self.navigationController?.pushViewController(couponsController, animated: true)
+    }
+    
+    func getReferralCode() {
+        let params: Parameters = [
+            Constants.API.method: Constants.MethodType.getReferralCode.rawValue,
+            Constants.API.key: "7a3452c9af80160c67334e7bb35f163be24a6215",
+            Constants.API.customerId: UserConstant.shared.userModel.id
+        ]
+        
+        self.alertLoader = self.showAlertLoader()
+        APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
+            DispatchQueue.main.async {
+                self.alertLoader?.dismiss(animated: false, completion: nil)
+                let text = responseData?[keyPath: "response.msg"] as? String
+                if text != nil {
+                    self.shareCode(with: text!)
+                }
+            }
+        }
+    }
+    
+    func shareCode(with text: String) {
+        let textToShare = [ text ]
+        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+
+        // exclude some activity types from the list (optional)
+        activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook ]
+
+        // present the view controller
+        self.present(activityViewController, animated: true, completion: nil)
     }
 }

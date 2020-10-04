@@ -13,6 +13,7 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var txtFullNameField: UITextField!
     @IBOutlet weak var txtEmailField: UITextField!
     
+    var alertLoader: UIAlertController?
     var isSaveAlreadyAdded: Bool = false
     
     override func viewDidLoad() {
@@ -45,15 +46,15 @@ class EditProfileViewController: UIViewController {
             saveBtn.setTitle("SAVE", for: .normal)
             saveBtn.titleLabel?.font = FontUtility.roboto(style: .Regular, size: 14)
             saveBtn.setTitleColor(ColorConstant.themePrimary.color, for: .normal)
+            saveBtn.addTarget(self, action: #selector(self.saveBtnAction(_:)), for: .touchUpInside)
             
             let barButton = UIBarButtonItem(customView: saveBtn)
-            barButton.action = #selector(self.saveBtnAction(_:))
             self.navigationItem.rightBarButtonItems = [self.navigationItem.rightBarButtonItem!, barButton]
         }
     }
     
-    @objc func saveBtnAction(_ sender: UIBarButtonItem) {
-        
+    @objc func saveBtnAction(_ sender: UIButton) {
+        self.saveEditedProfile()
     }
     
     @objc func backBtnAction(_ sender: UIBarButtonItem) {
@@ -63,6 +64,31 @@ class EditProfileViewController: UIViewController {
     @objc func notificationAction(_ sender: UIBarButtonItem) {
         let notificationController = NotificationViewController()
         self.navigationController?.pushViewController(notificationController, animated: true)
+    }
+    
+    func saveEditedProfile() {
+        let params: Parameters = [
+            Constants.API.method: Constants.MethodType.editProfile.rawValue,
+            Constants.API.key: "cb954a3797065bae4c444456d4fa32f2153ddf3a",
+            Constants.API.customerId: UserConstant.shared.userModel.id,
+            Constants.API.name: self.txtFullNameField.text,
+            Constants.API.emaildId: self.txtEmailField.text,
+            Constants.API.mobileNo: UserConstant.shared.userModel.mobileNo
+        ]
+        
+        self.alertLoader = self.showAlertLoader()
+        APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
+            APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
+                
+                DispatchQueue.main.async {
+                    self.alertLoader?.dismiss(animated: false, completion: nil)
+                    if let response = responseData?.first, let jsonData = try? JSONSerialization.data(withJSONObject: response) {
+                        let user = try! JSONDecoder().decode(User.self, from: jsonData)
+                        UserConstant.shared.userModel = user
+                    }
+                }
+            }
+        }
     }
 }
 
