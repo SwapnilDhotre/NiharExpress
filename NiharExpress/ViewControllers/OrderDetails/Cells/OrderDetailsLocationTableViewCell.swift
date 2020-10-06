@@ -28,6 +28,22 @@ class OrderDetailsLocationTableViewCell: UITableViewCell {
     
     var contactNo: String = ""
     
+    @IBOutlet weak var pickUpDeliveryTime: UIStackView!
+    
+    @IBOutlet weak var commentsView: UIStackView!
+    @IBOutlet weak var lblCommentsTitle: UILabel!
+    @IBOutlet weak var lblCommentsValue: UILabel!
+    
+    /// Store Info
+    @IBOutlet weak var storeInfoView: UIView!
+    @IBOutlet weak var lblStoreNameTitle: UILabel!
+    @IBOutlet weak var lblStoreNameValue: UILabel!
+    @IBOutlet weak var lblStoreContactTitle: UILabel!
+    @IBOutlet weak var lblStoreContactValue: UILabel!
+    @IBOutlet weak var lblStoreTransaction: UILabel!
+    @IBOutlet weak var lblStoreTransactionValue: UILabel!
+    
+    
     var isFirst: Bool = false {
         didSet {
             if self.isFirst {
@@ -79,11 +95,42 @@ class OrderDetailsLocationTableViewCell: UITableViewCell {
             self.lblCourierTitle.text = "Delivery Time"
         }
         
+        /// Hiding logic
+        // Hide show Time
+        if address.isComplete == "N" {
+            self.pickUpDeliveryTime.isHidden = true
+        } else {
+            self.pickUpDeliveryTime.isHidden = false
+        }
+        
+        if (address.comment != "") {
+            self.commentsView.isHidden = false
+            self.lblCommentsValue.text = address.comment
+        } else {
+            self.commentsView.isHidden = true
+        }
+        
+        if (address.orderType != nil && address.orderType! == "S") {
+            self.storeInfoView.isHidden = false
+            
+            self.lblStoreNameTitle.text = "Store Name"
+            self.lblStoreContactTitle.text = "Store Contact"
+            self.lblStoreTransaction.text = "Transaction Amount"
+            
+            self.lblStoreNameValue.text = address.storeName
+            self.lblStoreContactValue.text = address.storeContactNo
+            
+        } else {
+            self.storeInfoView.isHidden = true
+        }
+        
         self.lblDetailedAddress.text = address.address
         
         self.lblContactPersonValue.text = address.userName
         self.lblContactNo.text = address.mobileNo
         self.contactNo = address.mobileNo
+        
+        
     }
     
     @IBAction func btnPhoneCallAction(_ sender: UIButton) {

@@ -40,6 +40,7 @@ class TrackOrderTableViewCell: UITableViewCell {
         self.lblOrderAmount.text = order.price
         self.lblDetailedAddress.text = order.pickUp.address
         self.lblCourierBoyName.text = order.driverName
+        self.lblCourierBoyNo.text = order.driveMobileNo
         self.contactNo = order.driveMobileNo
         
         self.btnPhone.titleLabel?.font = UIFont.fontAwesome(ofSize: 18, style: .solid)

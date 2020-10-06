@@ -93,8 +93,16 @@ class PaymentViewTableViewCell: UITableViewCell {
         for formModel in allFormFields {
             if formModel.type == .pickUpPoint || formModel.type == .deliveryPoint {
                 if let addressField = (formModel.formSubFields.filter { $0.type == .address }).first {
+                    var userName = ""
+                    if let nameField = (formModel.formSubFields.filter { $0.type == .name }).first {
+                        userName = (nameField.value as? String) ?? ""
+                        if userName != "" {
+                             userName += " - "
+                        }
+                    }
                     
-                    if let address = (addressField.value as? AddressModel)?.address, address != "" {
+                    let address = userName + ((addressField.value as? AddressModel)?.address ?? "")
+                    if address != "" {
                         locations.append(PaymentWillOccurAt(title: address, isSelected: false))
                     }
                 }

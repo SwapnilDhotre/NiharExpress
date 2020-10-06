@@ -703,6 +703,7 @@ extension NewOrderFormTableViewController: SearchAddressDelegate {
                     subFormField.value = userAddressModel.mobileNo
                 }
                 
+                self.calculatePrice()
                 self.tableView.reloadData()
             }
         }
@@ -713,6 +714,8 @@ extension NewOrderFormTableViewController: SearchAddressDelegate {
         if let subFormField = model as? FormSubFieldModel {
             if subFormField.type == .address {
                 subFormField.value = address
+                
+                self.calculatePrice()
                 self.tableView.reloadData()
             }
         }
@@ -799,8 +802,8 @@ extension NewOrderFormTableViewController: ForOnLineStoreProtocol {
 extension NewOrderFormTableViewController: PickAddressFieldProtocol {
     func fetchCurrentLocationAction(model: FormSubFieldModel) {
         self.pickLocation { (addressModel) in
-            model.value = addressModel
             DispatchQueue.main.async {
+                model.value = addressModel
                 self.calculatePrice()
                 self.tableView.reloadRows(at: [model.indexPath], with: .automatic)
             }

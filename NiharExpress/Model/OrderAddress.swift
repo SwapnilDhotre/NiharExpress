@@ -26,6 +26,7 @@ class OrderAddress: Codable {
     var long: String
     var time: String
     var isComplete: String
+    var comment: String
     var storeName: String?
     var storeContactNo: String?
     var orderType: String?
@@ -37,7 +38,7 @@ class OrderAddress: Codable {
     var isFirstCell: Bool = false // Only local use
     var isLastCell: Bool = false // Only local use
     
-    init(userName: String, mobileNo: String, addressId: String, address: String, lat: String, long: String, time: String, isComplete: String) {
+    init(userName: String, mobileNo: String, addressId: String, address: String, lat: String, long: String, time: String, isComplete: String, comment: String) {
         self.userName = userName
         self.mobileNo = mobileNo
         self.addressId = addressId
@@ -46,6 +47,7 @@ class OrderAddress: Codable {
         self.long = long
         self.time = time
         self.isComplete = isComplete
+        self.comment = comment
     }
     
     enum CodingKeys: String, CodingKey {
@@ -62,6 +64,7 @@ class OrderAddress: Codable {
         case orderType = "order_type"
         case transactionType = "transaction_type"
         case completedDate = "completed_date"
+        case comment = "comment"
     }
     
     required convenience init(from decoder: Decoder) throws {
@@ -75,8 +78,9 @@ class OrderAddress: Codable {
         let long = try container.decode(String.self, forKey: .long)
         let time = try container.decode(String.self, forKey: .time)
         let isComplete = try container.decode(String.self, forKey: .isComplete)
+        let comment = try container.decode(String.self, forKey: .comment)
         
-        self.init(userName: userName, mobileNo: mobileNo, addressId: addressId, address: address, lat: lat, long: long, time: time, isComplete: isComplete)
+        self.init(userName: userName, mobileNo: mobileNo, addressId: addressId, address: address, lat: lat, long: long, time: time, isComplete: isComplete, comment: comment)
         
         self.storeName = try? container.decode(String.self, forKey: .storeName)
         self.storeContactNo = try? container.decode(String.self, forKey: .storeContactNo)
@@ -104,5 +108,6 @@ class OrderAddress: Codable {
         try container.encode(self.storeContactNo, forKey: .storeContactNo)
         try container.encode(self.orderType, forKey: .orderType)
         try container.encode(self.transactionType, forKey: .transactionType)
+        try container.encode(self.comment, forKey: .comment)
     }
 }

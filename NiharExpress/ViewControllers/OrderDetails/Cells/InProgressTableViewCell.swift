@@ -17,7 +17,7 @@ protocol InProgressOrderProtocol {
 
 class InProgressTableViewCell: UITableViewCell {
     static var identifier = "InProgressTableViewCell"
-
+    
     @IBOutlet weak var mapView: GMSMapView!
     
     @IBOutlet weak var rupeeMapConstraint: NSLayoutConstraint!
@@ -32,13 +32,13 @@ class InProgressTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
     func updateData(with order: Order) {
-
+        
         if order.orderStatus == "Assigned" {
             self.mapView.isHidden = false
             self.rupeeMapConstraint.priority = UILayoutPriority(950)
@@ -49,11 +49,16 @@ class InProgressTableViewCell: UITableViewCell {
         
         self.lblAmount.text = order.price
         self.lblAddress.text = order.pickUp.address
-        self.lblCourierBoyName.text = order.driverName
         
-        self.courierBoyImage.pin_updateWithProgress = true
-        self.courierBoyImage.pin_setImage(from: URL(string: order.driverImage))
-        
+        // driver info
+        if order.driverName != "" {
+            self.lblCourierBoyName.text = order.driverName
+            //self.text = order.driveMobileNo
+            self.courierBoyImage.pin_updateWithProgress = true
+            self.courierBoyImage.pin_setImage(from: URL(string: order.driverImage))
+        } else {
+            self.lblCourierBoyName.text = "Driver Not Assign"
+        }
         var bounds: GMSCoordinateBounds = GMSCoordinateBounds()
         
         bounds = bounds.includingCoordinate(self.placeMarker(address: order.pickUp).position)
