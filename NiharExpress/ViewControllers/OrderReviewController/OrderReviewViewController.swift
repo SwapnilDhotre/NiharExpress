@@ -203,11 +203,11 @@ class OrderReviewViewController: UIViewController {
         var array = self.locations
         let pickUpLocation = array.remove(at: 0)
         
-        let params: Parameters = [
+        let params: [String: Any] = [
             Constants.API.method: Constants.MethodType.placeOrder.rawValue,
             Constants.API.key: "5b418e652da7ed82fe28897fa81bc0356c7d8f31",
             Constants.API.categoryId: self.category.id,
-            Constants.API.weight: self.weight,
+            Constants.API.weight: self.weight ?? "",
             
             Constants.API.pickUpAddress: pickUpLocation.address.address,
             Constants.API.pickUpPoint: "\(pickUpLocation.address.coordinate.latitude),\(pickUpLocation.address.coordinate.longitude)",
@@ -216,22 +216,20 @@ class OrderReviewViewController: UIViewController {
             Constants.API.pickUpDate: pickUpLocation.dateTime.toString(withFormat: "yyyy-MM-dd"),
             Constants.API.pickUpTime: pickUpLocation.dateTime.toString(withFormat: "hh:mm:a"),
             Constants.API.pickUpComment: pickUpLocation.comment,
-            Constants.API.pickUpStoreName: pickUpLocation.storeName,
-            Constants.API.pickUpStoreContactNo: pickUpLocation.storeContactNo,
-            Constants.API.pickUpOrderType: pickUpLocation.orderType,
-            Constants.API.pickUptransactionType: pickUpLocation.transactionAmount,
+            Constants.API.pickUpStoreName: pickUpLocation.storeName ?? "",
+            Constants.API.pickUpStoreContactNo: pickUpLocation.storeContactNo ?? "",
+            Constants.API.pickUpOrderType: pickUpLocation.orderType ?? "",
+            Constants.API.pickUptransactionType: pickUpLocation.transactionType ?? "",
             
-            Constants.API.deliveryName: "[\((array.map { "\"\($0.userName)\"" }).joined(separator: ", "))]",
-            Constants.API.deliveryAddress: "[\"\((array.map { $0.address.address }).joined(separator: "::"))\"]",
-            "\(Constants.API.deliveryPoint)[]": "[\"\((array.map { "\($0.address.coordinate.latitude),\($0.address.coordinate.longitude)" }).joined(separator: "::"))\"]",
-            Constants.API.deliveryMobile: "[\((array.map { "\"\($0.mobileNo)\"" }).joined(separator: ", "))]",
-            Constants.API.deliveryDate: "[]", //"[\((array.map { $0.dateTime.toString(withFormat: "dd.MM") }).joined(separator: ", "))]",
-            Constants.API.deliveryTime: "[]",//"[\((array.map { $0.dateTime.toString(withFormat: "HH:mm") }).joined(separator: ", "))]",
-            Constants.API.deliveryComment: "[\((array.map { $0.comment }).joined(separator: ", "))]",
-            Constants.API.deliveryStoreName: "[\((array.map { $0.storeName ?? "" }).joined(separator: ", "))]",
-            Constants.API.deliveryStoreContactNo: "[\((array.map { $0.storeContactNo ?? "" }).joined(separator: ", "))]",
-            Constants.API.deliveryOrderType: "[\((array.map { $0.orderType ?? "" }).joined(separator: ", "))]",
-            Constants.API.deliveryTransactionType: "[\((array.map { $0.transactionType ?? "" }).joined(separator: ", "))]",
+            Constants.API.deliveryAddress: (array.map { $0.address.address }).joined(separator: "::"),
+            Constants.API.deliveryPoint: (array.map { "\($0.address.coordinate.latitude),\($0.address.coordinate.longitude)" }).joined(separator: "::"),
+            Constants.API.deliveryMobile: (array.map { $0.mobileNo }),
+            Constants.API.deliveryName: (array.map { $0.userName }),
+            Constants.API.deliveryComment: (array.map { $0.comment }),
+            Constants.API.deliveryStoreName: (array.map { $0.storeName ?? "" }),
+            Constants.API.deliveryStoreContactNo: (array.map { $0.storeContactNo ?? "" }),
+            Constants.API.deliveryOrderType: (array.map { $0.orderType ?? "" }),
+            Constants.API.deliveryTransactionType: (array.map { $0.transactionType ?? "" }),
             
             Constants.API.orderType: "N",
             Constants.API.price: self.priceInfo.totalCost,
@@ -241,16 +239,36 @@ class OrderReviewViewController: UIViewController {
             Constants.API.paymentAddress: paymentAtAddress?.address.address ?? "",
             Constants.API.insurancePrice: self.priceInfo.insuranceCost,
             Constants.API.parcelPrice: self.parcelPrice ?? "",
-            Constants.API.orderId: self.orderId ?? "",
-            Constants.API.couponId: self.couponId,
-            Constants.API.discount: "",
             Constants.API.distance: "\(self.priceInfo.distance)"
         ]
         
+        //        Constants.API.orderId: nil,
+        //        Constants.API.couponId: nil,
+        //        Constants.API.discount: nil,
+        
         params.printPrettyJSON()
         
-        APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
-           APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
+        var val = createJsonString(parameter: params)
+        
+        print("jh")
+        //        APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: ["data":val], headers: nil) { (responseData, error) in
+        //           APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
+        //                if let data = responseData?.first {
+        //                    completion(data, nil)
+        //                } else {
+        //                    completion(nil, apiStatus)
+        //                }
+        //            }
+        //        }
+        
+        guard let url = URL(string: "\(URLConstant.baseURL)?\(val)") else { return }
+        
+        var request = URLRequest(url: url)
+        request.addValue("application/json", forHTTPHeaderField: Constants.headers.accept)
+        request.httpMethod = "GET"
+        
+        APIManager.shared.executeRequest(urlRequest: request) { (responseData: [String:Any]?, error: Error?) in
+            APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
                 if let data = responseData?.first {
                     completion(data, nil)
                 } else {
@@ -258,6 +276,26 @@ class OrderReviewViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func createJsonString(parameter dict: [String:Any]) -> String {
+        
+        if JSONSerialization.isValidJSONObject(dict) {
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: dict, options: JSONSerialization.WritingOptions())
+                
+                var safeCharacterSet = NSCharacterSet.urlQueryAllowed
+                safeCharacterSet.remove(charactersIn: "&=")
+                safeCharacterSet.remove(charactersIn: "+=")
+                
+                if let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)?.addingPercentEncoding(withAllowedCharacters: safeCharacterSet) {
+                    return jsonString as String
+                }
+            } catch let JSONError as NSError {
+                print("\(JSONError)")
+            }
+        }
+        return ""
     }
 }
 

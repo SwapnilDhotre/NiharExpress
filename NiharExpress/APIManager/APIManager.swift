@@ -94,20 +94,25 @@ class APIManager {
                 request.url = urlComponents.url
             }
             
-            print("URL Request hit:>> \(request.url)")
+            print("URL Request hit:>> \(String(describing: request.url?.absoluteString))")
             self.executeRequest(urlRequest: request, completionHandler: completionHandler)
             
         case .post, .put, .delete:
-            let boundary = self.generateBoundary()
-            request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: Constants.headers.contentType)
-            
-            let dataBody = self.createDataBody(withParameters: parameters, boundary: boundary)
-            request.httpBody = dataBody
-            self.executeRequest(urlRequest: request, completionHandler: completionHandler)
+            do{
+                let data = try JSONSerialization.data(withJSONObject: parameters!, options: [])
+                let jsonString = String.init(data: data, encoding: .utf8)
+                let url = ["data": jsonString]
+                let data1 = try JSONSerialization.data(withJSONObject: url, options: [])
+                request.httpBody =  data1
+                self.executeRequest(urlRequest: request, completionHandler: completionHandler)
+            }
+            catch{
+                print(error.localizedDescription)
+            }
         }
     }
     
-    private func executeRequest(urlRequest: URLRequest, completionHandler: @escaping APICallCompletionHandler) {
+    func executeRequest(urlRequest: URLRequest, completionHandler: @escaping APICallCompletionHandler) {
         self.session.dataTask(with: urlRequest) { (data, response, error) in
             if let error = error {
                 print("Error:>> \(error)")
