@@ -39,13 +39,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         GMSServices.provideAPIKey(Constants.googleApiKey)
         
-        self.configureFirebasePushNotification(application)
+        FirebaseApp.configure()
+        self.configureFirebasePushNotification()
         
         return true
     }
     
-    func configureFirebasePushNotification(_ application: UIApplication) {
-        FirebaseApp.configure()
+    func configureFirebasePushNotification() {
         
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
@@ -58,10 +58,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             let settings: UIUserNotificationSettings =
                 UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-            application.registerUserNotificationSettings(settings)
+            UIApplication.shared.registerUserNotificationSettings(settings)
         }
         
-        application.registerForRemoteNotifications()
+        UIApplication.shared.registerForRemoteNotifications()
         
         Messaging.messaging().delegate = self
         
@@ -165,6 +165,7 @@ extension AppDelegate: MessagingDelegate {
         let dataDict:[String: String] = ["token": fcmToken]
         NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
         
+        UserDefaultManager.shared.set(value: fcmToken, forKey: .fcmToken)
         self.updateDeviceToken(fcmToken: fcmToken)
     }
     

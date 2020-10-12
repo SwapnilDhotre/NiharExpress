@@ -20,6 +20,7 @@ class TrackOrderViewController: UIViewController {
     var timer: Timer?
     
     var driversZoomMode: Bool = false
+    var driverInfo: DriverInfo?
     
     @IBOutlet weak var btnToggleMapView: UIButton!
     @IBOutlet weak var gmsMap: GMSMapView!
@@ -55,6 +56,7 @@ class TrackOrderViewController: UIViewController {
         self.fetchDriversLocation { (driverInfo, apiStatus) in
             DispatchQueue.main.async {
                 if let info = driverInfo {
+                    self.driverInfo = info
                     self.setUpMap(driverInfo: info)
                 } else {
                     self.showAlert(withMsg: apiStatus?.message ?? "Something went wrong")
@@ -64,16 +66,7 @@ class TrackOrderViewController: UIViewController {
     }
     
     func setUpMap(driverInfo: DriverInfo) {
-        var bounds: GMSCoordinateBounds = GMSCoordinateBounds()
-        
-        bounds = bounds.includingCoordinate(self.placeMarker(address: order.pickUp, markerType: .pickUpMarker).position)
-        for (index, deliveryAddr) in order.delivery.enumerated() {
-            bounds = bounds.includingCoordinate(self.placeMarker(index: index, address: deliveryAddr, markerType: .dropMarker).position)
-        }
-
-        bounds = bounds.includingCoordinate(self.addPinAtLocation(coordinate: CLLocationCoordinate2D(latitude: driverInfo.latitude, longitude: driverInfo.longitude), title: self.order.driverName, mobileNo: self.order.driveMobileNo, address: "", isDriversLocation: true).position)
-
-//        self.gmsMap.animate(with: GMSCameraUpdate.fit(bounds))
+        self.placeAllMarkers(driverInfo: driverInfo)
         
         let sessionManager = GoogleMapSessionManager()
         let start = CLLocationCoordinate2D(latitude: driverInfo.latitude, longitude: driverInfo.longitude)
@@ -99,6 +92,9 @@ class TrackOrderViewController: UIViewController {
             if let error = error {
                 print("Something went wrong, abort drawing!\nError: \(error)")
             } else {
+                self.gmsMap.clear()
+                self.placeAllMarkers(driverInfo: driverInfo)
+                
                 // Create a GMSPolyline object from the GMSPath
                 let polyline = GMSPolyline(path: path!)
                 
@@ -123,6 +119,19 @@ class TrackOrderViewController: UIViewController {
             }
             
         })
+    }
+    
+    func placeAllMarkers(driverInfo: DriverInfo) {
+        var bounds: GMSCoordinateBounds = GMSCoordinateBounds()
+                
+                bounds = bounds.includingCoordinate(self.placeMarker(address: order.pickUp, markerType: .pickUpMarker).position)
+                for (index, deliveryAddr) in order.delivery.enumerated() {
+                    bounds = bounds.includingCoordinate(self.placeMarker(index: index, address: deliveryAddr, markerType: .dropMarker).position)
+                }
+
+                bounds = bounds.includingCoordinate(self.addPinAtLocation(coordinate: CLLocationCoordinate2D(latitude: driverInfo.latitude, longitude: driverInfo.longitude), title: self.order.driverName, mobileNo: self.order.driveMobileNo, address: "", isDriversLocation: true).position)
+
+        //        self.gmsMap.animate(with: GMSCameraUpdate.fit(bounds))
     }
     
     func placeMarker(index: Int? = nil, address: OrderAddress, markerType: MarkerType) -> GMSMarker {
@@ -195,7 +204,9 @@ class TrackOrderViewController: UIViewController {
             sender.setImage(UIImage(named: "logo"), for: .normal)
             self.driversZoomMode = true
         }
-        self.updateDriversLocation()
+        if let info = driverInfo {
+            self.setUpMap(driverInfo: info)
+        }
     }
     
     func fetchDriversLocation(completion: @escaping ((DriverInfo?, APIStatus?) -> Void)) {

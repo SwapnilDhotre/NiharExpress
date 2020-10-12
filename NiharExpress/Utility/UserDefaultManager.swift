@@ -25,6 +25,8 @@ enum UserDefaultKeys: String {
     case appInfo
     
     case isProductDemoViewed
+    
+    case fcmToken
 }
 
 class UserDefaultManager {

@@ -109,6 +109,16 @@ extension VerifyOtpViewController {
                 self.activityIndicator.isHidden = true
                 if let user = user {
                     UserConstant.shared.userModel = user
+                    
+                    if let fcmToken = UserDefaultManager.shared.valueFor(key: .fcmToken, type: .string) as? String {
+                        self.updateDeviceToken(fcmToken: fcmToken) {
+                            print("Device token registered")
+                            DispatchQueue.main.async {
+                                let appDelegate = UIApplication.shared.delegate as? AppDelegate
+                                appDelegate?.configureFirebasePushNotification()
+                            }
+                        }
+                    }
                     self.dismiss(animated: false, completion: {
                         self.delegate?.loginSuccess()
                     })
@@ -132,6 +142,17 @@ extension VerifyOtpViewController {
                 self.activityIndicator.isHidden = true
                 if let user = user {
                     UserConstant.shared.userModel = user
+                    
+                    if let fcmToken = UserDefaultManager.shared.valueFor(key: .fcmToken, type: .string) as? String {
+                        self.updateDeviceToken(fcmToken: fcmToken) {
+                            print("Device token registered")
+                           DispatchQueue.main.async {
+                                let appDelegate = UIApplication.shared.delegate as? AppDelegate
+                                appDelegate?.configureFirebasePushNotification()
+                            }
+                        }
+                    }
+                    
                     self.dismiss(animated: false, completion: {
                         self.delegate?.registrationSuccess()
                     })
@@ -186,6 +207,24 @@ extension VerifyOtpViewController {
             }
         }
     }
+    
+    func updateDeviceToken(fcmToken: String, completion: @escaping (() -> Void)) {
+            if UserConstant.shared.userModel != nil {
+                let params: Parameters = [
+                    Constants.API.method: Constants.MethodType.updateDeviceToken.rawValue,
+                    Constants.API.key: "918e0b4ff4b5916e2e481cc0144447d7d8efccad",
+                    "mode": "C",
+                    "member_id": UserConstant.shared.userModel.id,
+                    "device_token": fcmToken
+                ]
+                
+                APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
+                    APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
+                        completion()
+                    }
+                }
+            }
+        }
 }
 
 extension VerifyOtpViewController: UITextFieldDelegate {

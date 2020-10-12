@@ -9,6 +9,7 @@
 import UIKit
 
 class VisitLocation {
+    var orderId: String?
     var userName: String
     var address: AddressModel
     var dateTime: Date
@@ -35,11 +36,13 @@ class OrderReviewViewController: UIViewController {
     
     private var isCashOnDelivery: Bool = true
     
+    var orderId: String?
     var weight: String!
     var parcelPrice: String!
     var optimizeRoute: Bool!
     var category: Category!
     var priceInfo: PriceInfo!
+    var couponId: String = ""
     var locations: [VisitLocation] = []
     
     @IBOutlet weak var lblWhatItem: UILabel!
@@ -210,18 +213,18 @@ class OrderReviewViewController: UIViewController {
             Constants.API.pickUpPoint: "\(pickUpLocation.address.coordinate.latitude),\(pickUpLocation.address.coordinate.longitude)",
             Constants.API.pickUpName: pickUpLocation.userName,
             Constants.API.pickUpMobile: pickUpLocation.mobileNo,
-            Constants.API.pickUpDate: pickUpLocation.dateTime.toString(withFormat: "dd.MM"),
-            Constants.API.pickUpTime: pickUpLocation.dateTime.toString(withFormat: "HH:mm"),
+            Constants.API.pickUpDate: pickUpLocation.dateTime.toString(withFormat: "yyyy-MM-dd"),
+            Constants.API.pickUpTime: pickUpLocation.dateTime.toString(withFormat: "hh:mm:a"),
             Constants.API.pickUpComment: pickUpLocation.comment,
             Constants.API.pickUpStoreName: pickUpLocation.storeName,
             Constants.API.pickUpStoreContactNo: pickUpLocation.storeContactNo,
             Constants.API.pickUpOrderType: pickUpLocation.orderType,
-            Constants.API.pickUptransactionType: pickUpLocation.transactionType,
+            Constants.API.pickUptransactionType: pickUpLocation.transactionAmount,
             
-            Constants.API.deliveryAddress: "[\((array.map { $0.address.address }).joined(separator: "::"))]",
-            "\(Constants.API.deliveryPoint)[]": "[\((array.map { "\($0.address.coordinate.latitude),\($0.address.coordinate.longitude)" }).joined(separator: "::"))]",
-            Constants.API.deliveryMobile: "[\((array.map { $0.mobileNo }).joined(separator: ", "))]",
-            Constants.API.deliveryName: "[\((array.map { $0.userName }).joined(separator: ", "))]",
+            Constants.API.deliveryName: "[\((array.map { "\"\($0.userName)\"" }).joined(separator: ", "))]",
+            Constants.API.deliveryAddress: "[\"\((array.map { $0.address.address }).joined(separator: "::"))\"]",
+            "\(Constants.API.deliveryPoint)[]": "[\"\((array.map { "\($0.address.coordinate.latitude),\($0.address.coordinate.longitude)" }).joined(separator: "::"))\"]",
+            Constants.API.deliveryMobile: "[\((array.map { "\"\($0.mobileNo)\"" }).joined(separator: ", "))]",
             Constants.API.deliveryDate: "[]", //"[\((array.map { $0.dateTime.toString(withFormat: "dd.MM") }).joined(separator: ", "))]",
             Constants.API.deliveryTime: "[]",//"[\((array.map { $0.dateTime.toString(withFormat: "HH:mm") }).joined(separator: ", "))]",
             Constants.API.deliveryComment: "[\((array.map { $0.comment }).joined(separator: ", "))]",
@@ -237,10 +240,10 @@ class OrderReviewViewController: UIViewController {
             Constants.API.paymentMethod: self.isCashOnDelivery ? "CA" : "CO",
             Constants.API.paymentAddress: paymentAtAddress?.address.address ?? "",
             Constants.API.insurancePrice: self.priceInfo.insuranceCost,
-            Constants.API.parcelPrice: self.parcelPrice,
-            Constants.API.orderId: nil,
-            Constants.API.couponId: nil,
-            Constants.API.discount: nil,
+            Constants.API.parcelPrice: self.parcelPrice ?? "",
+            Constants.API.orderId: self.orderId ?? "",
+            Constants.API.couponId: self.couponId,
+            Constants.API.discount: "",
             Constants.API.distance: "\(self.priceInfo.distance)"
         ]
         
