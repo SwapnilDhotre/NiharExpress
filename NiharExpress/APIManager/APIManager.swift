@@ -29,7 +29,7 @@ enum APIStatus: String {
         case .success:
             return "Api Success"
         case .alreadyExist:
-            return "Data already exist"
+            return "User already exist"
         case .badRequest:
             return "Something went wrong"
         case .unauthorizedAccess:

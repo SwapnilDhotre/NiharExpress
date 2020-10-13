@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -60,17 +60,6 @@
                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a9s-gY-dfb">
-                        <rect key="frame" x="260" y="139" width="40" height="40"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="40" id="5lj-jI-SdI"/>
-                            <constraint firstAttribute="height" constant="40" id="msS-XD-55u"/>
-                        </constraints>
-                        <state key="normal" title="C"/>
-                        <connections>
-                            <action selector="btnPhoneCallAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="bG1-GS-zzX"/>
-                        </connections>
-                    </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zZd-4G-5M7" userLabel="bottom_line">
                         <rect key="frame" x="30.5" y="48" width="1" height="417"/>
                         <color key="backgroundColor" red="0.50196078430000002" green="0.1176470588" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -225,6 +214,17 @@
                             </view>
                         </subviews>
                     </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a9s-gY-dfb">
+                        <rect key="frame" x="260" y="139" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="5lj-jI-SdI"/>
+                            <constraint firstAttribute="height" constant="40" id="msS-XD-55u"/>
+                        </constraints>
+                        <state key="normal" title="C"/>
+                        <connections>
+                            <action selector="btnPhoneCallAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="bG1-GS-zzX"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="2V0-yA-hyx" firstAttribute="top" secondItem="tKz-wc-9Dd" secondAttribute="bottom" constant="20" id="19l-LQ-GTf"/>

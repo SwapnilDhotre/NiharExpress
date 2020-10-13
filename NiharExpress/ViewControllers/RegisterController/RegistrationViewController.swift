@@ -14,6 +14,8 @@ class RegistrationViewController: UIViewController {
     
     var registrationView: RegistrationView?
     var alertLoader: UIAlertController?
+    
+    var delegate: ProfileScreenLoginRegisterDelegate?
         
     // MARK: - Life Cycle methods
     override func viewDidLoad() {
@@ -152,7 +154,12 @@ extension RegistrationViewController: RegistrationViewProtocol {
 extension RegistrationViewController: OTPVerifiedProtocol {
     func loginSuccess() {}
     
+    func userAlreadyExist() {
+        self.showAlert(with: APIStatus.alreadyExist.message)
+    }
+    
     func registrationSuccess() {
+        self.delegate?.navigateToOrders()
         self.navigationController?.popViewController(animated: true)
     }
     

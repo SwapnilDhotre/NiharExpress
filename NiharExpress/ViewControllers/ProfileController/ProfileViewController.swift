@@ -106,11 +106,15 @@ class ProfileViewController: UIViewController {
     
     // MARK: - Action Methods
     @IBAction func loginBtnAction(_ sender: UIButton) {
-        self.navigationController?.pushViewController(LoginViewController(), animated: true)
+        let loginController = LoginViewController()
+        loginController.delegate = self
+        self.navigationController?.pushViewController(loginController, animated: true)
     }
     
     @IBAction func registerBtnAction(_ sender: UIButton) {
-        self.navigationController?.pushViewController(RegistrationViewController(), animated: true)
+        let registerController = RegistrationViewController()
+        registerController.delegate = self
+        self.navigationController?.pushViewController(registerController, animated: true)
     }
     
     @IBAction func createOrderAction(_ sender: UIButton) {
@@ -118,6 +122,12 @@ class ProfileViewController: UIViewController {
         let formController = UINavigationController(rootViewController: controller)
         formController.modalPresentationStyle = .fullScreen
         self.present(formController, animated: true, completion: nil)
+    }
+}
+
+extension ProfileViewController: ProfileScreenLoginRegisterDelegate {
+    func navigateToOrders() {
+        self.tabBarController?.selectedIndex = 0
     }
 }
 

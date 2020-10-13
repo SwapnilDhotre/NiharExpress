@@ -8,12 +8,17 @@
 
 import UIKit
 
+protocol ProfileScreenLoginRegisterDelegate {
+    func navigateToOrders()
+}
+
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var tabbedView: TabbedView!
     
     var loginView: LoginView?
     var alertLoader: UIAlertController?
+    var delegate: ProfileScreenLoginRegisterDelegate?
     
     // MARK: - Life Cycle methods
     override func viewDidLoad() {
@@ -135,7 +140,12 @@ extension LoginViewController: LoginViewProtocol {
 extension LoginViewController: OTPVerifiedProtocol {
     func registrationSuccess() {}
     
+    func userAlreadyExist() {
+        self.showAlert(with: APIStatus.alreadyExist.message)
+    }
+    
     func loginSuccess() {
+        self.delegate?.navigateToOrders()
         self.navigationController?.popViewController(animated: true)
     }
     

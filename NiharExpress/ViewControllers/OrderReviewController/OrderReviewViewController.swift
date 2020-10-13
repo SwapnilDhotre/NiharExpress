@@ -246,7 +246,7 @@ class OrderReviewViewController: UIViewController {
         //        Constants.API.couponId: nil,
         //        Constants.API.discount: nil,
         
-        params.printPrettyJSON()
+//        params.printPrettyJSON()
         
         var val = createJsonString(parameter: params)
         
@@ -261,13 +261,17 @@ class OrderReviewViewController: UIViewController {
         //            }
         //        }
         
-        guard let url = URL(string: "\(URLConstant.baseURL)?\(val)") else { return }
+        guard let url = URL(string: URLConstant.baseURL) else { return }
         
         var request = URLRequest(url: url)
         request.addValue("application/json", forHTTPHeaderField: Constants.headers.accept)
-        request.httpMethod = "GET"
+        request.httpMethod = "POST"
         
         APIManager.shared.executeRequest(urlRequest: request) { (responseData: [String:Any]?, error: Error?) in
+            responseData?.printPrettyJSON()
+            
+            print("fsdf");
+            
             APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
                 if let data = responseData?.first {
                     completion(data, nil)
@@ -284,11 +288,7 @@ class OrderReviewViewController: UIViewController {
             do {
                 let jsonData = try JSONSerialization.data(withJSONObject: dict, options: JSONSerialization.WritingOptions())
                 
-                var safeCharacterSet = NSCharacterSet.urlQueryAllowed
-                safeCharacterSet.remove(charactersIn: "&=")
-                safeCharacterSet.remove(charactersIn: "+=")
-                
-                if let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)?.addingPercentEncoding(withAllowedCharacters: safeCharacterSet) {
+                if let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue) {
                     return jsonString as String
                 }
             } catch let JSONError as NSError {
@@ -321,6 +321,7 @@ extension OrderReviewViewController: UITableViewDataSource, UITableViewDelegate 
 extension OrderReviewViewController: TempLoginProtocol {
     func loginSuccess(user: User) {
         self.temporaryUser = user
+        UserConstant.shared.userModel = user
     }
     
     func backPressed() {

@@ -35,6 +35,10 @@ class Util {
     }
     
     static func fetchAndUpdateNotifications(completion: @escaping (([NotificationModel], APIStatus?) -> Void)) {
+        if UserConstant.shared.userModel == nil {
+            return 
+        }
+        
         let params: Parameters = [
             Constants.API.method: Constants.MethodType.listNotification.rawValue,
             Constants.API.key: "41979bf5da2d2bfbae66fda5ac59ed132216b87b",
