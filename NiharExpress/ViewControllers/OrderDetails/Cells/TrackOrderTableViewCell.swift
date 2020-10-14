@@ -46,9 +46,18 @@ class TrackOrderTableViewCell: UITableViewCell {
         self.btnPhone.titleLabel?.font = UIFont.fontAwesome(ofSize: 18, style: .solid)
         self.btnPhone.setTitle(FontAwesome.phone.rawValue, for: .normal)
         self.btnPhone.setTitleColor(.darkGray, for: .normal)
-        
-        self.imgCourierBoy.pin_updateWithProgress = true
-        self.imgCourierBoy.pin_setImage(from: URL(string: order.driverImage))
+                
+        // driver info
+        if order.driverName != "" {
+            self.lblCourierBoyName.text = order.driverName
+            //self.text = order.driveMobileNo
+            self.imgCourierBoy.pin_updateWithProgress = true
+            self.imgCourierBoy.pin_setImage(from: URL(string: order.driverImage))
+            self.btnPhone.isHidden = false
+        } else {
+            self.lblCourierBoyName.text = "Driver Not Assign"
+            self.btnPhone.isHidden = true
+        }
     }
     
     @IBAction func trackOrderAction(_ sender: UIButton) {

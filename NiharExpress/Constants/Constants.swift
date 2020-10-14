@@ -81,6 +81,9 @@ class Constants {
         static let driverRating = "driver_rating"
  
         static let term = "term"
+        
+        static let amount = "amount"
+        static let couponCode = "coupon_code"
     }
     
     enum MethodType: String {
@@ -108,6 +111,7 @@ class Constants {
         case getReferralCode = "getReferralCode"
         case listReferenceCoupon = "listReferenceCoupon"
         case editProfile = "editProfile"
+        case redeemCoupon = "redeemCoupon"
     }
     
     struct headers {

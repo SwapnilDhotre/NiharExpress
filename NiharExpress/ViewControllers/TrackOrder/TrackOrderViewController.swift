@@ -60,13 +60,18 @@ class TrackOrderViewController: UIViewController {
                     self.setUpMap(driverInfo: info)
                 } else {
                     self.showAlert(withMsg: apiStatus?.message ?? "Something went wrong")
+                    self.setUpMap(driverInfo: nil)
                 }
             }
         }
     }
     
-    func setUpMap(driverInfo: DriverInfo) {
+    func setUpMap(driverInfo: DriverInfo?) {
         self.placeAllMarkers(driverInfo: driverInfo)
+        
+        guard let driverInfo = driverInfo else {
+            return
+        }
         
         let sessionManager = GoogleMapSessionManager()
         let start = CLLocationCoordinate2D(latitude: driverInfo.latitude, longitude: driverInfo.longitude)
@@ -121,17 +126,19 @@ class TrackOrderViewController: UIViewController {
         })
     }
     
-    func placeAllMarkers(driverInfo: DriverInfo) {
+    func placeAllMarkers(driverInfo: DriverInfo?) {
         var bounds: GMSCoordinateBounds = GMSCoordinateBounds()
-                
-                bounds = bounds.includingCoordinate(self.placeMarker(address: order.pickUp, markerType: .pickUpMarker).position)
-                for (index, deliveryAddr) in order.delivery.enumerated() {
-                    bounds = bounds.includingCoordinate(self.placeMarker(index: index, address: deliveryAddr, markerType: .dropMarker).position)
-                }
-
-                bounds = bounds.includingCoordinate(self.addPinAtLocation(coordinate: CLLocationCoordinate2D(latitude: driverInfo.latitude, longitude: driverInfo.longitude), title: self.order.driverName, mobileNo: self.order.driveMobileNo, address: "", isDriversLocation: true).position)
-
-        //        self.gmsMap.animate(with: GMSCameraUpdate.fit(bounds))
+        
+        bounds = bounds.includingCoordinate(self.placeMarker(address: order.pickUp, markerType: .pickUpMarker).position)
+        for (index, deliveryAddr) in order.delivery.enumerated() {
+            bounds = bounds.includingCoordinate(self.placeMarker(index: index, address: deliveryAddr, markerType: .dropMarker).position)
+        }
+        
+        if driverInfo != nil {
+            bounds = bounds.includingCoordinate(self.addPinAtLocation(coordinate: CLLocationCoordinate2D(latitude: driverInfo!.latitude, longitude: driverInfo!.longitude), title: self.order.driverName, mobileNo: self.order.driveMobileNo, address: "", isDriversLocation: true).position)
+        } else {
+            self.gmsMap.animate(with: GMSCameraUpdate.fit(bounds))
+        }
     }
     
     func placeMarker(index: Int? = nil, address: OrderAddress, markerType: MarkerType) -> GMSMarker {

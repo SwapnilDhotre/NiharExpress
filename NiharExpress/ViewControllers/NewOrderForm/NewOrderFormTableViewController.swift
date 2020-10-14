@@ -1010,12 +1010,45 @@ extension NewOrderFormTableViewController: ApplyPromoProtocol {
     
     func applyPromo(code: String) {
         print("promoCode:>>\(code)")
+        
+        
         self.view.resignFirstResponder()
     }
+    
+    
 }
 
 // MARK: - API Methods
 extension NewOrderFormTableViewController {
+    func applyPromoCode(code: String, amount: String) {
+        if UserConstant.shared.userModel == nil {
+           return
+        }
+        
+        let params: Parameters = [
+            Constants.API.method: Constants.MethodType.redeemCoupon.rawValue,
+            Constants.API.key: "4a57f2d2a12525c234690091a6ba53910b99ea9c",
+            Constants.API.customerId: UserConstant.shared.userModel.id,
+            Constants.API.amount: amount,
+                Constants.API.couponCode: code
+        ]
+        
+        APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (data, error) in
+            DispatchQueue.main.async {
+                self.alertLoader?.dismiss(animated: true, completion: nil)
+            }
+            if let responseData = data {
+                if let categoryData = responseData[keyPath: "\(Constants.Response.response).\(Constants.Response.data)"] as? [[String: Any]] {
+                    if let jsonData = try? JSONSerialization.data(withJSONObject: categoryData) {
+                        
+                        let categories: [Category] = try! JSONDecoder().decode([Category].self, from: jsonData)
+                        completion(categories)
+                    }
+                }
+            }
+        }
+    }
+    
     func fetchParcelCategories(completion: @escaping ([Category]) -> Void) {
         let params: Parameters = [
             Constants.API.method: Constants.MethodType.listCategory.rawValue,
