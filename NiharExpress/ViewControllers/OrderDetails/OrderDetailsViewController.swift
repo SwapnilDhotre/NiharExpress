@@ -182,7 +182,13 @@ extension OrderDetailsViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func createClone(of order: Order) {
-        let formFields = FormFieldModel.getFormFields()
+        var formFields = FormFieldModel.getFormFields()
+        
+        for _ in 1..<order.delivery.count {
+            self.addDeliveryPoint(formFields: &formFields)
+        }
+        
+        var currentDeliveryIndex = 0
         
         for formField in formFields {
             switch formField.type {
@@ -192,9 +198,10 @@ extension OrderDetailsViewController: UITableViewDataSource, UITableViewDelegate
                 self.addPointsData(to: formField, orderAddress: order.pickUp)
                 break
             case .deliveryPoint:
-                for orderAddress in order.delivery {
-                    self.addPointsData(to: formField, orderAddress: orderAddress)
-                }
+                let orderAddress = order.delivery[currentDeliveryIndex]
+                currentDeliveryIndex += 1
+                self.addPointsData(to: formField, orderAddress: orderAddress)
+                
                 break
             case .addDeliveryPoint:
                 break
@@ -208,7 +215,19 @@ extension OrderDetailsViewController: UITableViewDataSource, UITableViewDelegate
         }
         
         self.delegate?.cloneOrder(with: formFields)
-    self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func addDeliveryPoint(formFields: inout [FormFieldModel]) {
+        var index = -1
+        for (iteratorIndex, formElement) in formFields.enumerated() {
+            if formElement.type == .deliveryPoint {
+                index = iteratorIndex
+            }
+        }
+        
+        let formField = FormFieldModel(title: "Delivery Point", type: .deliveryPoint, formSubFields: FormFieldModel.getDeliveryPointFields(), value: "")
+        formFields.insert(formField, at: index + 1)
     }
     
     func addPointsData(to formField: FormFieldModel, orderAddress: OrderAddress) {
@@ -219,7 +238,7 @@ extension OrderDetailsViewController: UITableViewDataSource, UITableViewDelegate
                 break
             case .address:
                 let lat = NSString(string: orderAddress.lat).doubleValue
-                let long = NSString(string: orderAddress.lat).doubleValue
+                let long = NSString(string: orderAddress.long).doubleValue
                 let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
                 let addressModel = AddressModel(id: "", address: orderAddress.address, coordinate: coordinate)
                 
@@ -235,7 +254,7 @@ extension OrderDetailsViewController: UITableViewDataSource, UITableViewDelegate
                 subFormField.value = Date()
                 break
             case .comment:
-                subFormField.value = ""
+                subFormField.value = orderAddress.comment
                 break
             case .storeInfoHeader:
                 break

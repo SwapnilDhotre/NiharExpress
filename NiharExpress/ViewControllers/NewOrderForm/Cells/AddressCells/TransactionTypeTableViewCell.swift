@@ -40,6 +40,8 @@ class TransactionTypeTableViewCell: UITableViewCell {
         self.lblDownCaret.text = FontAwesome.angleDown.rawValue
         self.lblDownCaret.textColor = UIColor.gray
         self.lblDownCaret.font = UIFont.fontAwesome(ofSize: 14, style: .regular)
+        
+        self.txtTransactionAmountField.delegate = self
     }
     
     func updateData(with model: FormSubFieldModel) {
@@ -57,6 +59,8 @@ class TransactionTypeTableViewCell: UITableViewCell {
                 
                 self.btnTransaction.setTitle(valueType.transactionType, for: .normal)
                 self.txtTransactionAmountField.text = valueType.transactionAmount
+            } else {
+                self.btnTransaction.setTitle(valueType.transactionType, for: .normal)
             }
         }
     }

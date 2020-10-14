@@ -219,6 +219,7 @@ class NewOrderFormTableViewController: UITableViewController {
         var optimizeRoute = false
         var parcelPrice: String?
         var category: Category?
+        var couponCode: CouponCodeModel?
         var locations: [VisitLocation] = []
         
         var paymentWillOccurAtIndex: Int = 0
@@ -252,7 +253,7 @@ class NewOrderFormTableViewController: UITableViewController {
                         parcelPrice = subFormField.value as? String
                         break
                     case .promoCode:
-                        // Nothing here
+                        couponCode = subFormField.value as? CouponCodeModel
                         break
                     default:
                         print("Parcel Info case not found")
@@ -294,6 +295,8 @@ class NewOrderFormTableViewController: UITableViewController {
             self.showAlert(withMsg: "Price not calculated")
         }
         
+        reviewController.coupon = couponCode
+        
         reviewController.formDelegate = self.delegate
         reviewController.locations = locations
         reviewController.locations[paymentWillOccurAtIndex].isDefaultPayment = true
@@ -313,6 +316,8 @@ class NewOrderFormTableViewController: UITableViewController {
         var transactionType: String?
         var transactionAmount: String?
         
+        var counter = 0
+        
         formField.formSubFields.forEach { (subFormField) in
             switch subFormField.type {
             case .address:
@@ -331,9 +336,11 @@ class NewOrderFormTableViewController: UITableViewController {
                 comment = (subFormField.value as? String) ?? ""
                 break
             case .contactPerson:
+                counter += 1
                 storeContactPerson = (subFormField.value as? String) ?? ""
                 break
             case .contactNo:
+                counter += 1
                 storeContactNo = (subFormField.value as? String) ?? ""
                 break
             case .transaction:
@@ -370,7 +377,12 @@ class NewOrderFormTableViewController: UITableViewController {
         location.storeContactNo = storeContactNo
         location.transactionType = transactionType
         location.transactionAmount = transactionAmount
-        location.orderType = "N"
+        if counter >= 2 {
+            location.orderType = "S"
+        } else {
+            location.orderType = "N"
+        }
+        
         return location
     }
     
@@ -1008,19 +1020,32 @@ extension NewOrderFormTableViewController: ApplyPromoProtocol {
         self.bottomPanelView.lblForDeliveryValue.text = "₹\(priceInfo.insuranceCost)"
     }
     
-    func applyPromo(code: String) {
+    func applyPromo(model: CouponCodeModel, code: String) {
         print("promoCode:>>\(code)")
-        
-        
         self.view.resignFirstResponder()
+        
+        self.alertLoader = self.showAlertLoader()
+        self.applyPromoCode(code: code, amount: self.priceInfo?.totalCost ?? "") { (couponCode, apiStatus) in
+            
+            DispatchQueue.main.async {
+                self.alertLoader?.dismiss(animated: true, completion: nil)
+                print("Coupon code:>> \(couponCode?.couponCode)")
+                if couponCode != nil {
+                    model.couponCode = couponCode?.couponCode ?? ""
+                    model.couponId = couponCode?.couponId ?? ""
+                    model.discount = couponCode?.discount ?? ""
+                    self.tableView.reloadData()
+                } else {
+                    self.showAlert(withMsg: apiStatus?.message ?? "Something went wrong.")
+                }
+            }
+        }
     }
-    
-    
 }
 
 // MARK: - API Methods
 extension NewOrderFormTableViewController {
-    func applyPromoCode(code: String, amount: String) {
+    func applyPromoCode(code: String, amount: String, completion: @escaping (CouponCodeModel?, APIStatus?) -> Void) {
         if UserConstant.shared.userModel == nil {
            return
         }
@@ -1030,20 +1055,16 @@ extension NewOrderFormTableViewController {
             Constants.API.key: "4a57f2d2a12525c234690091a6ba53910b99ea9c",
             Constants.API.customerId: UserConstant.shared.userModel.id,
             Constants.API.amount: amount,
-                Constants.API.couponCode: code
+            Constants.API.couponCode: code
         ]
         
-        APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (data, error) in
-            DispatchQueue.main.async {
-                self.alertLoader?.dismiss(animated: true, completion: nil)
-            }
-            if let responseData = data {
-                if let categoryData = responseData[keyPath: "\(Constants.Response.response).\(Constants.Response.data)"] as? [[String: Any]] {
-                    if let jsonData = try? JSONSerialization.data(withJSONObject: categoryData) {
-                        
-                        let categories: [Category] = try! JSONDecoder().decode([Category].self, from: jsonData)
-                        completion(categories)
-                    }
+        APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
+            APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
+                if let response = responseData?.first, let jsonData = try? JSONSerialization.data(withJSONObject: response) {
+                    let user: CouponCodeModel = try! JSONDecoder().decode(CouponCodeModel.self, from: jsonData)
+                    completion(user, apiStatus)
+                } else {
+                    completion(nil, apiStatus)
                 }
             }
         }

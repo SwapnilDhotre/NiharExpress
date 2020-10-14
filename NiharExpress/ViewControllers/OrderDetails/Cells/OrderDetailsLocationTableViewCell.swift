@@ -22,6 +22,7 @@ class OrderDetailsLocationTableViewCell: UITableViewCell {
     @IBOutlet weak var lblContactNo: UILabel!
     
     @IBOutlet weak var btnPhone: UIButton!
+    @IBOutlet weak var btnPhone2: UIButton!
     
     @IBOutlet weak var upperLine: UIView!
     @IBOutlet weak var bottomLine: UIView!
@@ -72,13 +73,16 @@ class OrderDetailsLocationTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
     }
     
     func configureUI() {
         self.btnPhone.titleLabel?.font = UIFont.fontAwesome(ofSize: 18, style: .solid)
         self.btnPhone.setTitle(FontAwesome.phone.rawValue, for: .normal)
         self.btnPhone.setTitleColor(.darkGray, for: .normal)
+        
+        self.btnPhone2.titleLabel?.font = UIFont.fontAwesome(ofSize: 18, style: .solid)
+        self.btnPhone2.setTitle(FontAwesome.phone.rawValue, for: .normal)
+        self.btnPhone2.setTitleColor(.darkGray, for: .normal)
     }
     
     func updateData(with address: OrderAddress, isDelivered: Bool) {

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ApplyPromoProtocol {
-    func applyPromo(code: String)
+    func applyPromo(model: CouponCodeModel, code: String)
     func didSelectCategory(category: Category)
 }
 
@@ -70,11 +70,23 @@ class ParcelInfoTableViewCell: UITableViewCell {
                 self.txtParcelValue.text = formField.value as? String
             case .promoCode:
                 self.lblPromoCodeTitle.text = formField.title
-                self.txtPromoCode.text = formField.value as? String
+                self.txtPromoCode.text = (formField.value as? CouponCodeModel)?.couponCode
             default:
                 assertionFailure("Wrong field appears here")
             }
         }
+    }
+    
+    @IBAction func btnApplyPromoCode(_ sender: UIButton) {
+        for formField in self.formFieldModel.formSubFields {
+            switch formField.type {
+            case .promoCode:
+                self.promoCodeDelegate?.applyPromo(model: formField.value as! CouponCodeModel, code: self.txtPromoCode.text!)
+            default:
+                assertionFailure("Wrong field appears here")
+            }
+        }
+        
     }
 }
 

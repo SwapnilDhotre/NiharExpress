@@ -85,7 +85,7 @@ class FormFieldModel {
         return [
             FormSubFieldModel(title: "What are we sending?", type: .parcelType, value: Category(id: "", title: "", isSelected: false)),
             FormSubFieldModel(title: "Parcel Value", type: .parcelValue, value: ""),
-            FormSubFieldModel(title: "Promocode", type: .promoCode, value: "")
+            FormSubFieldModel(title: "Promocode", type: .promoCode, value: CouponCodeModel(couponId: "", couponCode: "", discount: ""))
         ]
     }
     

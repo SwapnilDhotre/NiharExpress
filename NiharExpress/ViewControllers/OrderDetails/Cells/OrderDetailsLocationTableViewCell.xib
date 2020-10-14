@@ -200,16 +200,39 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FJW-pQ-EpE">
+                                        <rect key="frame" x="202" y="67" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="5Xf-mH-Pvv"/>
+                                            <constraint firstAttribute="height" constant="40" id="Jnq-qy-MH3"/>
+                                        </constraints>
+                                        <state key="normal" title="C"/>
+                                        <connections>
+                                            <action selector="btnPhoneCallAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="JPN-fy-1nJ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yrJ-JH-MyZ">
+                                        <rect key="frame" x="0.0" y="66" width="242" height="41"/>
+                                        <connections>
+                                            <action selector="btnPhoneCallAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="FzW-fP-rn1"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
+                                    <constraint firstItem="FJW-pQ-EpE" firstAttribute="bottom" secondItem="Wub-sR-1jc" secondAttribute="bottom" id="5RG-bo-NGE"/>
                                     <constraint firstItem="rrd-Ge-NoM" firstAttribute="top" secondItem="xGI-Ky-eCg" secondAttribute="top" id="7Xt-b9-Y5p"/>
                                     <constraint firstItem="zyA-b6-gi3" firstAttribute="top" secondItem="rrd-Ge-NoM" secondAttribute="bottom" constant="8" id="9is-wB-oQA"/>
                                     <constraint firstAttribute="bottom" secondItem="zyA-b6-gi3" secondAttribute="bottom" id="DO6-yG-YR8"/>
+                                    <constraint firstItem="yrJ-JH-MyZ" firstAttribute="bottom" secondItem="Wub-sR-1jc" secondAttribute="bottom" id="MEK-Go-132"/>
                                     <constraint firstItem="zyA-b6-gi3" firstAttribute="leading" secondItem="xGI-Ky-eCg" secondAttribute="leading" id="T3b-nl-7JG"/>
+                                    <constraint firstItem="yrJ-JH-MyZ" firstAttribute="trailing" secondItem="Wub-sR-1jc" secondAttribute="trailing" id="bPm-Wu-JYK"/>
                                     <constraint firstAttribute="trailing" secondItem="rrd-Ge-NoM" secondAttribute="trailing" id="iWK-Rd-ZwY"/>
                                     <constraint firstAttribute="trailing" secondItem="zyA-b6-gi3" secondAttribute="trailing" id="ieJ-ck-UvD"/>
+                                    <constraint firstItem="yrJ-JH-MyZ" firstAttribute="top" secondItem="Wub-sR-1jc" secondAttribute="top" id="kWv-XF-ViL"/>
                                     <constraint firstItem="rrd-Ge-NoM" firstAttribute="leading" secondItem="xGI-Ky-eCg" secondAttribute="leading" id="lIQ-Wu-cz0"/>
+                                    <constraint firstItem="yrJ-JH-MyZ" firstAttribute="leading" secondItem="Wub-sR-1jc" secondAttribute="leading" id="lm7-Bm-D6F"/>
+                                    <constraint firstItem="FJW-pQ-EpE" firstAttribute="trailing" secondItem="Wub-sR-1jc" secondAttribute="trailing" id="q4Q-kZ-Uza"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -225,14 +248,24 @@
                             <action selector="btnPhoneCallAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="bG1-GS-zzX"/>
                         </connections>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZvW-jd-yu7">
+                        <rect key="frame" x="58" y="115" width="242" height="64"/>
+                        <connections>
+                            <action selector="btnPhoneCallAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="g9B-cJ-Cqm"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="2V0-yA-hyx" firstAttribute="top" secondItem="tKz-wc-9Dd" secondAttribute="bottom" constant="20" id="19l-LQ-GTf"/>
+                    <constraint firstItem="ZvW-jd-yu7" firstAttribute="leading" secondItem="uI0-Gd-aKE" secondAttribute="leading" id="4Gz-7y-x3p"/>
                     <constraint firstItem="F2z-eq-Zef" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="7Cy-o7-LbF"/>
+                    <constraint firstItem="ZvW-jd-yu7" firstAttribute="trailing" secondItem="uI0-Gd-aKE" secondAttribute="trailing" id="7I6-Ab-bx6"/>
                     <constraint firstItem="a9s-gY-dfb" firstAttribute="bottom" secondItem="uI0-Gd-aKE" secondAttribute="bottom" id="DiD-l5-HUb"/>
                     <constraint firstItem="2V0-yA-hyx" firstAttribute="leading" secondItem="tKz-wc-9Dd" secondAttribute="leading" id="J0U-Wt-1Kk"/>
+                    <constraint firstItem="ZvW-jd-yu7" firstAttribute="top" secondItem="uI0-Gd-aKE" secondAttribute="top" id="J3T-5X-DAK"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="2V0-yA-hyx" secondAttribute="bottom" constant="22" id="JaO-Fj-La3"/>
                     <constraint firstItem="vkE-tF-pWR" firstAttribute="centerX" secondItem="F2z-eq-Zef" secondAttribute="centerX" id="MX1-gR-1av"/>
+                    <constraint firstItem="ZvW-jd-yu7" firstAttribute="bottom" secondItem="uI0-Gd-aKE" secondAttribute="bottom" id="Vsw-Je-X34"/>
                     <constraint firstItem="F2z-eq-Zef" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="bNs-DG-oPa"/>
                     <constraint firstAttribute="bottom" secondItem="zZd-4G-5M7" secondAttribute="bottom" id="elF-Vn-bEV"/>
                     <constraint firstItem="zZd-4G-5M7" firstAttribute="centerX" secondItem="F2z-eq-Zef" secondAttribute="centerX" id="f5O-xx-ju4"/>
@@ -250,6 +283,7 @@
             <connections>
                 <outlet property="bottomLine" destination="zZd-4G-5M7" id="jdF-BM-IjY"/>
                 <outlet property="btnPhone" destination="a9s-gY-dfb" id="Orp-9K-ed8"/>
+                <outlet property="btnPhone2" destination="FJW-pQ-EpE" id="9KP-Sx-DIe"/>
                 <outlet property="commentsView" destination="jHe-xv-zq9" id="jID-dH-Ubo"/>
                 <outlet property="lblCommentsTitle" destination="lyI-kt-qdF" id="yWy-Hq-wiN"/>
                 <outlet property="lblCommentsValue" destination="JFf-il-GWf" id="FW0-fe-121"/>

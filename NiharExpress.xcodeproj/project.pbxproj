@@ -164,6 +164,7 @@
 		E68474A324DEEDD900BB339B /* PickAddressFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E68474A124DEEDD900BB339B /* PickAddressFieldTableViewCell.xib */; };
 		E68474A624DEEF8100BB339B /* AddressCommonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68474A424DEEF8100BB339B /* AddressCommonTableViewCell.swift */; };
 		E68474A724DEEF8100BB339B /* AddressCommonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E68474A524DEEF8100BB339B /* AddressCommonTableViewCell.xib */; };
+		E692D8D425373A0100255882 /* CouponCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E692D8D325373A0100255882 /* CouponCode.swift */; };
 		E696FD7624E10250004D60B6 /* ChangeLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E696FD7424E10250004D60B6 /* ChangeLocationViewController.swift */; };
 		E696FD7724E10250004D60B6 /* ChangeLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E696FD7524E10250004D60B6 /* ChangeLocationViewController.xib */; };
 		E6994C8B24DEF71800B935C1 /* DateTimePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6994C8924DEF71800B935C1 /* DateTimePickerTableViewCell.swift */; };
@@ -362,6 +363,7 @@
 		E68474A124DEEDD900BB339B /* PickAddressFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickAddressFieldTableViewCell.xib; sourceTree = "<group>"; };
 		E68474A424DEEF8100BB339B /* AddressCommonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCommonTableViewCell.swift; sourceTree = "<group>"; };
 		E68474A524DEEF8100BB339B /* AddressCommonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressCommonTableViewCell.xib; sourceTree = "<group>"; };
+		E692D8D325373A0100255882 /* CouponCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponCode.swift; sourceTree = "<group>"; };
 		E696FD7424E10250004D60B6 /* ChangeLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLocationViewController.swift; sourceTree = "<group>"; };
 		E696FD7524E10250004D60B6 /* ChangeLocationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangeLocationViewController.xib; sourceTree = "<group>"; };
 		E6994C8924DEF71800B935C1 /* DateTimePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimePickerTableViewCell.swift; sourceTree = "<group>"; };
@@ -771,8 +773,8 @@
 				E60F187C24BF176B00134353 /* ParcelInfoTableViewCell.swift */,
 				E60F187D24BF176B00134353 /* ParcelInfoTableViewCell.xib */,
 				E6AA98E124BF32CC006577F6 /* PaymentViewTableViewCell.swift */,
-				E6AA98E224BF32CC006577F6 /* PaymentViewTableViewCell.xib */,
 				E6AA98E724BF3914006577F6 /* RadioCellTableViewCell.swift */,
+				E6AA98E224BF32CC006577F6 /* PaymentViewTableViewCell.xib */,
 				E6AA98E824BF3914006577F6 /* RadioCellTableViewCell.xib */,
 				E6496A9024DA6F6C00514AB9 /* ParcelTypeCollectionViewCell.swift */,
 				E6496A9124DA6F6C00514AB9 /* ParcelTypeCollectionViewCell.xib */,
@@ -933,6 +935,7 @@
 				E656287B24F23F250030B5E0 /* DriverInfo.swift */,
 				0FBD97C72520B0FC000BA30A /* UserAddressModel.swift */,
 				E65ADDE1252A495F000A28D0 /* CouponModel.swift */,
+				E692D8D325373A0100255882 /* CouponCode.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1256,6 +1259,7 @@
 				0FBD97C82520B0FC000BA30A /* UserAddressModel.swift in Sources */,
 				E630D9A624BD9D43006666A8 /* UIColor_Extension.swift in Sources */,
 				E630D9A224BD9CFC006666A8 /* UserDefaultManager.swift in Sources */,
+				E692D8D425373A0100255882 /* CouponCode.swift in Sources */,
 				E672532624DE4DBA008837CB /* CancellationOrderViewController.swift in Sources */,
 				E6F81A4924DDD46600E98351 /* InProgressTableViewCell.swift in Sources */,
 				E609BD5124E011BF00B505EB /* EmptyFormViewController.swift in Sources */,

@@ -102,6 +102,9 @@
                         </constraints>
                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                         <state key="normal" title="Apply"/>
+                        <connections>
+                            <action selector="btnApplyPromoCode:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="51U-BR-CCu"/>
+                        </connections>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OzN-BB-G6r">
                         <rect key="frame" x="0.0" y="265" width="411" height="12"/>

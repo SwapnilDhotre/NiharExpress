@@ -42,7 +42,7 @@ class OrderReviewViewController: UIViewController {
     var optimizeRoute: Bool!
     var category: Category!
     var priceInfo: PriceInfo!
-    var couponId: String = ""
+    var coupon: CouponCodeModel?
     var locations: [VisitLocation] = []
     
     @IBOutlet weak var lblWhatItem: UILabel!
@@ -203,7 +203,8 @@ class OrderReviewViewController: UIViewController {
         var array = self.locations
         let pickUpLocation = array.remove(at: 0)
         
-        let params: [String: Any] = [
+        var params: [String: Any] = [
+            "device": "A",
             Constants.API.method: Constants.MethodType.placeOrder.rawValue,
             Constants.API.key: "5b418e652da7ed82fe28897fa81bc0356c7d8f31",
             Constants.API.categoryId: self.category.id,
@@ -242,36 +243,29 @@ class OrderReviewViewController: UIViewController {
             Constants.API.distance: "\(self.priceInfo.distance)"
         ]
         
-        //        Constants.API.orderId: nil,
-        //        Constants.API.couponId: nil,
-        //        Constants.API.discount: nil,
+        if coupon != nil {
+            params[Constants.API.couponId] = coupon!.couponId
+            params[Constants.API.discount] = coupon!.discount
+        }
         
-//        params.printPrettyJSON()
+        if orderId != nil {
+            params[Constants.API.orderId] = self.orderId!
+        }
         
-        var val = createJsonString(parameter: params)
-        
-        print("jh")
-        //        APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: ["data":val], headers: nil) { (responseData, error) in
-        //           APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
-        //                if let data = responseData?.first {
-        //                    completion(data, nil)
-        //                } else {
-        //                    completion(nil, apiStatus)
-        //                }
-        //            }
-        //        }
-        
-        guard let url = URL(string: URLConstant.baseURL) else { return }
+        guard let url = URL(string: URLConstant.placeOrderAPI) else { return }
         
         var request = URLRequest(url: url)
         request.addValue("application/json", forHTTPHeaderField: Constants.headers.accept)
         request.httpMethod = "POST"
         
+        do {
+            let data = try JSONSerialization.data(withJSONObject: params, options: [])
+            request.httpBody =  data
+        } catch {
+            print("Parameter parsing error")
+        }
         APIManager.shared.executeRequest(urlRequest: request) { (responseData: [String:Any]?, error: Error?) in
             responseData?.printPrettyJSON()
-            
-            print("fsdf");
-            
             APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
                 if let data = responseData?.first {
                     completion(data, nil)
@@ -280,22 +274,6 @@ class OrderReviewViewController: UIViewController {
                 }
             }
         }
-    }
-    
-    func createJsonString(parameter dict: [String:Any]) -> String {
-        
-        if JSONSerialization.isValidJSONObject(dict) {
-            do {
-                let jsonData = try JSONSerialization.data(withJSONObject: dict, options: JSONSerialization.WritingOptions())
-                
-                if let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue) {
-                    return jsonString as String
-                }
-            } catch let JSONError as NSError {
-                print("\(JSONError)")
-            }
-        }
-        return ""
     }
 }
 

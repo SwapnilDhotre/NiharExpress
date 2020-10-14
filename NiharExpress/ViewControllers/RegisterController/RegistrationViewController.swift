@@ -16,7 +16,7 @@ class RegistrationViewController: UIViewController {
     var alertLoader: UIAlertController?
     
     var delegate: ProfileScreenLoginRegisterDelegate?
-        
+    
     // MARK: - Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +56,7 @@ class RegistrationViewController: UIViewController {
             Constants.API.method: Constants.MethodType.getOTP.rawValue,
             Constants.API.key: "6997c339387ac79b5fec7676cd6170b0d8b1e79c",
             Constants.API.mobileNo: phoneNumber,
-//            Constants.API.mod: "L"
+            //            Constants.API.mod: "L"
         ]
         
         APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
@@ -65,6 +65,8 @@ class RegistrationViewController: UIViewController {
                 
                 if let otpText = responseData?.first?[Constants.Response.otp] as? Int {
                     completion("\(otpText)", apiStatus)
+                } else if let cutomerId = responseData?.first?[Constants.API.customerId] as? String {
+                    completion("", APIStatus.alreadyExist)
                 } else {
                     completion("", apiStatus)
                 }

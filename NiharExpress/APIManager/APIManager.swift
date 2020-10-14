@@ -22,6 +22,7 @@ enum APIStatus: String {
     case unauthorizedAccess = "401"
     case notFound = "404"
     case methodNotFound = "405"
+    case invalidUserToRedeemCode = "600"
     case ambiguous = ""
     
     var message: String {
@@ -40,6 +41,8 @@ enum APIStatus: String {
             return "URL error"
         case .ambiguous:
             return "Something went wrong"
+        case .invalidUserToRedeemCode:
+            return "Invalid user to redeem code"
         }
     }
 }
