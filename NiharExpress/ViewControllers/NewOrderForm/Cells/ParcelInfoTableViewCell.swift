@@ -78,7 +78,6 @@ class ParcelInfoTableViewCell: UITableViewCell {
     }
     
     @IBAction func btnApplyPromoCode(_ sender: UIButton) {
-        self.view.end
         for formField in self.formFieldModel.formSubFields {
             switch formField.type {
             case .promoCode:
