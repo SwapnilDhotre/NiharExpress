@@ -23,29 +23,32 @@ enum APIStatus: String {
     case notFound = "404"
     case methodNotFound = "405"
     case invalidUserToRedeemCode = "600"
+    case orderNotAllowedInSelectedCity = "702"
     case ambiguous = ""
     case noMsg = "noMsg"
     
     var message: String {
         switch self {
         case .success:
-            return "Api Success"
+            return "Api Success" // 200
         case .alreadyExist:
-            return "User already exist"
+            return "User already exist" // 304
         case .badRequest:
-            return "Something went wrong"
+            return "Something went wrong" // 400
         case .unauthorizedAccess:
-            return "User login expired"
+            return "User login expired" // 401
         case .notFound:
-            return "Not found"
+            return "Not found" // 404
         case .methodNotFound:
-            return "URL error"
+            return "URL error" // 405
         case .ambiguous:
             return "Something went wrong"
         case .invalidUserToRedeemCode:
-            return "Invalid user to redeem code"
+            return "Invalid user to redeem code" // 600
         case .noMsg:
             return "";
+        case .orderNotAllowedInSelectedCity:
+            return "Order not allowed in selected city"
         }
     }
 }

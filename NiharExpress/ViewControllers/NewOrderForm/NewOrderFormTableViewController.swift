@@ -137,7 +137,7 @@ class NewOrderFormTableViewController: UITableViewController {
         }
         
         if let priceInfo = priceInfo {
-            self.updateUI(with: priceInfo)
+            self.updatePriceUI(with: priceInfo)
         }
     }
     
@@ -224,18 +224,28 @@ class NewOrderFormTableViewController: UITableViewController {
         var couponCode: CouponCodeModel?
         var locations: [VisitLocation] = []
         
+        let reviewController = OrderReviewViewController()
+        
         self.formFields.forEach { (formField) in
             switch formField.type {
             case .weight:
                 weight = (formField.value as? String)
+                
+                if let weight = weight, weight.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
+                    reviewController.weight = weight.trimmingCharacters(in: .whitespacesAndNewlines)
+                } else {
+                    self.showAlert(withMsg: "Please add weight")
+                    return
+                }
+                
                 break
             case .pickUpPoint:
-                if let location = self.getPickUpDeliveryLocation(formField: formField) {
+                if let location = self.getPickUpDeliveryLocation(formField: formField, type: formField.type) {
                     locations.append(location)
                 }
                 break
             case .deliveryPoint:
-                if let location = self.getPickUpDeliveryLocation(formField: formField) {
+                if let location = self.getPickUpDeliveryLocation(formField: formField, type: formField.type) {
                     locations.append(location)
                 }
             case .addDeliveryPoint:
@@ -270,16 +280,7 @@ class NewOrderFormTableViewController: UITableViewController {
                 break
             }
         }
-        
-        let reviewController = OrderReviewViewController()
-        
-        if let weight = weight, weight.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
-            reviewController.weight = weight.trimmingCharacters(in: .whitespacesAndNewlines)
-        } else {
-            self.showAlert(withMsg: "Please add weight")
-            return
-        }
-        
+                        
         if locations.count < 2 {
             self.showAlert(withMsg: "Please select pick and delivery")
             return
@@ -316,7 +317,7 @@ class NewOrderFormTableViewController: UITableViewController {
         self.navigationController?.pushViewController(reviewController, animated: true)
     }
     
-    func getPickUpDeliveryLocation(formField: FormFieldModel) -> VisitLocation? {
+    func getPickUpDeliveryLocation(formField: FormFieldModel, type: FormFieldType) -> VisitLocation? {
         var userName: String!
         var address: AddressModel!
         var date: Date?
@@ -371,17 +372,17 @@ class NewOrderFormTableViewController: UITableViewController {
         }
         
         if address == nil || address!.address == "" {
-            self.showAlert(withMsg: "Please select address for every pickUp/Delivery point")
-            return nil
-        }
-        
-        if phoneNo == nil || phoneNo! == "" {
-            self.showAlert(withMsg: "Please select phone number for every pickUp/Delivery point")
+            self.showAlert(withMsg: "Please select address for \(type == .pickUpPoint ? "Pick up" : "every Delivery")  point")
             return nil
         }
         
         if userName == nil || userName! == "" {
-            self.showAlert(withMsg: "Please select user name for every pickUp/Delivery point")
+            self.showAlert(withMsg: "Please select user name for \(type == .pickUpPoint ? "Pick up" : "every Delivery") point")
+            return nil
+        }
+        
+        if phoneNo == nil || phoneNo! == "" {
+            self.showAlert(withMsg: "Please select phone number for \(type == .pickUpPoint ? "Pick up" : "every Delivery") point")
             return nil
         }
         
@@ -689,6 +690,10 @@ class NewOrderFormTableViewController: UITableViewController {
                 let searchAddressController = SearchAddressViewController()
                 searchAddressController.indexPath = indexPath
                 searchAddressController.delegate = self
+                
+                if let addressModel = subFormField.value as? AddressModel {
+                    searchAddressController.textToSearch = addressModel.address
+                }
                 self.navigationController?.pushViewController(searchAddressController, animated: true)
             }
         }
@@ -966,6 +971,13 @@ extension NewOrderFormTableViewController: ReloadCellProtocol {
 }
 
 extension NewOrderFormTableViewController: ApplyPromoProtocol {
+    func didTogglePromoCode(model: CouponCodeModel) {
+        if let info = priceInfo {
+            self.updatePriceUI(with: info)
+        }
+        self.tableView.reloadData()
+    }
+    
     func didSelectCategory(category: Category) {
         self.formFields.forEach { (formField) in
             if formField.type == .parcelInfo {
@@ -1029,7 +1041,7 @@ extension NewOrderFormTableViewController: ApplyPromoProtocol {
                 self.fetchPrice(weight: weight, categoryId: category.id, pickUpCoordinate: pickUpCoordinate, deliveryCoordinates: deliveryCoordinates) { (priceInfo, apiStatus) in
                     DispatchQueue.main.async {
                         if let priceInfo = priceInfo {
-                            self.updateUI(with: priceInfo)
+                            self.updatePriceUI(with: priceInfo)
                         } else {
                             self.showAlert(withMsg: apiStatus?.message ?? "Something went wrong")
                         }
@@ -1039,9 +1051,34 @@ extension NewOrderFormTableViewController: ApplyPromoProtocol {
         }
     }
     
-    func updateUI(with priceInfo: PriceInfo) {
+    func updatePriceUI(with priceInfo: PriceInfo) {
         self.priceInfo = priceInfo
-        self.bottomPanelView.lblTotalAmount.text = "₹\(priceInfo.totalCost)"
+        
+        var couponCode: CouponCodeModel?
+        self.formFields.forEach { (formField) in
+            switch formField.type {
+            case .parcelInfo:
+                formField.formSubFields.forEach { (subFormField) in
+                    switch subFormField.type {
+                    case .promoCode:
+                        couponCode = subFormField.value as? CouponCodeModel
+                        break
+                    default:
+                        print("Parcel Info case not found")
+                    }
+                }
+                break
+            default:
+                print("nothing here")
+            }
+        }
+        
+        if let coupon = couponCode, coupon.shouldApplyDiscount {
+            let price = (Double(priceInfo.totalCost) ?? 0) - (Double(coupon.discount) ?? 0)
+            self.bottomPanelView.lblTotalAmount.text = "₹\(price)"
+        } else {
+            self.bottomPanelView.lblTotalAmount.text = "₹\(priceInfo.totalCost)"
+        }
         self.bottomPanelView.lblParcelSecurityFeeValue.text = "₹\(priceInfo.insuranceCost)"
         self.bottomPanelView.lblForDeliveryValue.text = "₹\(priceInfo.insuranceCost)"
     }
@@ -1050,21 +1087,26 @@ extension NewOrderFormTableViewController: ApplyPromoProtocol {
         print("promoCode:>>\(code)")
         self.view.endEditing(true)
         
-        self.alertLoader = self.showAlertLoader()
-        self.applyPromoCode(code: code, amount: self.priceInfo?.totalCost ?? "") { (couponCode, apiStatus) in
-            
-            DispatchQueue.main.async {
-                self.alertLoader?.dismiss(animated: true, completion: nil)
-                print("Coupon code:>> \(couponCode?.couponCode)")
-                if couponCode != nil {
-                    model.couponCode = couponCode?.couponCode ?? ""
-                    model.couponId = couponCode?.couponId ?? ""
-                    model.discount = couponCode?.discount ?? ""
-                    self.tableView.reloadData()
-                } else {
-                    self.showAlert(withMsg: apiStatus?.message ?? "Something went wrong.")
+        if let priceInfo = self.priceInfo {
+            self.alertLoader = self.showAlertLoader()
+            self.applyPromoCode(code: code, amount: self.priceInfo?.totalCost ?? "") { (couponCode, apiStatus) in
+                
+                DispatchQueue.main.async {
+                    self.alertLoader?.dismiss(animated: true, completion: nil)
+                    print("Coupon code:>> \(couponCode?.couponCode)")
+                    if couponCode != nil {
+                        model.couponCode = couponCode?.couponCode ?? ""
+                        model.couponId = couponCode?.couponId ?? ""
+                        model.discount = couponCode?.discount ?? ""
+                        self.updatePriceUI(with: priceInfo)
+                        self.tableView.reloadData()
+                    } else {
+                        self.showAlert(withMsg: apiStatus?.message ?? "Something went wrong.")
+                    }
                 }
             }
+        } else {
+            self.showAlert(withMsg: "Price not calculated")
         }
     }
 }

@@ -17,6 +17,7 @@ enum MarkerType {
 
 class TrackOrderViewController: UIViewController {
     var order: Order!
+    var mapLocations: [MapLocation] = []
     var timer: Timer?
     
     var driversZoomMode: Bool = false
@@ -77,22 +78,14 @@ class TrackOrderViewController: UIViewController {
         let start = CLLocationCoordinate2D(latitude: driverInfo.latitude, longitude: driverInfo.longitude)
         var end: CLLocationCoordinate2D!
         
-        if order.pickUp.isComplete == "N" {
-            let lat: Double = NSString(string: order.pickUp.lat).doubleValue
-            let long: Double = NSString(string: order.pickUp.long).doubleValue
-            end = CLLocationCoordinate2D(latitude: lat, longitude: long)
-        } else {
-            for location in order.delivery {
-                if location.isComplete == "N" {
-                    let lat: Double = NSString(string: location.lat).doubleValue
-                    let long: Double = NSString(string: location.long).doubleValue
-                    end = CLLocationCoordinate2D(latitude: lat, longitude: long)
-                    break
-                }
+        for location in self.mapLocations {
+            if !location.isComplete {
+                end = location.coordinate
+                break
             }
         }
         
-        sessionManager.requestDirections(from: start, to: end, completionHandler: { (path, error) in
+        sessionManager.requestDirections(from: start, to: end, completionHandler: { (path, distance, duration, error) in
             
             if let error = error {
                 print("Something went wrong, abort drawing!\nError: \(error)")
@@ -110,6 +103,8 @@ class TrackOrderViewController: UIViewController {
                 polyline.strokeColor = #colorLiteral(red: 0.937254902, green: 0.1882352941, blue: 0.1294117647, alpha: 1)
                 polyline.strokeWidth = 3
                 
+//                self.placeInfoWindow(path: path!, distance: distance!, duration: duration!)
+                
                 if self.driversZoomMode {
                     var bounds: GMSCoordinateBounds = GMSCoordinateBounds()
                     bounds = bounds.includingCoordinate(CLLocationCoordinate2D(latitude: driverInfo.latitude, longitude: driverInfo.longitude))
@@ -126,12 +121,34 @@ class TrackOrderViewController: UIViewController {
         })
     }
     
+    func placeInfoWindow(path: GMSPath, distance: String, duration: String) {
+        let pathDraw = GMSPath(fromEncodedPath: path.encodedPath())!
+        let pointsCount = pathDraw.count()
+           let midpoint = pathDraw.coordinate(at: pointsCount)
+
+           DispatchQueue.main.async {
+               self.addMarkerPin(corrdinate: midpoint, distance: distance, duration: duration)
+           }
+    }
+    
+    func addMarkerPin(corrdinate: CLLocationCoordinate2D, distance: String, duration: String) {
+        let marker = GMSMarker()
+        marker.position = corrdinate
+
+        let infoWindow = InfoWindow()
+        infoWindow.lblTitle.text = distance
+        infoWindow.lblInfo.text = distance
+        
+        marker.icon = UIImage(view: infoWindow)
+        marker.map = self.gmsMap
+        marker.infoWindowAnchor = CGPoint(x: -1900 , y: -2000)
+    }
+    
     func placeAllMarkers(driverInfo: DriverInfo?) {
         var bounds: GMSCoordinateBounds = GMSCoordinateBounds()
         
-        bounds = bounds.includingCoordinate(self.placeMarker(address: order.pickUp, markerType: .pickUpMarker).position)
-        for (index, deliveryAddr) in order.delivery.enumerated() {
-            bounds = bounds.includingCoordinate(self.placeMarker(index: index, address: deliveryAddr, markerType: .dropMarker).position)
+        for (index, location) in mapLocations.enumerated() {
+            bounds = bounds.includingCoordinate(self.placeMarker(index: index, location: location, markerType: location.type).position)
         }
         
         if driverInfo != nil {
@@ -141,36 +158,35 @@ class TrackOrderViewController: UIViewController {
         }
     }
     
-    func placeMarker(index: Int? = nil, address: OrderAddress, markerType: MarkerType) -> GMSMarker {
-        let lat: Double = NSString(string: address.lat).doubleValue
-        let long: Double = NSString(string: address.long).doubleValue
-        
-        let marker = self.addPinAtLocation(coordinate: CLLocationCoordinate2D(latitude: lat, longitude: long), title: address.userName, mobileNo: address.mobileNo, address: address.address, isDriversLocation: false)
+    func placeMarker(index: Int, location: MapLocation, markerType: LocationType?) -> GMSMarker {
+        let marker = self.addPinAtLocation(coordinate: location.coordinate, title: location.name, mobileNo: location.mobileNo, address: location.address, isDriversLocation: false)
         
         let image: UIImage!
-        switch markerType {
-        case .pickUpMarker:
-            image = UIImage(named: "pickup-png")?.resizeImage(targetSize: CGSize(width: 60, height: 60))
-            break
-        case .driverMarker:
+        if let type = markerType {
+            switch type {
+            case .pickUp:
+                image = UIImage(named: "pickup-png")?.resizeImage(targetSize: CGSize(width: 60, height: 60))
+                break
+                
+            case .delivery:
+                image = UIImage(named: "drop-png")?.resizeImage(targetSize: CGSize(width: 60, height: 60))
+                break
+            }
+        } else {
             image = UIImage(named: "driver-png")?.resizeImage(targetSize: CGSize(width: 60, height: 60))
-            break
-        case .dropMarker:
-            image = UIImage(named: "drop-png")?.resizeImage(targetSize: CGSize(width: 60, height: 60))
-            break
         }
         
-        if index != nil {
-            marker.title = "Drop \(index! + 1)"
-            let markerView = MarkerView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
-            markerView.imgView.image = image
-            markerView.lblTitle.text = "Drop \(index! + 1)"
-            marker.iconView = markerView
-        } else {
+        if index == 0 {
             marker.title = "Pick Up"
             let markerView = MarkerView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
             markerView.imgView.image = image
             markerView.lblTitle.text = "Pick Up"
+            marker.iconView = markerView
+        } else {
+            marker.title = "Drop \(index)"
+            let markerView = MarkerView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+            markerView.imgView.image = image
+            markerView.lblTitle.text = "Drop \(index)"
             marker.iconView = markerView
         }
         

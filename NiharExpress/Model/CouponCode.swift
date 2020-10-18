@@ -12,11 +12,13 @@ class CouponCodeModel: Codable {
     var couponId: String
     var couponCode: String
     var discount: String
+    var shouldApplyDiscount: Bool
     
-    init(couponId: String, couponCode: String, discount: String) {
+    init(couponId: String, couponCode: String, discount: String, shouldApplyDiscount: Bool = true) {
         self.couponId = couponId
         self.couponCode = couponCode
         self.discount = discount
+        self.shouldApplyDiscount = shouldApplyDiscount
     }
     
     enum CodingKeys: String, CodingKey {

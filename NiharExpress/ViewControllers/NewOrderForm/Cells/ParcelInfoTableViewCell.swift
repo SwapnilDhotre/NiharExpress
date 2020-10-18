@@ -11,6 +11,7 @@ import UIKit
 protocol ApplyPromoProtocol {
     func applyPromo(model: CouponCodeModel, code: String)
     func didSelectCategory(category: Category)
+    func didTogglePromoCode(model: CouponCodeModel)
 }
 
 class ParcelInfoTableViewCell: UITableViewCell {
@@ -33,10 +34,16 @@ class ParcelInfoTableViewCell: UITableViewCell {
     var parcelValues: [Category] = []
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var couponCodeToggle: UIButton!
+    @IBOutlet weak var lblCouponCodeSuccess: UILabel!
+    @IBOutlet weak var couponCodeBottomConstraint: NSLayoutConstraint!
+    
     var formFieldModel: FormFieldModel!
     var indexPath: IndexPath!
     var delegate: ReloadCellProtocol?
     var promoCodeDelegate: ApplyPromoProtocol?
+    
+    var couponCode: CouponCodeModel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -51,6 +58,14 @@ class ParcelInfoTableViewCell: UITableViewCell {
         self.txtParcelType.delegate = self
         self.txtParcelValue.delegate = self
         self.txtPromoCode.delegate = self
+        
+        self.lblCouponCodeSuccess.isHidden = true
+        self.couponCodeToggle.isHidden = true
+        self.couponCodeBottomConstraint.priority = UILayoutPriority(850)
+        
+        self.couponCodeToggle.setTitle(FontAwesome.checkSquare.rawValue, for: .normal)
+        self.couponCodeToggle.setTitleColor(ColorConstant.themePrimary.color, for: .normal)
+        self.couponCodeToggle.titleLabel?.font = UIFont.fontAwesome(ofSize: 16, style: .solid)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -70,7 +85,19 @@ class ParcelInfoTableViewCell: UITableViewCell {
                 self.txtParcelValue.text = formField.value as? String
             case .promoCode:
                 self.lblPromoCodeTitle.text = formField.title
-                self.txtPromoCode.text = (formField.value as? CouponCodeModel)?.couponCode
+                
+                if let coupon = formField.value as? CouponCodeModel, coupon.couponId != "" {
+                    self.lblCouponCodeSuccess.text = "Your \(coupon.couponCode) Successfully Added Discount \(coupon.discount)";
+                    self.lblCouponCodeSuccess.isHidden = false
+                    self.couponCodeToggle.isHidden = false
+                    self.couponCodeBottomConstraint.priority = UILayoutPriority(950)
+                    self.txtPromoCode.text = coupon.couponCode
+                } else {
+                    self.txtPromoCode.text = ""
+                }
+                
+                self.contentView.setNeedsUpdateConstraints()
+                
             default:
                 assertionFailure("Wrong field appears here")
             }
@@ -86,7 +113,30 @@ class ParcelInfoTableViewCell: UITableViewCell {
                 }
             default:
                 print("Wrong field")
-//                assertionFailure("Wrong field appears here")
+                //                assertionFailure("Wrong field appears here")
+            }
+        }
+    }
+    
+    @IBAction func btnCouponToggle(_ sender: UIButton) {
+        for formField in self.formFieldModel.formSubFields {
+            switch formField.type {
+            case .promoCode:
+                if let couponCodeModel = formField.value as? CouponCodeModel {
+                    couponCodeModel.shouldApplyDiscount = !couponCodeModel.shouldApplyDiscount
+                    
+                    sender.setTitle(couponCodeModel.shouldApplyDiscount ? FontAwesome.checkSquare.rawValue : FontAwesome.square.rawValue, for: .normal)
+                    
+                    if couponCodeModel.shouldApplyDiscount {
+                        sender.titleLabel?.font = UIFont.fontAwesome(ofSize: 16, style: .solid)
+                    } else {
+                        sender.titleLabel?.font = UIFont.fontAwesome(ofSize: 16, style: .regular)
+                    }
+                    self.promoCodeDelegate?.didTogglePromoCode(model: couponCodeModel)
+                }
+            default:
+                print("Wrong field")
+                //                assertionFailure("Wrong field appears here")
             }
         }
     }

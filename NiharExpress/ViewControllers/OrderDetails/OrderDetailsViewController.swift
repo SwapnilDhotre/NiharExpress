@@ -34,6 +34,7 @@ class OrderDetailsViewController: UIViewController {
     
     var addressViews: [OrderAddress] = []
     
+    var alertLoader: UIAlertController?
     var delegate: NewOrderCloningProtocol?
     
     override func viewDidLoad() {
@@ -328,13 +329,123 @@ extension OrderDetailsViewController: InProgressOrderProtocol {
 }
 
 extension OrderDetailsViewController: TrackOrderProtocol {
-    func trackOrderAction() {
+    func fetchTrackLocation(completion: @escaping ((DriverInfo?, [MapLocation]?, APIStatus?) -> Void)) {
         
+        let params: Parameters = [
+            Constants.API.method: Constants.MethodType.getTrackingLocation.rawValue,
+            Constants.API.key: "49db3f1b61451f7a7339ca4adeae4b5d7eee9db1",
+            Constants.API.orderId: self.order.orderId,
+            "user_id": UserConstant.shared.userModel.id,
+            "type": "C"
+        ]
+        
+        APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
+            APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
+                if let response = responseData?.first {
+                    var driverInfo: DriverInfo?
+                    var models: [MapLocation] = []
+                    
+                    if let driverData = response["driver_data"] as? [String: Any], let driverJsonData = try? JSONSerialization.data(withJSONObject: driverData) {
+                        if let driverData = try? JSONDecoder().decode(DriverInfo.self, from: driverJsonData) {
+                            driverInfo = driverData
+                        }
+                    }
+                    
+                    if let pickUpLocation = response["pickup_address"] as? [String: Any], let pickUpJsonData = try? JSONSerialization.data(withJSONObject: pickUpLocation) {
+                        models.append(try! JSONDecoder().decode(MapLocation.self, from: pickUpJsonData))
+                    }
+                    
+                    if let deliveryLocations = response["delivery_address"] as? [[String: Any]], let deliveryJsonData = try? JSONSerialization.data(withJSONObject: deliveryLocations) {
+                        models.append(contentsOf: try! JSONDecoder().decode([MapLocation].self, from: deliveryJsonData))
+                    }
+                    
+                    completion(driverInfo, models,  nil)
+                } else {
+                    completion(nil, nil, apiStatus)
+                }
+            }
+        }
     }
     
-    func navigateToTrackOrder() {
+    func trackOrderAction() {
+        
+        self.alertLoader = self.showAlertLoader()
+        self.fetchTrackLocation { (driverInfo, locations, apiStatus) in
+            DispatchQueue.main.async {
+                self.alertLoader?.dismiss(animated: false, completion: nil)
+                if let locationsData = locations, !locationsData.isEmpty {
+                    self.navigateToTrackOrder(with: driverInfo, locations: locations ?? [])
+                } else {
+                    self.showAlert(withMsg: apiStatus?.message ?? "Something went wrong!!")
+                }
+            }
+        }
+    }
+    
+    func navigateToTrackOrder(with driverInfo: DriverInfo?, locations: [MapLocation]) {
         let trackOrderController = TrackOrderViewController()
         trackOrderController.order = self.order
+        trackOrderController.mapLocations = locations
         self.navigationController?.pushViewController(trackOrderController, animated: true)
+    }
+}
+
+
+enum LocationType: String, Codable {
+    case pickUp = "P"
+    case delivery = "D"
+}
+
+class MapLocation: Codable {
+    var name: String
+    var mobileNo: String
+    var address: String
+    var type: LocationType
+    var coordinate: CLLocationCoordinate2D
+    var isComplete: Bool
+    
+    init(name: String, mobileNo: String, address: String, type: LocationType, coordinate: CLLocationCoordinate2D, isComplete: Bool) {
+        self.name = name
+        self.mobileNo = mobileNo
+        self.address = address
+        self.type = type
+        self.coordinate = coordinate
+        self.isComplete = isComplete
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case name = "name"
+        case mobileNo = "mobile_no"
+        case address = "address"
+        case type = "type"
+        case lat = "latitude"
+        case long = "longitude"
+        case isComplete = "is_complete"
+    }
+    
+    required convenience init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        let name: String = try container.decode(String.self, forKey: .name)
+        let mobileNo: String = try container.decode(String.self, forKey: .mobileNo)
+        let address: String = try container.decode(String.self, forKey: .address)
+        let type: LocationType = LocationType(rawValue: try container.decode(String.self, forKey: .type))!
+        let latitude: Double = NSString(string: (try? container.decode(String.self, forKey: .lat)) ?? "0").doubleValue
+        let longitude: Double = NSString(string: (try? container.decode(String.self, forKey: .long)) ?? "0").doubleValue
+        let isComplete: Bool = (try container.decode(String.self, forKey: .isComplete)) == "N" ? false : true
+        
+        self.init(name: name, mobileNo: mobileNo, address: address, type: type, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), isComplete: isComplete)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(self.name, forKey: .name)
+        try container.encode(self.mobileNo, forKey: .mobileNo)
+        try container.encode(self.address, forKey: .address)
+        try container.encode(self.type, forKey: .type)
+        try container.encode("\(self.coordinate.latitude)", forKey: .lat)
+        try container.encode("\(self.coordinate.longitude)", forKey: .long)
+        try container.encode(self.isComplete ? "S" : "N", forKey: .isComplete)
     }
 }

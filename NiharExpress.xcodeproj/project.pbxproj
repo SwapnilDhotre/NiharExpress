@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F12E5BC253C5D0D0047DAC0 /* InfoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F12E5BB253C5D0D0047DAC0 /* InfoWindow.xib */; };
+		0F12E5BE253C5D1B0047DAC0 /* InfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F12E5BD253C5D1B0047DAC0 /* InfoWindow.swift */; };
 		0F21D81A25206ABC0058F390 /* TempLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F21D81825206ABC0058F390 /* TempLoginViewController.swift */; };
 		0F21D81B25206ABC0058F390 /* TempLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F21D81925206ABC0058F390 /* TempLoginViewController.xib */; };
 		0F2DC2DA2529DFF600D59FFC /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2DC2D82529DFF600D59FFC /* EditProfileViewController.swift */; };
@@ -202,6 +204,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F12E5BB253C5D0D0047DAC0 /* InfoWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoWindow.xib; sourceTree = "<group>"; };
+		0F12E5BD253C5D1B0047DAC0 /* InfoWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoWindow.swift; sourceTree = "<group>"; };
 		0F21D81825206ABC0058F390 /* TempLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempLoginViewController.swift; sourceTree = "<group>"; };
 		0F21D81925206ABC0058F390 /* TempLoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TempLoginViewController.xib; sourceTree = "<group>"; };
 		0F2DC2D82529DFF600D59FFC /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
@@ -822,6 +826,8 @@
 				E64E2DAD24E03B2F0018041F /* TrackOrderViewController.xib */,
 				0F49379025279E3500909CD1 /* MarkerView.swift */,
 				0F49379225279E4B00909CD1 /* MarkerView.xib */,
+				0F12E5BB253C5D0D0047DAC0 /* InfoWindow.xib */,
+				0F12E5BD253C5D1B0047DAC0 /* InfoWindow.swift */,
 			);
 			path = TrackOrder;
 			sourceTree = "<group>";
@@ -1080,6 +1086,7 @@
 				E6465EAB24DBBB1C00AF591D /* VerifyOtpViewController.xib in Resources */,
 				E60F186D24BEEC2F00134353 /* OptimizeRouteTableViewCell.xib in Resources */,
 				E6496A9F24DB123A00514AB9 /* EmptyOrderView.xib in Resources */,
+				0F12E5BC253C5D0D0047DAC0 /* InfoWindow.xib in Resources */,
 				E65ADDE6252A5342000A28D0 /* PromoCodeTableViewCell.xib in Resources */,
 				E609BD5224E011BF00B505EB /* EmptyFormViewController.xib in Resources */,
 				E630D9BD24BDDF32006666A8 /* WeightTableViewCell.xib in Resources */,
@@ -1235,6 +1242,7 @@
 				E654781E24DD30DC00A1F697 /* OrderAddress.swift in Sources */,
 				E630D9A024BD9CD9006666A8 /* Date_Extension.swift in Sources */,
 				0F2DC2DA2529DFF600D59FFC /* EditProfileViewController.swift in Sources */,
+				0F12E5BE253C5D1B0047DAC0 /* InfoWindow.swift in Sources */,
 				0F6C5B2524AE42BF00F15376 /* InfoViewController.swift in Sources */,
 				E6AA98E324BF32CC006577F6 /* PaymentViewTableViewCell.swift in Sources */,
 				E630D9B524BDC186006666A8 /* NavigationView.swift in Sources */,

@@ -248,6 +248,9 @@ class OrderReviewViewController: UIViewController {
         if coupon != nil {
             params[Constants.API.couponId] = coupon!.couponId
             params[Constants.API.discount] = coupon!.discount
+            
+            let price = (Double(priceInfo.totalCost) ?? 0) - (Double(coupon!.discount) ?? 0)
+            params[Constants.API.price] = "\(price)"
         }
         
         if orderId != nil {

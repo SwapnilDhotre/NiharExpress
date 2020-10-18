@@ -46,7 +46,7 @@ class PickAddressFieldTableViewCell: UITableViewCell {
             if model.address == "" {
                 self.txtAddressField.isUserInteractionEnabled = false
             } else {
-                self.txtAddressField.isUserInteractionEnabled = true
+                self.txtAddressField.isUserInteractionEnabled = false
             }
         } else {
             self.txtAddressField.isUserInteractionEnabled = false

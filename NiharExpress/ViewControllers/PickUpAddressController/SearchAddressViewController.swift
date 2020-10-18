@@ -30,12 +30,11 @@ class SearchAddressViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var alertLoader: UIAlertController?
-    
     var searchStarted: Bool = false
-    
     var delegate: SearchAddressDelegate?
-    
     var addressSelected: Any?
+    
+    var textToSearch: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +51,8 @@ class SearchAddressViewController: UIViewController {
         self.btnClearSearch.titleLabel?.font = FontUtility.niharExpress(size: 14)
         
         self.txtAddressSearch.addTarget(self, action: #selector(self.textEditing(_:)), for: .editingChanged)
+        self.txtAddressSearch.text = self.textToSearch
+        self.txtAddressSearch.sendActions(for: .editingChanged)
         self.txtAddressSearch.delegate = self
         
         let doneBarUttonn = UIButton(type: .custom)
@@ -110,12 +111,7 @@ class SearchAddressViewController: UIViewController {
     }
     
     @objc func doneBarButtonAction(_ sender: UIButton) {
-        if let addressModel = self.addressSelected as? UserAddressModel {
-            self.delegate?.previousAddressSelected(userAddressModel: addressModel, indexPath: self.indexPath)
-        } else if let addressModel = self.addressSelected as? AddressModel {
-            self.delegate?.newLocationPicked(address: addressModel, indexPath: self.indexPath)
-        }
-        self.navigationController?.popViewController(animated: true)
+        self.moveToPreviousScreen()
     }
     
     @objc func textEditing(_ textField: UITextField) {
@@ -186,19 +182,74 @@ class SearchAddressViewController: UIViewController {
             }
         }
     }
+    
+    func fetchLatLong(for text: String, completion: @escaping ((String?, APIStatus?) -> Void)) {
+        
+        var params: Parameters = [
+            Constants.API.method: Constants.MethodType.getLatLng.rawValue,
+            Constants.API.key: "1fc308cd794bf6580a8bbe86f8a3526338b0b687",
+            "address": text
+        ]
+        
+        if (UserConstant.shared.userModel != nil) {
+            params[Constants.API.customerId] = UserConstant.shared.userModel.id
+        }
+        
+        APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
+            APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
+                if let response = responseData?.first, let latLongString = response["geolocation"] as? String {
+                    completion(latLongString, nil)
+                } else {
+                    completion(nil, apiStatus)
+                }
+            }
+        }
+    }
 }
 
 extension SearchAddressViewController: UITextFieldDelegate {
+    func moveToPreviousScreen() {
+        if let addressModel = self.addressSelected as? UserAddressModel {
+            self.delegate?.previousAddressSelected(userAddressModel: addressModel, indexPath: self.indexPath)
+            self.navigationController?.popViewController(animated: true)
+        } else if let addressModel = self.addressSelected as? AddressModel {
+            self.delegate?.newLocationPicked(address: addressModel, indexPath: self.indexPath)
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            
+            self.alertLoader = self.showAlertLoader()
+            self.fetchLatLong(for: self.txtAddressSearch.text!) { (latLong, apiStatus) in
+                DispatchQueue.main.async {
+                    self.alertLoader?.dismiss(animated: false, completion: nil)
+                    if latLong != nil {
+                        let arr = latLong!.components(separatedBy: ",")
+                        if arr.count == 2 {
+                            let latStrinng = arr[0].trimmingCharacters(in: .whitespacesAndNewlines)
+                            let longStrinng = arr[1].trimmingCharacters(in: .whitespacesAndNewlines)
+                            let latDouble = NSString(string: latStrinng == "" ? "0" : latStrinng).doubleValue
+                            let longDouble = NSString(string: longStrinng == "" ? "0" : longStrinng).doubleValue
+                            let addressModel = AddressModel(id: "", address: self.txtAddressSearch.text!, coordinate: CLLocationCoordinate2D(latitude: latDouble, longitude: longDouble))
+                            self.delegate?.newLocationPicked(address: addressModel, indexPath: self.indexPath)
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    } else {
+                        self.showAlert(withMsg: apiStatus?.message ?? "Something went wrong")
+                    }
+                }
+            }
+        }
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.searchBy(text: textField.text!)
+        self.moveToPreviousScreen()
+        
         return textField.resignFirstResponder()
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let cs = NSCharacterSet(charactersIn: ACCEPTABLE_CHARACTERS).inverted
         let filtered = string.components(separatedBy: cs).joined(separator: "")
-
+        
         return (string == filtered)
     }
 }

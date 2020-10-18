@@ -112,6 +112,9 @@ class Constants {
         case listReferenceCoupon = "listReferenceCoupon"
         case editProfile = "editProfile"
         case redeemCoupon = "redeemCoupon"
+        
+        case getTrackingLocation = "getTrackingLocation"
+        case getLatLng = "getLatLng"
     }
     
     struct headers {
