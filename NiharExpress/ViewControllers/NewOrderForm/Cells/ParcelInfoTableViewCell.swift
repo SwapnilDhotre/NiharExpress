@@ -81,13 +81,14 @@ class ParcelInfoTableViewCell: UITableViewCell {
         for formField in self.formFieldModel.formSubFields {
             switch formField.type {
             case .promoCode:
-                self.promoCodeDelegate?.applyPromo(model: formField.value as! CouponCodeModel, code: self.txtPromoCode.text!)
+                if let couponCodeModel = formField.value as? CouponCodeModel {
+                    self.promoCodeDelegate?.applyPromo(model: couponCodeModel, code: self.txtPromoCode.text!)
+                }
             default:
                 print("Wrong field")
 //                assertionFailure("Wrong field appears here")
             }
         }
-        
     }
 }
 
@@ -126,8 +127,8 @@ extension ParcelInfoTableViewCell: UITextFieldDelegate {
                 formField.value = textField.text!
             }
         } else if textField == self.txtPromoCode {
-            if let formField = (self.formFieldModel.formSubFields.filter { $0.type == .promoCode }).first {
-                formField.value = textField.text!
+            if let formField = (self.formFieldModel.formSubFields.filter { $0.type == .promoCode }).first, let couponCodeModel = formField.value as? CouponCodeModel {
+                couponCodeModel.couponCode = textField.text!
             }
         }
     }
