@@ -170,5 +170,3 @@ extension TabbedView: UICollectionViewDelegateFlowLayout {
         return CGSize(width: self.tabCommonWidth == 0 ? self.tabs[indexPath.row].title.titleWidth() : self.tabCommonWidth, height: 40)
     }
 }
-
-

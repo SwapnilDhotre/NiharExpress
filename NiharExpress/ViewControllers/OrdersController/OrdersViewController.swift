@@ -9,6 +9,10 @@
 import UIKit
 import ESPullToRefresh
 
+extension Notification.Name {
+    static let fromNewOrderForm = Notification.Name("fromNewOrderForm")
+}
+
 class OrdersViewController: UIViewController {
     
     @IBOutlet weak var lblLoginButton: DesignableButton!
@@ -30,6 +34,7 @@ class OrdersViewController: UIViewController {
     
     var selectedTabIndex: Int = 0
     
+    var isReturnedFromForm: Bool = false
     var cloneOrderWithFields: [FormFieldModel] = []
     
     var notificationBarButton: UIButton!
@@ -39,6 +44,12 @@ class OrdersViewController: UIViewController {
         super.viewDidLoad()
         
         self.configureUI()
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.returnedFromForm(notification:)),
+            name: .fromNewOrderForm,
+            object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -131,6 +142,10 @@ class OrdersViewController: UIViewController {
         self.createNewOrder()
     }
     
+    @objc private func returnedFromForm(notification: NSNotification) {
+        self.isReturnedFromForm = true
+    }
+    
     func createNewOrder(with formFields: [FormFieldModel]? = nil) {
         let controller = NewOrderFormTableViewController()
         controller.formFields = formFields ?? []
@@ -177,7 +192,15 @@ extension OrdersViewController: TabbedViewDataSource {
             self.selectedTabIndex = index
             
             self.setUpTableView()
-            self.fetchData(for: index, isFromPullDownRefresh: false, completion: nil)
+            
+            if self.isReturnedFromForm {
+                self.isReturnedFromForm = false;
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.fetchData(for: index, isFromPullDownRefresh: false, completion: nil)
+                }
+            } else {
+                self.fetchData(for: index, isFromPullDownRefresh: false, completion: nil)
+            }
             
             return self.tableView!
         }
@@ -363,4 +386,3 @@ extension OrdersViewController: NewOrderCloningProtocol {
         self.cloneOrderWithFields = formFields
     }
 }
-

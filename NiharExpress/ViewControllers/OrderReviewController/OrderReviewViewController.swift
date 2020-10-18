@@ -58,6 +58,7 @@ class OrderReviewViewController: UIViewController {
     
     var alertLoader: UIAlertController?
     var formDelegate: FormDelegate?
+    var ordersFormDelegate: FormDelegate?
     
     var temporaryUser: User!
     
@@ -147,6 +148,7 @@ class OrderReviewViewController: UIViewController {
                 }
             }
         } else {
+            self.alertLoader = self.showAlertLoader()
             self.createOrder { (responseData, apiStatus) in
                 DispatchQueue.main.async {
                     self.alertLoader?.dismiss(animated: false, completion: nil)
@@ -264,6 +266,7 @@ class OrderReviewViewController: UIViewController {
         } catch {
             print("Parameter parsing error")
         }
+        
         APIManager.shared.executeRequest(urlRequest: request) { (responseData: [String:Any]?, error: Error?) in
             responseData?.printPrettyJSON()
             APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in

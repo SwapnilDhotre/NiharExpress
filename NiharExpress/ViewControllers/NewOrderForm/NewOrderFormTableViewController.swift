@@ -28,6 +28,8 @@ class NewOrderFormTableViewController: UITableViewController {
     var parcelCategories: [Category] = []
     var priceInfo: PriceInfo?
     
+    var paymentWillOccurAtIndex: Int = 0
+    
     var alertLoader: UIAlertController?
     var phoneNumberField: FormSubFieldModel?
     private let contactPicker = CNContactPickerViewController()
@@ -222,8 +224,6 @@ class NewOrderFormTableViewController: UITableViewController {
         var couponCode: CouponCodeModel?
         var locations: [VisitLocation] = []
         
-        var paymentWillOccurAtIndex: Int = 0
-        
         self.formFields.forEach { (formField) in
             switch formField.type {
             case .weight:
@@ -262,7 +262,9 @@ class NewOrderFormTableViewController: UITableViewController {
                 break
             case .paymentInfo:
                 for index in 0..<formField.paymentLocation.count {
-                    paymentWillOccurAtIndex = index
+                    if formField.paymentLocation[index].isSelected {
+                        paymentWillOccurAtIndex = index
+                    }
                 }
                 
                 break
@@ -271,28 +273,37 @@ class NewOrderFormTableViewController: UITableViewController {
         
         let reviewController = OrderReviewViewController()
         
-        if let weight = weight {
-            reviewController.weight = weight
+        if let weight = weight, weight.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
+            reviewController.weight = weight.trimmingCharacters(in: .whitespacesAndNewlines)
         } else {
             self.showAlert(withMsg: "Please add weight")
+            return
         }
         
-        if let category = category {
+        if locations.count < 2 {
+            self.showAlert(withMsg: "Please select pick and delivery")
+            return
+        }
+        
+        if let category = category, category.id != "" {
             reviewController.category = category
         } else {
             self.showAlert(withMsg: "Please select parcel category")
+            return
         }
         
-        if let price = parcelPrice {
-            reviewController.parcelPrice = price
+        if let price = parcelPrice, price.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
+            reviewController.parcelPrice = price.trimmingCharacters(in: .whitespacesAndNewlines)
         } else {
             self.showAlert(withMsg: "Parcel Price not set")
+            return
         }
         
         if let price = self.priceInfo {
             reviewController.priceInfo = price
         } else {
             self.showAlert(withMsg: "Price not calculated")
+            return
         }
         
         reviewController.coupon = couponCode
@@ -336,12 +347,19 @@ class NewOrderFormTableViewController: UITableViewController {
                 comment = (subFormField.value as? String) ?? ""
                 break
             case .contactPerson:
+                let value = (subFormField.value as? String) ?? ""
+                if value != "" {
+                    counter += 1
+                }
                 counter += 1
-                storeContactPerson = (subFormField.value as? String) ?? ""
+                storeContactPerson = value
                 break
             case .contactNo:
-                counter += 1
-                storeContactNo = (subFormField.value as? String) ?? ""
+                let value = (subFormField.value as? String) ?? ""
+                if value != "" {
+                    counter += 1
+                }
+                storeContactNo = value
                 break
             case .transaction:
                 transactionType = (subFormField.value as? (transactionType: String, transactionAmount: String))?.transactionType
@@ -352,17 +370,17 @@ class NewOrderFormTableViewController: UITableViewController {
             }
         }
         
-        if address == nil {
+        if address == nil || address!.address == "" {
             self.showAlert(withMsg: "Please select address for every pickUp/Delivery point")
             return nil
         }
         
-        if phoneNo == nil {
+        if phoneNo == nil || phoneNo! == "" {
             self.showAlert(withMsg: "Please select phone number for every pickUp/Delivery point")
             return nil
         }
         
-        if userName == nil {
+        if userName == nil || userName! == "" {
             self.showAlert(withMsg: "Please select user name for every pickUp/Delivery point")
             return nil
         }
@@ -532,6 +550,8 @@ class NewOrderFormTableViewController: UITableViewController {
                 
                 cell.selectionStyle = .none
                 cell.delegate = self
+                cell.paymentAddressDelegate = self
+                cell.selectedIndex = self.paymentWillOccurAtIndex
                 cell.updateData(with: formField, allFormFields: self.formFields)
                 
                 return cell
@@ -796,6 +816,12 @@ extension NewOrderFormTableViewController: WeightChangeProtocol {
     }
 }
 
+extension NewOrderFormTableViewController: PaymentSelectedAddressProtocol {
+    func paymentAddress(selectedIndex: Int) {
+        self.paymentWillOccurAtIndex = selectedIndex
+    }
+}
+
 // MARK: - AddressField Protocol
 extension NewOrderFormTableViewController: AddressHeaderProtocol {
     func arrowActionPerformed(model: FormSubFieldModel) {
@@ -1022,7 +1048,7 @@ extension NewOrderFormTableViewController: ApplyPromoProtocol {
     
     func applyPromo(model: CouponCodeModel, code: String) {
         print("promoCode:>>\(code)")
-        self.view.resignFirstResponder()
+        self.view.endEditing(true)
         
         self.alertLoader = self.showAlertLoader()
         self.applyPromoCode(code: code, amount: self.priceInfo?.totalCost ?? "") { (couponCode, apiStatus) in

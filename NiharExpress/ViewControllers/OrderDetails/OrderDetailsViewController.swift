@@ -329,6 +329,10 @@ extension OrderDetailsViewController: InProgressOrderProtocol {
 
 extension OrderDetailsViewController: TrackOrderProtocol {
     func trackOrderAction() {
+        
+    }
+    
+    func navigateToTrackOrder() {
         let trackOrderController = TrackOrderViewController()
         trackOrderController.order = self.order
         self.navigationController?.pushViewController(trackOrderController, animated: true)

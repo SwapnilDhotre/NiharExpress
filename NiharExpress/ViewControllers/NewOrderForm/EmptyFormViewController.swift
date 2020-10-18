@@ -9,12 +9,12 @@
 import UIKit
 
 class EmptyFormViewController: UIViewController {
-
+    
     var doNotExecute: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -26,6 +26,8 @@ class EmptyFormViewController: UIViewController {
             self.present(formController, animated: true, completion: nil)
         } else {
             self.doNotExecute = false
+            
+            NotificationCenter.default.post(name: .fromNewOrderForm, object: nil)
             self.tabBarController?.selectedIndex = 0
         }
     }

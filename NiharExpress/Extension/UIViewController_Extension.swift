@@ -130,6 +130,10 @@ extension UIViewController {
     }
     
     func showAlert(withMsg msg: String, title: String? = "Nihar Express", completion: ((UIAlertAction) -> Void)? = nil) {
+        if msg == "" {
+            return
+        }
+        
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in

@@ -24,6 +24,7 @@ enum APIStatus: String {
     case methodNotFound = "405"
     case invalidUserToRedeemCode = "600"
     case ambiguous = ""
+    case noMsg = "noMsg"
     
     var message: String {
         switch self {
@@ -43,6 +44,8 @@ enum APIStatus: String {
             return "Something went wrong"
         case .invalidUserToRedeemCode:
             return "Invalid user to redeem code"
+        case .noMsg:
+            return "";
         }
     }
 }
@@ -181,7 +184,11 @@ class APIManager {
             } else if let value = data[keyPath: "\(Constants.Response.response).\(Constants.Response.data)"] as? String {
                 completion([["value": value]], nil)
             } else if let status = data[keyPath: "\(Constants.Response.response).\(Constants.Response.responseCode)"] as? String, let apiStatus = APIStatus(rawValue: status) {
-                completion(nil, apiStatus)
+                if apiStatus == .notFound {
+                    completion(nil, .noMsg)
+                } else {
+                    completion(nil, apiStatus)
+                }
             } else if let status = data[keyPath: "\(Constants.Response.response).\(Constants.Response.code)"] as? String, let apiStatus = APIStatus(rawValue: status) {
                 completion(nil, apiStatus)
             } else {

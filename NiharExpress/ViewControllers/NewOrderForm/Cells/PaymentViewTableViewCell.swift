@@ -12,8 +12,12 @@ protocol ContentFittingTableViewDelegate: UITableViewDelegate {
     func tableViewDidUpdateContentSize(_ tableView: UITableView)
 }
 
-class ContentFittingTableView: UITableView {
+protocol PaymentSelectedAddressProtocol {
+    func paymentAddress(selectedIndex: Int)
+}
 
+class ContentFittingTableView: UITableView {
+    
     override var contentSize: CGSize {
         didSet {
             if !constraints.isEmpty {
@@ -21,7 +25,7 @@ class ContentFittingTableView: UITableView {
             } else {
                 sizeToFit()
             }
-
+            
             if contentSize != oldValue {
                 if let delegate = delegate as? ContentFittingTableViewDelegate {
                     delegate.tableViewDidUpdateContentSize(self)
@@ -29,11 +33,11 @@ class ContentFittingTableView: UITableView {
             }
         }
     }
-
+    
     override var intrinsicContentSize: CGSize {
         return contentSize
     }
-
+    
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         return contentSize
     }
@@ -50,7 +54,9 @@ class PaymentViewTableViewCell: UITableViewCell {
     
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     
+    var selectedIndex: Int = 0
     var delegate: ReloadCellProtocol?
+    var paymentAddressDelegate: PaymentSelectedAddressProtocol?
     var formFieldModel: FormFieldModel!
     
     override func awakeFromNib() {
@@ -97,7 +103,7 @@ class PaymentViewTableViewCell: UITableViewCell {
                     if let nameField = (formModel.formSubFields.filter { $0.type == .name }).first {
                         userName = (nameField.value as? String) ?? ""
                         if userName != "" {
-                             userName += " - "
+                            userName += " - "
                         }
                     }
                     
@@ -108,18 +114,23 @@ class PaymentViewTableViewCell: UITableViewCell {
                 }
             }
         }
+        
+        if selectedIndex < locations.count {
+            locations[selectedIndex].isSelected = true
+        }
+        
         self.formFieldModel.paymentLocation = locations
         self.tableView.reloadData()
         
-            self.tableView.layoutIfNeeded()
-            var heightOfTableView: CGFloat = 0.0
-            // Get visible cells and sum up their heights
-            let cells = self.tableView.visibleCells
-            for cell in cells {
-                heightOfTableView += cell.frame.height
-            }
-            // Edit heightOfTableViewConstraint's constant to update height of table view
-            self.tableViewHeightConstraint.constant = heightOfTableView
+        self.tableView.layoutIfNeeded()
+        var heightOfTableView: CGFloat = 0.0
+        // Get visible cells and sum up their heights
+        let cells = self.tableView.visibleCells
+        for cell in cells {
+            heightOfTableView += cell.frame.height
+        }
+        // Edit heightOfTableViewConstraint's constant to update height of table view
+        self.tableViewHeightConstraint.constant = heightOfTableView
         
     }
 }
@@ -144,6 +155,8 @@ extension PaymentViewTableViewCell: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.formFieldModel.paymentLocation.forEach { $0.isSelected = false }
         self.formFieldModel.paymentLocation[indexPath.row].isSelected = true
+        
+        self.paymentAddressDelegate?.paymentAddress(selectedIndex: indexPath.row)
         
         self.tableView.reloadData()
     }
