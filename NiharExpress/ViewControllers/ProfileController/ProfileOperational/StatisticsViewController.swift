@@ -20,8 +20,11 @@ class StatisticsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.showAndUpdateNavigationBar(with: "Statistics", withShadow: true, isHavingBackButton: true, actionController: self, backAction: #selector(self.backBtnAction(_:)))
+        
         self.getStatics { (data, apiStatus) in
             DispatchQueue.main.async {
+                self.alertLoader?.dismiss(animated: false, completion: nil)
                 if let data = data {
                 let totalOrders = (data["total_order"] as? String) ?? "0";
                 let totalPrice = (data["total_price"] as? String) ?? "0";
@@ -38,10 +41,14 @@ class StatisticsViewController: UIViewController {
             }
         }
     }
+    
+    @objc func backBtnAction(_ sender: UIBarButtonItem) {
+        self.navigationController?.popViewController(animated: true)
+    }
 
     func getStatics(completion: @escaping ([String: Any]?, APIStatus?) -> Void) {
         let params: Parameters = [
-            Constants.API.method: Constants.MethodType.getReferralCode.rawValue,
+            Constants.API.method: Constants.MethodType.getStatistics.rawValue,
             Constants.API.key: "65ddfb2d2002170fab5a78e74da6701a0bc8fb22",
             Constants.API.customerId: UserConstant.shared.userModel.id
         ]
