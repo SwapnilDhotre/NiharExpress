@@ -12,7 +12,7 @@ class Util {
     
     static func setIntialController(window: UIWindow) {
         
-        window.rootViewController = WalkThroughViewController()//UINavigationController(rootViewController: SplashScreenViewController())
+        window.rootViewController = UINavigationController(rootViewController: SplashScreenViewController())
         window.makeKeyAndVisible()
     }
     

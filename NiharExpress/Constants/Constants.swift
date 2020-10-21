@@ -42,6 +42,7 @@ class Constants {
         static let pickUpStoreContactNo = "pickup_store_contact_no"
         static let pickUpOrderType = "pickup_order_type"
         static let pickUptransactionType = "pickup_transaction_type"
+        static let pickUptransactionAmount = "pickup_transaction_amount"
         
         
         static let deliveryAddress = "delivery_address"
@@ -54,6 +55,7 @@ class Constants {
         static let deliveryStoreContactNo = "delivery_store_contact_no"
         static let deliveryOrderType = "delivery_order_type"
         static let deliveryTransactionType = "delivery_transaction_type"
+        static let deliveryTransactionAmount = "delivery_transaction_amount"
         
         static let orderType = "order_type"
         static let price = "price"
@@ -115,6 +117,8 @@ class Constants {
         
         case getTrackingLocation = "getTrackingLocation"
         case getLatLng = "getLatLng"
+        
+        case getStatistics = "getStatistics"
     }
     
     struct headers {

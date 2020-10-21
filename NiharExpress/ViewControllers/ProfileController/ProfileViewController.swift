@@ -43,15 +43,15 @@ class ProfileViewController: UIViewController {
         super.viewWillAppear(animated)
         
         if UserConstant.shared.userModel == nil {
-             self.showAndUpdateNavigationBar(with: "SAME DAY DELIVERY PARTNER", withShadow: true, isHavingBackButton: false, actionController: self, backAction: nil)
-             self.resetAnimatedView()
-             self.loginRegisterView.isHidden = false
-         } else {
-             self.configureTableUI()
-             self.loginRegisterView.isHidden = true
-             self.hideNavigationBar()
-             self.tableView.reloadData()
-         }
+            self.showAndUpdateNavigationBar(with: "SAME DAY DELIVERY PARTNER", withShadow: true, isHavingBackButton: false, actionController: self, backAction: nil)
+            self.resetAnimatedView()
+            self.loginRegisterView.isHidden = false
+        } else {
+            self.configureTableUI()
+            self.loginRegisterView.isHidden = true
+            self.hideNavigationBar()
+            self.tableView.reloadData()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -162,6 +162,10 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         case .refEarn:
             let referEarnController = ReferNEarnViewController()
             self.navigationController?.pushViewController(referEarnController, animated: true)
+            break
+        case .statistic:
+            let statisticController = StatisticsViewController()
+            self.navigationController?.pushViewController(statisticController, animated: true)
             break
         case .location:
             let locationController = ChangeLocationViewController()

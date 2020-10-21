@@ -45,6 +45,13 @@ class OrdersViewController: UIViewController {
         
         self.configureUI()
         
+        if !UserDefaults.standard.bool(forKey: "hasViewedWalkthrough") {
+            let walkthroughViewController = WalkThroughViewController()
+            walkthroughViewController.modalPresentationStyle = .fullScreen
+            self.present(walkthroughViewController, animated: true, completion: nil)
+        }
+
+        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.returnedFromForm(notification:)),
@@ -55,11 +62,6 @@ class OrdersViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if !UserDefaults.standard.bool(forKey: "hasViewedWalkthrough") {
-            let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-            let walkthroughViewController = WalkThroughViewController()
-            self.present(walkthroughViewController, animated: true, completion: nil)
-        }
         if self.cloneOrderWithFields.isEmpty {
             
             if UserConstant.shared.userModel == nil {

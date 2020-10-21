@@ -92,7 +92,9 @@ class APIManager {
         
         switch method {
         case .get:
-            if let param = parameters {
+            if var param = parameters {
+                param["device"] = "A"
+                
                 var urlComponents = URLComponents(string: urlString)!
                 var urlItems: [URLQueryItem] = []
                 for (key, value) in param {

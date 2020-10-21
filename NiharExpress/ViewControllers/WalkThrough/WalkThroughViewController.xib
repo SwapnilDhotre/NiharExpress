@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Bold.ttf">
+            <string>Roboto-Bold</string>
+        </array>
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WalkThroughViewController" customModule="NiharExpress" customModuleProvider="target">
             <connections>
+                <outlet property="leadingBtn" destination="2WG-WM-y6W" id="hY3-20-8BW"/>
+                <outlet property="letsStartBtn" destination="aIv-KB-zFS" id="YHy-gc-s64"/>
                 <outlet property="pageControl" destination="utS-j5-Gv6" id="rPA-fH-LOa"/>
                 <outlet property="scrollView" destination="pQf-d3-dKe" id="Nnt-X2-Za8"/>
+                <outlet property="trailingBtn" destination="BSy-Rw-zvj" id="1YU-Fr-b1Y"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,22 +32,67 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQf-d3-dKe">
-                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <rect key="frame" x="0.0" y="39" width="414" height="818"/>
                 </scrollView>
                 <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="utS-j5-Gv6">
                     <rect key="frame" x="187.5" y="805" width="39" height="37"/>
                     <color key="pageIndicatorTintColor" red="0.50196078430000002" green="0.1176470588" blue="0.45882352939999999" alpha="0.4172260123" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <color key="currentPageIndicatorTintColor" red="0.50196078430000002" green="0.1176470588" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                 </pageControl>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2WG-WM-y6W">
+                    <rect key="frame" x="12" y="809" width="42" height="29"/>
+                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" red="0.50196078430000002" green="0.1176470588" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="leadingBtnAction:" destination="-1" eventType="touchUpInside" id="j0V-9X-TzU"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BSy-Rw-zvj">
+                    <rect key="frame" x="360" y="809" width="42" height="29"/>
+                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" red="0.50196078430000002" green="0.1176470588" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="trailingBtnAction:" destination="-1" eventType="touchUpInside" id="HyM-ug-YlB"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aIv-KB-zFS" customClass="DesignableButton" customModule="NiharExpress" customModuleProvider="target">
+                    <rect key="frame" x="12" y="801" width="390" height="45"/>
+                    <color key="backgroundColor" red="0.90588235294117647" green="0.12156862745098039" blue="0.36078431372549019" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="jCb-WX-h77"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="15"/>
+                    <state key="normal" title="LET'S START"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="maskToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="letStartAction:" destination="-1" eventType="touchUpInside" id="dQP-iz-cRZ"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstItem="pQf-d3-dKe" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="2ze-CX-BrC"/>
+                <constraint firstItem="BSy-Rw-zvj" firstAttribute="centerY" secondItem="utS-j5-Gv6" secondAttribute="centerY" id="6ql-de-2bc"/>
+                <constraint firstItem="aIv-KB-zFS" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="KzX-nq-awh"/>
+                <constraint firstItem="2WG-WM-y6W" firstAttribute="centerY" secondItem="utS-j5-Gv6" secondAttribute="centerY" id="QrL-xQ-PEf"/>
+                <constraint firstItem="2WG-WM-y6W" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="SKD-qD-ynI"/>
                 <constraint firstItem="pQf-d3-dKe" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="e49-l8-xHf"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="aIv-KB-zFS" secondAttribute="trailing" constant="12" id="fT3-pX-8Pe"/>
+                <constraint firstItem="aIv-KB-zFS" firstAttribute="centerY" secondItem="utS-j5-Gv6" secondAttribute="centerY" id="lND-Qg-Sdm"/>
                 <constraint firstItem="utS-j5-Gv6" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="nKF-KW-B3F"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="BSy-Rw-zvj" secondAttribute="trailing" constant="12" id="sJE-hT-JFp"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="utS-j5-Gv6" secondAttribute="bottom" constant="20" id="uXA-yl-g4V"/>
                 <constraint firstItem="pQf-d3-dKe" firstAttribute="height" secondItem="fnl-2z-Ty3" secondAttribute="height" id="xvL-KG-5I6"/>
-                <constraint firstItem="pQf-d3-dKe" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="5" id="yof-zQ-lKS"/>
+                <constraint firstItem="pQf-d3-dKe" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="yof-zQ-lKS"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="131.8840579710145" y="122.54464285714285"/>

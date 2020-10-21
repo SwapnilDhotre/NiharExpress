@@ -229,6 +229,7 @@ class OrderReviewViewController: UIViewController {
             Constants.API.pickUpStoreContactNo: pickUpLocation.storeContactNo ?? "",
             Constants.API.pickUpOrderType: pickUpLocation.orderType ?? "",
             Constants.API.pickUptransactionType: pickUpLocation.transactionType ?? "",
+            Constants.API.pickUptransactionAmount: pickUpLocation.transactionAmount ?? "",
             
             Constants.API.deliveryAddress: (array.map { $0.address.address }).joined(separator: "::"),
             Constants.API.deliveryPoint: (array.map { "\($0.address.coordinate.latitude),\($0.address.coordinate.longitude)" }).joined(separator: "::"),
@@ -239,6 +240,7 @@ class OrderReviewViewController: UIViewController {
             Constants.API.deliveryStoreContactNo: (array.map { $0.storeContactNo ?? "" }),
             Constants.API.deliveryOrderType: (array.map { $0.orderType ?? "" }),
             Constants.API.deliveryTransactionType: (array.map { $0.transactionType ?? "" }),
+            Constants.API.deliveryTransactionAmount: (array.map { $0.transactionAmount ?? "" }),
             
             Constants.API.orderType: "N",
             Constants.API.price: self.priceInfo.totalCost,
