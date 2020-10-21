@@ -11,10 +11,10 @@ import Foundation
 class CouponCodeModel: Codable {
     var couponId: String
     var couponCode: String
-    var discount: String
+    var discount: Double
     var shouldApplyDiscount: Bool
     
-    init(couponId: String, couponCode: String, discount: String, shouldApplyDiscount: Bool = true) {
+    init(couponId: String, couponCode: String, discount: Double, shouldApplyDiscount: Bool = true) {
         self.couponId = couponId
         self.couponCode = couponCode
         self.discount = discount
@@ -32,7 +32,15 @@ class CouponCodeModel: Codable {
                 
         let couponId: String = (try? container.decode(String.self, forKey: .couponId)) ?? ""
         let couponCode: String = (try? container.decode(String.self, forKey: .couponCode)) ?? ""
-        let discount: String = (try? container.decode(String.self, forKey: .discount)) ?? ""
+        
+        var discount: Double = 0
+        if let discountString = try? container.decode(String.self, forKey: .discount), let discountDouble = Double(discountString) {
+            discount = discountDouble
+        } else if let discountDouble = try? container.decode(Double.self, forKey: .discount) {
+            discount = discountDouble
+        } else if let discountInt = try? container.decode(Int.self, forKey: .discount) {
+            discount = Double(discountInt)
+        }
         
         self.init(couponId: couponId, couponCode: couponCode, discount: discount)
     }

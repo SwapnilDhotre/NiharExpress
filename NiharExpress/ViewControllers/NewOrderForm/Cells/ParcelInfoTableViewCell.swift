@@ -92,8 +92,15 @@ class ParcelInfoTableViewCell: UITableViewCell {
                     self.couponCodeToggle.isHidden = false
                     self.couponCodeBottomConstraint.priority = UILayoutPriority(950)
                     self.txtPromoCode.text = coupon.couponCode
+                    
+                    self.btnApply.setTitle("Clear", for: .normal)
                 } else {
                     self.txtPromoCode.text = ""
+                    self.lblCouponCodeSuccess.isHidden = true
+                    self.couponCodeToggle.isHidden = true
+                    self.couponCodeBottomConstraint.priority = UILayoutPriority(850)
+                    
+                    self.btnApply.setTitle("Apply", for: .normal)
                 }
                 
                 self.contentView.setNeedsUpdateConstraints()
@@ -109,7 +116,11 @@ class ParcelInfoTableViewCell: UITableViewCell {
             switch formField.type {
             case .promoCode:
                 if let couponCodeModel = formField.value as? CouponCodeModel {
-                    self.promoCodeDelegate?.applyPromo(model: couponCodeModel, code: self.txtPromoCode.text!)
+                    if couponCodeModel.couponId != "" {
+                        self.promoCodeDelegate?.applyPromo(model: couponCodeModel, code: "")
+                    } else {
+                        self.promoCodeDelegate?.applyPromo(model: couponCodeModel, code: self.txtPromoCode.text!)
+                    }
                 }
             default:
                 print("Wrong field")

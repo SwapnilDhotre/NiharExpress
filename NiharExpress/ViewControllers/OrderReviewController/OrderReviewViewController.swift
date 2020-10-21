@@ -96,7 +96,13 @@ class OrderReviewViewController: UIViewController {
         self.lblWhatItem.text = "What's in it : \(category.title)"
         self.lblItemSize.text = "Upto \(weight ?? "")kg, book a courier"
         self.lblItemValue.text = "Stated Value: ₹\(self.priceInfo.totalCost)"
-        self.lblTotalAmount.text = "₹\(self.priceInfo.totalCost)"
+        
+        if let coupon = self.coupon, coupon.shouldApplyDiscount {
+            let price = (Double(priceInfo.totalCost) ?? 0) - coupon.discount
+            self.lblTotalAmount.text = "₹\(price)"
+        } else {
+            self.lblTotalAmount.text = "₹\(self.priceInfo.totalCost)"
+        }
         
         self.cashOnDeliveryRadio.font = UIFont.fontAwesome(ofSize: 18, style: .regular)
         self.payOnlineRadio.font = UIFont.fontAwesome(ofSize: 18, style: .regular)
@@ -249,7 +255,7 @@ class OrderReviewViewController: UIViewController {
             params[Constants.API.couponId] = coupon!.couponId
             params[Constants.API.discount] = coupon!.discount
             
-            let price = (Double(priceInfo.totalCost) ?? 0) - (Double(coupon!.discount) ?? 0)
+            let price = (Double(priceInfo.totalCost) ?? 0) - coupon!.discount
             params[Constants.API.price] = "\(price)"
         }
         

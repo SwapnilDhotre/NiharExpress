@@ -232,6 +232,12 @@ class NewOrderFormTableViewController: UITableViewController {
                 weight = (formField.value as? String)
                 
                 if let weight = weight, weight.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
+                    
+                    guard let doubleWeight = Double(weight), doubleWeight > 0 else {
+                        self.showAlert(withMsg: "Weight should be in digits and greater then 0")
+                        return
+                    }
+                    
                     reviewController.weight = weight.trimmingCharacters(in: .whitespacesAndNewlines)
                 } else {
                     self.showAlert(withMsg: "Please add weight")
@@ -280,7 +286,7 @@ class NewOrderFormTableViewController: UITableViewController {
                 break
             }
         }
-                        
+        
         if locations.count < 2 {
             self.showAlert(withMsg: "Please select pick and delivery")
             return
@@ -1038,6 +1044,11 @@ extension NewOrderFormTableViewController: ApplyPromoProtocol {
         if weight != nil && category != nil && pickUpCoordinate != nil && deliveryCoordinates != nil {
             if weight != "" && category.id != "" && !deliveryCoordinates.isEmpty {
                 
+                guard let doubleWeight = Double(weight), doubleWeight > 0 else {
+                    self.showAlert(withMsg: "Weight should be in digits and greater then 0")
+                    return
+                }
+                
                 self.fetchPrice(weight: weight, categoryId: category.id, pickUpCoordinate: pickUpCoordinate, deliveryCoordinates: deliveryCoordinates) { (priceInfo, apiStatus) in
                     DispatchQueue.main.async {
                         if let priceInfo = priceInfo {
@@ -1074,7 +1085,7 @@ extension NewOrderFormTableViewController: ApplyPromoProtocol {
         }
         
         if let coupon = couponCode, coupon.shouldApplyDiscount {
-            let price = (Double(priceInfo.totalCost) ?? 0) - (Double(coupon.discount) ?? 0)
+            let price = (Double(priceInfo.totalCost) ?? 0) - coupon.discount
             self.bottomPanelView.lblTotalAmount.text = "₹\(price)"
         } else {
             self.bottomPanelView.lblTotalAmount.text = "₹\(priceInfo.totalCost)"
@@ -1087,26 +1098,39 @@ extension NewOrderFormTableViewController: ApplyPromoProtocol {
         print("promoCode:>>\(code)")
         self.view.endEditing(true)
         
-        if let priceInfo = self.priceInfo {
-            self.alertLoader = self.showAlertLoader()
-            self.applyPromoCode(code: code, amount: self.priceInfo?.totalCost ?? "") { (couponCode, apiStatus) in
-                
-                DispatchQueue.main.async {
-                    self.alertLoader?.dismiss(animated: true, completion: nil)
-                    print("Coupon code:>> \(couponCode?.couponCode)")
-                    if couponCode != nil {
-                        model.couponCode = couponCode?.couponCode ?? ""
-                        model.couponId = couponCode?.couponId ?? ""
-                        model.discount = couponCode?.discount ?? ""
-                        self.updatePriceUI(with: priceInfo)
-                        self.tableView.reloadData()
-                    } else {
-                        self.showAlert(withMsg: apiStatus?.message ?? "Something went wrong.")
+        if code == "" {
+            model.couponCode = ""
+            model.couponId = ""
+            model.discount = 0
+            self.tableView.reloadData()
+            
+            if let priceInfo = self.priceInfo {
+                self.updatePriceUI(with: priceInfo)
+            }
+            
+        } else {
+            
+            if let priceInfo = self.priceInfo {
+                self.alertLoader = self.showAlertLoader()
+                self.applyPromoCode(code: code, amount: self.priceInfo?.totalCost ?? "") { (couponCode, apiStatus) in
+                    
+                    DispatchQueue.main.async {
+                        self.alertLoader?.dismiss(animated: true, completion: nil)
+                        print("Coupon code:>> \(String(describing: couponCode?.couponCode))")
+                        if couponCode != nil {
+                            model.couponCode = couponCode?.couponCode ?? ""
+                            model.couponId = couponCode?.couponId ?? ""
+                            model.discount = couponCode?.discount ?? 0
+                            self.updatePriceUI(with: priceInfo)
+                            self.tableView.reloadData()
+                        } else {
+                            self.showAlert(withMsg: apiStatus?.message ?? "Something went wrong.")
+                        }
                     }
                 }
+            } else {
+                self.showAlert(withMsg: "Price not calculated")
             }
-        } else {
-            self.showAlert(withMsg: "Price not calculated")
         }
     }
 }
@@ -1115,7 +1139,7 @@ extension NewOrderFormTableViewController: ApplyPromoProtocol {
 extension NewOrderFormTableViewController {
     func applyPromoCode(code: String, amount: String, completion: @escaping (CouponCodeModel?, APIStatus?) -> Void) {
         if UserConstant.shared.userModel == nil {
-           return
+            return
         }
         
         let params: Parameters = [

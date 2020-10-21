@@ -55,6 +55,11 @@ class OrdersViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        if !UserDefaults.standard.bool(forKey: "hasViewedWalkthrough") {
+            let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+            let walkthroughViewController = WalkThroughViewController()
+            self.present(walkthroughViewController, animated: true, completion: nil)
+        }
         if self.cloneOrderWithFields.isEmpty {
             
             if UserConstant.shared.userModel == nil {

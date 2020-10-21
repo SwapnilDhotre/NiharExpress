@@ -139,6 +139,10 @@
 		E656287624F231230030B5E0 /* TrackOrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E656287424F231230030B5E0 /* TrackOrderTableViewCell.xib */; };
 		E656287C24F23F250030B5E0 /* DriverInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E656287B24F23F250030B5E0 /* DriverInfo.swift */; };
 		E656287E24F2885F0030B5E0 /* GoogleMapSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E656287D24F2885F0030B5E0 /* GoogleMapSessionManager.swift */; };
+		E658C21F253F5629002ABBF5 /* WalkThroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E658C21D253F5629002ABBF5 /* WalkThroughViewController.swift */; };
+		E658C220253F5629002ABBF5 /* WalkThroughViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E658C21E253F5629002ABBF5 /* WalkThroughViewController.xib */; };
+		E658C222253F5866002ABBF5 /* WalkthroughPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = E658C221253F5866002ABBF5 /* WalkthroughPage.xib */; };
+		E658C224253F5878002ABBF5 /* WalkthroughPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E658C223253F5878002ABBF5 /* WalkthroughPage.swift */; };
 		E65ADDDF252A47B5000A28D0 /* ReferralCodesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65ADDDD252A47B5000A28D0 /* ReferralCodesViewController.swift */; };
 		E65ADDE0252A47B5000A28D0 /* ReferralCodesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E65ADDDE252A47B5000A28D0 /* ReferralCodesViewController.xib */; };
 		E65ADDE2252A495F000A28D0 /* CouponModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65ADDE1252A495F000A28D0 /* CouponModel.swift */; };
@@ -340,6 +344,10 @@
 		E656287424F231230030B5E0 /* TrackOrderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackOrderTableViewCell.xib; sourceTree = "<group>"; };
 		E656287B24F23F250030B5E0 /* DriverInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverInfo.swift; sourceTree = "<group>"; };
 		E656287D24F2885F0030B5E0 /* GoogleMapSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapSessionManager.swift; sourceTree = "<group>"; };
+		E658C21D253F5629002ABBF5 /* WalkThroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkThroughViewController.swift; sourceTree = "<group>"; };
+		E658C21E253F5629002ABBF5 /* WalkThroughViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalkThroughViewController.xib; sourceTree = "<group>"; };
+		E658C221253F5866002ABBF5 /* WalkthroughPage.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalkthroughPage.xib; sourceTree = "<group>"; };
+		E658C223253F5878002ABBF5 /* WalkthroughPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughPage.swift; sourceTree = "<group>"; };
 		E65ADDDD252A47B5000A28D0 /* ReferralCodesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralCodesViewController.swift; sourceTree = "<group>"; };
 		E65ADDDE252A47B5000A28D0 /* ReferralCodesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReferralCodesViewController.xib; sourceTree = "<group>"; };
 		E65ADDE1252A495F000A28D0 /* CouponModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponModel.swift; sourceTree = "<group>"; };
@@ -560,6 +568,7 @@
 		0F7F1C6024AE3F080011A754 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				E649889B253E11A700A9B4CE /* WalkThrough */,
 				0FBD97C22520A925000BA30A /* PickUpAddressController */,
 				0F21D81725206A7E0058F390 /* TempLoginController */,
 				E609BD5524E02AA200B505EB /* WebView */,
@@ -819,6 +828,17 @@
 			path = OrderReviewController;
 			sourceTree = "<group>";
 		};
+		E649889B253E11A700A9B4CE /* WalkThrough */ = {
+			isa = PBXGroup;
+			children = (
+				E658C21D253F5629002ABBF5 /* WalkThroughViewController.swift */,
+				E658C21E253F5629002ABBF5 /* WalkThroughViewController.xib */,
+				E658C221253F5866002ABBF5 /* WalkthroughPage.xib */,
+				E658C223253F5878002ABBF5 /* WalkthroughPage.swift */,
+			);
+			path = WalkThrough;
+			sourceTree = "<group>";
+		};
 		E64E2DB024E03B340018041F /* TrackOrder */ = {
 			isa = PBXGroup;
 			children = (
@@ -1058,6 +1078,7 @@
 				E6F81A4224DDC44F00E98351 /* InformationTableViewCell.xib in Resources */,
 				E630D95F24BD9192006666A8 /* fa-regular-400.ttf in Resources */,
 				E630D95E24BD9192006666A8 /* fa-solid-900.ttf in Resources */,
+				E658C222253F5866002ABBF5 /* WalkthroughPage.xib in Resources */,
 				0F8EF9422518B9EB00128C10 /* TransactonTypeSelectionViewController.xib in Resources */,
 				E6AA98EA24BF3914006577F6 /* RadioCellTableViewCell.xib in Resources */,
 				E630D96124BD9192006666A8 /* fa-brands-400.ttf in Resources */,
@@ -1089,6 +1110,7 @@
 				0F12E5BC253C5D0D0047DAC0 /* InfoWindow.xib in Resources */,
 				E65ADDE6252A5342000A28D0 /* PromoCodeTableViewCell.xib in Resources */,
 				E609BD5224E011BF00B505EB /* EmptyFormViewController.xib in Resources */,
+				E658C220253F5629002ABBF5 /* WalkThroughViewController.xib in Resources */,
 				E630D9BD24BDDF32006666A8 /* WeightTableViewCell.xib in Resources */,
 				E6AA98EF24BF4651006577F6 /* PickAddressViewController.xib in Resources */,
 				E68474A724DEEF8100BB339B /* AddressCommonTableViewCell.xib in Resources */,
@@ -1199,6 +1221,7 @@
 				E630D93924BD8D08006666A8 /* SplashScreenViewController.swift in Sources */,
 				E630D9B024BDBAC1006666A8 /* UIDevice_Extension.swift in Sources */,
 				E6994C9724DF146800B935C1 /* RemoveAddressTableViewCell.swift in Sources */,
+				E658C21F253F5629002ABBF5 /* WalkThroughViewController.swift in Sources */,
 				E630D9A924BD9D6F006666A8 /* APIManager.swift in Sources */,
 				E630D99324BD9813006666A8 /* FontAwesome.swift in Sources */,
 				E60336D624C6ADD100D263C9 /* LoginView.swift in Sources */,
@@ -1262,6 +1285,7 @@
 				E65C384524C5FB94002DD732 /* TabModel.swift in Sources */,
 				0F7F1C4D24AE3E7D0011A754 /* SceneDelegate.swift in Sources */,
 				E684749824DEC9A800BB339B /* NotificationTableViewCell.swift in Sources */,
+				E658C224253F5878002ABBF5 /* WalkthroughPage.swift in Sources */,
 				E630D99A24BD9C99006666A8 /* UITableView_Extension.swift in Sources */,
 				0FBD97C52520A948000BA30A /* SearchAddressViewController.swift in Sources */,
 				0FBD97C82520B0FC000BA30A /* UserAddressModel.swift in Sources */,
@@ -1436,7 +1460,7 @@
 				CODE_SIGN_ENTITLEMENTS = NiharExpress/NiharExpress.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development: NIHAR Sejpal (YMTKMALA8S)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GG38H3R5L8;
 				INFOPLIST_FILE = NiharExpress/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1444,6 +1468,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nihar-express.delivery";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = NiharExpressDevelopmentProvsioningProfile;
@@ -1460,7 +1485,7 @@
 				CODE_SIGN_ENTITLEMENTS = NiharExpress/NiharExpress.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development: NIHAR Sejpal (YMTKMALA8S)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GG38H3R5L8;
 				INFOPLIST_FILE = NiharExpress/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1468,6 +1493,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nihar-express.delivery";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = NiharExpressDevelopmentProvsioningProfile;
