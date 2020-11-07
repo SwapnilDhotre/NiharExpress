@@ -48,6 +48,11 @@ class VerifyOtpViewController: UIViewController {
     func configureUI() {
         self.activityIndicator.isHidden = true
         self.txtOTPField.text = self.otp
+        self.txtOTPField.delegate = self
+        
+        if #available(iOS 12, *) {
+            self.txtOTPField.textContentType = .oneTimeCode
+        }
         
         self.btnResendOTP.isHidden = true
         
@@ -128,6 +133,9 @@ extension VerifyOtpViewController {
                     self.timer = nil
                     self.lblRequestTime.text = apiStatus?.message ?? "Something went wrong."
                     self.lblRequestTime.textColor = UIColor.red
+                    
+                    self.btnResendOTP.isHidden = true
+                    self.lblRequestTime.isHidden = false
                 }
             }
         }
@@ -162,6 +170,9 @@ extension VerifyOtpViewController {
                     self.timer = nil
                     self.lblRequestTime.text = apiStatus?.message ?? "Something went wrong."
                     self.lblRequestTime.textColor = UIColor.red
+                    
+                    self.btnResendOTP.isHidden = true
+                    self.lblRequestTime.isHidden = false
                     
                     if let status = apiStatus, status == .alreadyExist {
                         self.dismiss(animated: false, completion: {

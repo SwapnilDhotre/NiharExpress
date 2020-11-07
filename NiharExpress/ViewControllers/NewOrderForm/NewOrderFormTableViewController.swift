@@ -58,6 +58,8 @@ class NewOrderFormTableViewController: UITableViewController {
     func configureUI() {
         if self.formFields.isEmpty {
             self.formFields = FormFieldModel.getFormFields()
+        } else {
+            self.calculatePrice()
         }
         
         self.tableView.dataSource = self
