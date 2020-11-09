@@ -198,6 +198,8 @@ class NewOrderFormTableViewController: UITableViewController {
         let okAction = UIAlertAction(title: "OK", style: .destructive, handler: { (action) in
             alertController.dismiss(animated: true, completion: nil)
             self.formFields = FormFieldModel.getFormFields()
+            self.priceInfo = nil
+            self.updatePriceUI(with: nil)
             self.tableView.reloadData()
         })
         
@@ -1064,7 +1066,7 @@ extension NewOrderFormTableViewController: ApplyPromoProtocol {
         }
     }
     
-    func updatePriceUI(with priceInfo: PriceInfo) {
+    func updatePriceUI(with priceInfo: PriceInfo?) {
         self.priceInfo = priceInfo
         
         var couponCode: CouponCodeModel?
@@ -1087,13 +1089,13 @@ extension NewOrderFormTableViewController: ApplyPromoProtocol {
         }
         
         if let coupon = couponCode, coupon.shouldApplyDiscount {
-            let price = (Double(priceInfo.totalCost) ?? 0) - coupon.discount
+            let price = (Double(priceInfo?.totalCost ?? "0") ?? 0) - coupon.discount
             self.bottomPanelView.lblTotalAmount.text = "₹\(price)"
         } else {
-            self.bottomPanelView.lblTotalAmount.text = "₹\(priceInfo.totalCost)"
+            self.bottomPanelView.lblTotalAmount.text = "₹\(priceInfo?.totalCost ?? "")"
         }
-        self.bottomPanelView.lblParcelSecurityFeeValue.text = "₹\(priceInfo.insuranceCost)"
-        self.bottomPanelView.lblForDeliveryValue.text = "₹\(priceInfo.insuranceCost)"
+        self.bottomPanelView.lblParcelSecurityFeeValue.text = "₹\(priceInfo?.insuranceCost ?? "")"
+        self.bottomPanelView.lblForDeliveryValue.text = "₹\(priceInfo?.insuranceCost ?? "")"
     }
     
     func applyPromo(model: CouponCodeModel, code: String) {

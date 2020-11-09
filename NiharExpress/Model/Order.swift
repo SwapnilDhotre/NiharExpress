@@ -18,6 +18,7 @@ class Order: Codable {
     var customerName: String
     var paymentMethod: String
     var weight: String
+    var categoryId: String
     var parcelType: String
     var orderType: String
     var pickUp: OrderAddress
@@ -38,7 +39,7 @@ class Order: Codable {
     var unreadNotification: String?
     var readNotification: String?
     
-    init(orderId: String, orderNo: String, orderStatus: String, orderDate: Date, customerId: String, customerName: String, paymentMethod: String, weight: String, parcelType: String, orderType: String, pickUp: OrderAddress, delivery: [OrderAddress], parcelValue: String, insurancePrice: String, price: String, driverName: String, driveMobileNo: String, driverImage: String, driverRating: String, comment: String?, overallRating: String?, unreadNotification: String, readNotification: String) {
+    init(orderId: String, orderNo: String, orderStatus: String, orderDate: Date, customerId: String, customerName: String, paymentMethod: String, weight: String, parcelType: String, orderType: String, pickUp: OrderAddress, delivery: [OrderAddress], parcelValue: String, insurancePrice: String, price: String, driverName: String, driveMobileNo: String, driverImage: String, driverRating: String, comment: String?, overallRating: String?, unreadNotification: String, readNotification: String, categoryId: String) {
         
         self.orderId = orderId
         self.orderNo = orderNo
@@ -63,6 +64,7 @@ class Order: Codable {
         self.overallRating = overallRating
         self.unreadNotification = unreadNotification
         self.readNotification = readNotification
+        self.categoryId = categoryId
     }
     
     enum CodingKeys: String, CodingKey {
@@ -94,6 +96,8 @@ class Order: Codable {
         
         case unreadNotification = "unread_notification"
         case readNotification = "read_notification"
+        
+        case categoryId = "category_id"
     }
     
     required convenience init(from decoder: Decoder) throws {
@@ -117,6 +121,7 @@ class Order: Codable {
         let parcelValue: String = try container.decode(String.self, forKey: .parcelValue)
         let insurancePrice: String = try container.decode(String.self, forKey: .insurancePrice)
         let price: String = try container.decode(String.self, forKey: .price)
+        let categoryId: String = try container.decode(String.self, forKey: .categoryId)
         
         let driverName: String = try container.decode(String.self, forKey: .driverName)
         let driveMobileNo: String = try container.decode(String.self, forKey: .driveMobileNo)
@@ -151,7 +156,8 @@ class Order: Codable {
                   comment: comment,
                   overallRating: overallRating,
                   unreadNotification: unreadNotification,
-                  readNotification: readNotification)
+                  readNotification: readNotification,
+                  categoryId: categoryId)
         
     }
     
@@ -177,6 +183,7 @@ class Order: Codable {
         try container.encode(self.driveMobileNo, forKey: .driveMobileNo)
         try container.encode(self.driverImage, forKey: .driverImage)
         try container.encode(self.driverRating, forKey: .driverRating)
+        try container.encode(self.categoryId, forKey: .categoryId)
         try? container.encode(self.comment, forKey: .comment)
         try? container.encode(self.overallRating, forKey: .overallRating)
         try container.encode(self.unreadNotification, forKey: .unreadNotification)

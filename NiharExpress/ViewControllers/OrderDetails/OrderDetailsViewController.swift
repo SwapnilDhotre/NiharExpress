@@ -280,7 +280,7 @@ extension OrderDetailsViewController: UITableViewDataSource, UITableViewDelegate
             case .header, .address, .name, .phoneNo, .whenToPickup, .comment, .storeInfoHeader, .contactPerson, .contactNo, .transaction,  .removeAddress:
                 break
             case .parcelType:
-                subFormField.value = Category(id: "", title: self.order.parcelType, isSelected: false)
+                subFormField.value = Category(id: self.order.categoryId, title: self.order.parcelType, isSelected: false)
                 break
             case .parcelValue:
                 subFormField.value = order.parcelValue

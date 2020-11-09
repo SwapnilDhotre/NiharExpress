@@ -117,11 +117,12 @@ extension VerifyOtpViewController {
                     UserConstant.shared.userModel = user
                     
                     if let fcmToken = UserDefaultManager.shared.valueFor(key: .fcmToken, type: .string) as? String {
+                        print("FCMToken going to register: \(fcmToken)")
                         self.updateDeviceToken(fcmToken: fcmToken) {
                             print("Device token registered")
                             DispatchQueue.main.async {
-                                let appDelegate = UIApplication.shared.delegate as? AppDelegate
-                                appDelegate?.configureFirebasePushNotification()
+//                                let appDelegate = UIApplication.shared.delegate as? AppDelegate
+//                                appDelegate?.configureFirebasePushNotification()
                             }
                         }
                     }
@@ -156,8 +157,8 @@ extension VerifyOtpViewController {
                         self.updateDeviceToken(fcmToken: fcmToken) {
                             print("Device token registered")
                             DispatchQueue.main.async {
-                                let appDelegate = UIApplication.shared.delegate as? AppDelegate
-                                appDelegate?.configureFirebasePushNotification()
+//                                let appDelegate = UIApplication.shared.delegate as? AppDelegate
+//                                appDelegate?.configureFirebasePushNotification()
                             }
                         }
                     }
@@ -236,8 +237,11 @@ extension VerifyOtpViewController {
                 "device_token": fcmToken
             ]
             
+            params.printPrettyJSON()
+            
             APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
                 APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
+                    print("After registered response: \(responseData), Api Status:\(apiStatus)")
                     completion()
                 }
             }

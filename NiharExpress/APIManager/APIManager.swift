@@ -17,6 +17,7 @@ enum HttpMethod: String {
 
 enum APIStatus: String {
     case success = "200"
+    case expiredOrInvalid = "302"
     case alreadyExist = "304"
     case badRequest = "400"
     case unauthorizedAccess = "401"
@@ -31,6 +32,8 @@ enum APIStatus: String {
         switch self {
         case .success:
             return "Api Success" // 200
+        case .expiredOrInvalid:
+            return "Coupon code expired or invalid" // 302
         case .alreadyExist:
             return "User already exist" // 304
         case .badRequest:

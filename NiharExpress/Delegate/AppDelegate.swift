@@ -40,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey(Constants.googleApiKey)
         
         FirebaseApp.configure()
+        Messaging.messaging().delegate = self
         self.configureFirebasePushNotification()
         
         return true
@@ -62,9 +63,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         UIApplication.shared.registerForRemoteNotifications()
-        
-        Messaging.messaging().delegate = self
-        
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -109,9 +107,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        Messaging.messaging().apnsToken = deviceToken
-        let d = deviceToken.hexString
-        print("DeviceToken \(d)")
+        print("This function has no use here")
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Ohh !! failed to register push notification: \(error)")
     }
 }
 
@@ -181,12 +181,7 @@ extension AppDelegate: MessagingDelegate {
             
             APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
                 APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
-                    if let response = responseData, let jsonData = try? JSONSerialization.data(withJSONObject: response) {
-                        let orders: [Order] = try! JSONDecoder().decode([Order].self, from: jsonData)
-//                        completion(orders, nil)
-                    } else {
-//                        completion(nil, apiStatus)
-                    }
+                    print("Token registered: \(String(describing: responseData)), \(String(describing: apiStatus))")
                 }
             }
         }
