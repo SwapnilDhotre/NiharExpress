@@ -1468,7 +1468,7 @@
 				CODE_SIGN_ENTITLEMENTS = NiharExpress/NiharExpress.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development: NIHAR Sejpal (YMTKMALA8S)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = GG38H3R5L8;
 				INFOPLIST_FILE = NiharExpress/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1493,7 +1493,7 @@
 				CODE_SIGN_ENTITLEMENTS = NiharExpress/NiharExpress.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development: NIHAR Sejpal (YMTKMALA8S)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = GG38H3R5L8;
 				INFOPLIST_FILE = NiharExpress/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
