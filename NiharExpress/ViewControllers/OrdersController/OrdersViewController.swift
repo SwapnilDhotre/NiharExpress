@@ -39,6 +39,9 @@ class OrdersViewController: UIViewController {
     
     var notificationBarButton: UIButton!
     
+    var cursor = 0
+    var pages = 0
+    
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -164,16 +167,26 @@ class OrdersViewController: UIViewController {
     
     //MARK: - Api Methods
     func fetchOrders(with tag: String, completion: @escaping ([Order]?, APIStatus?) -> Void) {
-        let params: Parameters = [
+        var params: Parameters = [
             Constants.API.method: Constants.MethodType.listOrder.rawValue,
             Constants.API.key: "1c2bc3708d69c02412c9bdbae96967a1d77bbc24",
             Constants.API.customerId: UserConstant.shared.userModel.id,
             Constants.API.orderStatus: tag
         ]
         
+        if tag == "I" || tag == "C" {
+            params["limit"] = "8"
+            params["cursor"] = "\(self.cursor)"
+        }
+        
         APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in
             APIManager.shared.parseResponse(responseData: responseData) { (responseData, apiStatus) in
                 if let response = responseData, let jsonData = try? JSONSerialization.data(withJSONObject: response) {
+                    if let firstOrder = response.first {
+                        if let noOfPages = firstOrder["pages"] as? Int {
+                            self.pages = noOfPages
+                        }
+                    }
                     let orders: [Order] = try! JSONDecoder().decode([Order].self, from: jsonData)
                     completion(orders, nil)
                 } else {
@@ -203,9 +216,11 @@ extension OrdersViewController: TabbedViewDataSource {
             if self.isReturnedFromForm {
                 self.isReturnedFromForm = false;
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.cursor = 0
                     self.fetchData(for: index, isFromPullDownRefresh: false, completion: nil)
                 }
             } else {
+                self.cursor = 0
                 self.fetchData(for: index, isFromPullDownRefresh: false, completion: nil)
             }
             
@@ -225,15 +240,25 @@ extension OrdersViewController: TabbedViewDataSource {
             orderStatus = "I"
         }
         
-        if !isFromPullDownRefresh {
+        if !isFromPullDownRefresh && index == 0 {
             self.alertLoader = self.showAlertLoader()
+        } else {
+            if (index == 1 || index == 2) && cursor == 0 {
+                self.alertLoader = self.showAlertLoader()
+            }
         }
+        
         self.fetchOrders(with: orderStatus) { (orders, apiStatus) in
             DispatchQueue.main.async {
                 self.alertLoader?.dismiss(animated: false, completion: nil)
                 completion?()
                 if let ordersData = orders {
-                    self.orderData = ordersData.reversed()
+                    if index == 0 {
+                        self.orderData = ordersData.reversed()
+                    } else {
+                        self.cursor += 1
+                        self.orderData.append(contentsOf: ordersData.reversed())
+                    }
                     self.tableView?.backgroundView = nil
                 } else {
                     self.showAlert(withMsg: apiStatus?.message ?? "Something went wrong")
@@ -248,6 +273,7 @@ extension OrdersViewController: TabbedViewDataSource {
         self.tableView = UITableView()
         
         self.tableView?.dataSource = self
+        self.tableView?.prefetchDataSource = self
         self.tableView?.delegate = self
         self.tableView?.separatorStyle = .none
         self.tableView?.separatorColor = UIColor.clear
@@ -259,11 +285,15 @@ extension OrdersViewController: TabbedViewDataSource {
         
         self.tableView?.register(UINib(nibName: InProgressOrdersTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: InProgressOrdersTableViewCell.identifier)
         self.tableView?.register(UINib(nibName: CompletedOrderTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: CompletedOrderTableViewCell.identifier)
+        self.tableView?.register(UINib(nibName: LoadingCellTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: LoadingCellTableViewCell.identifier)
+
         self.tableView?.reloadData()
         
         self.tableView?.es.addPullToRefresh {
             [unowned self] in
             
+            self.orderData = []
+            self.cursor = 0
             self.fetchData(for: self.selectedTabIndex, isFromPullDownRefresh: true, completion: { [unowned self] in
                 self.tableView?.es.stopPullToRefresh()
             })
@@ -277,12 +307,32 @@ extension OrdersViewController: TabbedViewDataSource {
     }
 }
 
-extension OrdersViewController: UITableViewDataSource, UITableViewDelegate {
+extension OrdersViewController: UITableViewDataSource, UITableViewDelegate, UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.orderData.count
+        if self.selectedTabIndex == 0 {
+            return self.orderData.count
+        } else {
+            if self.cursor + 1 < self.pages {
+                return self.orderData.count > 0 ? self.orderData.count + 1 : 0
+            } else {
+                return self.orderData.count
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if self.selectedTabIndex != 0 {
+            if isLoadingCell(for: indexPath) {
+                self.fetchData(for: self.selectedTabIndex, isFromPullDownRefresh: false, completion: nil)
+            }
+            
+            guard self.orderData.count + 1 > indexPath.row  else {
+                print("Array index outof bounds")
+                return UITableViewCell()
+            }
+        }
+        print("Indexpath:>>\(indexPath)")
+        
         switch self.selectedTabIndex {
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: InProgressOrdersTableViewCell.identifier) as? InProgressOrdersTableViewCell else {
@@ -300,35 +350,55 @@ extension OrdersViewController: UITableViewDataSource, UITableViewDelegate {
             
             return cell
         case 1:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: CompletedOrderTableViewCell.identifier) as? CompletedOrderTableViewCell else {
-                assertionFailure("Couldn't dequeue:>> \(CompletedOrderTableViewCell.identifier)")
-                return UITableViewCell()
+            
+            if isLoadingCell(for: indexPath) {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: LoadingCellTableViewCell.identifier) as? LoadingCellTableViewCell else {
+                    assertionFailure("Couldn't dequeue:>> \(LoadingCellTableViewCell.identifier)")
+                    return UITableViewCell()
+                }
+                cell.activityIndicator.startAnimating()
+                return cell
+            } else {
+                
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: CompletedOrderTableViewCell.identifier) as? CompletedOrderTableViewCell else {
+                    assertionFailure("Couldn't dequeue:>> \(CompletedOrderTableViewCell.identifier)")
+                    return UITableViewCell()
+                }
+                
+                let order = self.orderData[indexPath.row]
+                cell.updateData(with: order)
+                cell.selectionStyle = .none
+                
+                cell.btnNotificationAction = {
+                    self.navigateToNotification(with: order)
+                }
+                
+                return cell
             }
-            
-            let order = self.orderData[indexPath.row]
-            cell.updateData(with: order)
-            cell.selectionStyle = .none
-            
-            cell.btnNotificationAction = {
-                self.navigateToNotification(with: order)
-            }
-            
-            return cell
         case 2:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: InProgressOrdersTableViewCell.identifier) as? InProgressOrdersTableViewCell else {
-                assertionFailure("Couldn't dequeue:>> \(InProgressOrdersTableViewCell.identifier)")
-                return UITableViewCell()
+            if isLoadingCell(for: indexPath) {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: LoadingCellTableViewCell.identifier) as? LoadingCellTableViewCell else {
+                    assertionFailure("Couldn't dequeue:>> \(LoadingCellTableViewCell.identifier)")
+                    return UITableViewCell()
+                }
+                cell.activityIndicator.startAnimating()
+                return cell
+            } else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: InProgressOrdersTableViewCell.identifier) as? InProgressOrdersTableViewCell else {
+                    assertionFailure("Couldn't dequeue:>> \(InProgressOrdersTableViewCell.identifier)")
+                    return UITableViewCell()
+                }
+                
+                let order = self.orderData[indexPath.row]
+                cell.updateData(with: order)
+                cell.selectionStyle = .none
+                
+                cell.btnNotificationAction = {
+                    self.navigateToNotification(with: order)
+                }
+                
+                return cell
             }
-            
-            let order = self.orderData[indexPath.row]
-            cell.updateData(with: order)
-            cell.selectionStyle = .none
-            
-            cell.btnNotificationAction = {
-                self.navigateToNotification(with: order)
-            }
-            
-            return cell
         default:
             return UITableViewCell()
         }
@@ -360,6 +430,16 @@ extension OrdersViewController: UITableViewDataSource, UITableViewDelegate {
         default:
             print("Do nothing here")
         }
+    }
+    
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+//        if indexPaths.contains(where: isLoadingCell) && self.selectedTabIndex != 0 {
+//            self.fetchData(for: self.selectedTabIndex, isFromPullDownRefresh: false, completion: nil)
+//        }
+    }
+    
+    func isLoadingCell(for indexPath: IndexPath) -> Bool {
+        return indexPath.row == self.orderData.count
     }
     
     func navigateToNotification(with order: Order) {

@@ -169,6 +169,9 @@ class SearchAddressViewController: UIViewController {
         
         if (UserConstant.shared.userModel != nil) {
             params[Constants.API.customerId] = UserConstant.shared.userModel.id
+        } else {
+            self.alertLoader?.dismiss(animated: false, completion: nil)
+            return
         }
         
         APIManager.shared.executeDataRequest(urlString: URLConstant.baseURL, method: .get, parameters: params, headers: nil) { (responseData, error) in

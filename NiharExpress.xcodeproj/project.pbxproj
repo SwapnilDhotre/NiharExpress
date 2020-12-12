@@ -70,6 +70,8 @@
 		E60F187B24BF0CDC00134353 /* DatePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E60F187924BF0CDC00134353 /* DatePickerViewController.xib */; };
 		E60F187E24BF176B00134353 /* ParcelInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60F187C24BF176B00134353 /* ParcelInfoTableViewCell.swift */; };
 		E60F187F24BF176B00134353 /* ParcelInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E60F187D24BF176B00134353 /* ParcelInfoTableViewCell.xib */; };
+		E613CA57257BA95D0041E1DD /* LoadingCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E613CA55257BA95D0041E1DD /* LoadingCellTableViewCell.swift */; };
+		E613CA58257BA95D0041E1DD /* LoadingCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E613CA56257BA95D0041E1DD /* LoadingCellTableViewCell.xib */; };
 		E630D93124BD7157006666A8 /* UINavigationController_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E630D93024BD7157006666A8 /* UINavigationController_Extension.swift */; };
 		E630D93324BD7489006666A8 /* UIViewController_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E630D93224BD7489006666A8 /* UIViewController_Extension.swift */; };
 		E630D93824BD8D08006666A8 /* SplashScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E630D93624BD8D08006666A8 /* SplashScreenViewController.xib */; };
@@ -277,6 +279,8 @@
 		E60F187924BF0CDC00134353 /* DatePickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DatePickerViewController.xib; sourceTree = "<group>"; };
 		E60F187C24BF176B00134353 /* ParcelInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelInfoTableViewCell.swift; sourceTree = "<group>"; };
 		E60F187D24BF176B00134353 /* ParcelInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParcelInfoTableViewCell.xib; sourceTree = "<group>"; };
+		E613CA55257BA95D0041E1DD /* LoadingCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCellTableViewCell.swift; sourceTree = "<group>"; };
+		E613CA56257BA95D0041E1DD /* LoadingCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCellTableViewCell.xib; sourceTree = "<group>"; };
 		E630D93024BD7157006666A8 /* UINavigationController_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController_Extension.swift; sourceTree = "<group>"; };
 		E630D93224BD7489006666A8 /* UIViewController_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController_Extension.swift; sourceTree = "<group>"; };
 		E630D93624BD8D08006666A8 /* SplashScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashScreenViewController.xib; sourceTree = "<group>"; };
@@ -615,6 +619,8 @@
 				E654782024DD59C300A1F697 /* InProgressOrdersTableViewCell.xib */,
 				E654782924DD6F8800A1F697 /* CompletedOrderTableViewCell.swift */,
 				E654782A24DD6F8800A1F697 /* CompletedOrderTableViewCell.xib */,
+				E613CA55257BA95D0041E1DD /* LoadingCellTableViewCell.swift */,
+				E613CA56257BA95D0041E1DD /* LoadingCellTableViewCell.xib */,
 			);
 			path = OrdersController;
 			sourceTree = "<group>";
@@ -1115,6 +1121,7 @@
 				E6496A9F24DB123A00514AB9 /* EmptyOrderView.xib in Resources */,
 				0F12E5BC253C5D0D0047DAC0 /* InfoWindow.xib in Resources */,
 				E65ADDE6252A5342000A28D0 /* PromoCodeTableViewCell.xib in Resources */,
+				E613CA58257BA95D0041E1DD /* LoadingCellTableViewCell.xib in Resources */,
 				E609BD5224E011BF00B505EB /* EmptyFormViewController.xib in Resources */,
 				E658C220253F5629002ABBF5 /* WalkThroughViewController.xib in Resources */,
 				E630D9BD24BDDF32006666A8 /* WeightTableViewCell.xib in Resources */,
@@ -1242,6 +1249,7 @@
 				E656287524F231230030B5E0 /* TrackOrderTableViewCell.swift in Sources */,
 				0F7F1C6324AE415F0011A754 /* TabBarViewController.swift in Sources */,
 				E630D9A424BD9D0C006666A8 /* UIView_Utility.swift in Sources */,
+				E613CA57257BA95D0041E1DD /* LoadingCellTableViewCell.swift in Sources */,
 				E609BD5824E02ABA00B505EB /* WebViewViewController.swift in Sources */,
 				E68474A624DEEF8100BB339B /* AddressCommonTableViewCell.swift in Sources */,
 				E6AA98F124BF4BBE006577F6 /* PlaceMarker.swift in Sources */,
@@ -1468,7 +1476,7 @@
 				CODE_SIGN_ENTITLEMENTS = NiharExpress/NiharExpress.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development: NIHAR Sejpal (YMTKMALA8S)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GG38H3R5L8;
 				INFOPLIST_FILE = NiharExpress/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1476,7 +1484,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nihar-express.delivery";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = NiharExpressDevelopmentProvsioningProfile;
@@ -1493,7 +1501,7 @@
 				CODE_SIGN_ENTITLEMENTS = NiharExpress/NiharExpress.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development: NIHAR Sejpal (YMTKMALA8S)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GG38H3R5L8;
 				INFOPLIST_FILE = NiharExpress/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1501,7 +1509,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nihar-express.delivery";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = NiharExpressDevelopmentProvsioningProfile;
