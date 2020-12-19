@@ -104,6 +104,7 @@ PODS:
     - PINRemoteImage/Core
   - PromisesObjC (1.2.10)
   - Protobuf (3.13.0)
+  - Siren (5.1.2)
   - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
@@ -115,6 +116,7 @@ DEPENDENCIES:
   - GoogleMaps
   - GooglePlaces
   - PINRemoteImage
+  - Siren (from `https://github.com/ArtSabintsev/Siren.git`, branch `swift5.0`)
   - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
@@ -142,6 +144,16 @@ SPEC REPOS:
     - Protobuf
     - SwiftyJSON
 
+EXTERNAL SOURCES:
+  Siren:
+    :branch: swift5.0
+    :git: https://github.com/ArtSabintsev/Siren.git
+
+CHECKOUT OPTIONS:
+  Siren:
+    :commit: ef6d9ffa4226ced10d1b46d03c38c1b794b22788
+    :git: https://github.com/ArtSabintsev/Siren.git
+
 SPEC CHECKSUMS:
   Cosmos: 2795b36ad4bbea1af3050d6d65576ed63875f86a
   CryptoSwift: f12f037f6d0fcd6d48c96db0071b653de64e6c4d
@@ -164,8 +176,9 @@ SPEC CHECKSUMS:
   PINRemoteImage: e2b89e19fb6e77ffc099f9d9f3b3fe1745e3f9f9
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
   Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
+  Siren: ee674e4ab57f5cc23186202a11313bc50a661a61
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: ed7868f0298fb83609cd6def1cf563f186c8a764
+PODFILE CHECKSUM: 63867e7a7bda86291aacf39b132269ec8ecfed90
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.0

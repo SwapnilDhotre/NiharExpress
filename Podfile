@@ -24,6 +24,9 @@ target 'NiharExpress' do
   
   pod 'Firebase/Messaging'
   
+  # Force updated app to get downloaded
+  pod 'Siren', :git => 'https://github.com/ArtSabintsev/Siren.git', :branch => 'swift5.0' # Swift 5.0
+  
   # Pods for NiharExpress
 
 end

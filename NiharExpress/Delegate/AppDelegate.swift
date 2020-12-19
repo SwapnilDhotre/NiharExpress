@@ -8,6 +8,8 @@
 
 import UIKit
 
+import Siren
+
 import GoogleMaps
 import GooglePlaces
 
@@ -42,6 +44,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         Messaging.messaging().delegate = self
         self.configureFirebasePushNotification()
+        
+        let siren = Siren.shared;
+        siren.wail()
         
         return true
     }
