@@ -46,6 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.configureFirebasePushNotification()
         
         let siren = Siren.shared;
+        siren.rulesManager = RulesManager(majorUpdateRules: .annoying, minorUpdateRules: .annoying, patchUpdateRules: .annoying, revisionUpdateRules: .annoying)
         siren.wail()
         
         return true

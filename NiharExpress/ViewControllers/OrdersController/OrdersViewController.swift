@@ -340,14 +340,17 @@ extension OrdersViewController: UITableViewDataSource, UITableViewDelegate, UITa
                 return UITableViewCell()
             }
             
-            let order = self.orderData[indexPath.row]
-            cell.updateData(with: order)
-            cell.selectionStyle = .none
-            
-            cell.btnNotificationAction = {
-                self.navigateToNotification(with: order)
+            if self.orderData.count > indexPath.row {
+                let order = self.orderData[indexPath.row]
+                cell.updateData(with: order)
+                cell.selectionStyle = .none
+                
+                cell.btnNotificationAction = {
+                    self.navigateToNotification(with: order)
+                }
+            } else {
+                print("Caught in data reload")
             }
-            
             return cell
         case 1:
             
