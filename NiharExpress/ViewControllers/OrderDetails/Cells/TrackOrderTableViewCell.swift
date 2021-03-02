@@ -10,6 +10,7 @@ import UIKit
 
 protocol TrackOrderProtocol {
     func trackOrderAction()
+    func cloneOrder()
 }
 
 class TrackOrderTableViewCell: UITableViewCell {
@@ -68,5 +69,9 @@ class TrackOrderTableViewCell: UITableViewCell {
         if let url = URL(string: "tel://\(self.contactNo)") {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
+    }
+    
+    @IBAction func cloneOrderAction(_ sender: UIButton) {
+        self.delegate?.cloneOrder()
     }
 }
